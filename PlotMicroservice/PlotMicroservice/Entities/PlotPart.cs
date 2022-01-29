@@ -7,20 +7,20 @@ namespace PlotMicroservice.Entities
 {
     public class PlotPart
     {
-        private Guid PlotPartId { get; set; }
+        public Guid PlotPartId { get; set; }
 
-        private string PlotPartName { get; set; }
+        public string PlotPartName { get; set; }
 
-        private PlotPartClass PlotPartClass { get; set; }
+        public PlotPartClass PlotPartClass { get; set; }
 
-        private PlotPartProtectedZone PlotPartProtectedZone { get; set; }
+        public PlotPartProtectedZone PlotPartProtectedZone { get; set; }
 
-        private PlotPartFormOfOwnership PlotPartFormOfOwnership { get; set; }
+        public PlotPartFormOfOwnership PlotPartFormOfOwnership { get; set; }
 
-        private string PlotPartSurfaceArea { get; set; }
+        public string PlotPartSurfaceArea { get; set; }
 
-        private string PlotPartCurrentClass { get; set; }
+        public string PlotPartCurrentClass { get; set; }
 
-        private string PlotPartCurrentProtectedZone { get; set; }
+        public string PlotPartCurrentProtectedZone { get; set; }
     }
 }

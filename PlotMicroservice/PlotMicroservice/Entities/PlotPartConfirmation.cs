@@ -5,10 +5,7 @@ using System.Threading.Tasks;
 
 namespace PlotMicroservice.Entities
 {
-    public class PlotPartClass
+    public class PlotPartConfirmation
     {
-        public Guid PlotPartClassId { get; set; }
-
-        public string Class { get; set; }
     }
 }

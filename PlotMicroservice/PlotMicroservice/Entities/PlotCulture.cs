@@ -7,8 +7,8 @@ namespace PlotMicroservice.Entities
 {
     public class PlotCulture
     {
-        private Guid PlotCultureId { get; set; }
+        public Guid PlotCultureId { get; set; }
 
-        private string Culture { get; set; }
+        public string Culture { get; set; }
     }
 }

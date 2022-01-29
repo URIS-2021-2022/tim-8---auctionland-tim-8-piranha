@@ -7,8 +7,8 @@ namespace PlotMicroservice.Entities
 {
     public class PlotPartProtectedZone
     {
-        private Guid PlotPartProtectedZoneId { get; set; }
+        public Guid PlotPartProtectedZoneId { get; set; }
 
-        private string ProtectedZone { get; set; }
+        public string ProtectedZone { get; set; }
     }
 }

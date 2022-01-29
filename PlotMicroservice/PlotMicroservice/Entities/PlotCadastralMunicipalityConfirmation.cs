@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PlotMicroservice.Entities
 {
-    public class PlotCadastralMunicipality
+    public class PlotCadastralMunicipalityConfirmation
     {
         public Guid PlotCadastralMunicipalityId { get; set; }
 

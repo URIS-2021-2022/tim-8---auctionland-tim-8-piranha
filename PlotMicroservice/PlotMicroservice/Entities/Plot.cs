@@ -7,27 +7,27 @@ namespace PlotMicroservice.Entities
 {
     public class Plot
     {
-        private Guid PlotId { get; set; }
-        
+        public Guid PlotId { get; set; }
+
         // KorinsikParceleId ???
-        private string PlotName { get; set; }
+        public string PlotName { get; set; }
 
-        private List<PlotPart> PlotParts { get; set; }
+        public List<PlotPart> PlotParts { get; set; }
 
-        private PlotCulture PlotCulture { get; set; }
+        public PlotCulture PlotCulture { get; set; }
 
-        private PlotCadastralMunicipality PlotCadastralMunicipality { get; set; }
+        public PlotCadastralMunicipality PlotCadastralMunicipality { get; set; }
 
-        private PlotWorkability PlotWorkability { get; set; }
+        public PlotWorkability PlotWorkability { get; set; }
 
-        private string PlotSurfaceArea { get; set; }
+        public string PlotSurfaceArea { get; set; }
 
-        private string PlotNumber { get; set; }
+        public string PlotNumber { get; set; }
 
-        private string PlotRealEstateListNumber { get; set; }
+        public string PlotRealEstateListNumber { get; set; }
 
-        private string PlotCurrentCulture { get; set; }
+        public string PlotCurrentCulture { get; set; }
 
-        private string PlotCurrentWorkability { get; set; }
+        public string PlotCurrentWorkability { get; set; }
     }
 }

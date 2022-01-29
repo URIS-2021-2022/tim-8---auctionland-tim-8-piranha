@@ -7,8 +7,8 @@ namespace PlotMicroservice.Entities
 {
     public class PlotPartFormOfOwnership
     {
-        private Guid PlotPartFormOfOwnershipId { get; set; }
+        public Guid PlotPartFormOfOwnershipId { get; set; }
 
-        private string FormOfOwnership { get; set; }
+        public string FormOfOwnership { get; set; }
     }
 }

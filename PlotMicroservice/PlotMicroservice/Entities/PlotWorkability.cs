@@ -7,8 +7,8 @@ namespace PlotMicroservice.Entities
 {
     public class PlotWorkability
     {
-        private Guid PlotWorkabilityId { get; set; }
+        public Guid PlotWorkabilityId { get; set; }
 
-        private string Workability { get; set; }
+        public string Workability { get; set; }
     }
 }
