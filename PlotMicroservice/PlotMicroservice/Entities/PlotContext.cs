@@ -15,6 +15,8 @@ namespace PlotMicroservice.Entities
 
         public DbSet<PlotCadastralMunicipality> PlotCadastralMunicipalities { get; set; }
 
+        public DbSet<PlotCulture> PlotCultures { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // CADASTRAL MUNICIPALITY
@@ -93,7 +95,65 @@ namespace PlotMicroservice.Entities
                 {
                     PlotCadastralMunicipalityId = Guid.Parse("0c0e2227-531a-4f0d-83f0-a1d4a52f4676"),
                     CadastralMunicipality = "Palić"
-                }); 
+                });
+
+            // CULTURE
+            modelBuilder.Entity<PlotCulture>().HasData(
+                new
+                {
+                    PlotCultureId = Guid.Parse("ba9777ce-d43f-4f71-a163-7c974e36654f"),
+                    Culture = "Njive"
+                });
+
+            modelBuilder.Entity<PlotCulture>().HasData(
+                new
+                {
+                    PlotCultureId = Guid.Parse("60644cdd-795b-47a2-96ac-55f623862efe"),
+                    Culture = "Vrtovi"
+                });
+
+            modelBuilder.Entity<PlotCulture>().HasData(
+                new
+                {
+                    PlotCultureId = Guid.Parse("2484a534-4e5f-4b0c-af35-190ae0d68fcc"),
+                    Culture = "Voćnjaci"
+                });
+
+            modelBuilder.Entity<PlotCulture>().HasData(
+                new
+                {
+                    PlotCultureId = Guid.Parse("7b199139-6b41-4087-89b0-84d911b5fe2b"),
+                    Culture = "Vinogradi"
+                });
+
+            modelBuilder.Entity<PlotCulture>().HasData(
+                new
+                {
+                    PlotCultureId = Guid.Parse("97adad6e-f225-4164-8830-b59004c812c3"),
+                    Culture = "Livade"
+                });
+
+            modelBuilder.Entity<PlotCulture>().HasData(
+                new
+                {
+                    PlotCultureId = Guid.Parse("cc506ecd-fb9e-48d8-af90-26ecc5d9feba"),
+                    Culture = "Pašnjaci"
+                });
+
+
+            modelBuilder.Entity<PlotCulture>().HasData(
+               new
+               {
+                   PlotCultureId = Guid.Parse("3262a3e8-a113-431f-8f2f-98a10d97c5a4"),
+                   Culture = "Šume"
+               });
+
+            modelBuilder.Entity<PlotCulture>().HasData(
+               new
+               {
+                   PlotCultureId = Guid.Parse("a0c1727d-bb2c-4243-a907-be6f3a005558"),
+                   Culture = "Trstici-močvare"
+               });
         }
     }
 }

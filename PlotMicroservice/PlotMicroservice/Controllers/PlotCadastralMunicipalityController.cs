@@ -60,7 +60,6 @@ namespace PlotMicroservice.Controllers
             return Ok(Mapper.Map<PlotCadastralMunicipalityDto>(municipality));
         }
         
-        // uri parametar je null, ali izgleda da POST zahtev radi, upise se u bazu
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -83,7 +82,6 @@ namespace PlotMicroservice.Controllers
             }
         }
 
-        // Vraca isti objekat, ne menja vrednosti
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]

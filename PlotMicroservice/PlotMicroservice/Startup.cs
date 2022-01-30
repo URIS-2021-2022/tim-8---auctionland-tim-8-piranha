@@ -38,6 +38,7 @@ namespace PlotMicroservice
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IPlotCadastralMunicipalityRepository, PlotCadastralMunicipalityRepository>();
+            services.AddScoped<IPlotCultureRepository, PlotCultureRepository>();
 
            /* services.AddSwaggerGen(c =>
             {
