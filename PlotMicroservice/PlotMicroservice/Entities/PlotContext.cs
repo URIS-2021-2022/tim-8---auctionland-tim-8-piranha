@@ -17,6 +17,8 @@ namespace PlotMicroservice.Entities
 
         public DbSet<PlotCulture> PlotCultures { get; set; }
 
+        public DbSet<PlotWorkability> PlotWorkabilities { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // CADASTRAL MUNICIPALITY
@@ -154,6 +156,22 @@ namespace PlotMicroservice.Entities
                    PlotCultureId = Guid.Parse("a0c1727d-bb2c-4243-a907-be6f3a005558"),
                    Culture = "Trstici-močvare"
                });
+
+            // WORKABILITY
+
+            modelBuilder.Entity<PlotWorkability>().HasData(
+                new
+                {
+                    PlotWorkabilityId = Guid.Parse("c0615a4d-faa4-4e17-8f2f-93ec25383f9b"),
+                    Workability = "Obradivo"
+                });
+
+            modelBuilder.Entity<PlotWorkability>().HasData(
+                new
+                {
+                    PlotWorkabilityId = Guid.Parse("40d2641b-8b85-4625-b01c-a129389a6aad"),
+                    Workability = "Ostalo"
+                });
         }
     }
 }
