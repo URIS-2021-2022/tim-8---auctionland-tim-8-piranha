@@ -23,6 +23,8 @@ namespace PlotMicroservice.Entities
 
         public DbSet<PlotPartClass> PlotPartClasses { get; set; }
 
+        public DbSet<PlotPartProtectedZone> PlotPartProtectedZones { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // PLOT CADASTRAL MUNICIPALITIES
@@ -283,6 +285,36 @@ namespace PlotMicroservice.Entities
                 {
                     PlotPartClassId = Guid.Parse("1965dce3-a24a-4e7c-a6d1-fddbbfeabc44"),
                     Class = "VIII"
+                });
+
+            // PLOT PART PROTECTED ZONES
+
+            modelBuilder.Entity<PlotPartProtectedZone>().HasData(
+                new
+                {
+                    PlotPartProtectedZoneId = Guid.Parse("f66b8360-33d2-48e9-9be5-b208988d1fb1"),
+                    ProtectedZone = "1"
+                });
+
+            modelBuilder.Entity<PlotPartProtectedZone>().HasData(
+                new
+                {
+                    PlotPartProtectedZoneId = Guid.Parse("e54364be-1fe6-43b5-9401-8b8bd2165aba"),
+                    ProtectedZone = "2"
+                });
+
+            modelBuilder.Entity<PlotPartProtectedZone>().HasData(
+                new
+                {
+                    PlotPartProtectedZoneId = Guid.Parse("de569d06-4787-4808-b4f6-0efea24f6b03"),
+                    ProtectedZone = "3"
+                });
+
+            modelBuilder.Entity<PlotPartProtectedZone>().HasData(
+                new
+                {
+                    PlotPartProtectedZoneId = Guid.Parse("4debaa6a-1a2f-43e0-bb82-1b7ca1824318"),
+                    ProtectedZone = "4"
                 });
         }
     }
