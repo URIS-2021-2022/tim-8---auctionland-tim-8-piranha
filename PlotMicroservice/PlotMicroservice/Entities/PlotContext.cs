@@ -19,6 +19,8 @@ namespace PlotMicroservice.Entities
 
         public DbSet<PlotWorkability> PlotWorkabilities { get; set; }
 
+        public DbSet<PlotPartFormOfOwnership> PlotPartFormOfOwnerships { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // CADASTRAL MUNICIPALITY
@@ -171,6 +173,56 @@ namespace PlotMicroservice.Entities
                 {
                     PlotWorkabilityId = Guid.Parse("40d2641b-8b85-4625-b01c-a129389a6aad"),
                     Workability = "Ostalo"
+                });
+
+            // PLOT PART FORM OF OWNERSHIPS
+            modelBuilder.Entity<PlotPartFormOfOwnership>().HasData(
+                new
+                {
+                    PlotPartFormOfOwnershipId = Guid.Parse("06d92fec-8bd5-4be1-a772-f52ae7ff6ee3"),
+                    FormOfOwnership = "Privatna svojina"
+                });
+
+            modelBuilder.Entity<PlotPartFormOfOwnership>().HasData(
+                new
+                {
+                    PlotPartFormOfOwnershipId = Guid.Parse("f5f92ac7-0682-48a6-bd34-f2f5d89be9a0"),
+                    FormOfOwnership = "Državna svojina RS"
+                });
+
+            modelBuilder.Entity<PlotPartFormOfOwnership>().HasData(
+                new
+                {
+                    PlotPartFormOfOwnershipId = Guid.Parse("3075f4ce-e8f4-4b68-bd22-246363d71a57"),
+                    FormOfOwnership = "Državna svojina"
+                });
+
+            modelBuilder.Entity<PlotPartFormOfOwnership>().HasData(
+                new
+                {
+                    PlotPartFormOfOwnershipId = Guid.Parse("aa444022-1e63-44f5-8cf4-7df5045af184"),
+                    FormOfOwnership = "Društvena svojina"
+                });
+
+            modelBuilder.Entity<PlotPartFormOfOwnership>().HasData(
+                new
+                {
+                    PlotPartFormOfOwnershipId = Guid.Parse("b8e349da-6c4d-4282-acb1-872628128fc1"),
+                    FormOfOwnership = "Zadružna svojina"
+                });
+
+            modelBuilder.Entity<PlotPartFormOfOwnership>().HasData(
+                new
+                {
+                    PlotPartFormOfOwnershipId = Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588"),
+                    FormOfOwnership = "Mešovita svojina"
+                });
+
+            modelBuilder.Entity<PlotPartFormOfOwnership>().HasData(
+                new
+                {
+                    PlotPartFormOfOwnershipId = Guid.Parse("a2c789e8-9e35-43d6-bf2e-156d776aeceb"),
+                    FormOfOwnership = "Drugi oblici"
                 });
         }
     }

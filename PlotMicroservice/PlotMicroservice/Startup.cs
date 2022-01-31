@@ -40,6 +40,7 @@ namespace PlotMicroservice
             services.AddScoped<IPlotCadastralMunicipalityRepository, PlotCadastralMunicipalityRepository>();
             services.AddScoped<IPlotCultureRepository, PlotCultureRepository>();
             services.AddScoped<IPlotWorkabilityRepository, PlotWorkabilityRepository>();
+            services.AddScoped<IPlotPartFormOfOwnershipRepository, PlotPartFormOfOwnershipRepository>();
 
            /* services.AddSwaggerGen(c =>
             {
