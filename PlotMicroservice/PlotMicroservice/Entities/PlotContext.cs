@@ -21,9 +21,11 @@ namespace PlotMicroservice.Entities
 
         public DbSet<PlotPartFormOfOwnership> PlotPartFormOfOwnerships { get; set; }
 
+        public DbSet<PlotPartClass> PlotPartClasses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // CADASTRAL MUNICIPALITY
+            // PLOT CADASTRAL MUNICIPALITIES
             modelBuilder.Entity<PlotCadastralMunicipality>().HasData(
                 new
                 {
@@ -101,7 +103,7 @@ namespace PlotMicroservice.Entities
                     CadastralMunicipality = "Palić"
                 });
 
-            // CULTURE
+            // PLOT CULTURES
             modelBuilder.Entity<PlotCulture>().HasData(
                 new
                 {
@@ -159,7 +161,7 @@ namespace PlotMicroservice.Entities
                    Culture = "Trstici-močvare"
                });
 
-            // WORKABILITY
+            // PLOT WORKABILITIES
 
             modelBuilder.Entity<PlotWorkability>().HasData(
                 new
@@ -223,6 +225,64 @@ namespace PlotMicroservice.Entities
                 {
                     PlotPartFormOfOwnershipId = Guid.Parse("a2c789e8-9e35-43d6-bf2e-156d776aeceb"),
                     FormOfOwnership = "Drugi oblici"
+                });
+
+            // PLOT PART CLASSES
+
+            modelBuilder.Entity<PlotPartClass>().HasData(
+                new
+                {
+                    PlotPartClassId = Guid.Parse("1794fc01-2d12-4f5d-aaec-7eb219635052"),
+                    Class = "I"
+                });
+
+            modelBuilder.Entity<PlotPartClass>().HasData(
+                new
+                {
+                    PlotPartClassId = Guid.Parse("5b957c06-8ca6-4658-ad45-78e62c465b3d"),
+                    Class = "II"
+                });
+
+            modelBuilder.Entity<PlotPartClass>().HasData(
+                new
+                {
+                    PlotPartClassId = Guid.Parse("6f2629db-8de7-496c-97e0-75b1a94b1db3"),
+                    Class = "III"
+                });
+
+            modelBuilder.Entity<PlotPartClass>().HasData(
+                new
+                {
+                    PlotPartClassId = Guid.Parse("5e69aeb5-4fec-4dd9-ba69-a474f06721f2"),
+                    Class = "IV"
+                });
+
+            modelBuilder.Entity<PlotPartClass>().HasData(
+                new
+                {
+                    PlotPartClassId = Guid.Parse("3a3e6366-3a20-4d3b-ae15-be85ba277683"),
+                    Class = "V"
+                });
+
+            modelBuilder.Entity<PlotPartClass>().HasData(
+                new
+                {
+                    PlotPartClassId = Guid.Parse("b2ddef8e-eddc-4fb0-884b-1701ab983bed"),
+                    Class = "VI"
+                });
+
+            modelBuilder.Entity<PlotPartClass>().HasData(
+                new
+                {
+                    PlotPartClassId = Guid.Parse("a9a4427b-889d-4be4-bf9c-386edb323d9c"),
+                    Class = "VII"
+                });
+
+            modelBuilder.Entity<PlotPartClass>().HasData(
+                new
+                {
+                    PlotPartClassId = Guid.Parse("1965dce3-a24a-4e7c-a6d1-fddbbfeabc44"),
+                    Class = "VIII"
                 });
         }
     }
