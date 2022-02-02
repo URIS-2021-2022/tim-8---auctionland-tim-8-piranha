@@ -1,7 +1,10 @@
+using ComplaintMicroservice.Data;
+using ComplaintMicroservice.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,11 +30,18 @@ namespace ComplaintMicroservice
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(setup =>
+            {
+                setup.ReturnHttpNotAcceptable = true;
+            }).AddXmlDataContractSerializerFormatters();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IComplaintTypeRepository,ComplaintTypeRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ComplaintMicroservice", Version = "v1" });
             });
+
+            services.AddDbContext<ComplaintContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ComplaintDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
