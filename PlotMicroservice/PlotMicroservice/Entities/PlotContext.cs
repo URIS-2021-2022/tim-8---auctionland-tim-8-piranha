@@ -25,9 +25,14 @@ namespace PlotMicroservice.Entities
 
         public DbSet<PlotPartProtectedZone> PlotPartProtectedZones { get; set; }
 
+        public DbSet<Plot> Plots { get; set; }
+
+        public DbSet<PlotPart> PlotParts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // PLOT CADASTRAL MUNICIPALITIES
+
             modelBuilder.Entity<PlotCadastralMunicipality>().HasData(
                 new
                 {
@@ -105,7 +110,9 @@ namespace PlotMicroservice.Entities
                     CadastralMunicipality = "Palić"
                 });
 
+
             // PLOT CULTURES
+
             modelBuilder.Entity<PlotCulture>().HasData(
                 new
                 {
@@ -163,6 +170,7 @@ namespace PlotMicroservice.Entities
                    Culture = "Trstici-močvare"
                });
 
+
             // PLOT WORKABILITIES
 
             modelBuilder.Entity<PlotWorkability>().HasData(
@@ -179,7 +187,9 @@ namespace PlotMicroservice.Entities
                     Workability = "Ostalo"
                 });
 
-            // PLOT PART FORM OF OWNERSHIPS
+
+           // PLOT PART FORM OF OWNERSHIPS
+
             modelBuilder.Entity<PlotPartFormOfOwnership>().HasData(
                 new
                 {
@@ -228,6 +238,7 @@ namespace PlotMicroservice.Entities
                     PlotPartFormOfOwnershipId = Guid.Parse("a2c789e8-9e35-43d6-bf2e-156d776aeceb"),
                     FormOfOwnership = "Drugi oblici"
                 });
+
 
             // PLOT PART CLASSES
 
@@ -287,6 +298,7 @@ namespace PlotMicroservice.Entities
                     Class = "VIII"
                 });
 
+
             // PLOT PART PROTECTED ZONES
 
             modelBuilder.Entity<PlotPartProtectedZone>().HasData(
@@ -315,6 +327,181 @@ namespace PlotMicroservice.Entities
                 {
                     PlotPartProtectedZoneId = Guid.Parse("4debaa6a-1a2f-43e0-bb82-1b7ca1824318"),
                     ProtectedZone = "4"
+                });
+
+
+           // PLOTS
+
+            modelBuilder.Entity<Plot>().HasData(
+                new
+                {
+                    PlotId = Guid.Parse("b281612e-8013-40cc-b9ce-f9d063295420"),
+                    PlotCultureId = Guid.Parse("ba9777ce-d43f-4f71-a163-7c974e36654f"),
+                    PlotCadastralMunicipalityId = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226"),
+                    PlotWorkabilityId = Guid.Parse("c0615a4d-faa4-4e17-8f2f-93ec25383f9b"),
+                    PlotSurfaceArea = "4500 m2",
+                    PlotNumber = "112",
+                    PlotRealEstateListNumber = "LN100",
+                    PlotCurrentCulture = "",
+                    PlotCurrentWorkability = ""
+                });
+
+            modelBuilder.Entity<Plot>().HasData(
+                new
+                {
+                    PlotId = Guid.Parse("c6ea356d-c1c1-4374-985b-f8f91d35daa1"),
+                    PlotCultureId = Guid.Parse("60644cdd-795b-47a2-96ac-55f623862efe"),
+                    PlotCadastralMunicipalityId = Guid.Parse("458adb42-62a5-4117-8101-7d933fa88abb"),
+                    PlotWorkabilityId = Guid.Parse("c0615a4d-faa4-4e17-8f2f-93ec25383f9b"),
+                    PlotSurfaceArea = "5600 m2",
+                    PlotNumber = "146",
+                    PlotRealEstateListNumber = "LN202",
+                    PlotCurrentCulture = "",
+                    PlotCurrentWorkability = ""
+                });
+
+            modelBuilder.Entity<Plot>().HasData(
+                new
+                {
+                    PlotId = Guid.Parse("226480a5-74db-4507-958a-8963c4a36716"),
+                    PlotCultureId = Guid.Parse("2484a534-4e5f-4b0c-af35-190ae0d68fcc"),
+                    PlotCadastralMunicipalityId = Guid.Parse("0c0e2227-531a-4f0d-83f0-a1d4a52f4676"),
+                    PlotWorkabilityId = Guid.Parse("c0615a4d-faa4-4e17-8f2f-93ec25383f9b"),
+                    PlotSurfaceArea = "3850 m2",
+                    PlotNumber = "5308",
+                    PlotRealEstateListNumber = "LN550",
+                    PlotCurrentCulture = "",
+                    PlotCurrentWorkability = ""
+                });
+
+            modelBuilder.Entity<Plot>().HasData(
+                new
+                {
+                    PlotId = Guid.Parse("5f37ba98-ca19-4c9e-8914-708e38bba8bf"),
+                    PlotCultureId = Guid.Parse("97adad6e-f225-4164-8830-b59004c812c3"),
+                    PlotCadastralMunicipalityId = Guid.Parse("372d9458-a560-4b56-8119-ada1f7feb723"),
+                    PlotWorkabilityId = Guid.Parse("40d2641b-8b85-4625-b01c-a129389a6aad"),
+                    PlotSurfaceArea = "7602 m2",
+                    PlotNumber = "97",
+                    PlotRealEstateListNumber = "LN90",
+                    PlotCurrentCulture = "",
+                    PlotCurrentWorkability = ""
+                });
+
+
+            // PLOT PARTS
+
+            modelBuilder.Entity<PlotPart>().HasData(
+                new
+                {
+                    PlotPartId = Guid.Parse("d14d555d-9637-4244-8ab3-dad55097259b"),
+                    PlotPartNumber = "112/1",
+                    PlotPartSurfaceArea = "1900 m2",
+                    PlotId = Guid.Parse("b281612e-8013-40cc-b9ce-f9d063295420"),
+                    PlotPartClassId = Guid.Parse("1794fc01-2d12-4f5d-aaec-7eb219635052"),
+                    PlotPartProtectedZoneId = Guid.Parse("f66b8360-33d2-48e9-9be5-b208988d1fb1"),
+                    PlotPartFormOfOwnershipId = Guid.Parse("06d92fec-8bd5-4be1-a772-f52ae7ff6ee3"),
+                    PlotPartCurrentClass = "",
+                    PlotPartCurrentProtectedZone = ""
+                });
+
+            modelBuilder.Entity<PlotPart>().HasData(
+                new
+                {
+                    PlotPartId = Guid.Parse("1f61ce66-fc70-42a5-ae25-6671d294f879"),
+                    PlotPartNumber = "112/3",
+                    PlotPartSurfaceArea = "2600 m2",
+                    PlotId = Guid.Parse("b281612e-8013-40cc-b9ce-f9d063295420"),
+                    PlotPartClassId = Guid.Parse("1794fc01-2d12-4f5d-aaec-7eb219635052"),
+                    PlotPartProtectedZoneId = Guid.Parse("f66b8360-33d2-48e9-9be5-b208988d1fb1"),
+                    PlotPartFormOfOwnershipId = Guid.Parse("06d92fec-8bd5-4be1-a772-f52ae7ff6ee3"),
+                    PlotPartCurrentClass = "",
+                    PlotPartCurrentProtectedZone = ""
+                });
+
+            modelBuilder.Entity<PlotPart>().HasData(
+                new
+                {
+                    PlotPartId = Guid.Parse("fb974419-6f20-4969-950e-e0f0ccb58593"),
+                    PlotPartNumber = "146/2",
+                    PlotPartSurfaceArea = "2200 m2",
+                    PlotId = Guid.Parse("c6ea356d-c1c1-4374-985b-f8f91d35daa1"),
+                    PlotPartClassId = Guid.Parse("5b957c06-8ca6-4658-ad45-78e62c465b3d"),
+                    PlotPartProtectedZoneId = Guid.Parse("e54364be-1fe6-43b5-9401-8b8bd2165aba"),
+                    PlotPartFormOfOwnershipId = Guid.Parse("f5f92ac7-0682-48a6-bd34-f2f5d89be9a0"),
+                    PlotPartCurrentClass = "",
+                    PlotPartCurrentProtectedZone = ""
+                });
+
+            modelBuilder.Entity<PlotPart>().HasData(
+                new
+                {
+                    PlotPartId = Guid.Parse("68bf5d70-f26b-4c53-b014-bab74b7b86a0"),
+                    PlotPartNumber = "146/4",
+                    PlotPartSurfaceArea = "1600 m2",
+                    PlotId = Guid.Parse("c6ea356d-c1c1-4374-985b-f8f91d35daa1"),
+                    PlotPartClassId = Guid.Parse("5b957c06-8ca6-4658-ad45-78e62c465b3d"),
+                    PlotPartProtectedZoneId = Guid.Parse("e54364be-1fe6-43b5-9401-8b8bd2165aba"),
+                    PlotPartFormOfOwnershipId = Guid.Parse("f5f92ac7-0682-48a6-bd34-f2f5d89be9a0"),
+                    PlotPartCurrentClass = "",
+                    PlotPartCurrentProtectedZone = ""
+                });
+
+            modelBuilder.Entity<PlotPart>().HasData(
+                new
+                {
+                    PlotPartId = Guid.Parse("ce8229bf-0853-4ae9-b0ed-59c9e5607d64"),
+                    PlotPartNumber = "146/5",
+                    PlotPartSurfaceArea = "2800 m2",
+                    PlotId = Guid.Parse("c6ea356d-c1c1-4374-985b-f8f91d35daa1"),
+                    PlotPartClassId = Guid.Parse("6f2629db-8de7-496c-97e0-75b1a94b1db3"),
+                    PlotPartProtectedZoneId = Guid.Parse("f66b8360-33d2-48e9-9be5-b208988d1fb1"),
+                    PlotPartFormOfOwnershipId = Guid.Parse("f5f92ac7-0682-48a6-bd34-f2f5d89be9a0"),
+                    PlotPartCurrentClass = "",
+                    PlotPartCurrentProtectedZone = ""
+                });
+
+            modelBuilder.Entity<PlotPart>().HasData(
+                new
+                {
+                    PlotPartId = Guid.Parse("f083e28b-6352-4fda-a172-0d579390e632"),
+                    PlotPartNumber = "5308/1",
+                    PlotPartSurfaceArea = "2700 m2",
+                    PlotId = Guid.Parse("226480a5-74db-4507-958a-8963c4a36716"),
+                    PlotPartClassId = Guid.Parse("6f2629db-8de7-496c-97e0-75b1a94b1db3"),
+                    PlotPartProtectedZoneId = Guid.Parse("de569d06-4787-4808-b4f6-0efea24f6b03"),
+                    PlotPartFormOfOwnershipId = Guid.Parse("aa444022-1e63-44f5-8cf4-7df5045af184"),
+                    PlotPartCurrentClass = "",
+                    PlotPartCurrentProtectedZone = ""
+                });
+
+
+            modelBuilder.Entity<PlotPart>().HasData(
+                new
+                {
+                    PlotPartId = Guid.Parse("861f142c-4707-416d-ad14-7debbd2031ed"),
+                    PlotPartNumber = "5308/2",
+                    PlotPartSurfaceArea = "1150 m2",
+                    PlotId = Guid.Parse("226480a5-74db-4507-958a-8963c4a36716"),
+                    PlotPartClassId = Guid.Parse("6f2629db-8de7-496c-97e0-75b1a94b1db3"),
+                    PlotPartProtectedZoneId = Guid.Parse("de569d06-4787-4808-b4f6-0efea24f6b03"),
+                    PlotPartFormOfOwnershipId = Guid.Parse("aa444022-1e63-44f5-8cf4-7df5045af184"),
+                    PlotPartCurrentClass = "",
+                    PlotPartCurrentProtectedZone = ""
+                });
+
+            modelBuilder.Entity<PlotPart>().HasData(
+                new
+                {
+                    PlotPartId = Guid.Parse("0ec20a3b-fd39-4c2e-8062-7d1664eb5381"),
+                    PlotPartNumber = "97",
+                    PlotPartSurfaceArea = "7602 m2",
+                    PlotId = Guid.Parse("5f37ba98-ca19-4c9e-8914-708e38bba8bf"),
+                    PlotPartClassId = Guid.Parse("3a3e6366-3a20-4d3b-ae15-be85ba277683"),
+                    PlotPartProtectedZoneId = Guid.Parse("4debaa6a-1a2f-43e0-bb82-1b7ca1824318"),
+                    PlotPartFormOfOwnershipId = Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588"),
+                    PlotPartCurrentClass = "",
+                    PlotPartCurrentProtectedZone = ""
                 });
         }
     }

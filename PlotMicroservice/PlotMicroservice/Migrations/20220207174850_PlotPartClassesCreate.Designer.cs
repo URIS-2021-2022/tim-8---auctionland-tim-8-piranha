@@ -10,8 +10,8 @@ using PlotMicroservice.Entities;
 namespace PlotMicroservice.Migrations
 {
     [DbContext(typeof(PlotContext))]
-    [Migration("20220130131139_PlotWorkabilityCreate")]
-    partial class PlotWorkabilityCreate
+    [Migration("20220207174850_PlotPartClassesCreate")]
+    partial class PlotPartClassesCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,6 +145,113 @@ namespace PlotMicroservice.Migrations
                         {
                             PlotCultureId = new Guid("a0c1727d-bb2c-4243-a907-be6f3a005558"),
                             Culture = "Trstici-močvare"
+                        });
+                });
+
+            modelBuilder.Entity("PlotMicroservice.Entities.PlotPartClass", b =>
+                {
+                    b.Property<Guid>("PlotPartClassId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Class")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PlotPartClassId");
+
+                    b.ToTable("PlotPartClasses");
+
+                    b.HasData(
+                        new
+                        {
+                            PlotPartClassId = new Guid("1794fc01-2d12-4f5d-aaec-7eb219635052"),
+                            Class = "I"
+                        },
+                        new
+                        {
+                            PlotPartClassId = new Guid("5b957c06-8ca6-4658-ad45-78e62c465b3d"),
+                            Class = "II"
+                        },
+                        new
+                        {
+                            PlotPartClassId = new Guid("6f2629db-8de7-496c-97e0-75b1a94b1db3"),
+                            Class = "III"
+                        },
+                        new
+                        {
+                            PlotPartClassId = new Guid("5e69aeb5-4fec-4dd9-ba69-a474f06721f2"),
+                            Class = "IV"
+                        },
+                        new
+                        {
+                            PlotPartClassId = new Guid("3a3e6366-3a20-4d3b-ae15-be85ba277683"),
+                            Class = "V"
+                        },
+                        new
+                        {
+                            PlotPartClassId = new Guid("b2ddef8e-eddc-4fb0-884b-1701ab983bed"),
+                            Class = "VI"
+                        },
+                        new
+                        {
+                            PlotPartClassId = new Guid("a9a4427b-889d-4be4-bf9c-386edb323d9c"),
+                            Class = "VII"
+                        },
+                        new
+                        {
+                            PlotPartClassId = new Guid("1965dce3-a24a-4e7c-a6d1-fddbbfeabc44"),
+                            Class = "VIII"
+                        });
+                });
+
+            modelBuilder.Entity("PlotMicroservice.Entities.PlotPartFormOfOwnership", b =>
+                {
+                    b.Property<Guid>("PlotPartFormOfOwnershipId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FormOfOwnership")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PlotPartFormOfOwnershipId");
+
+                    b.ToTable("PlotPartFormOfOwnerships");
+
+                    b.HasData(
+                        new
+                        {
+                            PlotPartFormOfOwnershipId = new Guid("06d92fec-8bd5-4be1-a772-f52ae7ff6ee3"),
+                            FormOfOwnership = "Privatna svojina"
+                        },
+                        new
+                        {
+                            PlotPartFormOfOwnershipId = new Guid("f5f92ac7-0682-48a6-bd34-f2f5d89be9a0"),
+                            FormOfOwnership = "Državna svojina RS"
+                        },
+                        new
+                        {
+                            PlotPartFormOfOwnershipId = new Guid("3075f4ce-e8f4-4b68-bd22-246363d71a57"),
+                            FormOfOwnership = "Državna svojina"
+                        },
+                        new
+                        {
+                            PlotPartFormOfOwnershipId = new Guid("aa444022-1e63-44f5-8cf4-7df5045af184"),
+                            FormOfOwnership = "Društvena svojina"
+                        },
+                        new
+                        {
+                            PlotPartFormOfOwnershipId = new Guid("b8e349da-6c4d-4282-acb1-872628128fc1"),
+                            FormOfOwnership = "Zadružna svojina"
+                        },
+                        new
+                        {
+                            PlotPartFormOfOwnershipId = new Guid("07af89f2-feee-4680-b489-9d0e31699588"),
+                            FormOfOwnership = "Mešovita svojina"
+                        },
+                        new
+                        {
+                            PlotPartFormOfOwnershipId = new Guid("a2c789e8-9e35-43d6-bf2e-156d776aeceb"),
+                            FormOfOwnership = "Drugi oblici"
                         });
                 });
 

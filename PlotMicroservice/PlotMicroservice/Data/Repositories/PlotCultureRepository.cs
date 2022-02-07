@@ -38,7 +38,7 @@ namespace PlotMicroservice.Data.Repositories
 
         public List<PlotCulture> GetPlotCultures(string culture = null)
         {
-            return PlotContext.PlotCultures.Where(o => o.Culture == null || culture == null).ToList();
+            return PlotContext.PlotCultures.Where(o => o.Culture == culture || culture == null).ToList();
         }
 
         public bool SaveChanges()

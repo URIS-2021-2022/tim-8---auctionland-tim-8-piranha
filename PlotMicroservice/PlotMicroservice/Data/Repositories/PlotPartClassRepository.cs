@@ -12,7 +12,7 @@ namespace PlotMicroservice.Data.Repositories
     {
         private readonly PlotContext PlotContext;
         private readonly IMapper Mapper;
-        
+
         public PlotPartClassRepository(PlotContext context, IMapper mapper)
         {
             PlotContext = context;

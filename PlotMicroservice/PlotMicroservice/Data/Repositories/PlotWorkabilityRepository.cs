@@ -33,7 +33,7 @@ namespace PlotMicroservice.Data.Repositories
 
         public List<PlotWorkability> GetPlotWorkabilities(string workability = null)
         {
-            return PlotContext.PlotWorkabilities.Where(o => o.Workability == null || workability == null).ToList();
+            return PlotContext.PlotWorkabilities.Where(o => o.Workability == workability || workability == null).ToList();
         }
 
         public PlotWorkability GetPlotWorkabilityById(Guid plotWorkabilityId)

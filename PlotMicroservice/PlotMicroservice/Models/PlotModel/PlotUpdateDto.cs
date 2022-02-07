@@ -1,30 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PlotMicroservice.Entities
+namespace PlotMicroservice.Models.PlotModel
 {
-    public class Plot
+    public class PlotUpdateDto
     {
         public Guid PlotId { get; set; }
 
-        // KorisnikParceleId ???
-
-        public ICollection<PlotPart> PlotParts { get; set; }
-
-        [ForeignKey("PlotCulture")]
         public Guid PlotCultureId { get; set; }
-        public PlotCulture PlotCulture { get; set; }
 
-        [ForeignKey("PlotCadastralMunicipality")]
         public Guid PlotCadastralMunicipalityId { get; set; }
-        public PlotCadastralMunicipality PlotCadastralMunicipality { get; set; }
 
-        [ForeignKey("PlotWorkability")]
         public Guid PlotWorkabilityId { get; set; }
-        public PlotWorkability PlotWorkability { get; set; }
 
         public string PlotSurfaceArea { get; set; }
 

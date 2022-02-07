@@ -33,7 +33,7 @@ namespace PlotMicroservice.Data.Repositories
 
         public List<PlotCadastralMunicipality> GetPlotCadastralMunicipalities(string cadastrialMunicipality = null)
         {
-            return Context.PlotCadastralMunicipalities.Where(o => o.CadastralMunicipality == null || cadastrialMunicipality == null).ToList();
+            return Context.PlotCadastralMunicipalities.Where(o => o.CadastralMunicipality == cadastrialMunicipality || cadastrialMunicipality == null).ToList();
         }
 
         public PlotCadastralMunicipality GetPlotCadastralMunicipalityById(Guid plotCadastrialMunicipalityId)

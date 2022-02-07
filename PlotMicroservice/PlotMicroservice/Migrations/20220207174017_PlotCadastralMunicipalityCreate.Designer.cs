@@ -10,8 +10,8 @@ using PlotMicroservice.Entities;
 namespace PlotMicroservice.Migrations
 {
     [DbContext(typeof(PlotContext))]
-    [Migration("20220129183421_PlotCultureCreate")]
-    partial class PlotCultureCreate
+    [Migration("20220207174017_PlotCadastralMunicipalityCreate")]
+    partial class PlotCadastralMunicipalityCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,62 +89,6 @@ namespace PlotMicroservice.Migrations
                         {
                             PlotCadastralMunicipalityId = new Guid("0c0e2227-531a-4f0d-83f0-a1d4a52f4676"),
                             CadastralMunicipality = "Palić"
-                        });
-                });
-
-            modelBuilder.Entity("PlotMicroservice.Entities.PlotCulture", b =>
-                {
-                    b.Property<Guid>("PlotCultureId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Culture")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PlotCultureId");
-
-                    b.ToTable("PlotCultures");
-
-                    b.HasData(
-                        new
-                        {
-                            PlotCultureId = new Guid("ba9777ce-d43f-4f71-a163-7c974e36654f"),
-                            Culture = "Njive"
-                        },
-                        new
-                        {
-                            PlotCultureId = new Guid("60644cdd-795b-47a2-96ac-55f623862efe"),
-                            Culture = "Vrtovi"
-                        },
-                        new
-                        {
-                            PlotCultureId = new Guid("2484a534-4e5f-4b0c-af35-190ae0d68fcc"),
-                            Culture = "Voćnjaci"
-                        },
-                        new
-                        {
-                            PlotCultureId = new Guid("7b199139-6b41-4087-89b0-84d911b5fe2b"),
-                            Culture = "Vinogradi"
-                        },
-                        new
-                        {
-                            PlotCultureId = new Guid("97adad6e-f225-4164-8830-b59004c812c3"),
-                            Culture = "Livade"
-                        },
-                        new
-                        {
-                            PlotCultureId = new Guid("cc506ecd-fb9e-48d8-af90-26ecc5d9feba"),
-                            Culture = "Pašnjaci"
-                        },
-                        new
-                        {
-                            PlotCultureId = new Guid("3262a3e8-a113-431f-8f2f-98a10d97c5a4"),
-                            Culture = "Šume"
-                        },
-                        new
-                        {
-                            PlotCultureId = new Guid("a0c1727d-bb2c-4243-a907-be6f3a005558"),
-                            Culture = "Trstici-močvare"
                         });
                 });
 #pragma warning restore 612, 618

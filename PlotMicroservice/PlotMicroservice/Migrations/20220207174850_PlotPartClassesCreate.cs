@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PlotMicroservice.Migrations
 {
-    public partial class PlotPartClassCreate : Migration
+    public partial class PlotPartClassesCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

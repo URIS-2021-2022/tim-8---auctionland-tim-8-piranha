@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlotMicroservice.Entities;
 
 namespace PlotMicroservice.Migrations
 {
     [DbContext(typeof(PlotContext))]
-    partial class PlotContextModelSnapshot : ModelSnapshot
+    [Migration("20220207175339_PlotPartCreate")]
+    partial class PlotPartCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,7 +279,7 @@ namespace PlotMicroservice.Migrations
 
                     b.HasIndex("PlotPartProtectedZoneId");
 
-                    b.ToTable("PlotParts");
+                    b.ToTable("PlotPart");
 
                     b.HasData(
                         new

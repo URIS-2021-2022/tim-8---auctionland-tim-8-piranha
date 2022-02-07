@@ -10,8 +10,8 @@ using PlotMicroservice.Entities;
 namespace PlotMicroservice.Migrations
 {
     [DbContext(typeof(PlotContext))]
-    [Migration("20220131110758_PlotPartClassCreate")]
-    partial class PlotPartClassCreate
+    [Migration("20220207175019_PlotPartProtectedZoneCreate")]
+    partial class PlotPartProtectedZoneCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -252,6 +252,42 @@ namespace PlotMicroservice.Migrations
                         {
                             PlotPartFormOfOwnershipId = new Guid("a2c789e8-9e35-43d6-bf2e-156d776aeceb"),
                             FormOfOwnership = "Drugi oblici"
+                        });
+                });
+
+            modelBuilder.Entity("PlotMicroservice.Entities.PlotPartProtectedZone", b =>
+                {
+                    b.Property<Guid>("PlotPartProtectedZoneId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProtectedZone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PlotPartProtectedZoneId");
+
+                    b.ToTable("PlotPartProtectedZones");
+
+                    b.HasData(
+                        new
+                        {
+                            PlotPartProtectedZoneId = new Guid("f66b8360-33d2-48e9-9be5-b208988d1fb1"),
+                            ProtectedZone = "1"
+                        },
+                        new
+                        {
+                            PlotPartProtectedZoneId = new Guid("e54364be-1fe6-43b5-9401-8b8bd2165aba"),
+                            ProtectedZone = "2"
+                        },
+                        new
+                        {
+                            PlotPartProtectedZoneId = new Guid("de569d06-4787-4808-b4f6-0efea24f6b03"),
+                            ProtectedZone = "3"
+                        },
+                        new
+                        {
+                            PlotPartProtectedZoneId = new Guid("4debaa6a-1a2f-43e0-bb82-1b7ca1824318"),
+                            ProtectedZone = "4"
                         });
                 });
 

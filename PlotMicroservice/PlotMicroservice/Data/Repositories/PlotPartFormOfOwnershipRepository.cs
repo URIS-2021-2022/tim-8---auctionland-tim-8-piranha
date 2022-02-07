@@ -38,7 +38,7 @@ namespace PlotMicroservice.Data.Repositories
 
         public List<PlotPartFormOfOwnership> GetPlotPartFormOfOwnerships(string formOfOwnership = null)
         {
-            return PlotContext.PlotPartFormOfOwnerships.Where(o => o.FormOfOwnership == null || formOfOwnership == null).ToList();
+            return PlotContext.PlotPartFormOfOwnerships.Where(o => o.FormOfOwnership == formOfOwnership || formOfOwnership == null).ToList();
         }
 
         public bool SaveChanges()

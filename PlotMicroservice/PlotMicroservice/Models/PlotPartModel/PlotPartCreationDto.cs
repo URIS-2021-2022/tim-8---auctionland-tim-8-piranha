@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PlotMicroservice.Entities
+namespace PlotMicroservice.Models.PlotPartModel
 {
-    public class PlotPartConfirmation
+    public class PlotPartCreationDto
     {
-        public Guid PlotPartId { get; set; }
-
         public string PlotPartNumber { get; set; }
 
         public Guid PlotId { get; set; }

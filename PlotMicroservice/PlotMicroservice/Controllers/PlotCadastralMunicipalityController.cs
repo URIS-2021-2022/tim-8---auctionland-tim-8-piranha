@@ -141,7 +141,5 @@ namespace PlotMicroservice.Controllers
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
         }
-
-
     }
 }
