@@ -5,55 +5,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace AuctionMicroservice.Data
 {
     public class DocumentationIndividualRepository : IDocumentationIndividualRepository
     {
-        private readonly DocumentationIndividualContext context;
+        private readonly AuctionContext context;
         private readonly IMapper mapper;
 
-        public DocumentationIndividualRepository(DocumentationIndividualContext context, IMapper mapper)
+        public DocumentationIndividualRepository(AuctionContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
+        }
+        public DocumentationIndividualConformation CreateDocumentationIndividual(DocumentationIndividual documentation)
+        {
+            var documentationEntity = context.Add(documentation);
+
+            return mapper.Map<DocumentationIndividualConformation>(documentationEntity.Entity);
+        }
+
+        public void DeleteDocumentation(Guid DocumentationIndividualId)
+        {
+            var documentation = GetDocumentationById(DocumentationIndividualId);
+
+            context.Remove(documentation);
+        }
+
+        public DocumentationIndividual GetDocumentationById(Guid DocumentationIndividualId)
+        {
+            return context.documentationIndividual.FirstOrDefault(e => e.DocumentationIndividualId == DocumentationIndividualId);
+        }
+
+        public List<DocumentationIndividual> GetDocumentationIndividuals()
+        {
+            return context.documentationIndividual.ToList();
+        }
+
+        public List<DocumentationIndividual> GetDocumentationIndividualsByAuction(Guid AuctionId)
+        {
+            return context.documentationIndividual.Where(e => e.AuctionId == AuctionId).ToList();
         }
 
         public bool SaveChanges()
         {
             return context.SaveChanges() > 0;
         }
-        public DocumentationIndividualConformation CreateDocumentationIndividual(DocumentationIndividual documentationIndividual)
-        {
-            var createdEntity = context.Add(documentationIndividual);
-            return mapper.Map<DocumentationIndividualConformation>(createdEntity.Entity);
-        }
 
-        public void DeleteDocumentationIndividual(Guid DocumentationIndividualId)
-        {
-            var documentation = GetDocumentationIndividualById(DocumentationIndividualId);
-            context.Remove(documentation);
-        }
-
-        public DocumentationIndividual GetDocumentationIndividualById(Guid DocumentationIndividualId)
-        {
-            return context.documentationIndividuals.FirstOrDefault(e => e.DocumentationIndividualId == DocumentationIndividualId);
-           
-        }
-
-
-        public List<DocumentationIndividual> GetDocumentationIndividuals(string FirstName = null, string Surname = null, string IdentifiactionNumber = null)
-        {
-            return context.documentationIndividuals.Where(e => (
-            (FirstName == null || e.FirstName == null) &&
-            (Surname == null || e.Surname == null) &&
-            (IdentifiactionNumber == null || e.IdentificationNumber == null)
-            )).ToList();
-        }
-
-       
-
-        public void UpdateDocumentationIndividual(DocumentationIndividual documentationIndividual)
+        public void UpdateDocumentation(DocumentationIndividual documentation)
         {
             
         }

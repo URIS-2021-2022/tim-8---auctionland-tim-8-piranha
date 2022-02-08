@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace AuctionMicroservice.Data
 {
-    public interface IDocumentationIndividualRepository 
+    public interface IDocumentationIndividualRepository
     {
-        List<DocumentationIndividual> GetDocumentationIndividuals(string FirstName = null, string Surname = null, string IdentifiactionNumber = null);//zbog query parametra
+        DocumentationIndividualConformation CreateDocumentationIndividual(DocumentationIndividual documentation);
 
-        DocumentationIndividual GetDocumentationIndividualById(Guid DocumentationIndividualId);
+        List<DocumentationIndividual> GetDocumentationIndividuals();
 
-        DocumentationIndividualConformation CreateDocumentationIndividual(DocumentationIndividual documentationIndividual);
+        //By Auctions
+        List<DocumentationIndividual> GetDocumentationIndividualsByAuction(Guid AuctionId);
 
-        void UpdateDocumentationIndividual(DocumentationIndividual documentationIndividual);
+        DocumentationIndividual GetDocumentationById(Guid DocumentationIndividualId);
 
-        void DeleteDocumentationIndividual(Guid DocumentationIndividualId);
+        void UpdateDocumentation(DocumentationIndividual documentation);
+
+        void DeleteDocumentation(Guid DocumentationIndividualId);
 
         bool SaveChanges();
-
 
     }
 }

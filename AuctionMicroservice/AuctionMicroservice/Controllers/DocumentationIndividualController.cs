@@ -14,30 +14,28 @@ using System.Threading.Tasks;
 namespace AuctionMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/documentationIndividual")]
-    [Produces("application/json", "application/xml")]
-    //[Authorize]
+    [Route("api/DocumentationIndividuals")]
+    [Produces("application/json", "application/xml")] 
     public class DocumentationIndividualController : ControllerBase
     {
         private readonly IDocumentationIndividualRepository documentationIndividualRepository;
-        private readonly LinkGenerator linkGenerator;
+        private readonly LinkGenerator linkGenerator; 
         private readonly IMapper mapper;
 
-        public DocumentationIndividualController(IDocumentationIndividualRepository documentationIndividualRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public DocumentationIndividualController(IDocumentationIndividualRepository documentationIndividualRepository,LinkGenerator linkGenerator, IMapper mapper)
         {
-            this.mapper = mapper;
-            this.linkGenerator = linkGenerator;
             this.documentationIndividualRepository = documentationIndividualRepository;
+            this.linkGenerator = linkGenerator;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        [HttpHead]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpHead]     
+        [ProducesResponseType(StatusCodes.Status200OK)] 
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-
-        public ActionResult<List<DocumentationIndividualDto>> GetDocumentationIndividuals(string FirstName, string Surname, string IdentificationNumber)
+        public ActionResult<List<DocumentationIndividualDto>> GetDocumentationIndividuals()
         {
-            var documentations = documentationIndividualRepository.GetDocumentationIndividuals(FirstName, Surname, IdentificationNumber);
+            var documentations = documentationIndividualRepository.GetDocumentationIndividuals();
 
             if (documentations == null || documentations.Count == 0)
             {
@@ -45,129 +43,126 @@ namespace AuctionMicroservice.Controllers
             }
 
             return Ok(mapper.Map<List<DocumentationIndividualDto>>(documentations));
-
         }
 
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-
-        [HttpGet("{DocumentationIndividualId}")]
-
-        public ActionResult<DocumentationIndividualDto> GetDocumentationIndividualById(Guid DocumentationIndividualId)
+        [HttpGet("auction/{AuctionId}")]
+        public ActionResult<List<DocumentationIndividualDto>> GetDocumentationIndividualsByAuction(Guid AuctionId)
         {
-            var documentation = documentationIndividualRepository.GetDocumentationIndividualById(DocumentationIndividualId);
+            var documentations = documentationIndividualRepository.GetDocumentationIndividualsByAuction(AuctionId);
+
+            if (documentations == null || documentations.Count == 0)
+            {
+                return NoContent();
+            }
+
+            return Ok(mapper.Map<List<DocumentationIndividualDto>>(documentations));
+        }
+
+
+
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet("{DocumentationIndividualId}")]
+        public ActionResult<DocumentationIndividualDto> GetDocumentationById(Guid DocumentationIndividualId)
+        {
+            var documentation = documentationIndividualRepository.GetDocumentationById(DocumentationIndividualId);
 
             if(documentation == null)
             {
-                
                 return NotFound();
             }
 
-            return Ok(mapper.Map<DocumentationIndividualDto> (documentation));
+            return Ok(mapper.Map<DocumentationIndividualDto>(documentation));
         }
 
         [HttpPost]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-
-        public ActionResult<DocumentationIndividualConfirmationDto> CreateDocumentationIndividual([FromBody] DocumentationIndividualDto documentationIndividualDto)
+        public ActionResult<DocumentationIndividualConfirmationDto> CreateDocumentationIndividual([FromBody] DocumentatonLegalEntitylCreationDto documentation)
         {
             try
             {
-                DocumentationIndividual documentationIndividualEntity = mapper.Map<DocumentationIndividual>(documentationIndividualDto);
-                DocumentationIndividualConformation confirmation = documentationIndividualRepository.CreateDocumentationIndividual(documentationIndividualEntity);
+                DocumentationIndividual documentationEntity = mapper.Map<DocumentationIndividual>(documentation);
+                DocumentationIndividualConformation conformation = documentationIndividualRepository.CreateDocumentationIndividual(documentationEntity);
                 documentationIndividualRepository.SaveChanges();
 
-                string location = linkGenerator.GetPathByAction("GetDocumentationIndividualById", "DocumentationIndividual", new { DocumentationIndividualId = confirmation.DocumentationIndividualId });
+                string location = linkGenerator.GetPathByAction("GetDocumentationIndividuals", "DocumentationIndividual", new { DocumentationIndividualId = conformation.DocumentationIndividualId });
 
-                return Created(location, mapper.Map<DocumentationIndividualConfirmationDto>(confirmation));
-
+                return Created(location, mapper.Map<DocumentationIndividualConfirmationDto>(conformation));
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
+
 
         }
 
         [HttpPut]
         [Consumes("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-
         public ActionResult<DocumentationIndividualDto> UpdateDocumentationIndividual(DocumentationIndividualUpdateDto documentation)
         {
             try
             {
-                var oldDocumentation = documentationIndividualRepository.GetDocumentationIndividualById(documentation.DocumentationIndividualId);
+                var oldDocumentation = documentationIndividualRepository.GetDocumentationById(documentation.DocumentationIndividualId);
 
-                if (oldDocumentation == null)
+                if(oldDocumentation == null)
                 {
                     return NotFound();
-
                 }
-                DocumentationIndividual documentationIndividualEntity = mapper.Map<DocumentationIndividual>(documentation);
 
-                mapper.Map(documentationIndividualEntity, oldDocumentation);
+                DocumentationIndividual documentationEntity = mapper.Map<DocumentationIndividual>(documentation);
+
+                mapper.Map(documentationEntity, oldDocumentation);
 
                 documentationIndividualRepository.SaveChanges();
+
                 return Ok(mapper.Map<DocumentationIndividualDto>(oldDocumentation));
-
-
             }
-            catch(Exception e)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Update Error" + e.Message);
-            }
-
-
-            
-                
-
-                
-            
-        }
-
-
-        [HttpDelete("{DocumentationIndividualId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-
-        public IActionResult DeleteDocumentationIndividual(Guid DocumentationIndividualId)
-        {
-            try
-            {
-                var documentation = documentationIndividualRepository.GetDocumentationIndividualById(DocumentationIndividualId);
-
-                if(documentation == null)
-                {
-                    return NotFound();
-
-                }
-
-                documentationIndividualRepository.DeleteDocumentationIndividual(DocumentationIndividualId);
-                documentationIndividualRepository.SaveChanges();
-                return NoContent();
-            }
-            catch(Exception e)
+            catch(Exception e )
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
 
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpDelete("{DocumentationIndividualId}")]
+        public IActionResult DeleteDocumentationIndividual(Guid DocumentationIndividualId)
+        {
+            try
+            {
+                var documentation = documentationIndividualRepository.GetDocumentationById(DocumentationIndividualId);
+
+                if (documentation == null)
+                {
+                    return NotFound();
+                }
+
+                documentationIndividualRepository.DeleteDocumentation(DocumentationIndividualId);
+                documentationIndividualRepository.SaveChanges();
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
 
         [HttpOptions]
-        [AllowAnonymous]
-
+        [AllowAnonymous] 
         public IActionResult GetDocumentationIndividualOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
-            return Ok();        
+            return Ok();
         }
-
 
     }
 }

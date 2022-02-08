@@ -21,13 +21,13 @@ namespace AuctionMicroservice.Models
 
         public int PriceStep { get; set; }
 
-        public List<DocumentationIndividualDto> DocumentationIndividual { get; set; }
+        //public DocumentationIndividualDto DocumentationIndividual { get; set; }
 
-        public List<DocumentationLegalEntityDto> DocumentationLegalEntity { get; set; }
+        //public DocumentationLegalEntityDto DocumentationLegalEntity { get; set; }
 
-        public List<PublicBiddingDto> PublicBiddings { get; set; }
+        //public PublicBiddingDto PublicBiddings { get; set; }
 
-
+        public DateTime ApplicationDeadline { get; set; }
         #endregion
     }
 }

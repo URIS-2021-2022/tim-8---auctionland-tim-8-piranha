@@ -1,5 +1,8 @@
-﻿using System;
+﻿using AuctionMicroservice.Entities;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +11,7 @@ namespace AuctionMicroservice.Models
     public class PublicBiddingDto
     {
         #region
+        [Key]
         public Guid PublicBiddingId { get; set; }
 
         public DateTime Date { get; set; }
@@ -29,6 +33,11 @@ namespace AuctionMicroservice.Models
         public int DepositAdditionPrice { get; set; }
 
         public int Round { get; set; }
+
+        
+        public Guid AuctionId { get; set; }
+
+        public Auction auction { get; set; }
 
         #endregion
 

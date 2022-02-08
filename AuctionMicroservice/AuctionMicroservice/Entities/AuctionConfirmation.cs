@@ -1,11 +1,12 @@
-﻿using System;
+﻿using AuctionMicroservice.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AuctionMicroservice.Models
+namespace AuctionMicroservice.Entities
 {
-    public class AuctionConformationDto
+    public class AuctionConfirmation
     {
         #region
 
@@ -21,14 +22,13 @@ namespace AuctionMicroservice.Models
 
         public int PriceStep { get; set; }
 
-        //public DocumentationIndividualDto DocumentationIndividual { get; set; }
+        //public DocumentationIndividual DocumentationIndividual { get; set; }
 
-        //public DocumentationLegalEntityDto DocumentationLegalEntity { get; set; }
+        //public DocumentationLegalEntity DocumentationLegalEntity { get; set; }
 
         //public PublicBiddingDto PublicBiddings { get; set; }
 
         public DateTime ApplicationDeadline { get; set; }
-
         #endregion
     }
 }

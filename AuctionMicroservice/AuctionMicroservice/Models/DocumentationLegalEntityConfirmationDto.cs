@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace AuctionMicroservice.Models
 {
-    public class DocumentationLegalEntityDto
+    public class DocumentationLegalEntityConfirmationDto
     {
         #region
-        [Key]
         public Guid DocumentationLegalEntityId { get; set; }
 
         public string Name { get; set; }
@@ -18,7 +16,7 @@ namespace AuctionMicroservice.Models
 
         public string Address { get; set; }
 
-        
+       
         public Guid AuctionId { get; set; }
 
         #endregion

@@ -13,7 +13,7 @@ namespace AuctionMicroservice.Profiles
        public DocumentationIndividualProfile()
         {
             CreateMap<DocumentationIndividual, DocumentationIndividualDto>();//get
-            CreateMap<DocumentationIndividualDto, DocumentationIndividual>();//post
+            CreateMap<DocumentatonLegalEntitylCreationDto, DocumentationIndividual>();//post
             CreateMap<DocumentationIndividualUpdateDto, DocumentationIndividual>();//update
             CreateMap<DocumentationIndividual, DocumentationIndividual>();
 
