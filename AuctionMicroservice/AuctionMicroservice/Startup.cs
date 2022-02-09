@@ -1,5 +1,6 @@
 using AuctionMicroservice.Data;
 using AuctionMicroservice.Entities;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -39,7 +40,12 @@ namespace AuctionMicroservice
                 setup.ReturnHttpNotAcceptable = true;
 
             }
-            ).AddXmlDataContractSerializerFormatters();//.ConfigureApiBehaviorOptions(setupAction =>
+            ).AddXmlDataContractSerializerFormatters().AddFluentValidation(s =>
+            {
+                s.RegisterValidatorsFromAssemblyContaining<Startup>();
+                s.DisableDataAnnotationsValidation = true;
+
+            });//.ConfigureApiBehaviorOptions(setupAction =>
             //{
             //    setupAction.InvalidModelStateResponseFactory = context =>
             //    {
@@ -122,6 +128,7 @@ namespace AuctionMicroservice
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
 
             app.UseAuthorization();
 

@@ -10,8 +10,8 @@ namespace AuctionMicroservice.Models
     public class DocumentatonLegalEntitylCreationDto : IValidatableObject
     {
         #region
-        [Key]
-        public Guid DocumentationIndividualId { get; set; }
+        //[Key]
+        //public Guid DocumentationIndividualId { get; set; }
 
         [Required(ErrorMessage = "First name is required!")]
         [MaxLength(20)]

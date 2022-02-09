@@ -1,7 +1,9 @@
 ﻿using AuctionMicroservice.Data;
 using AuctionMicroservice.Entities;
 using AuctionMicroservice.Models;
+using AuctionMicroservice.Validatiors;
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +23,14 @@ namespace AuctionMicroservice.Controllers
         private readonly IDocumentationIndividualRepository documentationIndividualRepository;
         private readonly LinkGenerator linkGenerator; 
         private readonly IMapper mapper;
+        private readonly DocumentationIndividualValidator validator;
 
-        public DocumentationIndividualController(IDocumentationIndividualRepository documentationIndividualRepository,LinkGenerator linkGenerator, IMapper mapper)
+        public DocumentationIndividualController(IDocumentationIndividualRepository documentationIndividualRepository,LinkGenerator linkGenerator, IMapper mapper, DocumentationIndividualValidator validator)
         {
             this.documentationIndividualRepository = documentationIndividualRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.validator = validator;
         }
 
         [HttpGet]
@@ -86,6 +90,9 @@ namespace AuctionMicroservice.Controllers
             try
             {
                 DocumentationIndividual documentationEntity = mapper.Map<DocumentationIndividual>(documentation);
+
+                validator.ValidateAndThrow(documentationEntity);
+
                 DocumentationIndividualConformation conformation = documentationIndividualRepository.CreateDocumentationIndividual(documentationEntity);
                 documentationIndividualRepository.SaveChanges();
 
@@ -93,7 +100,11 @@ namespace AuctionMicroservice.Controllers
 
                 return Created(location, mapper.Map<DocumentationIndividualConfirmationDto>(conformation));
             }
-            catch(Exception e)
+            catch (ValidationException v)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
+            }
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }

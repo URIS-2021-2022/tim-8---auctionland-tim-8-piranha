@@ -9,8 +9,8 @@ namespace AuctionMicroservice.Models
     public class DocumentationLegalEntityCreationDto
     {
         #region
-        [Key]
-        public Guid DocumentationLegalEntityId { get; set; }
+        //[Key]
+        //public Guid DocumentationLegalEntityId { get; set; }
 
 
         [Required(ErrorMessage = "Name is required!")]

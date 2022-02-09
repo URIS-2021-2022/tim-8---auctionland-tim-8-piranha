@@ -9,7 +9,7 @@ namespace AuctionMicroservice.Models
     public class AuctionCreationDto
     {
         #region
-        public Guid AuctionId { get; set; }
+       // public Guid AuctionId { get; set; }
 
 
         [Required]

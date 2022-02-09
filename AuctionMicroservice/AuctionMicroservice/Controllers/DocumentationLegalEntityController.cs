@@ -1,7 +1,9 @@
 ﻿using AuctionMicroservice.Data;
 using AuctionMicroservice.Entities;
 using AuctionMicroservice.Models;
+using AuctionMicroservice.Validatiors;
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +23,14 @@ namespace AuctionMicroservice.Controllers
         private readonly IDocumentationLegalEntityRepository documentationLegalEntityRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
+        private readonly DocumentationLegalEntityValidator validator;
 
-        public DocumentationLegalEntityController(IDocumentationLegalEntityRepository documentationLegalEntityRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public DocumentationLegalEntityController(IDocumentationLegalEntityRepository documentationLegalEntityRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentationLegalEntityValidator validator)
         {
             this.documentationLegalEntityRepository = documentationLegalEntityRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.validator = validator;
         }
 
         [HttpGet]
@@ -88,12 +92,19 @@ namespace AuctionMicroservice.Controllers
             try
             {
                 DocumentationLegalEntity documentationEntity = mapper.Map<DocumentationLegalEntity>(documentation);
+
+                validator.ValidateAndThrow(documentationEntity);
+
                 DocumentationLegalEntityConfirmation conformation = documentationLegalEntityRepository.CreateDocumentationLegalEntity(documentationEntity);
                 documentationLegalEntityRepository.SaveChanges();
 
                 string location = linkGenerator.GetPathByAction("GetDocumentationLegalEntites", "DocumentationLegalEntity", new { DocumentationLegalEntityId = conformation.DocumentationLegalEntityId });
 
                 return Created(location, mapper.Map<DocumentationLegalEntityConfirmationDto>(conformation));
+            }
+            catch(ValidationException v)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
             }
             catch (Exception e)
             {
