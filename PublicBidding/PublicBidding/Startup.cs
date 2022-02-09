@@ -2,11 +2,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PublicBidding.Data;
+using PublicBidding.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +31,19 @@ namespace PublicBidding
         {
 
             services.AddControllers();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<ITypeRepository, TypeRepository>();
+            services.AddScoped<IStatusRepository, StatusRepository>();
+            services.AddScoped<IPublicBiddingRepository, PublicBiddingRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PublicBidding", Version = "v1" });
             });
+
+            services.AddDbContext<PublicBiddingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PublicBiddingDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
