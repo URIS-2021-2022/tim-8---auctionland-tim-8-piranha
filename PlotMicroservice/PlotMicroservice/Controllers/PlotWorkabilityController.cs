@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace PlotMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/plotWorkabilities")]
+    [Route("api/plot-workabilities")]
     [Produces("application/json", "application/xml")]
     public class PlotWorkabilityController : ControllerBase
     {

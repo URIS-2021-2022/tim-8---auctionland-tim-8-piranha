@@ -16,7 +16,7 @@ using PlotMicroservice.Validators;
 namespace PlotMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/plotPartFormOfOwnerships")]
+    [Route("api/plot-part-form-of-ownerships")]
     [Produces("application/json", "application/xml")]
     public class PlotPartFormOfOwnershipController : ControllerBase
     {

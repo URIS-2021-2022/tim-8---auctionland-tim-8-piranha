@@ -16,7 +16,7 @@ using PlotMicroservice.Validators;
 namespace PlotMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/plotParts")]
+    [Route("api/plot-parts")]
     [Produces("application/json", "application/xml")]
     public class PlotPartController : ControllerBase
     {

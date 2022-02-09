@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace PlotMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/plotPartClasses")]
+    [Route("api/plot-part-classes")]
     [Produces("application/json", "application/xml")]
     public class PlotPartClassController : ControllerBase
     {

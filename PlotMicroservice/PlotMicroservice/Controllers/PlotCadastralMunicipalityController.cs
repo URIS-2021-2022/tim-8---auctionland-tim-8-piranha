@@ -17,7 +17,7 @@ using FluentValidation.Results;
 namespace PlotMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/plotCadastralMunicipalities")]
+    [Route("api/plot-cadastral-municipalities")]
     [Produces("application/json", "application/xml")]
     //[Authorize] - kontroleru mogu pristupati samo autorizovani korisnici
     public class PlotCadastralMunicipalityController : ControllerBase

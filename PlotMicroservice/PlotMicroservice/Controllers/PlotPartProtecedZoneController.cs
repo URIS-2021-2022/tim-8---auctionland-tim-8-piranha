@@ -16,7 +16,7 @@ using PlotMicroservice.Validators;
 namespace PlotMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/plotPartProtectedZones")]
+    [Route("api/plot-part-protected-zones")]
     [Produces("application/json", "application/xml")]
     public class PlotPartProtecedZoneController : ControllerBase
     {

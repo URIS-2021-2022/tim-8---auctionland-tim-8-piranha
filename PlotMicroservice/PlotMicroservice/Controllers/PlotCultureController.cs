@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace PlotMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/plotCultures")]
+    [Route("api/plot-cultures")]
     [Produces("application/json", "application/xml")]
     public class PlotCultureController : ControllerBase
     {
