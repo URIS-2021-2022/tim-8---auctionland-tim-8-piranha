@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Routing;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using PlotMicroservice.Models.PlotPartClassModel;
+using PlotMicroservice.Validators;
 using System;
 using System.Collections.Generic;
+using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,12 +23,14 @@ namespace PlotMicroservice.Controllers
         private readonly IPlotPartClassRepository PlotPartClassRepository;
         private readonly IMapper Mapper;
         private readonly LinkGenerator LinkGenerator;
+        private readonly PlotPartClassValidator Validator;
 
-        public PlotPartClassController(IPlotPartClassRepository plotPartClassRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public PlotPartClassController(IPlotPartClassRepository plotPartClassRepository, IMapper mapper, LinkGenerator linkGenerator, PlotPartClassValidator validator)
         {
             PlotPartClassRepository = plotPartClassRepository;
             Mapper = mapper;
             LinkGenerator = linkGenerator;
+            Validator = validator;
         }
 
         [HttpGet]
@@ -63,12 +67,16 @@ namespace PlotMicroservice.Controllers
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PlotPartClassConfirmationDto> CreatePlotPartClass([FromBody] PlotPartClassCreationDto plotPartClassCreation)
         {
             try
             {
                 PlotPartClass plotPartClass = Mapper.Map<PlotPartClass>(plotPartClassCreation);
+
+                Validator.ValidateAndThrow(plotPartClass);
+
                 PlotPartClassConfirmation plotPartClassConfirmation = PlotPartClassRepository.CreatePlotPartClass(plotPartClass);
                 PlotPartClassRepository.SaveChanges();
 
@@ -76,6 +84,9 @@ namespace PlotMicroservice.Controllers
 
                 return Created(uri, Mapper.Map<PlotPartClassConfirmationDto>(plotPartClassConfirmation));
 
+            } catch (ValidationException ve)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch (Exception ex)
             {
@@ -86,6 +97,7 @@ namespace PlotMicroservice.Controllers
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PlotPartClassDto> UpdatePlotPartClass(PlotPartClassUpdateDto plotPartClassUpdate)
@@ -100,13 +112,20 @@ namespace PlotMicroservice.Controllers
                 }
 
                 PlotPartClass plotPartClass = Mapper.Map<PlotPartClass>(plotPartClassUpdate);
+
+                Validator.ValidateAndThrow(plotPartClass);
+                
                 Mapper.Map(plotPartClass, existingPlotPartClass);
 
                 PlotPartClassRepository.SaveChanges();
 
                 return Ok(Mapper.Map<PlotPartClassDto>(existingPlotPartClass));
 
-            } catch (Exception ex)
+            } catch (ValidationException ve)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            } 
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }

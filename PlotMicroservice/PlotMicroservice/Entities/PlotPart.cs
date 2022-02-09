@@ -29,7 +29,7 @@ namespace PlotMicroservice.Entities
         public Guid PlotPartFormOfOwnershipId { get; set; }
         public PlotPartFormOfOwnership PlotPartFormOfOwnership { get; set; }
 
-        public string PlotPartSurfaceArea { get; set; }
+        public int PlotPartSurfaceArea { get; set; }
 
         public string PlotPartCurrentClass { get; set; }
 

@@ -9,7 +9,7 @@ namespace PlotMicroservice.Models.PlotPartModel
     {
         public string PlotPartNumber { get; set; }
 
-        public string PlotPartSurfaceArea { get; set; }
+        public int PlotPartSurfaceArea { get; set; }
 
         public Guid PlotId { get; set; }
     }

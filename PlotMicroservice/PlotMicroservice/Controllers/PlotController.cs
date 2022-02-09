@@ -8,8 +8,10 @@ using PlotMicroservice.Entities;
 using PlotMicroservice.Models.PlotModel;
 using System;
 using System.Collections.Generic;
+using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
+using PlotMicroservice.Validators;
 
 namespace PlotMicroservice.Controllers
 {
@@ -21,12 +23,14 @@ namespace PlotMicroservice.Controllers
         private readonly IPlotRepository PlotRepository;
         private readonly LinkGenerator LinkGenerator;
         private readonly IMapper Mapper;
+        private readonly PlotValidator Validator;
 
-        public PlotController(IPlotRepository plotRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public PlotController(IPlotRepository plotRepository, IMapper mapper, LinkGenerator linkGenerator, PlotValidator validator)
         {
             PlotRepository = plotRepository;
             LinkGenerator = linkGenerator;
             Mapper = mapper;
+            Validator = validator;
         }
 
         [HttpGet]
@@ -63,12 +67,16 @@ namespace PlotMicroservice.Controllers
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PlotConfirmationDto> CreatePlot([FromBody] PlotCreationDto plotCreation)
         {
             try
             {
                 Plot plot = Mapper.Map<Plot>(plotCreation);
+
+                Validator.ValidateAndThrow(plot);
+                
                 PlotConfirmation plotConfirmation = PlotRepository.CreatePlot(plot);
                 PlotRepository.SaveChanges();
 
@@ -76,7 +84,11 @@ namespace PlotMicroservice.Controllers
 
                 return Created(uri, Mapper.Map<PlotConfirmationDto>(plotConfirmation));
 
-            } catch(Exception ex)
+            } catch (ValidationException ve)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            } 
+            catch(Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
@@ -85,6 +97,7 @@ namespace PlotMicroservice.Controllers
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PlotDto> UpdatePlot(PlotUpdateDto plotUpdate)
@@ -99,13 +112,20 @@ namespace PlotMicroservice.Controllers
                 }
 
                 Plot plot = Mapper.Map<Plot>(plotUpdate);
+
+                Validator.ValidateAndThrow(plot);
+
                 Mapper.Map(plot, existingPlot);
 
                 PlotRepository.SaveChanges();
 
                 return Ok(Mapper.Map<PlotDto>(existingPlot));
 
-            } catch(Exception ex)
+            } catch (ValidationException ve)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            }
+            catch(Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }

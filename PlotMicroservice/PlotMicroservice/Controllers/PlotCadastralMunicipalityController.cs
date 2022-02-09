@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Routing;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using PlotMicroservice.Models;
+using PlotMicroservice.Validators;
 using System;
 using System.Collections.Generic;
+using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 
 namespace PlotMicroservice.Controllers
 {
@@ -22,12 +25,14 @@ namespace PlotMicroservice.Controllers
         private readonly IPlotCadastralMunicipalityRepository PlotCadastralMunicipalityRepository;
         private readonly LinkGenerator LinkGenerator;
         private readonly IMapper Mapper;
+        private readonly PlotCadastralMunicipalityValidator Validator;
 
-        public PlotCadastralMunicipalityController(IPlotCadastralMunicipalityRepository plotCadastralMunicipalityRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public PlotCadastralMunicipalityController(IPlotCadastralMunicipalityRepository plotCadastralMunicipalityRepository, LinkGenerator linkGenerator, IMapper mapper, PlotCadastralMunicipalityValidator validator)
         {
             PlotCadastralMunicipalityRepository = plotCadastralMunicipalityRepository;
             LinkGenerator = linkGenerator;
             Mapper = mapper;
+            Validator = validator;
         }
 
         [HttpGet]
@@ -43,7 +48,7 @@ namespace PlotMicroservice.Controllers
                 return NoContent();
             }
 
-            return Ok(Mapper.Map<List<PlotCadastralMunicipalityDto>>(municipalities));
+            return Ok(Mapper.Map<List<PlotCadastralMunicipalityDto>>(municipalities));      
         }
 
         [HttpGet("{plotCadastralMunicipalityId}")]
@@ -51,30 +56,41 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<PlotCadastralMunicipalityDto> GetPlotCadastralMunicipalityById(Guid plotCadastralMunicipalityId)
         {
+           
             PlotCadastralMunicipality municipality = PlotCadastralMunicipalityRepository.GetPlotCadastralMunicipalityById(plotCadastralMunicipalityId);
 
-            if(municipality == null)
+            if (municipality == null)
             {
                 return NotFound();
             }
+
             return Ok(Mapper.Map<PlotCadastralMunicipalityDto>(municipality));
         }
         
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PlotCadastralMunicipalityConfirmationDto> CreatePlotCadastralMunicipality([FromBody] PlotCadastralMunicipalityCreationDto municipality)
         {
             try
             {
+
                 PlotCadastralMunicipality cadastralMunicipality = Mapper.Map<PlotCadastralMunicipality>(municipality);
+
+                Validator.ValidateAndThrow(cadastralMunicipality);
+
                 PlotCadastralMunicipalityConfirmation confirmation = PlotCadastralMunicipalityRepository.CreatePlotCadastralMunicipality(cadastralMunicipality);
                 PlotCadastralMunicipalityRepository.SaveChanges();
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotCadastralMunicipalities", "PlotCadastralMunicipality", new { cadastralMunicipalityId = confirmation.PlotCadastralMunicipalityId });
-                
+
                 return Created(uri, Mapper.Map<PlotCadastralMunicipalityConfirmationDto>(confirmation));
+               
+            } catch (ValidationException ve)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch(Exception ex)
             {
@@ -85,6 +101,7 @@ namespace PlotMicroservice.Controllers
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PlotCadastralMunicipalityDto> UpdatePlotCadastralMunicipality(PlotCadastralMunicipalityUpdateDto plotCadastralMunicipality)
@@ -99,14 +116,21 @@ namespace PlotMicroservice.Controllers
                 }
 
                 PlotCadastralMunicipality cadastralMunicipality = Mapper.Map<PlotCadastralMunicipality>(plotCadastralMunicipality);
+
+                Validator.ValidateAndThrow(cadastralMunicipality);
+
                 Mapper.Map(cadastralMunicipality, existingCadastralMunicipality);
                 PlotCadastralMunicipalityRepository.SaveChanges();
 
                 return Ok(Mapper.Map<PlotCadastralMunicipalityDto>(existingCadastralMunicipality));
 
-            } catch(Exception)
+            } catch(ValidationException ve)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while updating cadastrial municipality object");
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -128,9 +152,10 @@ namespace PlotMicroservice.Controllers
                 PlotCadastralMunicipalityRepository.SaveChanges();
                 return NoContent(); // Successful deletion
 
-            } catch(Exception)
+            }
+            catch(Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while deleting cadastrial municipality object!");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 

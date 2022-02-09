@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Routing;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using PlotMicroservice.Models.PlotWorkabilityModel;
+using PlotMicroservice.Validators;
 using System;
 using System.Collections.Generic;
+using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,12 +23,14 @@ namespace PlotMicroservice.Controllers
         private readonly IPlotWorkabilityRepository PlotWorkabilityRepository;
         private readonly IMapper Mapper;
         private readonly LinkGenerator LinkGenerator;
+        private readonly PlotWorkabilityValidator Validator;
 
-        public PlotWorkabilityController(IPlotWorkabilityRepository plotWorkabilityRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public PlotWorkabilityController(IPlotWorkabilityRepository plotWorkabilityRepository, IMapper mapper, LinkGenerator linkGenerator, PlotWorkabilityValidator validator)
         {
             PlotWorkabilityRepository = plotWorkabilityRepository;
             Mapper = mapper;
             LinkGenerator = linkGenerator;
+            Validator = validator;
         }
 
         [HttpGet]
@@ -63,12 +67,16 @@ namespace PlotMicroservice.Controllers
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PlotWorkabilityConfirmationDto> CreatePlotWorkability([FromBody] PlotWorkabilityCreationDto plotWorkabilityCreation)
         {
             try
             {
                 PlotWorkability plotWorkability = Mapper.Map<PlotWorkability>(plotWorkabilityCreation);
+
+                Validator.ValidateAndThrow(plotWorkability);
+                
                 PlotWorkabilityConfirmation plotWorkabilityConfirmation = PlotWorkabilityRepository.CreatePlotWorkability(plotWorkability);
                 PlotWorkabilityRepository.SaveChanges();
 
@@ -76,7 +84,11 @@ namespace PlotMicroservice.Controllers
 
                 return Created(uri, Mapper.Map<PlotWorkabilityConfirmationDto>(plotWorkabilityConfirmation));
 
-            } catch(Exception ex)
+            } catch(ValidationException ve)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            } 
+            catch(Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
@@ -85,6 +97,7 @@ namespace PlotMicroservice.Controllers
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PlotWorkabilityDto> UpdatePlotWorkability(PlotWorkabilityUpdateDto plotWorkabilityUpdate)
@@ -99,12 +112,18 @@ namespace PlotMicroservice.Controllers
                 }
 
                 PlotWorkability plotWorkability = Mapper.Map<PlotWorkability>(plotWorkabilityUpdate);
+
+                Validator.ValidateAndThrow(plotWorkability);
+                
                 Mapper.Map(plotWorkability, existingPlotWorkability);
 
                 PlotWorkabilityRepository.SaveChanges();
 
                 return Ok(Mapper.Map<PlotWorkabilityDto>(existingPlotWorkability));
 
+            } catch (ValidationException ve)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch (Exception ex)
             {

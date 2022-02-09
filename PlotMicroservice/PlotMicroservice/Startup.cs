@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Data.Repositories;
 using PlotMicroservice.Entities;
+using PlotMicroservice.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +35,10 @@ namespace PlotMicroservice
 
             services.AddControllers(setup => {
                 setup.ReturnHttpNotAcceptable = true;
-            }).AddXmlDataContractSerializerFormatters();
+            }).AddXmlDataContractSerializerFormatters()
+              .AddFluentValidation(fv => {
+                fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+            });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -46,12 +51,12 @@ namespace PlotMicroservice
             services.AddScoped<IPlotRepository, PlotRepository>();
             services.AddScoped<IPlotPartRepository, PlotPartRepository>();
 
-           /* services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlotMicroservice", Version = "v1" });
-            });*/
+            services.AddDbContext<PlotContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PlotDB")));
 
-            services.AddDbContext<PlotContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PlotDB")));   
+            /* services.AddSwaggerGen(c =>
+             {
+                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlotMicroservice", Version = "v1" });
+             });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

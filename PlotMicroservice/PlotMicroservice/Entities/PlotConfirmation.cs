@@ -15,7 +15,7 @@ namespace PlotMicroservice.Entities
 
         public Guid PlotWorkabilityId { get; set; }
 
-        public string PlotSurfaceArea { get; set; }
+        public int PlotSurfaceArea { get; set; }
 
         public string PlotNumber { get; set; }
 

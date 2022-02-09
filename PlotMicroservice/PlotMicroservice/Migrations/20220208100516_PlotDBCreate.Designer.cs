@@ -10,8 +10,8 @@ using PlotMicroservice.Entities;
 namespace PlotMicroservice.Migrations
 {
     [DbContext(typeof(PlotContext))]
-    [Migration("20220207175339_PlotPartCreate")]
-    partial class PlotPartCreate
+    [Migration("20220208100516_PlotDBCreate")]
+    partial class PlotDBCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,8 +45,8 @@ namespace PlotMicroservice.Migrations
                     b.Property<string>("PlotRealEstateListNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PlotSurfaceArea")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PlotSurfaceArea")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("PlotWorkabilityId")
                         .HasColumnType("uniqueidentifier");
@@ -71,7 +71,7 @@ namespace PlotMicroservice.Migrations
                             PlotCurrentWorkability = "",
                             PlotNumber = "112",
                             PlotRealEstateListNumber = "LN100",
-                            PlotSurfaceArea = "4500 m2",
+                            PlotSurfaceArea = 4500,
                             PlotWorkabilityId = new Guid("c0615a4d-faa4-4e17-8f2f-93ec25383f9b")
                         },
                         new
@@ -83,7 +83,7 @@ namespace PlotMicroservice.Migrations
                             PlotCurrentWorkability = "",
                             PlotNumber = "146",
                             PlotRealEstateListNumber = "LN202",
-                            PlotSurfaceArea = "5600 m2",
+                            PlotSurfaceArea = 5600,
                             PlotWorkabilityId = new Guid("c0615a4d-faa4-4e17-8f2f-93ec25383f9b")
                         },
                         new
@@ -95,7 +95,7 @@ namespace PlotMicroservice.Migrations
                             PlotCurrentWorkability = "",
                             PlotNumber = "5308",
                             PlotRealEstateListNumber = "LN550",
-                            PlotSurfaceArea = "3850 m2",
+                            PlotSurfaceArea = 3850,
                             PlotWorkabilityId = new Guid("c0615a4d-faa4-4e17-8f2f-93ec25383f9b")
                         },
                         new
@@ -107,7 +107,7 @@ namespace PlotMicroservice.Migrations
                             PlotCurrentWorkability = "",
                             PlotNumber = "97",
                             PlotRealEstateListNumber = "LN90",
-                            PlotSurfaceArea = "7602 m2",
+                            PlotSurfaceArea = 7602,
                             PlotWorkabilityId = new Guid("40d2641b-8b85-4625-b01c-a129389a6aad")
                         });
                 });
@@ -266,8 +266,8 @@ namespace PlotMicroservice.Migrations
                     b.Property<Guid>("PlotPartProtectedZoneId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("PlotPartSurfaceArea")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PlotPartSurfaceArea")
+                        .HasColumnType("int");
 
                     b.HasKey("PlotPartId");
 
@@ -279,7 +279,7 @@ namespace PlotMicroservice.Migrations
 
                     b.HasIndex("PlotPartProtectedZoneId");
 
-                    b.ToTable("PlotPart");
+                    b.ToTable("PlotParts");
 
                     b.HasData(
                         new
@@ -292,7 +292,7 @@ namespace PlotMicroservice.Migrations
                             PlotPartFormOfOwnershipId = new Guid("06d92fec-8bd5-4be1-a772-f52ae7ff6ee3"),
                             PlotPartNumber = "112/1",
                             PlotPartProtectedZoneId = new Guid("f66b8360-33d2-48e9-9be5-b208988d1fb1"),
-                            PlotPartSurfaceArea = "1900 m2"
+                            PlotPartSurfaceArea = 1900
                         },
                         new
                         {
@@ -304,7 +304,7 @@ namespace PlotMicroservice.Migrations
                             PlotPartFormOfOwnershipId = new Guid("06d92fec-8bd5-4be1-a772-f52ae7ff6ee3"),
                             PlotPartNumber = "112/3",
                             PlotPartProtectedZoneId = new Guid("f66b8360-33d2-48e9-9be5-b208988d1fb1"),
-                            PlotPartSurfaceArea = "2600 m2"
+                            PlotPartSurfaceArea = 2600
                         },
                         new
                         {
@@ -316,7 +316,7 @@ namespace PlotMicroservice.Migrations
                             PlotPartFormOfOwnershipId = new Guid("f5f92ac7-0682-48a6-bd34-f2f5d89be9a0"),
                             PlotPartNumber = "146/2",
                             PlotPartProtectedZoneId = new Guid("e54364be-1fe6-43b5-9401-8b8bd2165aba"),
-                            PlotPartSurfaceArea = "2200 m2"
+                            PlotPartSurfaceArea = 2200
                         },
                         new
                         {
@@ -328,7 +328,7 @@ namespace PlotMicroservice.Migrations
                             PlotPartFormOfOwnershipId = new Guid("f5f92ac7-0682-48a6-bd34-f2f5d89be9a0"),
                             PlotPartNumber = "146/4",
                             PlotPartProtectedZoneId = new Guid("e54364be-1fe6-43b5-9401-8b8bd2165aba"),
-                            PlotPartSurfaceArea = "1600 m2"
+                            PlotPartSurfaceArea = 1600
                         },
                         new
                         {
@@ -340,7 +340,7 @@ namespace PlotMicroservice.Migrations
                             PlotPartFormOfOwnershipId = new Guid("f5f92ac7-0682-48a6-bd34-f2f5d89be9a0"),
                             PlotPartNumber = "146/5",
                             PlotPartProtectedZoneId = new Guid("f66b8360-33d2-48e9-9be5-b208988d1fb1"),
-                            PlotPartSurfaceArea = "2800 m2"
+                            PlotPartSurfaceArea = 2800
                         },
                         new
                         {
@@ -352,7 +352,7 @@ namespace PlotMicroservice.Migrations
                             PlotPartFormOfOwnershipId = new Guid("aa444022-1e63-44f5-8cf4-7df5045af184"),
                             PlotPartNumber = "5308/1",
                             PlotPartProtectedZoneId = new Guid("de569d06-4787-4808-b4f6-0efea24f6b03"),
-                            PlotPartSurfaceArea = "2700 m2"
+                            PlotPartSurfaceArea = 2700
                         },
                         new
                         {
@@ -364,7 +364,7 @@ namespace PlotMicroservice.Migrations
                             PlotPartFormOfOwnershipId = new Guid("aa444022-1e63-44f5-8cf4-7df5045af184"),
                             PlotPartNumber = "5308/2",
                             PlotPartProtectedZoneId = new Guid("de569d06-4787-4808-b4f6-0efea24f6b03"),
-                            PlotPartSurfaceArea = "1150 m2"
+                            PlotPartSurfaceArea = 1150
                         },
                         new
                         {
@@ -376,7 +376,7 @@ namespace PlotMicroservice.Migrations
                             PlotPartFormOfOwnershipId = new Guid("07af89f2-feee-4680-b489-9d0e31699588"),
                             PlotPartNumber = "97",
                             PlotPartProtectedZoneId = new Guid("4debaa6a-1a2f-43e0-bb82-1b7ca1824318"),
-                            PlotPartSurfaceArea = "7602 m2"
+                            PlotPartSurfaceArea = 7602
                         });
                 });
 

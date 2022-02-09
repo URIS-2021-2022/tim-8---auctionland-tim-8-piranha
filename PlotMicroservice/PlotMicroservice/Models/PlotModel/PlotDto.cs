@@ -9,7 +9,7 @@ namespace PlotMicroservice.Models.PlotModel
     {
         public string PlotNumber { get; set; }
 
-        public string PlotSurfaceArea { get; set; }
+        public int PlotSurfaceArea { get; set; }
 
         public string PlotRealEstateListNumber { get; set; }
     }
