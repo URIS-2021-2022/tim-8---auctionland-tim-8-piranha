@@ -18,6 +18,7 @@ namespace ComplaintMicroservice.Profiles.Status
                     opt => opt.MapFrom(src => $"{src.Status}"));
             CreateMap<ComplaintStatusCreationDto, ComplaintStatus>();
             CreateMap<ComplaintStatusUpdateDto, ComplaintStatus>();
+            CreateMap<ComplaintStatus, ComplaintStatus>();
         }
     }
 }

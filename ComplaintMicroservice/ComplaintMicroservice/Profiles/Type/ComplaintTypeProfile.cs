@@ -18,6 +18,7 @@ namespace ComplaintMicroservice.Profiles
                     opt => opt.MapFrom(src => $"{src.ComplaintType}"));
             CreateMap<ComplaintTypeCreationDto, ComplaintTypeModel>();
             CreateMap<ComplaintTypeUpdateDto, ComplaintTypeModel>();
+            CreateMap<ComplaintTypeModel, ComplaintTypeModel>();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComplaintMicroservice.Data.Status
 {
-    interface IComplaintStatusRepository
+    public interface IComplaintStatusRepository
     {
         List<ComplaintStatus> GetComplaintStatuses(string Status = null);
 

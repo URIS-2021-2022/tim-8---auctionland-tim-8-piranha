@@ -48,7 +48,7 @@ namespace ComplaintMicroservice.Controllers
             {
                 return NotFound();
             }
-            return Ok(mapper.Map<List<ComplaintTypeDto>>(type));
+            return Ok(mapper.Map<ComplaintTypeDto>(type));
         }
 
         [HttpPost]
@@ -117,7 +117,7 @@ namespace ComplaintMicroservice.Controllers
         
 
         [HttpOptions]
-        public IActionResult GetExamRegistrationOptions()
+        public IActionResult GetComplaintTypeOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();

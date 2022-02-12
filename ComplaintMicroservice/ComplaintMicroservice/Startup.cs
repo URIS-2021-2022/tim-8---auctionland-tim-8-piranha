@@ -1,4 +1,7 @@
 using ComplaintMicroservice.Data;
+using ComplaintMicroservice.Data.Complaint;
+using ComplaintMicroservice.Data.Event;
+using ComplaintMicroservice.Data.Status;
 using ComplaintMicroservice.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +39,9 @@ namespace ComplaintMicroservice
             }).AddXmlDataContractSerializerFormatters();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IComplaintTypeRepository,ComplaintTypeRepository>();
+            services.AddScoped<IComplaintStatusRepository, ComplaintStatusRepository>();
+            services.AddScoped<IComplaintEventRepository, ComplaintEventRepository>();
+            services.AddScoped<IComplaintRepository, ComplaintRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ComplaintMicroservice", Version = "v1" });

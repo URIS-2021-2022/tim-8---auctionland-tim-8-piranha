@@ -26,15 +26,16 @@ namespace ComplaintMicroservice.Data
 
         public ComplaintTypeConfirmation CreateComplaintType(ComplaintTypeModel complaintType)
         {
-            var createdEntity = context.Add(complaintType);
-            return mapper.Map<ComplaintTypeConfirmation>(createdEntity.Entity);
-            
+            var createdEntity = context.ComplaintTypes.Add(complaintType);
+            context.SaveChanges();
+            return mapper.Map<ComplaintTypeConfirmation>(createdEntity.Entity); 
         }
 
         public void DeleteComplaintType(Guid complaintTypeId)
         {
             var type = GetComplaintTypeById(complaintTypeId);
-            context.Remove(type);
+            context.ComplaintTypes.Remove(type);
+            context.SaveChanges();
         }
 
         public List<ComplaintTypeModel> GetComplaintTypes(string complaintType = null)

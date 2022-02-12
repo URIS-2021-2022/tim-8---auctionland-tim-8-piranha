@@ -16,6 +16,7 @@ namespace ComplaintMicroservice.Profiles
                 .ForMember(
                     dest => dest.ComplaintType,
                     opt => opt.MapFrom(src => $"{src.ComplaintType}"));
+            CreateMap<ComplaintTypeModel, ComplaintTypeConfirmation>();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace ComplaintMicroservice.Profiles.Status
                 .ForMember(
                     dest => dest.Status,
                     opt => opt.MapFrom(src => $"{src.Status}"));
+            CreateMap<ComplaintStatus, ComplaintStatusConfirmation>();
         }
     }
 }
