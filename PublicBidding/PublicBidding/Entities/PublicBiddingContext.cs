@@ -16,9 +16,43 @@ namespace PublicBidding.Entities
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Type> Types { get; set; }
         public DbSet<PublicBidding> PublicBiddings { get; set; }
+        public DbSet<PublicBiddingAuthorizedPerson> PublicBiddingAuthorizedPerson { get; set; }
+        public DbSet<PublicBiddingBuyer> PublicBiddingBuyer { get; set; }
+        public DbSet<PublicBiddingPlotPart> PublicBiddingPlotPart { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Veze izmedju entiteta van mikroservisa
+            modelBuilder.Entity<PublicBiddingAuthorizedPerson>()
+                .HasOne(p => p.PublicBidding)
+                .WithMany()
+                .HasForeignKey("PublicBiddingId")
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            modelBuilder.Entity<PublicBiddingAuthorizedPerson>()
+                .HasKey(pa => new { pa.PublicBiddingId, pa.AuthorizedPersonId });
+
+            modelBuilder.Entity<PublicBiddingBuyer>()
+                .HasOne(p => p.PublicBidding)
+                .WithMany()
+                .HasForeignKey("PublicBiddingId")
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            modelBuilder.Entity<PublicBiddingBuyer>()
+                .HasKey(pb => new { pb.PublicBiddingId, pb.BuyerId });
+
+            modelBuilder.Entity<PublicBiddingPlotPart>()
+                .HasOne(p => p.PublicBidding)
+                .WithMany()
+                .HasForeignKey("PublicBiddingId")
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            modelBuilder.Entity<PublicBiddingPlotPart>()
+                .HasKey(pp => new { pp.PublicBiddingId, pp.PlotPartId });
+
             //Status
             modelBuilder.Entity<Status>().HasData(
                 new

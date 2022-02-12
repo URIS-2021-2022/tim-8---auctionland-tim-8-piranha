@@ -9,14 +9,16 @@ namespace PublicBidding.Data
 {
     public interface IPublicBiddingRepository
     {
-        List<Entities.PublicBidding> GetPublicBiddings(int numberOfApplicants = 0, Type type = null, Status status = null);
+        Task SaveChanges();
 
-        Entities.PublicBidding GetPublicBiddingById(Guid publicBiddingId);
+        Task<List<Entities.PublicBidding>> GetPublicBiddings(int numberOfApplicants = 0, Type type = null, Status status = null);
 
-        PublicBiddingConfirmation CreatePublicBidding(Entities.PublicBidding publicBidding);
+        Task<Entities.PublicBidding> GetPublicBiddingById(Guid publicBiddingId);
 
-        void UpdatePublicBidding(Entities.PublicBidding publicBidding);
+        Task<PublicBiddingConfirmation> CreatePublicBidding(Entities.PublicBidding publicBidding);
 
-        void DeletePublicBidding(Guid publicBiddingId);
+        Task UpdatePublicBidding(Entities.PublicBidding publicBidding);
+
+        Task DeletePublicBidding(Guid publicBiddingId);
     }
 }

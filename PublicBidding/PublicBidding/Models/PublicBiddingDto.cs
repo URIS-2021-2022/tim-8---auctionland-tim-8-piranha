@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PublicBidding.Models
 {
+    /// <summary>
+    /// Dto javnog nadmetanja
+    /// </summary>
     public class PublicBiddingDto
     {
         public Guid PublicBiddingId { get; set; }
@@ -29,13 +32,11 @@ namespace PublicBidding.Models
 
         public bool IsExcepted { get; set; }
 
-        public Guid AddressId { get; set; }
-
-        public List<Guid> Plots { get; set; }
+        public AddressDto AddressId { get; set; }
 
         public int Price { get; set; }
 
-        public Guid? BestBidder { get; set; }
+        public BuyerDto BestBidder { get; set; }
 
         public int RentPeriod { get; set; }
 
@@ -44,5 +45,19 @@ namespace PublicBidding.Models
         public int DepositSupplement { get; set; }
 
         public int Round { get; set; }
+
+        /// <summary>
+        /// Lista delova parcela
+        /// </summary>
+        public List<PlotPartDto> PlotParts { get; set; }
+
+        /// <summary>
+        /// Lista ovlascenih lica
+        /// </summary>
+        public List<AuthorizedPersonDto> AuthorizedPersons { get; set; }
+        /// <summary>
+        /// Lista kupaca
+        /// </summary>
+        public List<BuyerDto> Buyers { get; set; }
     }
 }

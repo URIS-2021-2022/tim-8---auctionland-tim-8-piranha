@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PublicBidding.Entities;
 using System;
 using System.Collections.Generic;
@@ -19,39 +20,141 @@ namespace PublicBidding.Data
             this.mapper = mapper;
         }
 
-        public bool SaveChanges()
+        public async Task SaveChanges()
         {
-            return context.SaveChanges() > 0;
+            await context.SaveChangesAsync();
         }
 
-        public PublicBiddingConfirmation CreatePublicBidding(Entities.PublicBidding publicBidding)
+        public async Task<PublicBiddingConfirmation> CreatePublicBidding(Entities.PublicBidding publicBidding)
         {
-            var createdEntity = context.Add(publicBidding);
+            //Izračunavanje dopune depozita
+            if (publicBidding.Price > (publicBidding.StartPricePerHa * 2))
+            {
+                publicBidding.DepositSupplement = (int)(publicBidding.Price * 0.5);
+            }
+            else
+            {
+                publicBidding.DepositSupplement = (int)(publicBidding.Price * 0.1);
+            }
+
+            List<Guid> authorizedPersons = publicBidding.AuthorizedPersons;
+            List<Guid> buyers = publicBidding.Bidders;
+            List<Guid> plotParts = publicBidding.Plots;
+
+            foreach (var authorizedPersonId in authorizedPersons)
+            {
+                var publicBiddingAuthorizedPerson = new PublicBiddingAuthorizedPerson
+                {
+                    PublicBiddingId = publicBidding.PublicBiddingId,
+                    AuthorizedPersonId = authorizedPersonId
+                };
+                await context.PublicBiddingAuthorizedPerson.AddAsync(publicBiddingAuthorizedPerson);
+            }
+    
+            foreach (var buyerId in buyers)
+            {
+                var publicBiddingBuyer = new PublicBiddingBuyer
+                {
+                    PublicBiddingId = publicBidding.PublicBiddingId,
+                    BuyerId = buyerId
+                };
+                await context.PublicBiddingBuyer.AddAsync(publicBiddingBuyer);
+            }
+
+            foreach (var plotPartId in plotParts)
+            {
+                var publicBiddingPlotPart = new PublicBiddingPlotPart
+                {
+                    PublicBiddingId = publicBidding.PublicBiddingId,
+                    PlotPartId = plotPartId
+                };
+                await context.PublicBiddingPlotPart.AddAsync(publicBiddingPlotPart);
+            }
+
+            var createdEntity = await context.PublicBiddings.AddAsync(publicBidding);
             return mapper.Map<PublicBiddingConfirmation>(createdEntity.Entity);
         }
 
-        public void DeletePublicBidding(Guid publicBiddingId)
+        public async Task DeletePublicBidding(Guid publicBiddingId)
         {
-            var publicBidding = GetPublicBiddingById(publicBiddingId);
+            var publicBidding = await GetPublicBiddingById(publicBiddingId);
             context.Remove(publicBidding);
         }
 
-        public Entities.PublicBidding GetPublicBiddingById(Guid publicBiddingId)
+        public async Task<Entities.PublicBidding> GetPublicBiddingById(Guid publicBiddingId)
         {
-            return context.PublicBiddings.FirstOrDefault(e => e.PublicBiddingId == publicBiddingId);
+            var publicBidding = await context.PublicBiddings.Include(s => s.Status).Include(t => t.Type)
+                .FirstOrDefaultAsync(pb => pb.PublicBiddingId == publicBiddingId);
+
+            if (publicBidding is not null)
+            {
+                publicBidding.AuthorizedPersons = await context.PublicBiddingAuthorizedPerson.Where(pa => pa.PublicBiddingId == publicBidding.PublicBiddingId).Select(a => a.AuthorizedPersonId).ToListAsync();
+                publicBidding.Bidders = await context.PublicBiddingBuyer.Where(pb => pb.PublicBiddingId == publicBidding.PublicBiddingId).Select(b => b.BuyerId).ToListAsync();
+                publicBidding.Plots = await context.PublicBiddingPlotPart.Where(pp => pp.PublicBiddingId == publicBidding.PublicBiddingId).Select(p => p.PlotPartId).ToListAsync();
+            }
+
+            return publicBidding;
         }
 
-        public List<Entities.PublicBidding> GetPublicBiddings(int numberOfApplicants = 0, Type type = null, Status status = null)
+        public async Task<List<Entities.PublicBidding>> GetPublicBiddings(int numberOfApplicants = 0, Type type = null, Status status = null)
         {
-            return context.PublicBiddings.Where(e => (numberOfApplicants == 0 || e.NumberOfApplicants >= numberOfApplicants) &&
-                                                        (type == null || e.Type.TypeName == type.TypeName) &&
-                                                        (status == null || e.Status.StatusName == status.StatusName)).ToList();
+            var publicBiddings = await context.PublicBiddings.Include(s => s.Status).Include(t => t.Type)
+                .ToListAsync();
+
+            foreach (var publicBidding in publicBiddings)
+            {
+                publicBidding.AuthorizedPersons = await context.PublicBiddingAuthorizedPerson.Where(pa => pa.PublicBiddingId == publicBidding.PublicBiddingId).Select(a => a.AuthorizedPersonId).ToListAsync();
+                publicBidding.Bidders = await context.PublicBiddingBuyer.Where(pb => pb.PublicBiddingId == publicBidding.PublicBiddingId).Select(b => b.BuyerId).ToListAsync();
+                publicBidding.Plots = await context.PublicBiddingPlotPart.Where(pp => pp.PublicBiddingId == publicBidding.PublicBiddingId).Select(p => p.PlotPartId).ToListAsync();
+            }
+
+            return publicBiddings;
         }
 
-        public void UpdatePublicBidding(Entities.PublicBidding publicBidding)
+        public async Task UpdatePublicBidding(Entities.PublicBidding publicBidding)
         {
-            //Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze
-            //i kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane
+            var authorizedPerson = await context.PublicBiddingAuthorizedPerson.Where(pa => pa.PublicBiddingId == publicBidding.PublicBiddingId).ToListAsync();
+            context.PublicBiddingAuthorizedPerson.RemoveRange(authorizedPerson);
+
+            var buyer = await context.PublicBiddingBuyer.Where(pb => pb.PublicBiddingId == publicBidding.PublicBiddingId).ToListAsync();
+            context.PublicBiddingBuyer.RemoveRange(buyer);
+
+            var plotPart = await context.PublicBiddingPlotPart.Where(pp => pp.PublicBiddingId == publicBidding.PublicBiddingId).ToListAsync();
+            context.PublicBiddingPlotPart.RemoveRange(plotPart);
+
+            List<Guid> authorizedPersons = publicBidding.AuthorizedPersons;
+            List<Guid> buyers = publicBidding.Bidders;
+            List<Guid> plotParts = publicBidding.Plots;
+
+            foreach (var authorizedPersonId in authorizedPersons)
+            {
+                var publicBiddingAuthorizedPerson = new PublicBiddingAuthorizedPerson
+                {
+                    PublicBiddingId = publicBidding.PublicBiddingId,
+                    AuthorizedPersonId = authorizedPersonId
+                };
+                await context.PublicBiddingAuthorizedPerson.AddAsync(publicBiddingAuthorizedPerson);
+            }
+
+            foreach (var buyerId in buyers)
+            {
+                var publicBiddingBuyer = new PublicBiddingBuyer
+                {
+                    PublicBiddingId = publicBidding.PublicBiddingId,
+                    BuyerId = buyerId
+                };
+                await context.PublicBiddingBuyer.AddAsync(publicBiddingBuyer);
+            }
+
+            foreach (var plotPartId in plotParts)
+            {
+                var publicBiddingPlotPart = new PublicBiddingPlotPart
+                {
+                    PublicBiddingId = publicBidding.PublicBiddingId,
+                    PlotPartId = plotPartId
+                };
+                await context.PublicBiddingPlotPart.AddAsync(publicBiddingPlotPart);
+            }
         }
     }
 }

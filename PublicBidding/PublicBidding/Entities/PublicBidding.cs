@@ -35,6 +35,8 @@ namespace PublicBidding.Entities
 
         public Guid AddressId { get; set; }
 
+        public List<Guid> AuthorizedPersons { get; set; }
+
         public List<Guid> Bidders { get; set; }
 
         public List<Guid> Plots { get; set; }

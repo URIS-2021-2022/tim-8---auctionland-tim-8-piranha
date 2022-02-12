@@ -11,7 +11,6 @@ namespace PublicBidding.Profiles
     {
         public TypeProfile()
         {
-
             CreateMap<Type, TypeDto>();
             CreateMap<Type, Type>();
         }

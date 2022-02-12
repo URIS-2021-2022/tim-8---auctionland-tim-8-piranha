@@ -1,22 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PublicBidding.Entities
+namespace PublicBidding.Models
 {
-    [Keyless]
-    public class Address
+    public class AddressDto
     {
         public string Street { get; set; }
-
-        public int Number { get; set; }
-
+        public string AddressNumber { get; set; }
         public string City { get; set; }
-
         public string PostalCode { get; set; }
-
         public string Country { get; set; }
     }
 }
