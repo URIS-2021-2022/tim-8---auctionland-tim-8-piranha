@@ -16,7 +16,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
  
 
@@ -91,8 +93,36 @@ namespace AuctionMicroservice
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuctionMicroservice", Version = "v1" });
+                c.SwaggerDoc("AuctionOpenApiSpecification", new OpenApiInfo() 
+                { 
+                    Title = "AuctionMicroservice", 
+                    Version = "1" ,
+                    Description = "Using this API, it's possible to manipulate data regarding auction",
+                    Contact = new OpenApiContact()
+                    {
+                        Name = "Luka Panic",
+                        Email = "Panic.Luka@uns.ac.rs",
+                        Url = new Uri("https://sova.uns.ac.rs/")
+                    },
+                    License = new OpenApiLicense()
+                    {
+                        Name = "Licence",
+                        Url = new Uri("https://sova.uns.ac.rs/"),
+
+                    },
+                    TermsOfService = new Uri("https://sova.uns.ac.rs/")
+                });
+
+                var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+
+                c.IncludeXmlComments(xmlCommentsPath);
             });
+
+           
+
+
 
             //services.AddDbContext<DocumentationIndividualContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuctionDB")));
             //services.AddScoped<IDocumentationIndividualRepository, DocumentationIndividualRepository>();
@@ -122,7 +152,7 @@ namespace AuctionMicroservice
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuctionMicroservice v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/AuctionOpenApiSpecification/swagger.json", "AuctionMicroservice 1"));
             }
 
             app.UseHttpsRedirection();

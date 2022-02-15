@@ -30,6 +30,10 @@ namespace AuctionMicroservice.Entities
 
         }
 
+        /// <summary>
+        /// Inserts seed data into database
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //builder.Entity<Auction>().HasMany(d => d.DocumentationIndividual).WithOne();
