@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using ComplaintMicroservice.Entities;
 using ComplaintMicroservice.Entities.Complaint;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ComplaintMicroservice.Data.Complaint
 {
@@ -40,7 +40,7 @@ namespace ComplaintMicroservice.Data.Complaint
 
         public List<ComplaintMicroservice.Entities.Complaint.Complaint> GetComplaints(string solutionNumber = null)
         {
-            return context.Complaint.Where(e => solutionNumber == null || e.SolutionNumber == solutionNumber).ToList();
+            return context.Complaint.Include(c => c.ComplaintType).Include(c=> c.ComplaintStatus).Include(c=> c.ComplaintEvent).ToList();
 
         }
 

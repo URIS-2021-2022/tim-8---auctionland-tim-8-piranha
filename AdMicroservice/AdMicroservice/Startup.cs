@@ -1,7 +1,12 @@
+using AdMicroservice.Data;
+using AdMicroservice.Data.Ad;
+using AdMicroservice.Data.Journal;
+using AdMicroservice.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,11 +32,18 @@ namespace AdMicroservice
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(setup =>
+            {
+                setup.ReturnHttpNotAcceptable = true;
+            }).AddXmlDataContractSerializerFormatters();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IAdRepository, AdRepository>();
+            services.AddScoped<IJournalRepository, JournalRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AdMicroservice", Version = "v1" });
             });
+            services.AddDbContext<AdContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AdDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

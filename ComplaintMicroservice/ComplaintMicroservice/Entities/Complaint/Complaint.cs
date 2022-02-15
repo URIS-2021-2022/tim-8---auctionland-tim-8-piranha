@@ -19,12 +19,9 @@ namespace ComplaintMicroservice.Entities.Complaint
         public string SolutionNumber { get; set; }
         public string DecisionNumber { get; set; }
         public Guid ComplaintTypeId { get; set; }
-        [ForeignKey("ComplaintTypeModel")]
         public ComplaintTypeModel ComplaintType { get; set; }
         public Guid ComplaintStatusId { get; set; }
-        [ForeignKey("ComplaintStatus")]
         public ComplaintStatus ComplaintStatus { get; set; }
-        [ForeignKey("ComplaintEvent")]
         public Guid ComplaintEventId { get; set; }
         public ComplaintEvent ComplaintEvent { get; set; }
 

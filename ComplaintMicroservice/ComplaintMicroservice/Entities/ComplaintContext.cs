@@ -72,28 +72,28 @@ namespace ComplaintMicroservice.Entities
                 .HasData(new
                 {
                     ComplaintId = Guid.Parse("eb6bac2d-aea4-485a-8cb6-991bf8b1e1d4"),
-                    SubmissionDate = "06-06-2021",
+                    SubmissionDate = DateTime.Parse("06-06-2021"),
                     Explanation = "Complaint explanation",
                     Reason = "Complaint reason",
                     SolutionNumber = "SN001",
                     DecisionNumber = "DN001",
-                    ComplaintTypeId= "6a411c13-a195-48f7-8dbd-67596c3974c0",
-                    ComplaintStatusId = "6a411c13-a195-48f7-8dbd-67596c3974c0",
-                    ComplaintEventId = "6a411c13-a195-48f7-8dbd-67596c3974c0"
+                    ComplaintTypeId= Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    ComplaintStatusId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    ComplaintEventId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0")
                 });
 
             modelBuilder.Entity<ComplaintMicroservice.Entities.Complaint.Complaint>()
                 .HasData(new
                 {
                     ComplaintId = Guid.Parse("b16abef5-5d4e-43a5-9bf3-1fe0618da6f7"),
-                    SubmissionDate = "05-05-2021",
+                    SubmissionDate = DateTime.Parse("05-05-2021"),
                     Explanation = "Complaint explanation 2",
                     Reason = "Complaint reason 2",
                     SolutionNumber = "SN002",
                     DecisionNumber = "DN002",
-                    ComplaintTypeId = "6a411c13-a195-48f7-8dbd-67596c3974c0",
-                    ComplaintStatusId = "6a411c13-a195-48f7-8dbd-67596c3974c0",
-                    ComplaintEventId = "6a411c13-a195-48f7-8dbd-67596c3974c0"
+                    ComplaintTypeId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    ComplaintStatusId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    ComplaintEventId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0")
                 });
         }
     }
