@@ -40,13 +40,15 @@ namespace ComplaintMicroservice.Data.Complaint
 
         public List<ComplaintMicroservice.Entities.Complaint.Complaint> GetComplaints(string solutionNumber = null)
         {
-            return context.Complaint.Include(c => c.ComplaintType).Include(c=> c.ComplaintStatus).Include(c=> c.ComplaintEvent).ToList();
+            return context.Complaint.Include(c => c.ComplaintType).Include(c=> c.ComplaintStatus).Include(c=> c.ComplaintEvent).
+                Where(c => solutionNumber == null || c.SolutionNumber == solutionNumber).ToList();
 
         }
 
         public ComplaintMicroservice.Entities.Complaint.Complaint GetComplaintById(Guid complaintId)
         {
-            return context.Complaint.FirstOrDefault(e => e.ComplaintId == complaintId);
+            return context.Complaint.Include(c => c.ComplaintType).Include(c => c.ComplaintStatus).Include(c => c.ComplaintEvent).
+                FirstOrDefault(e => e.ComplaintId == complaintId);
         }
 
         public ComplaintConfirmation UpdateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint)
