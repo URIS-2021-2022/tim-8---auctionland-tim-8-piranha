@@ -15,7 +15,9 @@ using PlotMicroservice.Entities;
 using PlotMicroservice.Validators;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PlotMicroservice
@@ -58,8 +60,28 @@ namespace PlotMicroservice
                 setupAction.SwaggerDoc("PlotMicroserviceOpenApiSpecification", new OpenApiInfo()
                 {
                     Title = "Plot microservice API",
-                    Version = "1"
+                    Version = "1",
+                    Description = "Throughout this API, you can view or modify existing plots, also you can create new plots.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Andrija Pavlov",
+                        Email = "pavlovandrija9@gmail.com",
+                        Url = new Uri("https://github.com/pavlovandrija99")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "FTN license",
+                        Url = new Uri("http://www.ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka")
+                    }
                 });
+
+                var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+
+                // Making path to XML file with comments
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+
+                // Telling Swagger where file with XML comments is located
+                setupAction.IncludeXmlComments(xmlCommentsPath);
             });
         }
 
@@ -72,8 +94,8 @@ namespace PlotMicroservice
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(setupAction => { 
-                
+            app.UseSwaggerUI(setupAction => {
+                setupAction.SwaggerEndpoint("/swagger/PlotMicroserviceOpenApiSpecification/swagger.json", "Plot microservice API");
             });
 
             app.UseHttpsRedirection();

@@ -15,6 +15,10 @@ using System.Threading.Tasks;
 
 namespace PlotMicroservice.Controllers
 {
+    /// <summary>
+    /// Plot culutre controller. Gives access to fields and methods of plot culuture.
+    /// Produces JSON and XML objects as response to a request.
+    /// </summary>
     [ApiController]
     [Route("api/plot-cultures")]
     [Produces("application/json", "application/xml")]
@@ -25,6 +29,14 @@ namespace PlotMicroservice.Controllers
         private readonly LinkGenerator LinkGenerator;
         private readonly PlotCultureValidator Validator;
 
+        /// <summary>
+        /// Plot culture constructor.
+        /// Initializes properties.
+        /// </summary>
+        /// <param name="plotCultureRepository"></param>
+        /// <param name="mapper"></param>
+        /// <param name="linkGenerator"></param>
+        /// <param name="validator"></param>
         public PlotCultureController(IPlotCultureRepository plotCultureRepository, IMapper mapper, LinkGenerator linkGenerator, PlotCultureValidator validator)
         {
             PlotCultureRepository = plotCultureRepository;
@@ -33,6 +45,11 @@ namespace PlotMicroservice.Controllers
             Validator = validator;
         }
 
+        /// <summary>
+        /// Getting all instances of plot cultures for given filter.
+        /// </summary>
+        /// <param name="plotCulture">Plot culture (ex. Voćnjaci)</param>
+        /// <returns>List of plot cultures.</returns>
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -49,6 +66,11 @@ namespace PlotMicroservice.Controllers
             return Ok(Mapper.Map<List<PlotCultureDto>>(plotCultures));
         }
 
+        /// <summary>
+        /// Getting plot culture by given GUID of plot culture as parameter.
+        /// </summary>
+        /// <param name="plotCultureId"></param>
+        /// <returns>Single plot culture.</returns>
         [HttpGet("{plotCultureId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -64,6 +86,18 @@ namespace PlotMicroservice.Controllers
             return Ok(Mapper.Map<PlotCultureDto>(plotCulture));
         }
 
+        /// <summary>
+        /// Creating new plot culture.
+        /// </summary>
+        /// <param name="plotCultureCreation"></param>
+        /// <returns>Confirmation about created plot culture.</returns>
+        /// <remarks>
+        /// Example of POST request \
+        /// POST /api/plot-cultures \
+        /// {   \
+        ///     "culture": "New plot culture" \
+        /// }
+        /// </remarks>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -96,6 +130,19 @@ namespace PlotMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Updating existing plot culuture by given GUID.
+        /// </summary>
+        /// <param name="plotCultureUpdate"></param>
+        /// <returns>Updated plot culture.</returns>
+        /// <remarks>
+        /// Example of PUT request \
+        /// PUT /api/plot-cultures \
+        /// {   \
+        ///     "plotCultureId": "260c190d-07b9-426b-e58b-08d9e36dc042",
+        ///     "culture": "Updated culture"
+        /// }
+        /// </remarks>
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -134,6 +181,11 @@ namespace PlotMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Deleting plot culture by given GUID.
+        /// </summary>
+        /// <param name="plotCultureId"></param>
+        /// <returns>Appropriate status code.</returns>
         [HttpDelete("{plotCultureId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -160,6 +212,10 @@ namespace PlotMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Gives an overview of response header.
+        /// </summary>
+        /// <returns>Response header.</returns>
         [HttpOptions]
         [AllowAnonymous]
         public IActionResult GetPlotCultureOptions()

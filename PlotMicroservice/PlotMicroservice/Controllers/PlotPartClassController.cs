@@ -15,6 +15,10 @@ using System.Threading.Tasks;
 
 namespace PlotMicroservice.Controllers
 {
+    /// <summary>
+    /// Plot part class controller. Gives access to fields and methods of plot part class.
+    /// Produces JSON and XML objects as response to a request.
+    /// </summary>
     [ApiController]
     [Route("api/plot-part-classes")]
     [Produces("application/json", "application/xml")]
@@ -25,6 +29,14 @@ namespace PlotMicroservice.Controllers
         private readonly LinkGenerator LinkGenerator;
         private readonly PlotPartClassValidator Validator;
 
+        /// <summary>
+        /// Plot part class constructor.
+        /// Initializes properties.s
+        /// </summary>
+        /// <param name="plotPartClassRepository"></param>
+        /// <param name="mapper"></param>
+        /// <param name="linkGenerator"></param>
+        /// <param name="validator"></param>
         public PlotPartClassController(IPlotPartClassRepository plotPartClassRepository, IMapper mapper, LinkGenerator linkGenerator, PlotPartClassValidator validator)
         {
             PlotPartClassRepository = plotPartClassRepository;
@@ -33,6 +45,11 @@ namespace PlotMicroservice.Controllers
             Validator = validator;
         }
 
+        /// <summary>
+        /// Getting all instances of plot part classes for given filter.
+        /// </summary>
+        /// <param name="plotPartClass">Plot part class (ex. II)</param>
+        /// <returns>List of plot part classes.</returns>
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -49,6 +66,11 @@ namespace PlotMicroservice.Controllers
             return Ok(Mapper.Map<List<PlotPartClassDto>>(plotPartClasses));
         }
 
+        /// <summary>
+        /// Getting plot part class by given GUID of plot part class as parameter.
+        /// </summary>
+        /// <param name="plotPartClassId"></param>
+        /// <returns>Single plot part class.</returns>
         [HttpGet("{plotPartClassId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -64,6 +86,18 @@ namespace PlotMicroservice.Controllers
             return Ok(Mapper.Map<PlotPartClassDto>(plotPartClass));
         }
 
+        /// <summary>
+        /// Creating new plot part class.
+        /// </summary>
+        /// <param name="plotPartClassCreation"></param>
+        /// <returns>Confirmation about created plot part class.</returns>
+        /// <remarks>
+        /// Example of POST request \
+        /// POST /api/plot-part-classes \
+        /// {   \
+        ///     "class": "New plot part class" \
+        /// }
+        /// </remarks>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -94,6 +128,19 @@ namespace PlotMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Updating existing plot part class by given GUID.
+        /// </summary>
+        /// <param name="plotPartClassUpdate"></param>
+        /// <returns>Updated plot part class.</returns>
+        /// <remarks>
+        /// Example of PUT request \
+        /// PUT /api/plot-part-classes \
+        /// {   \
+        ///     "plotPartClassId": "f319d30e-85b7-40d3-e79b-08d9e4b5d468", \
+        ///     "class": "UpdatedPlotPartClass" \
+        /// }
+        /// </remarks>
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -131,6 +178,11 @@ namespace PlotMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Deleting plot part class by given GUID.
+        /// </summary>
+        /// <param name="plotPartClassId"></param>
+        /// <returns>Appropriate status code.</returns>
         [HttpDelete("{plotPartClassId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -157,6 +209,10 @@ namespace PlotMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Gives an overview of response header.
+        /// </summary>
+        /// <returns>Response header.</returns>
         [HttpOptions]
         [AllowAnonymous]
         public IActionResult GetPlotPartClassOptions()
