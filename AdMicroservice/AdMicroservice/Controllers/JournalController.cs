@@ -87,7 +87,7 @@ namespace AdMicroservice.Controllers
             }
         }
 
-        [HttpDelete("{adId}")]
+        [HttpDelete("{journalId}")]
         public IActionResult DeleteJournal(Guid journalId)
         {
             try

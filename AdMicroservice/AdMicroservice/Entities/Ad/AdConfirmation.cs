@@ -9,5 +9,6 @@ namespace AdMicroservice.Entities.Ad
     {
         public Guid AdId { get; set; }
         public string PublicationDate { get; set; }
+        public Guid JournalId { get; set; }
     }
 }

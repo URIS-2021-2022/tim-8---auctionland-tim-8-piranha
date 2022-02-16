@@ -1,6 +1,7 @@
 ﻿using AdMicroservice.Entities;
 using AdMicroservice.Entities.Ad;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,13 +41,13 @@ namespace AdMicroservice.Data.Ad
 
         public List<AdModel> GetAds(string publicationDate = null)
         {
-            return context.Ads.Where(e => publicationDate == null || e.PublicationDate == publicationDate).ToList();
+            return context.Ads.Include(a => a.Journal).Where(e => publicationDate == null || e.PublicationDate == publicationDate).ToList();
 
         }
 
         public AdModel GetAdById(Guid adId)
         {
-            return context.Ads.FirstOrDefault(e => e.AdId == adId);
+            return context.Ads.Include(a => a.Journal).FirstOrDefault(e => e.AdId == adId);
         }
 
         public AdConfirmation UpdateAd(AdModel ad)

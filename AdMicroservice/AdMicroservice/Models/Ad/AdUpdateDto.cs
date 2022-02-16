@@ -11,5 +11,6 @@ namespace AdMicroservice.Models
         public Guid AdId { get; set; }
         [Required(ErrorMessage = "Must enter a date of publication")]
         public string PublicationDate { get; set; }
+        public Guid JournalId { get; set; }
     }
 }
