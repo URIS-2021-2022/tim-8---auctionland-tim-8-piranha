@@ -4,7 +4,7 @@
         <name>AuctionMicroservice</name>
     </assembly>
     <members>
-        <member name="M:AuctionMicroservice.Controllers.AuctionController.GetAuctions">
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.GetAuctionsAsync">
             <summary>
             Returns list of all auctions.
             </summary>
@@ -12,7 +12,7 @@
             <response code="200">Returns list of auctions</response>
             <response code="404">No auctions found</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.AuctionController.GetAuctionById(System.Guid)">
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.GetAuctionByIdAsync(System.Guid)">
              <summary>
              Returns Auction by ID of auction
              </summary>
@@ -21,7 +21,7 @@
             <response code="200">returns found auction</response>
             <response code="404">no auction found</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.AuctionController.CreateAuction(AuctionMicroservice.Models.AuctionCreationDto)">
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.CreateAuctionAsync(AuctionMicroservice.Models.AuctionCreationDto)">
              <summary>
              Creates new auction
              </summary>
@@ -53,7 +53,7 @@
             <response code="400">Auction not found</response>
             <response code="500">There has been internal server error</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.AuctionController.DeleteAuction(System.Guid)">
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.DeleteAuctionAsync(System.Guid)">
             <summary>
             Deletes one auction by ID
             </summary>
@@ -69,7 +69,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationIndividuals">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationIndividualsAsync">
             <summary>
             Returns list of all individual documentations
             </summary>
@@ -77,7 +77,7 @@
             <response code="200">Returns list of individual documentations</response>
             <response code="404">No individual documentations found</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationIndividualsByAuction(System.Guid)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationIndividualsByAuctionAsync(System.Guid)">
              <summary>
              Returns individual documentations that belong to one auction by AuctionId
              </summary>
@@ -86,7 +86,7 @@
             <response code="200">returns found individual documentations</response>
             <response code="404">no individual documentations found</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationById(System.Guid)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationByIdAsync(System.Guid)">
              <summary>
              Returns individual documentations by ID
              </summary>
@@ -95,7 +95,7 @@
             <response code="200">returns found individual documentation</response>
             <response code="404">no individual documentation found</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.CreateDocumentationIndividual(AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.CreateDocumentationIndividualAsync(AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto)">
             <summary>
             Creates new individual documentation
             </summary>
@@ -114,7 +114,7 @@
             <response code="200">returns created documentation</response>
             <response code="500">There's been server error</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.UpdateDocumentationIndividual(AuctionMicroservice.Models.DocumentationIndividualUpdateDto)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.UpdateDocumentationIndividualAsync(AuctionMicroservice.Models.DocumentationIndividualUpdateDto)">
             <summary>
             Updates one individual documentation 
             </summary>
@@ -124,7 +124,7 @@
             <response code="400">Individual documentation not found</response>
             <response code="500">There has been internal server error</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.DeleteDocumentationIndividual(System.Guid)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.DeleteDocumentationIndividualAsync(System.Guid)">
             <summary>
             Deletes one individual documentation by ID
             </summary>
@@ -140,7 +140,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationLegalEntites">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationLegalEntitesAsync">
             <summary>
             Returns list of all legal entity documentations
             </summary>
@@ -148,7 +148,7 @@
             <response code="200">Returns list of legal entity documentations</response>
             <response code="404">No legal entity documentations found</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationById(System.Guid)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationByIdAsync(System.Guid)">
              <summary>
              Returns legal enitity documentation by ID
              </summary>
@@ -157,7 +157,7 @@
             <response code="200">returns found legal enitity documentation</response>
             <response code="404">no legal enitity documentation found</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationLegalEntitesByAuction(System.Guid)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationLegalEntitesByAuctionAsync(System.Guid)">
              <summary>
              Returns legal entity documentations that belong to one auction by AuctionId
              </summary>
@@ -166,7 +166,7 @@
             <response code="200">returns found legal entity documentations</response>
             <response code="404">no legal entity documentations found</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.CreateDocumentationLegalEntity(AuctionMicroservice.Models.DocumentationLegalEntityCreationDto)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.CreateDocumentationLegalEntityAsync(AuctionMicroservice.Models.DocumentationLegalEntityCreationDto)">
             <summary>
             Creates new legal entity documentation
             </summary>
@@ -185,7 +185,7 @@
             <response code="200">returns created documentation</response>
             <response code="500">There's been server error</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.UpdateDocumentationLegalEntity(AuctionMicroservice.Models.DocumentationLegalEntityUpdateDto)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.UpdateDocumentationLegalEntityAsync(AuctionMicroservice.Models.DocumentationLegalEntityUpdateDto)">
             <summary>
             Updates one legal entity documentation 
             </summary>
@@ -195,7 +195,7 @@
             <response code="400">legal entity documentation not found</response>
             <response code="500">There has been internal server error</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.DeleteDocumentationLegalEntity(System.Guid)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.DeleteDocumentationLegalEntityAsync(System.Guid)">
             <summary>
             Deletes one legal entity documentation by ID
             </summary>

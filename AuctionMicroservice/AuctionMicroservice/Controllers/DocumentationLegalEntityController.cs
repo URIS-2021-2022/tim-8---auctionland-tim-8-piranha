@@ -43,9 +43,9 @@ namespace AuctionMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<DocumentationLegalEntityDto>> GetDocumentationLegalEntites()
+        public async Task<ActionResult<List<DocumentationLegalEntityDto>>> GetDocumentationLegalEntitesAsync()
         {
-            var documentations = documentationLegalEntityRepository.GetDocumentationLegalEntities();
+            var documentations = await documentationLegalEntityRepository.GetDocumentationLegalEntitiesAsync();
 
             if (documentations == null || documentations.Count == 0)
             {
@@ -67,9 +67,9 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{DocumentationLegalEntityId}")]
-        public ActionResult<DocumentationLegalEntityDto> GetDocumentationById(Guid DocumentationLegalEntityId)
+        public async  Task<ActionResult<DocumentationLegalEntityDto>> GetDocumentationByIdAsync(Guid DocumentationLegalEntityId)
         {
-            var documentation = documentationLegalEntityRepository.GetDocumentationById(DocumentationLegalEntityId);
+            var documentation = await documentationLegalEntityRepository.GetDocumentationByIdAsync(DocumentationLegalEntityId);
 
             if (documentation == null)
             {
@@ -89,9 +89,9 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("auction/{AuctionId}")]
-        public ActionResult<List<DocumentationLegalEntityDto>> GetDocumentationLegalEntitesByAuction(Guid AuctionId)
+        public async Task<ActionResult<List<DocumentationLegalEntityDto>>> GetDocumentationLegalEntitesByAuctionAsync(Guid AuctionId)
         {
-            var documentations = documentationLegalEntityRepository.GetDocumentationLegalEntitesByAuction(AuctionId);
+            var documentations = await documentationLegalEntityRepository.GetDocumentationLegalEntitesByAuctionAsync(AuctionId);
 
             if (documentations == null || documentations.Count == 0)
             {
@@ -123,7 +123,7 @@ namespace AuctionMicroservice.Controllers
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<DocumentationLegalEntityConfirmationDto> CreateDocumentationLegalEntity([FromBody] DocumentationLegalEntityCreationDto documentation)
+        public async Task<ActionResult<DocumentationLegalEntityConfirmationDto>> CreateDocumentationLegalEntityAsync([FromBody] DocumentationLegalEntityCreationDto documentation)
         {
             try
             {
@@ -131,8 +131,8 @@ namespace AuctionMicroservice.Controllers
 
                 validator.ValidateAndThrow(documentationEntity);
 
-                DocumentationLegalEntityConfirmation conformation = documentationLegalEntityRepository.CreateDocumentationLegalEntity(documentationEntity);
-                documentationLegalEntityRepository.SaveChanges();
+                DocumentationLegalEntityConfirmation conformation = await documentationLegalEntityRepository.CreateDocumentationLegalEntityAsync(documentationEntity);
+                await documentationLegalEntityRepository.SaveChangesAsync();
 
                 string location = linkGenerator.GetPathByAction("GetDocumentationLegalEntites", "DocumentationLegalEntity", new { DocumentationLegalEntityId = conformation.DocumentationLegalEntityId });
 
@@ -164,11 +164,11 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<DocumentationLegalEntityDto> UpdateDocumentationLegalEntity(DocumentationLegalEntityUpdateDto documentation)
+        public async Task<ActionResult<DocumentationLegalEntityDto>> UpdateDocumentationLegalEntityAsync(DocumentationLegalEntityUpdateDto documentation)
         {
             try
             {
-                var oldDocumentation = documentationLegalEntityRepository.GetDocumentationById(documentation.DocumentationLegalEntityId);
+                var oldDocumentation = await documentationLegalEntityRepository.GetDocumentationByIdAsync(documentation.DocumentationLegalEntityId);
 
                 if (oldDocumentation == null)
                 {
@@ -179,7 +179,7 @@ namespace AuctionMicroservice.Controllers
 
                 mapper.Map(documentationEntity, oldDocumentation);
 
-                documentationLegalEntityRepository.SaveChanges();
+                await documentationLegalEntityRepository.SaveChangesAsync();
 
                 return Ok(mapper.Map<DocumentationLegalEntityDto>(oldDocumentation));
             }
@@ -202,19 +202,19 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{DocumentationLegalEntityId}")]
-        public IActionResult DeleteDocumentationLegalEntity(Guid DocumentationLegalEntityId)
+        public async Task<IActionResult> DeleteDocumentationLegalEntityAsync(Guid DocumentationLegalEntityId)
         {
             try
             {
-                var documentation = documentationLegalEntityRepository.GetDocumentationById(DocumentationLegalEntityId);
+                var documentation = await documentationLegalEntityRepository.GetDocumentationByIdAsync(DocumentationLegalEntityId);
 
                 if (documentation == null)
                 {
                     return NotFound();
                 }
 
-                documentationLegalEntityRepository.DeleteDocumentation(DocumentationLegalEntityId);
-                documentationLegalEntityRepository.SaveChanges();
+                documentationLegalEntityRepository.DeleteDocumentationAsync(DocumentationLegalEntityId);
+                await documentationLegalEntityRepository .SaveChangesAsync();
                 return NoContent();
             }
             catch (Exception e)

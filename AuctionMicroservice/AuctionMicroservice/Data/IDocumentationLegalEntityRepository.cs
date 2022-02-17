@@ -8,19 +8,19 @@ namespace AuctionMicroservice.Data
 {
     public interface IDocumentationLegalEntityRepository
     {
-        DocumentationLegalEntityConfirmation CreateDocumentationLegalEntity(DocumentationLegalEntity documentation);
+        Task<DocumentationLegalEntityConfirmation> CreateDocumentationLegalEntityAsync(DocumentationLegalEntity documentation);
 
-        List<DocumentationLegalEntity> GetDocumentationLegalEntities();
+        Task<List<DocumentationLegalEntity>> GetDocumentationLegalEntitiesAsync();
 
         //By Auctions
-        List<DocumentationLegalEntity> GetDocumentationLegalEntitesByAuction(Guid AuctionId);
+        Task<List<DocumentationLegalEntity>> GetDocumentationLegalEntitesByAuctionAsync(Guid AuctionId);
 
-        DocumentationLegalEntity GetDocumentationById(Guid DocumentationLegalEntityId);
+        Task<DocumentationLegalEntity> GetDocumentationByIdAsync(Guid DocumentationLegalEntityId);
 
-        void UpdateDocumentation(DocumentationLegalEntity documentation);
+        Task UpdateDocumentationAsync(DocumentationLegalEntity documentation);
 
-        void DeleteDocumentation(Guid DocumentationLegalEntityId);
+        Task DeleteDocumentationAsync(Guid DocumentationLegalEntityId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
     }
 }

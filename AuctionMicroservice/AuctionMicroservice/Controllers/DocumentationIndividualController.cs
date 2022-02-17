@@ -45,9 +45,9 @@ namespace AuctionMicroservice.Controllers
         [HttpHead]     
         [ProducesResponseType(StatusCodes.Status200OK)] 
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<DocumentationIndividualDto>> GetDocumentationIndividuals()
+        public async Task<ActionResult<List<DocumentationIndividualDto>>> GetDocumentationIndividualsAsync()
         {
-            var documentations = documentationIndividualRepository.GetDocumentationIndividuals();
+            var documentations = await documentationIndividualRepository.GetDocumentationIndividualsAsync();
 
             if (documentations == null || documentations.Count == 0)
             {
@@ -67,9 +67,9 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("auction/{AuctionId}")]
-        public ActionResult<List<DocumentationIndividualDto>> GetDocumentationIndividualsByAuction(Guid AuctionId)
+        public async Task<ActionResult<List<DocumentationIndividualDto>>> GetDocumentationIndividualsByAuctionAsync(Guid AuctionId)
         {
-            var documentations = documentationIndividualRepository.GetDocumentationIndividualsByAuction(AuctionId);
+            var documentations = await documentationIndividualRepository.GetDocumentationIndividualsByAuctionAsync(AuctionId);
 
             if (documentations == null || documentations.Count == 0)
             {
@@ -91,9 +91,9 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{DocumentationIndividualId}")]
-        public ActionResult<DocumentationIndividualDto> GetDocumentationById(Guid DocumentationIndividualId)
+        public async Task<ActionResult<DocumentationIndividualDto>> GetDocumentationByIdAsync(Guid DocumentationIndividualId)
         {
-            var documentation = documentationIndividualRepository.GetDocumentationById(DocumentationIndividualId);
+            var documentation = await documentationIndividualRepository.GetDocumentationByIdAsync(DocumentationIndividualId);
 
             if(documentation == null)
             {
@@ -125,7 +125,7 @@ namespace AuctionMicroservice.Controllers
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<DocumentationIndividualConfirmationDto> CreateDocumentationIndividual([FromBody] DocumentatonLegalEntitylCreationDto documentation)
+        public async Task<ActionResult<DocumentationIndividualConfirmationDto>> CreateDocumentationIndividualAsync([FromBody] DocumentatonLegalEntitylCreationDto documentation)
         {
             try
             {
@@ -133,8 +133,8 @@ namespace AuctionMicroservice.Controllers
 
                 validator.ValidateAndThrow(documentationEntity);
 
-                DocumentationIndividualConformation conformation = documentationIndividualRepository.CreateDocumentationIndividual(documentationEntity);
-                documentationIndividualRepository.SaveChanges();
+                DocumentationIndividualConformation conformation = await documentationIndividualRepository.CreateDocumentationIndividualAsync(documentationEntity);
+                await documentationIndividualRepository.SaveChangesAsync();
 
                 string location = linkGenerator.GetPathByAction("GetDocumentationIndividuals", "DocumentationIndividual", new { DocumentationIndividualId = conformation.DocumentationIndividualId });
 
@@ -166,11 +166,11 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<DocumentationIndividualDto> UpdateDocumentationIndividual(DocumentationIndividualUpdateDto documentation)
+        public async Task<ActionResult<DocumentationIndividualDto>> UpdateDocumentationIndividualAsync(DocumentationIndividualUpdateDto documentation)
         {
             try
             {
-                var oldDocumentation = documentationIndividualRepository.GetDocumentationById(documentation.DocumentationIndividualId);
+                var oldDocumentation = await documentationIndividualRepository.GetDocumentationByIdAsync(documentation.DocumentationIndividualId);
 
                 if(oldDocumentation == null)
                 {
@@ -181,7 +181,7 @@ namespace AuctionMicroservice.Controllers
 
                 mapper.Map(documentationEntity, oldDocumentation);
 
-                documentationIndividualRepository.SaveChanges();
+                await documentationIndividualRepository.SaveChangesAsync();
 
                 return Ok(mapper.Map<DocumentationIndividualDto>(oldDocumentation));
             }
@@ -204,19 +204,19 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{DocumentationIndividualId}")]
-        public IActionResult DeleteDocumentationIndividual(Guid DocumentationIndividualId)
+        public async Task<IActionResult> DeleteDocumentationIndividualAsync(Guid DocumentationIndividualId)
         {
             try
             {
-                var documentation = documentationIndividualRepository.GetDocumentationById(DocumentationIndividualId);
+                var documentation = await documentationIndividualRepository.GetDocumentationByIdAsync(DocumentationIndividualId);
 
                 if (documentation == null)
                 {
                     return NotFound();
                 }
 
-                documentationIndividualRepository.DeleteDocumentation(DocumentationIndividualId);
-                documentationIndividualRepository.SaveChanges();
+                documentationIndividualRepository.DeleteDocumentationAsync(DocumentationIndividualId);
+                await documentationIndividualRepository.SaveChangesAsync();
                 return NoContent();
             }
             catch (Exception e)

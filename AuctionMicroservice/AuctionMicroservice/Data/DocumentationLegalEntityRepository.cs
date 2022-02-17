@@ -1,5 +1,6 @@
 ﻿using AuctionMicroservice.Entities;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,42 +18,42 @@ namespace AuctionMicroservice.Data
             this.context = context;
             this.mapper = mapper;
         }
-        public DocumentationLegalEntityConfirmation CreateDocumentationLegalEntity(DocumentationLegalEntity documentation)
+        public async Task<DocumentationLegalEntityConfirmation> CreateDocumentationLegalEntityAsync(DocumentationLegalEntity documentation)
         {
-            var documentationEntity = context.Add(documentation);
+            var documentationEntity = await context.AddAsync(documentation);
 
             return mapper.Map<DocumentationLegalEntityConfirmation>(documentationEntity.Entity);
         }
 
-        public void DeleteDocumentation(Guid DocumentationLegalEntityId)
+        public async Task DeleteDocumentationAsync(Guid DocumentationLegalEntityId)
         {
-            var documentation = GetDocumentationById(DocumentationLegalEntityId);
+            var documentation = await GetDocumentationByIdAsync(DocumentationLegalEntityId);
 
             context.Remove(documentation);
         }
 
-        public DocumentationLegalEntity GetDocumentationById(Guid DocumentationLegalEntityId)
+        public async Task<DocumentationLegalEntity> GetDocumentationByIdAsync(Guid DocumentationLegalEntityId)
         {
-            return context.documentationLegalEntity.FirstOrDefault(e => e.DocumentationLegalEntityId == DocumentationLegalEntityId);
+            return await context.documentationLegalEntity.FirstOrDefaultAsync(e => e.DocumentationLegalEntityId == DocumentationLegalEntityId);
         }
 
-        public List<DocumentationLegalEntity> GetDocumentationLegalEntitesByAuction(Guid AuctionId)
+        public async Task<List<DocumentationLegalEntity>> GetDocumentationLegalEntitesByAuctionAsync(Guid AuctionId)
         {
-            return context.documentationLegalEntity.Where(e => e.AuctionId == AuctionId).ToList();
+            return await context.documentationLegalEntity.Where(e => e.AuctionId == AuctionId).ToListAsync();
         }
 
-        public List<DocumentationLegalEntity> GetDocumentationLegalEntities()
+        public async Task<List<DocumentationLegalEntity>> GetDocumentationLegalEntitiesAsync()
         {
-            return context.documentationLegalEntity.ToList();
+            return await context.documentationLegalEntity.ToListAsync();
         }
 
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return context.SaveChanges() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
-        public void UpdateDocumentation(DocumentationLegalEntity documentation)
+        public async Task UpdateDocumentationAsync(DocumentationLegalEntity documentation)
         {
            
         }

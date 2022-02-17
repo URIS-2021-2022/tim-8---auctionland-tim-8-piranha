@@ -47,9 +47,9 @@ namespace AuctionMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<AuctionDto>> GetAuctions()
+        public async Task<ActionResult<List<AuctionDto>>> GetAuctionsAsync()
         {
-            var auctions = auctionRepository.GetAuctions();
+            var auctions = await auctionRepository.GetAuctionsAsync();
 
             if(auctions == null || auctions.Count == 0)
             {
@@ -70,9 +70,9 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{AuctionId}")]
-        public ActionResult<AuctionDto> GetAuctionById(Guid AuctionId)
+        public async Task<ActionResult<AuctionDto>> GetAuctionByIdAsync(Guid AuctionId)
         {
-            var auction = auctionRepository.GetAuctionById(AuctionId);
+            var auction = await auctionRepository.GetAuctionByIdAsync(AuctionId);
 
             if(auction == null)
             {
@@ -103,13 +103,13 @@ namespace AuctionMicroservice.Controllers
     /// </remarks>
     /// <response code="200">returns created auction</response>
     /// <response code="500">There's been server error</response>
-    [HttpPost]
+        [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
-        public ActionResult<AuctionConformationDto> CreateAuction([FromBody] AuctionCreationDto auctionCreationDto)
+        public async Task<ActionResult<AuctionConformationDto>> CreateAuctionAsync([FromBody] AuctionCreationDto auctionCreationDto)
         {
             try
             {
@@ -117,8 +117,8 @@ namespace AuctionMicroservice.Controllers
 
                 auctionValidator.ValidateAndThrow(auction);
 
-                AuctionConfirmation confirmation = auctionRepository.CreateAuction(auction);
-                auctionRepository.SaveChanges();
+                AuctionConfirmation confirmation = await auctionRepository.CreateAuctionAsync(auction);
+                await auctionRepository.SaveChangesAsync();
 
                 string location = linkGenerator.GetPathByAction("GetAuctions", "Auction", new { AuctionId = confirmation.AuctionId });
 
@@ -148,11 +148,11 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<AuctionDto> UpdateAuction(AuctionUpdateDto auctionUpdate)
+        public async Task<ActionResult<AuctionDto>> UpdateAuction(AuctionUpdateDto auctionUpdate)
         {
             try
             {
-                var oldAuction = auctionRepository.GetAuctionById(auctionUpdate.AuctionId);
+                var oldAuction = await auctionRepository.GetAuctionByIdAsync(auctionUpdate.AuctionId);
 
                 if (oldAuction == null)
                 {
@@ -163,7 +163,7 @@ namespace AuctionMicroservice.Controllers
 
                 mapper.Map(auction, oldAuction);
 
-                auctionRepository.SaveChanges();
+                await auctionRepository.SaveChangesAsync();
 
                 return Ok(mapper.Map<AuctionDto>(oldAuction));
 
@@ -187,11 +187,11 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{AuctionId}")]
-        public IActionResult DeleteAuction(Guid AuctionId)
+        public async Task<IActionResult> DeleteAuctionAsync(Guid AuctionId)
         {
             try
             {
-                var auction = auctionRepository.GetAuctionById(AuctionId);
+                var auction = await auctionRepository.GetAuctionByIdAsync(AuctionId);
 
                 if(auction == null)
                 {
@@ -199,8 +199,8 @@ namespace AuctionMicroservice.Controllers
 
                 }
 
-                auctionRepository.DeleteAuction(AuctionId);
-                auctionRepository.SaveChanges();
+                 auctionRepository.DeleteAuctionAsync(AuctionId);
+                await auctionRepository.SaveChangesAsync();
                 return NoContent();
 
 

@@ -8,20 +8,20 @@ namespace AuctionMicroservice.Data
 {
     public interface IDocumentationIndividualRepository
     {
-        DocumentationIndividualConformation CreateDocumentationIndividual(DocumentationIndividual documentation);
+        Task<DocumentationIndividualConformation> CreateDocumentationIndividualAsync(DocumentationIndividual documentation);
 
-        List<DocumentationIndividual> GetDocumentationIndividuals();
+        Task<List<DocumentationIndividual>> GetDocumentationIndividualsAsync();
 
         //By Auctions
-        List<DocumentationIndividual> GetDocumentationIndividualsByAuction(Guid AuctionId);
+        Task<List<DocumentationIndividual>> GetDocumentationIndividualsByAuctionAsync(Guid AuctionId);
 
-        DocumentationIndividual GetDocumentationById(Guid DocumentationIndividualId);
+        Task<DocumentationIndividual> GetDocumentationByIdAsync(Guid DocumentationIndividualId);
 
-        void UpdateDocumentation(DocumentationIndividual documentation);
+        Task UpdateDocumentationAsync(DocumentationIndividual documentation);
 
-        void DeleteDocumentation(Guid DocumentationIndividualId);
+        Task DeleteDocumentationAsync(Guid DocumentationIndividualId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AuctionMicroservice.Entities;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,41 +18,41 @@ namespace AuctionMicroservice.Data
             this.context = context;
             this.mapper = mapper;
         }
-        public DocumentationIndividualConformation CreateDocumentationIndividual(DocumentationIndividual documentation)
+        public async Task<DocumentationIndividualConformation> CreateDocumentationIndividualAsync(DocumentationIndividual documentation)
         {
-            var documentationEntity = context.Add(documentation);
+            var documentationEntity = await context.AddAsync(documentation);
 
             return mapper.Map<DocumentationIndividualConformation>(documentationEntity.Entity);
         }
 
-        public void DeleteDocumentation(Guid DocumentationIndividualId)
+        public async Task DeleteDocumentationAsync(Guid DocumentationIndividualId)
         {
-            var documentation = GetDocumentationById(DocumentationIndividualId);
+            var documentation = await GetDocumentationByIdAsync(DocumentationIndividualId);
 
             context.Remove(documentation);
         }
 
-        public DocumentationIndividual GetDocumentationById(Guid DocumentationIndividualId)
+        public async Task<DocumentationIndividual> GetDocumentationByIdAsync(Guid DocumentationIndividualId)
         {
-            return context.documentationIndividual.FirstOrDefault(e => e.DocumentationIndividualId == DocumentationIndividualId);
+            return await context.documentationIndividual.FirstOrDefaultAsync(e => e.DocumentationIndividualId == DocumentationIndividualId);
         }
 
-        public List<DocumentationIndividual> GetDocumentationIndividuals()
+        public async Task<List<DocumentationIndividual>> GetDocumentationIndividualsAsync()
         {
-            return context.documentationIndividual.ToList();
+            return await context.documentationIndividual.ToListAsync();
         }
 
-        public List<DocumentationIndividual> GetDocumentationIndividualsByAuction(Guid AuctionId)
+        public async Task<List<DocumentationIndividual>> GetDocumentationIndividualsByAuctionAsync(Guid AuctionId)
         {
-            return context.documentationIndividual.Where(e => e.AuctionId == AuctionId).ToList();
+            return await context.documentationIndividual.Where(e => e.AuctionId == AuctionId).ToListAsync();
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return context.SaveChanges() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
-        public void UpdateDocumentation(DocumentationIndividual documentation)
+        public async Task UpdateDocumentationAsync(DocumentationIndividual documentation)
         {
             
         }

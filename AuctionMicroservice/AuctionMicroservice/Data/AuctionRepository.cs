@@ -1,5 +1,6 @@
 ﻿using AuctionMicroservice.Entities;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,39 +19,39 @@ namespace AuctionMicroservice.Data
             this.mapper = mapper;
         }
 
-        public AuctionConfirmation CreateAuction(Auction auction)
+        public async Task<AuctionConfirmation> CreateAuctionAsync(Auction auction)
         {
-            var auctionEntity = context.Add(auction);
+            var auctionEntity =  await context.AddAsync(auction);
 
-            return mapper.Map<AuctionConfirmation>(auctionEntity.Entity);
+            return  mapper.Map<AuctionConfirmation>(auctionEntity.Entity);
         }
 
-        public void DeleteAuction(Guid AuctionId)
+        public async void DeleteAuctionAsync(Guid AuctionId)
         {
-            var auction = GetAuctionById(AuctionId);
+            var auction =  await GetAuctionByIdAsync(AuctionId);
 
             context.Remove(auction);
         }
 
-        public Auction GetAuctionById(Guid AuctionId)
+        public async Task<Auction> GetAuctionByIdAsync(Guid AuctionId)
         {
 
 
-            return context.auction.FirstOrDefault(e => e.AuctionId == AuctionId);
+            return await context.auction.FirstOrDefaultAsync(e => e.AuctionId == AuctionId);
         }
 
-        public List<Auction> GetAuctions()
+        public async Task<List<Auction>> GetAuctionsAsync()
         {
-            return context.auction.ToList();
+            return await context.auction.ToListAsync();
         }          
 
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return context.SaveChanges() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
-        public void UpdateAuction(Auction auction)
+        public async void UpdateAuction(Auction auction)
         {
 
         }

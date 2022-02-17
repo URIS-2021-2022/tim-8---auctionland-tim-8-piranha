@@ -2,11 +2,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RegistrationMicroservice.Data;
+using RegistrationMicroservice.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +30,25 @@ namespace RegistrationMicroservice
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+
+
+
+            services.AddControllers(setup => 
+            {
+                setup.ReturnHttpNotAcceptable = true; 
+            }
+            ).AddXmlDataContractSerializerFormatters();
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RegistrationMicroservice", Version = "v1" });
             });
+
+            services.AddDbContext<RegistrationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RegistrationDB")));
+            services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

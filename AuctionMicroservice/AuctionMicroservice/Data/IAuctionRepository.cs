@@ -9,17 +9,17 @@ namespace AuctionMicroservice.Data
 {
     public interface IAuctionRepository
     {
-        AuctionConfirmation CreateAuction(Auction auction);
+        Task<AuctionConfirmation> CreateAuctionAsync(Auction auction);
 
-        List<Auction> GetAuctions();
+        Task<List<Auction>> GetAuctionsAsync();
 
-        Auction GetAuctionById(Guid AuctionId);
+        Task<Auction> GetAuctionByIdAsync(Guid AuctionId);
 
         void UpdateAuction(Auction auction);
 
-        void DeleteAuction(Guid AuctionId);
+        void DeleteAuctionAsync(Guid AuctionId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
 
 
     }
