@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using System;
@@ -19,34 +20,36 @@ namespace PlotMicroservice.Data.Repositories
             Mapper = mapper;
         }
 
-        public PlotPartClassConfirmation CreatePlotPartClass(PlotPartClass plotPartClass)
+        public async Task<PlotPartClassConfirmation> CreatePlotPartClassAsync(PlotPartClass plotPartClass)
         {
-            var createdEntity = PlotContext.Add(plotPartClass);
+            var createdEntity = await PlotContext.AddAsync(plotPartClass);
             return Mapper.Map<PlotPartClassConfirmation>(createdEntity.Entity);
         }
 
-        public void DeletePlotPartClass(Guid plotPartClassId)
+        public async Task DeletePlotPartClassAsync(Guid plotPartClassId)
         {
-            var plotPartClass = GetPlotPartClassById(plotPartClassId);
+            var plotPartClass = await GetPlotPartClassByIdAsync(plotPartClassId);
             PlotContext.Remove(plotPartClass);
         }
 
-        public PlotPartClass GetPlotPartClassById(Guid plotPartClassId)
+        public async Task<PlotPartClass> GetPlotPartClassByIdAsync(Guid plotPartClassId)
         {
-            return PlotContext.PlotPartClasses.FirstOrDefault(o => o.PlotPartClassId == plotPartClassId);
+            return await PlotContext.PlotPartClasses.FirstOrDefaultAsync(o => o.PlotPartClassId == plotPartClassId);
         }
 
-        public List<PlotPartClass> GetPlotPartClasses(string plotPartClass = null)
+        public async Task<List<PlotPartClass>> GetPlotPartClassesAsync(string plotPartClass = null)
         {
-            return PlotContext.PlotPartClasses.Where(o => o.Class == plotPartClass || plotPartClass == null).ToList();
+            return await PlotContext.PlotPartClasses.Where(o => o.Class == plotPartClass || plotPartClass == null).ToListAsync();
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return PlotContext.SaveChanges() > 0;
+            return await PlotContext.SaveChangesAsync() > 0;
         }
 
-        public void UpdatePlotPartClass(PlotPartClass plotPartClass)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task UpdatePlotPartClassAsync(PlotPartClass plotPartClass)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 
               kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane */

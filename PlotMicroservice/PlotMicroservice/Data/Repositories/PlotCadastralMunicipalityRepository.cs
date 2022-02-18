@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using System;
@@ -19,37 +20,39 @@ namespace PlotMicroservice.Data.Repositories
             Mapper = mapper;
         }
 
-        public PlotCadastralMunicipalityConfirmation CreatePlotCadastralMunicipality(PlotCadastralMunicipality plotCadastralMunicipality)
+        public async Task<PlotCadastralMunicipalityConfirmation> CreatePlotCadastralMunicipalityAsync(PlotCadastralMunicipality plotCadastralMunicipality)
         {
-            var createdEntity = Context.Add(plotCadastralMunicipality);
+            var createdEntity = await Context.AddAsync(plotCadastralMunicipality);
             return Mapper.Map<PlotCadastralMunicipalityConfirmation>(createdEntity.Entity);
         }
 
-        public void DeletePlotCadastralMunicipality(Guid plotCadastrialMunicipalityId)
+        public async Task DeletePlotCadastralMunicipalityAsync(Guid plotCadastrialMunicipalityId)
         {
-            var cadastralMunicipality = GetPlotCadastralMunicipalityById(plotCadastrialMunicipalityId);
+            var cadastralMunicipality = await GetPlotCadastralMunicipalityByIdAsync(plotCadastrialMunicipalityId);
             Context.Remove(cadastralMunicipality);
         }
 
-        public List<PlotCadastralMunicipality> GetPlotCadastralMunicipalities(string cadastrialMunicipality = null)
+        public async Task<List<PlotCadastralMunicipality>> GetPlotCadastralMunicipalitiesAsync(string cadastrialMunicipality = null)
         {
-            return Context.PlotCadastralMunicipalities.Where(o => o.CadastralMunicipality == cadastrialMunicipality || cadastrialMunicipality == null).ToList();
+            return await Context.PlotCadastralMunicipalities.Where(o => o.CadastralMunicipality == cadastrialMunicipality || cadastrialMunicipality == null).ToListAsync();
         }
 
-        public PlotCadastralMunicipality GetPlotCadastralMunicipalityById(Guid plotCadastrialMunicipalityId)
+        public async Task<PlotCadastralMunicipality> GetPlotCadastralMunicipalityByIdAsync(Guid plotCadastrialMunicipalityId)
         {
-            return Context.PlotCadastralMunicipalities.FirstOrDefault(o => o.PlotCadastralMunicipalityId == plotCadastrialMunicipalityId);
+            return await Context.PlotCadastralMunicipalities.FirstOrDefaultAsync(o => o.PlotCadastralMunicipalityId == plotCadastrialMunicipalityId);
         }
 
-        public void UpdatePlotCadastralMunicipality(PlotCadastralMunicipality plotCadastralMunicipality)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task UpdatePlotCadastralMunicipalityAsync(PlotCadastralMunicipality plotCadastralMunicipality)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 
                kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane */
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return Context.SaveChanges() > 0;
+            return await Context.SaveChangesAsync() > 0;
         }
     }
 }

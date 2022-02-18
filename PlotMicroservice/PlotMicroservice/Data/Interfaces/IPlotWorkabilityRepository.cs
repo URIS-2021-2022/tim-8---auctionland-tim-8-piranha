@@ -8,16 +8,16 @@ namespace PlotMicroservice.Data.Interfaces
 {
     public interface IPlotWorkabilityRepository
     {
-        List<PlotWorkability> GetPlotWorkabilities(string workability = null);
+        Task<List<PlotWorkability>> GetPlotWorkabilitiesAsync(string workability = null);
 
-        PlotWorkability GetPlotWorkabilityById(Guid plotWorkabilityId);
+        Task<PlotWorkability> GetPlotWorkabilityByIdAsync(Guid plotWorkabilityId);
 
-        PlotWorkabilityConfirmation CreatePlotWorkability(PlotWorkability plotWorkability);
+        Task<PlotWorkabilityConfirmation> CreatePlotWorkabilityAsync(PlotWorkability plotWorkability);
 
-        void UpdatePlotWorkability(PlotWorkability plotWorkability);
+        Task UpdatePlotWorkabilityAsync(PlotWorkability plotWorkability);
 
-        void DeletePlotWorkability(Guid plotWorkabilityId);
+        Task DeletePlotWorkabilityAsync(Guid plotWorkabilityId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
     }
 }

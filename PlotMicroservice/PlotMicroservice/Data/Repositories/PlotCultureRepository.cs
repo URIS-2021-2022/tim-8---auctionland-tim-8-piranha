@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using System;
@@ -19,34 +20,36 @@ namespace PlotMicroservice.Data.Repositories
             Mapper = mapper;
         }
 
-        public PlotCultureConfirmation CreatePlotCulture(PlotCulture plotCulture)
+        public async Task<PlotCultureConfirmation> CreatePlotCultureAsync(PlotCulture plotCulture)
         {
-            var createdEntity = PlotContext.Add(plotCulture);
+            var createdEntity = await PlotContext.AddAsync(plotCulture);
             return Mapper.Map<PlotCultureConfirmation>(createdEntity.Entity);
         }
 
-        public void DeletePlotCulture(Guid plotCultureId)
+        public async Task DeletePlotCultureAsync(Guid plotCultureId)
         {
-            var plotCulture = GetPlotCultureById(plotCultureId);
+            var plotCulture = await GetPlotCultureByIdAsync(plotCultureId);
             PlotContext.Remove(plotCulture);
         }
 
-        public PlotCulture GetPlotCultureById(Guid plotCultureId)
+        public async Task<PlotCulture> GetPlotCultureByIdAsync(Guid plotCultureId)
         {
-            return PlotContext.PlotCultures.FirstOrDefault(o => o.PlotCultureId == plotCultureId);
+            return await PlotContext.PlotCultures.FirstOrDefaultAsync(o => o.PlotCultureId == plotCultureId);
         }
 
-        public List<PlotCulture> GetPlotCultures(string culture = null)
+        public async Task<List<PlotCulture>> GetPlotCulturesAsync(string culture = null)
         {
-            return PlotContext.PlotCultures.Where(o => o.Culture == culture || culture == null).ToList();
+            return await PlotContext.PlotCultures.Where(o => o.Culture == culture || culture == null).ToListAsync();
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return PlotContext.SaveChanges() > 0;
+            return await PlotContext.SaveChangesAsync() > 0;
         }
 
-        public void UpdatePlotCulture(PlotCulture plotCulture)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task UpdatePlotCultureAsync(PlotCulture plotCulture)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 
               kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane */

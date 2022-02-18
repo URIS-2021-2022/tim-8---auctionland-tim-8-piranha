@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using System;
@@ -19,39 +20,41 @@ namespace PlotMicroservice.Data.Repositories
             Mapper = mapper;
         }
 
-        public PlotPartConfirmation CreatePlotPart(PlotPart plotPart)
+        public async Task<PlotPartConfirmation> CreatePlotPartAsync(PlotPart plotPart)
         {
-            var createdEntity = PlotContext.Add(plotPart);
+            var createdEntity = await PlotContext.AddAsync(plotPart);
             return Mapper.Map<PlotPartConfirmation>(createdEntity.Entity);
         }
 
-        public void DeletePlotPart(Guid plotPartId)
+        public async Task DeletePlotPartAsync(Guid plotPartId)
         {
-            var plotPart = GetPlotPartById(plotPartId);
+            var plotPart = await GetPlotPartByIdAsync(plotPartId);
             PlotContext.Remove(plotPart);
         }
 
-        public PlotPart GetPlotPartById(Guid plotPartId)
+        public async Task<PlotPart> GetPlotPartByIdAsync(Guid plotPartId)
         {
-            return PlotContext.PlotParts.FirstOrDefault(o => o.PlotPartId == plotPartId);
+            return await PlotContext.PlotParts.FirstOrDefaultAsync(o => o.PlotPartId == plotPartId);
         }
 
-        public List<PlotPart> GetPlotParts(string plotPartCurrentClass = null, string plotPartCurrentProtectedZone = null)
+        public async Task<List<PlotPart>> GetPlotPartsAsync(string plotPartCurrentClass = null, string plotPartCurrentProtectedZone = null)
         {
-            return PlotContext.PlotParts.Where(o => (o.PlotPartCurrentClass == plotPartCurrentClass || plotPartCurrentClass == null) && (o.PlotPartCurrentProtectedZone == plotPartCurrentProtectedZone || plotPartCurrentProtectedZone == null)).ToList();
+            return await PlotContext.PlotParts.Where(o => (o.PlotPartCurrentClass == plotPartCurrentClass || plotPartCurrentClass == null) && (o.PlotPartCurrentProtectedZone == plotPartCurrentProtectedZone || plotPartCurrentProtectedZone == null)).ToListAsync();
         }
 
-        public List<PlotPart> GetPlotPartsByPlotId(Guid plotId)
+        public async Task<List<PlotPart>> GetPlotPartsByPlotIdAsync(Guid plotId)
         {
-            return PlotContext.PlotParts.Where(o => o.PlotId == plotId).ToList();
+            return await PlotContext.PlotParts.Where(o => o.PlotId == plotId).ToListAsync();
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return PlotContext.SaveChanges() > 0;
+            return await PlotContext.SaveChangesAsync() > 0;
         }
 
-        public void UpdatePlotPart(PlotPart plotPart)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task UpdatePlotPartAsync(PlotPart plotPart)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 
               kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane */

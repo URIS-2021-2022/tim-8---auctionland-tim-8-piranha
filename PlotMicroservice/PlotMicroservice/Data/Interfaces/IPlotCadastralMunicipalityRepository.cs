@@ -8,16 +8,16 @@ namespace PlotMicroservice.Data.Interfaces
 {
     public interface IPlotCadastralMunicipalityRepository
     {
-        List<PlotCadastralMunicipality> GetPlotCadastralMunicipalities(string cadastrialMunicipality = null);
+        Task<List<PlotCadastralMunicipality>> GetPlotCadastralMunicipalitiesAsync(string cadastrialMunicipality = null);
 
-        PlotCadastralMunicipality GetPlotCadastralMunicipalityById(Guid plotCadastrialMunicipalityId);
+        Task<PlotCadastralMunicipality> GetPlotCadastralMunicipalityByIdAsync(Guid plotCadastrialMunicipalityId);
 
-        PlotCadastralMunicipalityConfirmation CreatePlotCadastralMunicipality(PlotCadastralMunicipality plotCadastralMunicipality);
+        Task<PlotCadastralMunicipalityConfirmation> CreatePlotCadastralMunicipalityAsync(PlotCadastralMunicipality plotCadastralMunicipality);
 
-        void UpdatePlotCadastralMunicipality(PlotCadastralMunicipality plotCadastralMunicipality);
+        Task UpdatePlotCadastralMunicipalityAsync(PlotCadastralMunicipality plotCadastralMunicipality);
 
-        void DeletePlotCadastralMunicipality(Guid plotCadastrialMunicipalityId);
+        Task DeletePlotCadastralMunicipalityAsync(Guid plotCadastrialMunicipalityId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
     }
 }

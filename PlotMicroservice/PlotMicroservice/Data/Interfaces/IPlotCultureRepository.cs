@@ -8,16 +8,16 @@ namespace PlotMicroservice.Data.Interfaces
 {
     public interface IPlotCultureRepository
     {
-        List<PlotCulture> GetPlotCultures(string culture = null);
+        Task<List<PlotCulture>> GetPlotCulturesAsync(string culture = null);
 
-        PlotCulture GetPlotCultureById(Guid plotCultureId);
+        Task<PlotCulture> GetPlotCultureByIdAsync(Guid plotCultureId);
 
-        PlotCultureConfirmation CreatePlotCulture(PlotCulture plotCulture);
+        Task<PlotCultureConfirmation> CreatePlotCultureAsync(PlotCulture plotCulture);
 
-        void UpdatePlotCulture(PlotCulture plotCulture);
+        Task UpdatePlotCultureAsync(PlotCulture plotCulture);
 
-        void DeletePlotCulture(Guid plotCultureId);
+        Task DeletePlotCultureAsync(Guid plotCultureId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
     }
 }

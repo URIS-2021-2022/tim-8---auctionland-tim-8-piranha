@@ -8,16 +8,16 @@ namespace PlotMicroservice.Data.Interfaces
 {
     public interface IPlotPartFormOfOwnershipRepository
     {
-        List<PlotPartFormOfOwnership> GetPlotPartFormOfOwnerships(string formOfOwnership = null);
+        Task<List<PlotPartFormOfOwnership>> GetPlotPartFormOfOwnershipsAsync(string formOfOwnership = null);
 
-        PlotPartFormOfOwnership GetPlotPartFormOfOwnershipById(Guid plotPartOfOwnershipId);
+        Task<PlotPartFormOfOwnership> GetPlotPartFormOfOwnershipByIdAsync(Guid plotPartOfOwnershipId);
 
-        PlotPartFormOfOwnershipConfirmation CreatPlotPartFormOfOwnership(PlotPartFormOfOwnership plotPartFormOfOwnership);
+        Task<PlotPartFormOfOwnershipConfirmation> CreatPlotPartFormOfOwnershipAsync(PlotPartFormOfOwnership plotPartFormOfOwnership);
 
-        void UpdatePlotPartFormOfOwnership(PlotPartFormOfOwnership plotPartFormOfOwnership);
+        Task UpdatePlotPartFormOfOwnershipAsync(PlotPartFormOfOwnership plotPartFormOfOwnership);
 
-        void DeletePlotPartFormOfOwnership(Guid plotPartOfOwnershipId);
+        Task DeletePlotPartFormOfOwnershipAsync(Guid plotPartOfOwnershipId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
     }
 }

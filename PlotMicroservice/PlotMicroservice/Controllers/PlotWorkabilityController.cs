@@ -54,9 +54,9 @@ namespace PlotMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<PlotWorkabilityDto>> GetPlotWorkabilities(string workability)
+        public async Task<ActionResult<List<PlotWorkabilityDto>>> GetPlotWorkabilitiesAsync(string workability)
         {
-            List<PlotWorkability> plotWorkabilities = PlotWorkabilityRepository.GetPlotWorkabilities(workability);
+            List<PlotWorkability> plotWorkabilities = await PlotWorkabilityRepository.GetPlotWorkabilitiesAsync(workability);
 
             if(plotWorkabilities == null || plotWorkabilities.Count == 0)
             {
@@ -74,9 +74,9 @@ namespace PlotMicroservice.Controllers
         [HttpGet("{plotWorkabilityId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<PlotWorkabilityDto> GetPlotWorkabilityId(Guid plotWorkabilityId)
+        public async Task<ActionResult<PlotWorkabilityDto>> GetPlotWorkabilityIdAsync(Guid plotWorkabilityId)
         {
-            PlotWorkability plotWorkability = PlotWorkabilityRepository.GetPlotWorkabilityById(plotWorkabilityId);
+            PlotWorkability plotWorkability = await PlotWorkabilityRepository.GetPlotWorkabilityByIdAsync(plotWorkabilityId);
 
             if(plotWorkability == null)
             {
@@ -103,7 +103,7 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotWorkabilityConfirmationDto> CreatePlotWorkability([FromBody] PlotWorkabilityCreationDto plotWorkabilityCreation)
+        public async Task<ActionResult<PlotWorkabilityConfirmationDto>> CreatePlotWorkabilityAsync([FromBody] PlotWorkabilityCreationDto plotWorkabilityCreation)
         {
             try
             {
@@ -111,8 +111,8 @@ namespace PlotMicroservice.Controllers
 
                 Validator.ValidateAndThrow(plotWorkability);
                 
-                PlotWorkabilityConfirmation plotWorkabilityConfirmation = PlotWorkabilityRepository.CreatePlotWorkability(plotWorkability);
-                PlotWorkabilityRepository.SaveChanges();
+                PlotWorkabilityConfirmation plotWorkabilityConfirmation = await PlotWorkabilityRepository.CreatePlotWorkabilityAsync(plotWorkability);
+                await PlotWorkabilityRepository.SaveChangesAsync();
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotWorkabilities", "PlotWorkability", new { plotWorkabilityId = plotWorkabilityConfirmation.PlotWorkabilityId });
 
@@ -147,11 +147,11 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotWorkabilityDto> UpdatePlotWorkability(PlotWorkabilityUpdateDto plotWorkabilityUpdate)
+        public async Task<ActionResult<PlotWorkabilityDto>> UpdatePlotWorkabilityAsync(PlotWorkabilityUpdateDto plotWorkabilityUpdate)
         {
             try
             {
-                PlotWorkability existingPlotWorkability = PlotWorkabilityRepository.GetPlotWorkabilityById(plotWorkabilityUpdate.PlotWorkabilityId);
+                PlotWorkability existingPlotWorkability = await PlotWorkabilityRepository.GetPlotWorkabilityByIdAsync(plotWorkabilityUpdate.PlotWorkabilityId);
 
                 if (existingPlotWorkability == null)
                 {
@@ -164,7 +164,7 @@ namespace PlotMicroservice.Controllers
                 
                 Mapper.Map(plotWorkability, existingPlotWorkability);
 
-                PlotWorkabilityRepository.SaveChanges();
+                await PlotWorkabilityRepository.SaveChangesAsync();
 
                 return Ok(Mapper.Map<PlotWorkabilityDto>(existingPlotWorkability));
 
@@ -187,19 +187,19 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeletePlotWorkability(Guid plotWorkabilityId)
+        public async Task<IActionResult> DeletePlotWorkabilityAsync(Guid plotWorkabilityId)
         {
             try
             {
-                PlotWorkability plotWorkability = PlotWorkabilityRepository.GetPlotWorkabilityById(plotWorkabilityId);
+                PlotWorkability plotWorkability = await PlotWorkabilityRepository.GetPlotWorkabilityByIdAsync(plotWorkabilityId);
 
                 if (plotWorkability == null)
                 {
                     return NotFound();
                 }
 
-                PlotWorkabilityRepository.DeletePlotWorkability(plotWorkabilityId);
-                PlotWorkabilityRepository.SaveChanges();
+                await PlotWorkabilityRepository.DeletePlotWorkabilityAsync(plotWorkabilityId);
+                await PlotWorkabilityRepository.SaveChangesAsync();
 
                 return NoContent();
 

@@ -8,16 +8,16 @@ namespace PlotMicroservice.Data.Interfaces
 {
     public interface IPlotRepository
     {
-        List<Plot> GetPlots(string culture = null, string workability = null);
+        Task<List<Plot>> GetPlotsAsync(string culture = null, string workability = null);
 
-        Plot GetPlotById(Guid plotId);
+        Task<Plot> GetPlotByIdAsync(Guid plotId);
 
-        PlotConfirmation CreatePlot(Plot plot);
+        Task<PlotConfirmation> CreatePlotAsync(Plot plot);
 
-        void UpdatePlot(Plot plot);
+        Task UpdatePlotAsync(Plot plot);
 
-        void DeletePlot(Guid plotId);
+        Task DeletePlotAsync(Guid plotId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
     }
 }

@@ -55,9 +55,9 @@ namespace PlotMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<PlotPartDto>> GetPlotParts(string plotPartClass, string plotProtectedZone)
+        public async Task<ActionResult<List<PlotPartDto>>> GetPlotPartsAsync(string plotPartClass, string plotProtectedZone)
         {
-            List<PlotPart> plotParts = PlotPartRepository.GetPlotParts(plotPartClass, plotProtectedZone);
+            List<PlotPart> plotParts = await PlotPartRepository.GetPlotPartsAsync(plotPartClass, plotProtectedZone);
             
             if(plotParts == null || plotParts.Count == 0)
             {
@@ -75,9 +75,9 @@ namespace PlotMicroservice.Controllers
         [HttpGet("{plotPartId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<PlotPartDto> GetPlotPartById(Guid plotPartId)
+        public async Task<ActionResult<PlotPartDto>> GetPlotPartByIdAsync(Guid plotPartId)
         {
-            PlotPart plotPart = PlotPartRepository.GetPlotPartById(plotPartId);
+            PlotPart plotPart = await PlotPartRepository.GetPlotPartByIdAsync(plotPartId);
 
             if(plotPart == null)
             {
@@ -95,9 +95,9 @@ namespace PlotMicroservice.Controllers
         [HttpGet("plot/{plotId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<PlotPartDto>> GetPlotPartsByPlotId(Guid plotId)
+        public async Task<ActionResult<List<PlotPartDto>>> GetPlotPartsByPlotIdAsync(Guid plotId)
         {
-            List<PlotPart> plotParts = PlotPartRepository.GetPlotPartsByPlotId(plotId);
+            List<PlotPart> plotParts = await PlotPartRepository.GetPlotPartsByPlotIdAsync(plotId);
 
             if(plotParts == null)
             {
@@ -131,7 +131,7 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotPartConfirmationDto> CreatePlotPart([FromBody] PlotPartCreationDto plotPartCreation)
+        public async Task<ActionResult<PlotPartConfirmationDto>> CreatePlotPartAsync([FromBody] PlotPartCreationDto plotPartCreation)
         {
             try
             {
@@ -139,9 +139,9 @@ namespace PlotMicroservice.Controllers
 
                 Validator.ValidateAndThrow(plotPart);
                 
-                PlotPartConfirmation plotPartConfirmation = PlotPartRepository.CreatePlotPart(plotPart);
+                PlotPartConfirmation plotPartConfirmation = await PlotPartRepository.CreatePlotPartAsync(plotPart);
 
-                PlotPartRepository.SaveChanges();
+                await PlotPartRepository.SaveChangesAsync();
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotParts", "PlotPart", new { plotPartId = plotPartConfirmation.PlotPartId });
 
@@ -183,11 +183,11 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotPartDto> UpdatePlotPart(PlotPartUpdateDto plotPartUpdate)
+        public async Task<ActionResult<PlotPartDto>> UpdatePlotPartAsync(PlotPartUpdateDto plotPartUpdate)
         {
             try
             {
-                PlotPart existingPlotPart = PlotPartRepository.GetPlotPartById(plotPartUpdate.PlotPartId);
+                PlotPart existingPlotPart = await PlotPartRepository.GetPlotPartByIdAsync(plotPartUpdate.PlotPartId);
 
                 if(existingPlotPart == null)
                 {
@@ -200,7 +200,7 @@ namespace PlotMicroservice.Controllers
                 
                 Mapper.Map(plotPart, existingPlotPart);
 
-                PlotPartRepository.SaveChanges();
+                await PlotPartRepository.SaveChangesAsync();
 
                 return Ok(Mapper.Map<PlotPartDto>(existingPlotPart));
 
@@ -223,19 +223,19 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeletePlotPart(Guid plotPartId)
+        public async Task<IActionResult> DeletePlotPartAsync(Guid plotPartId)
         {
             try
             {
-                PlotPart plotPart = PlotPartRepository.GetPlotPartById(plotPartId);
+                PlotPart plotPart = await PlotPartRepository.GetPlotPartByIdAsync(plotPartId);
 
                 if (plotPart == null)
                 {
                     return NotFound();
                 }
 
-                PlotPartRepository.DeletePlotPart(plotPartId);
-                PlotPartRepository.SaveChanges();
+                await PlotPartRepository.DeletePlotPartAsync(plotPartId);
+                await PlotPartRepository.SaveChangesAsync();
 
                 return NoContent();
 

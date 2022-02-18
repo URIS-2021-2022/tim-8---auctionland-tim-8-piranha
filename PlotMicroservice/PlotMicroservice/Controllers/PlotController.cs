@@ -55,9 +55,9 @@ namespace PlotMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<PlotDto>> GetPlots(string culture, string workability)
+        public async Task<ActionResult<List<PlotDto>>> GetPlotsAsync(string culture, string workability)
         {
-            List<Plot> plots = PlotRepository.GetPlots(culture, workability);
+            List<Plot> plots = await PlotRepository.GetPlotsAsync(culture, workability);
 
             if(plots == null || plots.Count == 0)
             {
@@ -75,9 +75,9 @@ namespace PlotMicroservice.Controllers
         [HttpGet("{plotId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<PlotDto> GetPlotById(Guid plotId)
+        public async Task<ActionResult<PlotDto>> GetPlotByIdAsync(Guid plotId)
         {
-            Plot plot = PlotRepository.GetPlotById(plotId);
+            Plot plot = await PlotRepository.GetPlotByIdAsync(plotId);
 
             if(plot == null)
             {
@@ -111,7 +111,7 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotConfirmationDto> CreatePlot([FromBody] PlotCreationDto plotCreation)
+        public async Task<ActionResult<PlotConfirmationDto>> CreatePlotAsync([FromBody] PlotCreationDto plotCreation)
         {
             try
             {
@@ -119,8 +119,8 @@ namespace PlotMicroservice.Controllers
 
                 Validator.ValidateAndThrow(plot);
                 
-                PlotConfirmation plotConfirmation = PlotRepository.CreatePlot(plot);
-                PlotRepository.SaveChanges();
+                PlotConfirmation plotConfirmation = await PlotRepository.CreatePlotAsync(plot);
+                await PlotRepository.SaveChangesAsync();
 
                 string uri = LinkGenerator.GetPathByAction("GetPlots", "Plot", new { plotId = plotConfirmation.PlotId });
 
@@ -162,11 +162,11 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotDto> UpdatePlot(PlotUpdateDto plotUpdate)
+        public async Task<ActionResult<PlotDto>> UpdatePlotAsync(PlotUpdateDto plotUpdate)
         {
             try
             {
-                Plot existingPlot = PlotRepository.GetPlotById(plotUpdate.PlotId);
+                Plot existingPlot = await PlotRepository.GetPlotByIdAsync(plotUpdate.PlotId);
 
                 if(existingPlot == null)
                 {
@@ -179,7 +179,7 @@ namespace PlotMicroservice.Controllers
 
                 Mapper.Map(plot, existingPlot);
 
-                PlotRepository.SaveChanges();
+                await PlotRepository.SaveChangesAsync();
 
                 return Ok(Mapper.Map<PlotDto>(existingPlot));
 
@@ -202,19 +202,19 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeletePlot(Guid plotId)
+        public async Task<IActionResult> DeletePlotAsync(Guid plotId)
         {
             try
             {
-                Plot plot = PlotRepository.GetPlotById(plotId);
+                Plot plot = await PlotRepository.GetPlotByIdAsync(plotId);
 
                 if(plot == null)
                 {
                     return NotFound();
                 }
 
-                PlotRepository.DeletePlot(plotId);
-                PlotRepository.SaveChanges();
+                await PlotRepository.DeletePlotAsync(plotId);
+                await PlotRepository.SaveChangesAsync();
 
                 return NoContent();
 

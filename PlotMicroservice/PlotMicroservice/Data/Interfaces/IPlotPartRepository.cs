@@ -8,18 +8,18 @@ namespace PlotMicroservice.Data.Interfaces
 {
     public interface IPlotPartRepository
     {
-        List<PlotPart> GetPlotParts(string plotPartCurrentClass = null, string plotPartCurrentProtectedZone = null);
+        Task<List<PlotPart>> GetPlotPartsAsync(string plotPartCurrentClass = null, string plotPartCurrentProtectedZone = null);
 
-        List<PlotPart> GetPlotPartsByPlotId(Guid plotId);
+        Task<List<PlotPart>> GetPlotPartsByPlotIdAsync(Guid plotId);
 
-        PlotPart GetPlotPartById(Guid plotPartId);
+        Task<PlotPart> GetPlotPartByIdAsync(Guid plotPartId);
 
-        PlotPartConfirmation CreatePlotPart(PlotPart plotPart);
+        Task<PlotPartConfirmation> CreatePlotPartAsync(PlotPart plotPart);
 
-        void UpdatePlotPart(PlotPart plotPart);
+        Task UpdatePlotPartAsync(PlotPart plotPart);
 
-        void DeletePlotPart(Guid plotPartId);
+        Task DeletePlotPartAsync(Guid plotPartId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
     }
 }

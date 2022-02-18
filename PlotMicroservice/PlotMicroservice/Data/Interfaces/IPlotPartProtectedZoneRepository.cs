@@ -8,16 +8,16 @@ namespace PlotMicroservice.Data.Interfaces
 {
     public interface IPlotPartProtectedZoneRepository
     {
-        List<PlotPartProtectedZone> GetPlotPartProtectedZones(string protectedZone = null);
+        Task<List<PlotPartProtectedZone>> GetPlotPartProtectedZonesAsync(string protectedZone = null);
 
-        PlotPartProtectedZone GetPlotPartProtectedZoneById(Guid plotPartProtectedZoneId);
+        Task<PlotPartProtectedZone> GetPlotPartProtectedZoneByIdAsync(Guid plotPartProtectedZoneId);
 
-        PlotPartProtectedZoneConfirmation CreatePlotPartProtectedZone(PlotPartProtectedZone plotPartProtectedZone);
+        Task<PlotPartProtectedZoneConfirmation> CreatePlotPartProtectedZoneAsync(PlotPartProtectedZone plotPartProtectedZone);
 
-        void UpdatePlotPartProtectedZone(PlotPartProtectedZone plotPartProtectedZone);
+        Task UpdatePlotPartProtectedZoneAsync(PlotPartProtectedZone plotPartProtectedZone);
 
-        void DeletePlotPartProtectedZone(Guid plotPartProtectedZoneId);
+        Task DeletePlotPartProtectedZoneAsync(Guid plotPartProtectedZoneId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
     }
 }

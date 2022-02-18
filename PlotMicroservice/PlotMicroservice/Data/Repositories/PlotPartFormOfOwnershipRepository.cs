@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using System;
@@ -19,34 +20,36 @@ namespace PlotMicroservice.Data.Repositories
             Mapper = mapper;
         }
 
-        public PlotPartFormOfOwnershipConfirmation CreatPlotPartFormOfOwnership(PlotPartFormOfOwnership plotPartFormOfOwnership)
+        public async Task<PlotPartFormOfOwnershipConfirmation> CreatPlotPartFormOfOwnershipAsync(PlotPartFormOfOwnership plotPartFormOfOwnership)
         {
-            var createdEntity = PlotContext.Add(plotPartFormOfOwnership);
+            var createdEntity = await PlotContext.AddAsync(plotPartFormOfOwnership);
             return Mapper.Map<PlotPartFormOfOwnershipConfirmation>(createdEntity.Entity);
         }
 
-        public void DeletePlotPartFormOfOwnership(Guid plotPartOfOwnershipId)
+        public async Task DeletePlotPartFormOfOwnershipAsync(Guid plotPartOfOwnershipId)
         {
-            var plotPartOfOwnership = GetPlotPartFormOfOwnershipById(plotPartOfOwnershipId);
+            var plotPartOfOwnership = await GetPlotPartFormOfOwnershipByIdAsync(plotPartOfOwnershipId);
             PlotContext.Remove(plotPartOfOwnership);
         }
 
-        public PlotPartFormOfOwnership GetPlotPartFormOfOwnershipById(Guid plotPartOfOwnershipId)
+        public async Task<PlotPartFormOfOwnership> GetPlotPartFormOfOwnershipByIdAsync(Guid plotPartOfOwnershipId)
         {
-            return PlotContext.PlotPartFormOfOwnerships.FirstOrDefault(o => o.PlotPartFormOfOwnershipId == plotPartOfOwnershipId);
+            return await PlotContext.PlotPartFormOfOwnerships.FirstOrDefaultAsync(o => o.PlotPartFormOfOwnershipId == plotPartOfOwnershipId);
         }
 
-        public List<PlotPartFormOfOwnership> GetPlotPartFormOfOwnerships(string formOfOwnership = null)
+        public async Task<List<PlotPartFormOfOwnership>> GetPlotPartFormOfOwnershipsAsync(string formOfOwnership = null)
         {
-            return PlotContext.PlotPartFormOfOwnerships.Where(o => o.FormOfOwnership == formOfOwnership || formOfOwnership == null).ToList();
+            return await PlotContext.PlotPartFormOfOwnerships.Where(o => o.FormOfOwnership == formOfOwnership || formOfOwnership == null).ToListAsync();
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return PlotContext.SaveChanges() > 0;
+            return await PlotContext.SaveChangesAsync() > 0;
         }
 
-        public void UpdatePlotPartFormOfOwnership(PlotPartFormOfOwnership plotPartFormOfOwnership)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task UpdatePlotPartFormOfOwnershipAsync(PlotPartFormOfOwnership plotPartFormOfOwnership)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 
               kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane */

@@ -20,21 +20,21 @@
             <param name="mapper"></param>
             <param name="validator"></param>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.GetPlotCadastralMunicipalities(System.String)">
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.GetPlotCadastralMunicipalitiesAsync(System.String)">
             <summary>
             Getting all instances of cadastral municipality for given filter.
             </summary>
             <param name="cadastrialMunicipality">Plot cadastral municipality (ex. Stari Grad).</param>
             <returns>List of cadastral municipalities.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.GetPlotCadastralMunicipalityById(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.GetPlotCadastralMunicipalityByIdAsync(System.Guid)">
             <summary>
             Getting plot cadastral municipality by given GUID of cadastral municipality as parameter.
             </summary>
             <param name="plotCadastralMunicipalityId"></param>
             <returns>Single plot cadastral municipality.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.CreatePlotCadastralMunicipality(PlotMicroservice.Models.PlotCadastralMunicipalityCreationDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.CreatePlotCadastralMunicipalityAsync(PlotMicroservice.Models.PlotCadastralMunicipalityCreationDto)">
             <summary>
             Creating new plot cadastral municipality.
             </summary>
@@ -48,7 +48,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.UpdatePlotCadastralMunicipality(PlotMicroservice.Models.PlotCadastralMunicipalityUpdateDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.UpdatePlotCadastralMunicipalityAsync(PlotMicroservice.Models.PlotCadastralMunicipalityUpdateDto)">
             <summary>
             Updating existing plot cadastral municipality by given GUID. 
             </summary>
@@ -63,7 +63,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.DeletePlotCadastralMunicipality(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.DeletePlotCadastralMunicipalityAsync(System.Guid)">
             <summary>
             Deleting plot cadastral municipality by given GUID.
             </summary>
@@ -92,7 +92,7 @@
             <param name="linkGenerator"></param>
             <param name="validator"></param>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotController.GetPlots(System.String,System.String)">
+        <member name="M:PlotMicroservice.Controllers.PlotController.GetPlotsAsync(System.String,System.String)">
             <summary>
             Getting all instances of plot for given filter/s.
             </summary>
@@ -100,14 +100,14 @@
             <param name="workability">Workability (ex. Obradivo)</param>
             <returns>List of plots.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotController.GetPlotById(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotController.GetPlotByIdAsync(System.Guid)">
             <summary>
             Getting plot by given GUID of plot as parameter.
             </summary>
             <param name="plotId"></param>
             <returns>Single plot.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotController.CreatePlot(PlotMicroservice.Models.PlotModel.PlotCreationDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotController.CreatePlotAsync(PlotMicroservice.Models.PlotModel.PlotCreationDto)">
             <summary>
             Creating new plot.
             </summary>
@@ -128,7 +128,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotController.UpdatePlot(PlotMicroservice.Models.PlotModel.PlotUpdateDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotController.UpdatePlotAsync(PlotMicroservice.Models.PlotModel.PlotUpdateDto)">
             <summary>
             Updating existing plot by given GUID.
             </summary>
@@ -150,7 +150,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotController.DeletePlot(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotController.DeletePlotAsync(System.Guid)">
             <summary>
             Deleting plot by given GUID.
             </summary>
@@ -179,21 +179,21 @@
             <param name="linkGenerator"></param>
             <param name="validator"></param>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCultureController.GetPlotCultures(System.String)">
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.GetPlotCulturesAsync(System.String)">
             <summary>
             Getting all instances of plot cultures for given filter.
             </summary>
             <param name="plotCulture">Plot culture (ex. Voćnjaci)</param>
             <returns>List of plot cultures.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCultureController.GetPlotCultureById(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.GetPlotCultureByIdAsync(System.Guid)">
             <summary>
             Getting plot culture by given GUID of plot culture as parameter.
             </summary>
             <param name="plotCultureId"></param>
             <returns>Single plot culture.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCultureController.CreatePlotCulture(PlotMicroservice.Models.PlotCultureModel.PlotCultureCreationDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.CreatePlotCultureAsync(PlotMicroservice.Models.PlotCultureModel.PlotCultureCreationDto)">
             <summary>
             Creating new plot culture.
             </summary>
@@ -207,7 +207,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCultureController.UpdatePlotCulture(PlotMicroservice.Models.PlotCultureModel.PlotCultureUpdateDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.UpdatePlotCultureAsync(PlotMicroservice.Models.PlotCultureModel.PlotCultureUpdateDto)">
             <summary>
             Updating existing plot culuture by given GUID.
             </summary>
@@ -222,7 +222,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCultureController.DeletePlotCulture(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.DeletePlotCultureAsync(System.Guid)">
             <summary>
             Deleting plot culture by given GUID.
             </summary>
@@ -251,21 +251,21 @@
             <param name="linkGenerator"></param>
             <param name="validator"></param>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.GetPlotPartClasses(System.String)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.GetPlotPartClassesAsync(System.String)">
             <summary>
             Getting all instances of plot part classes for given filter.
             </summary>
             <param name="plotPartClass">Plot part class (ex. II)</param>
             <returns>List of plot part classes.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.GetPlotPartClassById(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.GetPlotPartClassByIdAsync(System.Guid)">
             <summary>
             Getting plot part class by given GUID of plot part class as parameter.
             </summary>
             <param name="plotPartClassId"></param>
             <returns>Single plot part class.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.CreatePlotPartClass(PlotMicroservice.Models.PlotPartClassModel.PlotPartClassCreationDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.CreatePlotPartClassAsync(PlotMicroservice.Models.PlotPartClassModel.PlotPartClassCreationDto)">
             <summary>
             Creating new plot part class.
             </summary>
@@ -279,7 +279,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.UpdatePlotPartClass(PlotMicroservice.Models.PlotPartClassModel.PlotPartClassUpdateDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.UpdatePlotPartClassAsync(PlotMicroservice.Models.PlotPartClassModel.PlotPartClassUpdateDto)">
             <summary>
             Updating existing plot part class by given GUID.
             </summary>
@@ -294,7 +294,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.DeletePlotPartClass(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.DeletePlotPartClassAsync(System.Guid)">
             <summary>
             Deleting plot part class by given GUID.
             </summary>
@@ -323,7 +323,7 @@
             <param name="linkGenerator"></param>
             <param name="validator"></param>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotParts(System.String,System.String)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartsAsync(System.String,System.String)">
             <summary>
             Getting all instances of plot parts for given filter/s.
             </summary>
@@ -331,21 +331,21 @@
             <param name="plotProtectedZone">Plot part protected zone (ex. 4)</param>
             <returns>List of plot parts.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartById(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartByIdAsync(System.Guid)">
             <summary>
             Getting plot part by given GUID of plot part as parameter.
             </summary>
             <param name="plotPartId"></param>
             <returns>Single plot part.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartsByPlotId(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartsByPlotIdAsync(System.Guid)">
             <summary>
             Getting plot parts by given GUID of plot as parameter.
             </summary>
             <param name="plotId"></param>
             <returns>List of plot parts.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartController.CreatePlotPart(PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.CreatePlotPartAsync(PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto)">
             <summary>
             Creating new plot part.
             </summary>
@@ -366,7 +366,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartController.UpdatePlotPart(PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.UpdatePlotPartAsync(PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto)">
             <summary>
             Updating existing plot part by given GUID.
             </summary>
@@ -388,7 +388,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartController.DeletePlotPart(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.DeletePlotPartAsync(System.Guid)">
             <summary>
              Deleting plot part by given GUID.
             </summary>
@@ -417,21 +417,21 @@
             <param name="linkGenerator"></param>
             <param name="validator"></param>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.GetPlotPartFormOfOwnerships(System.String)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.GetPlotPartFormOfOwnershipsAsync(System.String)">
             <summary>
             Getting all instances of plot part form of ownerships for given filter.
             </summary>
             <param name="formOfOwnership">Plot part form of ownership (ex. Privatna svojina)</param>
             <returns>List of plot part form of onwerships.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.GetPlotPartFormOfOwnershipById(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.GetPlotPartFormOfOwnershipByIdAsync(System.Guid)">
             <summary>
             Getting plot part form of ownership by given GUID of plot part form of ownership as parameter.
             </summary>
             <param name="plotPartFormOfOwnershipId"></param>
             <returns>Single plot part form of ownership.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.CreatPlotPartFormOfOwnership(PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipCreationDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.CreatPlotPartFormOfOwnershipAsync(PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipCreationDto)">
              <summary>
              Creating new plot part form of ownership.
              </summary>
@@ -446,7 +446,7 @@
             
              </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.UpdatePlotPartFormOfOwnership(PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipUpdateDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.UpdatePlotPartFormOfOwnershipAsync(PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipUpdateDto)">
             <summary>
             Updating existing plot part form of ownership by given GUID.
             </summary>
@@ -461,7 +461,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.DeletePlotPartFormOfOwnership(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.DeletePlotPartFormOfOwnershipAsync(System.Guid)">
             <summary>
             Deleting plot part form of ownership by given GUID.
             </summary>
@@ -490,21 +490,21 @@
             <param name="linkGenerator"></param>
             <param name="validator"></param>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.GetPlotPartProtectedZones(System.String)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.GetPlotPartProtectedZonesAsync(System.String)">
             <summary>
             Getting all instances of plot part protected zones for given filter.
             </summary>
             <param name="protectedZone">Protected zone (ex. 3)</param>
             <returns>List of plot part protected zones.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.GetPlotPartProtectedZoneById(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.GetPlotPartProtectedZoneByIdAsync(System.Guid)">
             <summary>
             Getting plot part protected zone by given GUID of plot part protected zone as parameter.
             </summary>
             <param name="plotPartProtectedZoneId"></param>
             <returns>Single plot part protected zone.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.CreatePlotPartProtectedZone(PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneCreationDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.CreatePlotPartProtectedZoneAsync(PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneCreationDto)">
             <summary>
             Creating new plot part protected zone.
             </summary>
@@ -518,7 +518,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.UpdatePlotPartProtectedZone(PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneUpdateDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.UpdatePlotPartProtectedZoneAsync(PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneUpdateDto)">
             <summary>
             Updating existing plot part protected zone by given GUID.
             </summary>
@@ -533,7 +533,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.DeletePlotPartProtectedZone(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.DeletePlotPartProtectedZoneAsync(System.Guid)">
             <summary>
             Deleting plot part protected zone by given GUID.
             </summary>
@@ -562,21 +562,21 @@
             <param name="linkGenerator"></param>
             <param name="validator"></param>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.GetPlotWorkabilities(System.String)">
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.GetPlotWorkabilitiesAsync(System.String)">
             <summary>
             Getting all instances of plot workabilities for given filter.
             </summary>
             <param name="workability">Workability (ex. Obradivo)</param>
             <returns>List of plot workabilities.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.GetPlotWorkabilityId(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.GetPlotWorkabilityIdAsync(System.Guid)">
             <summary>
             Getting plot workability by given GUID of plot workability as parameter.
             </summary>
             <param name="plotWorkabilityId"></param>
             <returns>Single plot workability.</returns>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.CreatePlotWorkability(PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityCreationDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.CreatePlotWorkabilityAsync(PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityCreationDto)">
             <summary>
             Creating new plot workability.
             </summary>
@@ -590,7 +590,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.UpdatePlotWorkability(PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityUpdateDto)">
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.UpdatePlotWorkabilityAsync(PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityUpdateDto)">
             <summary>
             Updating existing plot workability by given GUID.
             </summary>
@@ -605,7 +605,7 @@
             }
             </remarks>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.DeletePlotWorkability(System.Guid)">
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.DeletePlotWorkabilityAsync(System.Guid)">
             <summary>
             Deleting plot workability by given GUID.
             </summary>

@@ -54,9 +54,9 @@ namespace PlotMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<PlotPartProtectedZoneDto>> GetPlotPartProtectedZones(string protectedZone)
+        public async Task<ActionResult<List<PlotPartProtectedZoneDto>>> GetPlotPartProtectedZonesAsync(string protectedZone)
         {
-            List<PlotPartProtectedZone> plotPartProtectedZones = PlotPartProtectedZoneRepository.GetPlotPartProtectedZones(protectedZone);
+            List<PlotPartProtectedZone> plotPartProtectedZones = await PlotPartProtectedZoneRepository.GetPlotPartProtectedZonesAsync(protectedZone);
 
             if(plotPartProtectedZones == null || plotPartProtectedZones.Count == 0)
             {
@@ -74,9 +74,9 @@ namespace PlotMicroservice.Controllers
         [HttpGet("{plotPartProtectedZoneId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<PlotPartProtectedZoneDto> GetPlotPartProtectedZoneById(Guid plotPartProtectedZoneId)
+        public async Task<ActionResult<PlotPartProtectedZoneDto>> GetPlotPartProtectedZoneByIdAsync(Guid plotPartProtectedZoneId)
         {
-            PlotPartProtectedZone plotPartProtectedZone = PlotPartProtectedZoneRepository.GetPlotPartProtectedZoneById(plotPartProtectedZoneId);
+            PlotPartProtectedZone plotPartProtectedZone = await PlotPartProtectedZoneRepository.GetPlotPartProtectedZoneByIdAsync(plotPartProtectedZoneId);
 
             if(plotPartProtectedZone == null)
             {
@@ -103,7 +103,7 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotPartProtectedZoneConfirmationDto> CreatePlotPartProtectedZone([FromBody] PlotPartProtectedZoneCreationDto plotPartProtectedZoneCreation)
+        public async Task<ActionResult<PlotPartProtectedZoneConfirmationDto>> CreatePlotPartProtectedZoneAsync([FromBody] PlotPartProtectedZoneCreationDto plotPartProtectedZoneCreation)
         {
             try
             {
@@ -111,8 +111,8 @@ namespace PlotMicroservice.Controllers
 
                 Validator.ValidateAndThrow(plotPartProtectedZone);
                 
-                PlotPartProtectedZoneConfirmation plotPartProtectedZoneConfirmation = PlotPartProtectedZoneRepository.CreatePlotPartProtectedZone(plotPartProtectedZone);
-                PlotPartProtectedZoneRepository.SaveChanges();
+                PlotPartProtectedZoneConfirmation plotPartProtectedZoneConfirmation = await PlotPartProtectedZoneRepository.CreatePlotPartProtectedZoneAsync(plotPartProtectedZone);
+                await PlotPartProtectedZoneRepository.SaveChangesAsync();
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotPartProtectedZones", "PlotPartProtecedZone", new { plotPartProtectedZoneId = plotPartProtectedZoneConfirmation.PlotPartProtectedZoneId});
 
@@ -147,11 +147,11 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotPartProtectedZoneDto> UpdatePlotPartProtectedZone(PlotPartProtectedZoneUpdateDto plotPartProtectedZoneUpdate)
+        public async Task<ActionResult<PlotPartProtectedZoneDto>> UpdatePlotPartProtectedZoneAsync(PlotPartProtectedZoneUpdateDto plotPartProtectedZoneUpdate)
         {
             try
             {
-                PlotPartProtectedZone existingPlotPartProtectedZone = PlotPartProtectedZoneRepository.GetPlotPartProtectedZoneById(plotPartProtectedZoneUpdate.PlotPartProtectedZoneId);
+                PlotPartProtectedZone existingPlotPartProtectedZone = await PlotPartProtectedZoneRepository.GetPlotPartProtectedZoneByIdAsync(plotPartProtectedZoneUpdate.PlotPartProtectedZoneId);
 
                 if(existingPlotPartProtectedZone == null)
                 {
@@ -164,7 +164,7 @@ namespace PlotMicroservice.Controllers
                 
                 Mapper.Map(plotPartProtectedZone, existingPlotPartProtectedZone);
 
-                PlotPartProtectedZoneRepository.SaveChanges();
+                await PlotPartProtectedZoneRepository.SaveChangesAsync();
 
                 return Ok(Mapper.Map<PlotPartProtectedZoneDto>(existingPlotPartProtectedZone));
 
@@ -187,19 +187,19 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeletePlotPartProtectedZone(Guid plotPartProtectedZoneId)
+        public async Task<IActionResult> DeletePlotPartProtectedZoneAsync(Guid plotPartProtectedZoneId)
         {
             try
             {
-                PlotPartProtectedZone plotPartProtectedZone = PlotPartProtectedZoneRepository.GetPlotPartProtectedZoneById(plotPartProtectedZoneId);
+                PlotPartProtectedZone plotPartProtectedZone = await PlotPartProtectedZoneRepository.GetPlotPartProtectedZoneByIdAsync(plotPartProtectedZoneId);
 
                 if (plotPartProtectedZone == null)
                 {
                     return NotFound();
                 }
 
-                PlotPartProtectedZoneRepository.DeletePlotPartProtectedZone(plotPartProtectedZoneId);
-                PlotPartProtectedZoneRepository.SaveChanges();
+                await PlotPartProtectedZoneRepository.DeletePlotPartProtectedZoneAsync(plotPartProtectedZoneId);
+                await PlotPartProtectedZoneRepository.SaveChangesAsync();
 
                 return NoContent();
 

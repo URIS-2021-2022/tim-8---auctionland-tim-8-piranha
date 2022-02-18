@@ -54,9 +54,9 @@ namespace PlotMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<PlotPartFormOfOwnershipDto>> GetPlotPartFormOfOwnerships(string formOfOwnership)
+        public async Task<ActionResult<List<PlotPartFormOfOwnershipDto>>> GetPlotPartFormOfOwnershipsAsync(string formOfOwnership)
         {
-            List<PlotPartFormOfOwnership> plotPartFormOfOwnerships = PlotPartFormOfOwnershipRepository.GetPlotPartFormOfOwnerships(formOfOwnership);
+            List<PlotPartFormOfOwnership> plotPartFormOfOwnerships = await PlotPartFormOfOwnershipRepository.GetPlotPartFormOfOwnershipsAsync(formOfOwnership);
 
             if(plotPartFormOfOwnerships == null || plotPartFormOfOwnerships.Count == 0)
             {
@@ -74,9 +74,9 @@ namespace PlotMicroservice.Controllers
         [HttpGet("{plotPartFormOfOwnershipId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<PlotPartFormOfOwnershipDto> GetPlotPartFormOfOwnershipById(Guid plotPartFormOfOwnershipId)
+        public async Task<ActionResult<PlotPartFormOfOwnershipDto>> GetPlotPartFormOfOwnershipByIdAsync(Guid plotPartFormOfOwnershipId)
         {
-            PlotPartFormOfOwnership plotPartFormOfOwnership = PlotPartFormOfOwnershipRepository.GetPlotPartFormOfOwnershipById(plotPartFormOfOwnershipId);
+            PlotPartFormOfOwnership plotPartFormOfOwnership = await PlotPartFormOfOwnershipRepository.GetPlotPartFormOfOwnershipByIdAsync(plotPartFormOfOwnershipId);
 
             if(plotPartFormOfOwnership == null)
             {
@@ -104,7 +104,7 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotPartFormOfOwnershipConfirmationDto> CreatPlotPartFormOfOwnership([FromBody] PlotPartFormOfOwnershipCreationDto plotPartFormOfOwnershipCreation)
+        public async Task<ActionResult<PlotPartFormOfOwnershipConfirmationDto>> CreatPlotPartFormOfOwnershipAsync([FromBody] PlotPartFormOfOwnershipCreationDto plotPartFormOfOwnershipCreation)
         {
             try
             {
@@ -112,8 +112,8 @@ namespace PlotMicroservice.Controllers
 
                 Validator.ValidateAndThrow(plotPartFormOfOwnership);
 
-                PlotPartFormOfOwnershipConfirmation plotPartFormOfOwnershipConfirmation = PlotPartFormOfOwnershipRepository.CreatPlotPartFormOfOwnership(plotPartFormOfOwnership);
-                PlotPartFormOfOwnershipRepository.SaveChanges();
+                PlotPartFormOfOwnershipConfirmation plotPartFormOfOwnershipConfirmation = await PlotPartFormOfOwnershipRepository.CreatPlotPartFormOfOwnershipAsync(plotPartFormOfOwnership);
+                await PlotPartFormOfOwnershipRepository.SaveChangesAsync();
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotPartFormOfOwnerships", "PlotPartFormOfOwnership", new { plotPartFormOfOwnershipId = plotPartFormOfOwnershipConfirmation.PlotPartFormOfOwnershipId });
 
@@ -148,11 +148,11 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotPartFormOfOwnershipDto> UpdatePlotPartFormOfOwnership(PlotPartFormOfOwnershipUpdateDto plotPartFormOfOwnershipUpdate)
+        public async Task<ActionResult<PlotPartFormOfOwnershipDto>> UpdatePlotPartFormOfOwnershipAsync(PlotPartFormOfOwnershipUpdateDto plotPartFormOfOwnershipUpdate)
         {
             try
             {
-                PlotPartFormOfOwnership existingPlotPartFormOfOwnership = PlotPartFormOfOwnershipRepository.GetPlotPartFormOfOwnershipById(plotPartFormOfOwnershipUpdate.PlotPartFormOfOwnershipId);
+                PlotPartFormOfOwnership existingPlotPartFormOfOwnership = await PlotPartFormOfOwnershipRepository.GetPlotPartFormOfOwnershipByIdAsync(plotPartFormOfOwnershipUpdate.PlotPartFormOfOwnershipId);
 
                 if(existingPlotPartFormOfOwnership == null)
                 {
@@ -165,7 +165,7 @@ namespace PlotMicroservice.Controllers
                 
                 Mapper.Map(plotPartFormOfOwnership, existingPlotPartFormOfOwnership);
 
-                PlotPartFormOfOwnershipRepository.SaveChanges();
+                await PlotPartFormOfOwnershipRepository.SaveChangesAsync();
 
                 return Ok(Mapper.Map<PlotPartFormOfOwnershipDto>(existingPlotPartFormOfOwnership));
 
@@ -188,19 +188,19 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeletePlotPartFormOfOwnership(Guid plotPartFormOfOwnershipId)
+        public async Task<IActionResult> DeletePlotPartFormOfOwnershipAsync(Guid plotPartFormOfOwnershipId)
         {
             try
             {
-                PlotPartFormOfOwnership plotPartFormOfOwnership = PlotPartFormOfOwnershipRepository.GetPlotPartFormOfOwnershipById(plotPartFormOfOwnershipId);
+                PlotPartFormOfOwnership plotPartFormOfOwnership = await PlotPartFormOfOwnershipRepository.GetPlotPartFormOfOwnershipByIdAsync(plotPartFormOfOwnershipId);
 
                 if(plotPartFormOfOwnership == null)
                 {
                     return NotFound();
                 }
 
-                PlotPartFormOfOwnershipRepository.DeletePlotPartFormOfOwnership(plotPartFormOfOwnershipId);
-                PlotPartFormOfOwnershipRepository.SaveChanges();
+                await PlotPartFormOfOwnershipRepository.DeletePlotPartFormOfOwnershipAsync(plotPartFormOfOwnershipId);
+                await PlotPartFormOfOwnershipRepository.SaveChangesAsync();
 
                 return NoContent();
 

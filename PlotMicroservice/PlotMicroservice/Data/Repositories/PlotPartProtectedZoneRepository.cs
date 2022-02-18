@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using System;
@@ -19,34 +20,36 @@ namespace PlotMicroservice.Data.Repositories
             Mapper = mapper;
         }
 
-        public PlotPartProtectedZoneConfirmation CreatePlotPartProtectedZone(PlotPartProtectedZone plotPartProtectedZone)
+        public async Task<PlotPartProtectedZoneConfirmation> CreatePlotPartProtectedZoneAsync(PlotPartProtectedZone plotPartProtectedZone)
         {
-            var createdEntity = PlotContext.Add(plotPartProtectedZone);
+            var createdEntity = await PlotContext.AddAsync(plotPartProtectedZone);
             return Mapper.Map<PlotPartProtectedZoneConfirmation>(createdEntity.Entity);
         }
 
-        public void DeletePlotPartProtectedZone(Guid plotPartProtectedZoneId)
+        public async Task DeletePlotPartProtectedZoneAsync(Guid plotPartProtectedZoneId)
         {
-            var plotPartProtectedZone = GetPlotPartProtectedZoneById(plotPartProtectedZoneId);
+            var plotPartProtectedZone = await GetPlotPartProtectedZoneByIdAsync(plotPartProtectedZoneId);
             PlotContext.Remove(plotPartProtectedZone);
         }
 
-        public PlotPartProtectedZone GetPlotPartProtectedZoneById(Guid plotPartProtectedZoneId)
+        public async Task<PlotPartProtectedZone> GetPlotPartProtectedZoneByIdAsync(Guid plotPartProtectedZoneId)
         {
-            return PlotContext.PlotPartProtectedZones.FirstOrDefault(o => o.PlotPartProtectedZoneId == plotPartProtectedZoneId);
+            return await PlotContext.PlotPartProtectedZones.FirstOrDefaultAsync(o => o.PlotPartProtectedZoneId == plotPartProtectedZoneId);
         }
 
-        public List<PlotPartProtectedZone> GetPlotPartProtectedZones(string protectedZone = null)
+        public async Task<List<PlotPartProtectedZone>> GetPlotPartProtectedZonesAsync(string protectedZone = null)
         {
-            return PlotContext.PlotPartProtectedZones.Where(o => o.ProtectedZone == protectedZone || protectedZone == null).ToList();
+            return await PlotContext.PlotPartProtectedZones.Where(o => o.ProtectedZone == protectedZone || protectedZone == null).ToListAsync();
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return PlotContext.SaveChanges() > 0;
+            return await PlotContext.SaveChangesAsync() > 0;
         }
 
-        public void UpdatePlotPartProtectedZone(PlotPartProtectedZone plotPartProtectedZone)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task UpdatePlotPartProtectedZoneAsync(PlotPartProtectedZone plotPartProtectedZone)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 
               kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane */

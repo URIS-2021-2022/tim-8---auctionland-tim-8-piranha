@@ -54,9 +54,9 @@ namespace PlotMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<PlotCultureDto>> GetPlotCultures(string plotCulture)
+        public async Task<ActionResult<List<PlotCultureDto>>> GetPlotCulturesAsync(string plotCulture)
         {
-            List<PlotCulture> plotCultures = PlotCultureRepository.GetPlotCultures(plotCulture);
+            List<PlotCulture> plotCultures = await PlotCultureRepository.GetPlotCulturesAsync(plotCulture);
             
             if(plotCultures == null || plotCultures.Count == 0)
             {
@@ -74,9 +74,9 @@ namespace PlotMicroservice.Controllers
         [HttpGet("{plotCultureId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<PlotCultureDto> GetPlotCultureById(Guid plotCultureId)
+        public async Task<ActionResult<PlotCultureDto>> GetPlotCultureByIdAsync(Guid plotCultureId)
         {
-            PlotCulture plotCulture = PlotCultureRepository.GetPlotCultureById(plotCultureId);
+            PlotCulture plotCulture = await PlotCultureRepository.GetPlotCultureByIdAsync(plotCultureId);
 
             if(plotCulture == null)
             {
@@ -103,7 +103,7 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotCultureConfirmationDto> CreatePlotCulture([FromBody] PlotCultureCreationDto plotCultureCreation)
+        public async Task<ActionResult<PlotCultureConfirmationDto>> CreatePlotCultureAsync([FromBody] PlotCultureCreationDto plotCultureCreation)
         {
             try
             {
@@ -112,9 +112,9 @@ namespace PlotMicroservice.Controllers
 
                 Validator.ValidateAndThrow(plotCulture);
 
-                PlotCultureConfirmation plotCultureConfirmation = PlotCultureRepository.CreatePlotCulture(plotCulture);
+                PlotCultureConfirmation plotCultureConfirmation = await PlotCultureRepository.CreatePlotCultureAsync(plotCulture);
                 
-                PlotCultureRepository.SaveChanges();
+                await PlotCultureRepository.SaveChangesAsync();
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotCultures", "PlotCulture", new { plotCultureId = plotCultureConfirmation.PlotCultureId });
 
@@ -149,12 +149,12 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PlotCultureDto> UpdatePlotCulture(PlotCultureUpdateDto plotCultureUpdate)
+        public async Task<ActionResult<PlotCultureDto>> UpdatePlotCultureAsync(PlotCultureUpdateDto plotCultureUpdate)
         {
             try
             {
 
-                PlotCulture existingPlotCulture = PlotCultureRepository.GetPlotCultureById(plotCultureUpdate.PlotCultureId);
+                PlotCulture existingPlotCulture = await PlotCultureRepository.GetPlotCultureByIdAsync(plotCultureUpdate.PlotCultureId);
 
                 if (existingPlotCulture == null)
                 {
@@ -167,7 +167,7 @@ namespace PlotMicroservice.Controllers
 
                 Mapper.Map(plotCulture, existingPlotCulture);
 
-                PlotCultureRepository.SaveChanges();
+                await PlotCultureRepository.SaveChangesAsync();
 
                 return Ok(Mapper.Map<PlotCultureDto>(existingPlotCulture));
 
@@ -190,19 +190,19 @@ namespace PlotMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeletePlotCulture(Guid plotCultureId)
+        public async Task<IActionResult> DeletePlotCultureAsync(Guid plotCultureId)
         {
             try
             {
-                PlotCulture plotCulture = PlotCultureRepository.GetPlotCultureById(plotCultureId);
+                PlotCulture plotCulture = await PlotCultureRepository.GetPlotCultureByIdAsync(plotCultureId);
 
                 if (plotCulture == null)
                 {
                     return NotFound();
                 }
 
-                PlotCultureRepository.DeletePlotCulture(plotCultureId);
-                PlotCultureRepository.SaveChanges();
+                await PlotCultureRepository.DeletePlotCultureAsync(plotCultureId);
+                await PlotCultureRepository.SaveChangesAsync();
 
                 return NoContent();
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Entities;
 using System;
@@ -19,34 +20,36 @@ namespace PlotMicroservice.Data.Repositories
             Mapper = mapper;
         }
 
-        public PlotConfirmation CreatePlot(Plot plot)
+        public async Task<PlotConfirmation> CreatePlotAsync(Plot plot)
         {
-            var createdEntity = PlotContext.Add(plot);
+            var createdEntity = await PlotContext.AddAsync(plot);
             return Mapper.Map<PlotConfirmation>(createdEntity.Entity);
         }
 
-        public void DeletePlot(Guid plotId)
+        public async Task DeletePlotAsync(Guid plotId)
         {
-            var plot = GetPlotById(plotId);
+            var plot = await GetPlotByIdAsync(plotId);
             PlotContext.Remove(plot);
         }
 
-        public Plot GetPlotById(Guid plotId)
+        public async Task<Plot> GetPlotByIdAsync(Guid plotId)
         {
-            return PlotContext.Plots.FirstOrDefault(o => o.PlotId == plotId);
+            return await PlotContext.Plots.FirstOrDefaultAsync(o => o.PlotId == plotId);
         }
 
-        public List<Plot> GetPlots(string culture = null, string workability = null)
+        public async Task<List<Plot>> GetPlotsAsync(string culture = null, string workability = null)
         {
-            return PlotContext.Plots.Where(o => (o.PlotCurrentCulture == culture || culture == null) && (o.PlotCurrentWorkability == workability || workability == null)).ToList();
+            return await PlotContext.Plots.Where(o => (o.PlotCurrentCulture == culture || culture == null) && (o.PlotCurrentWorkability == workability || workability == null)).ToListAsync();
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return PlotContext.SaveChanges() > 0;
+            return await PlotContext.SaveChangesAsync() > 0;
         }
 
-        public void UpdatePlot(Plot plot)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task UpdatePlotAsync(Plot plot)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 
               kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane */
