@@ -8,8 +8,8 @@ namespace PublicBidding.Data
 {
     public interface IStatusRepository
     {
-        List<Status> GetStatuses();
+        Task<List<Status>> GetStatuses();
 
-        Status GetStatusById(Guid statusId);
+        Task<Status> GetStatusById(Guid statusId);
     }
 }

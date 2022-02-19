@@ -1,4 +1,5 @@
-﻿using PublicBidding.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PublicBidding.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,14 @@ namespace PublicBidding.Data
             this.context = context;
         }
 
-        public Entities.Type GetTypeById(Guid typeId)
+        public async Task<Entities.Type> GetTypeById(Guid typeId)
         {
-            return context.Types.FirstOrDefault(e => e.TypeId == typeId);
+            return await context.Types.FirstOrDefaultAsync(e => e.TypeId == typeId);
         }
 
-        public List<Entities.Type> GetTypes()
+        public async Task<List<Entities.Type>> GetTypes()
         {
-            return context.Types.ToList();
+            return await context.Types.ToListAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PublicBidding.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,14 @@ namespace PublicBidding.Data
             this.context = context;
         }
 
-        public Status GetStatusById(Guid statusId)
+        public async Task<Status> GetStatusById(Guid statusId)
         {
-            return context.Statuses.FirstOrDefault(e => e.StatusId == statusId);
+            return await context.Statuses.FirstOrDefaultAsync(s => s.StatusId == statusId);
         }
 
-        public List<Status> GetStatuses()
+        public async Task<List<Status>> GetStatuses()
         {
-            return context.Statuses.ToList();
+            return await context.Statuses.ToListAsync();
         }
     }
 }
