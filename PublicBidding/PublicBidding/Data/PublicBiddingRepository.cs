@@ -41,34 +41,43 @@ namespace PublicBidding.Data
             List<Guid> buyers = publicBidding.Bidders;
             List<Guid> plotParts = publicBidding.Plots;
 
-            foreach (var authorizedPersonId in authorizedPersons)
+            if(authorizedPersons != null)
             {
-                var publicBiddingAuthorizedPerson = new PublicBiddingAuthorizedPerson
+                foreach (var authorizedPersonId in authorizedPersons)
                 {
-                    PublicBiddingId = publicBidding.PublicBiddingId,
-                    AuthorizedPersonId = authorizedPersonId
-                };
-                await context.PublicBiddingAuthorizedPerson.AddAsync(publicBiddingAuthorizedPerson);
+                    var publicBiddingAuthorizedPerson = new PublicBiddingAuthorizedPerson
+                    {
+                        PublicBiddingId = publicBidding.PublicBiddingId,
+                        AuthorizedPersonId = authorizedPersonId
+                    };
+                    await context.PublicBiddingAuthorizedPerson.AddAsync(publicBiddingAuthorizedPerson);
+                }
             }
-    
-            foreach (var buyerId in buyers)
+            
+            if(buyers != null)
             {
-                var publicBiddingBuyer = new PublicBiddingBuyer
+                foreach (var buyerId in buyers)
                 {
-                    PublicBiddingId = publicBidding.PublicBiddingId,
-                    BuyerId = buyerId
-                };
-                await context.PublicBiddingBuyer.AddAsync(publicBiddingBuyer);
+                    var publicBiddingBuyer = new PublicBiddingBuyer
+                    {
+                        PublicBiddingId = publicBidding.PublicBiddingId,
+                        BuyerId = buyerId
+                    };
+                    await context.PublicBiddingBuyer.AddAsync(publicBiddingBuyer);
+                }
             }
 
-            foreach (var plotPartId in plotParts)
+            if(plotParts != null)
             {
-                var publicBiddingPlotPart = new PublicBiddingPlotPart
+                foreach (var plotPartId in plotParts)
                 {
-                    PublicBiddingId = publicBidding.PublicBiddingId,
-                    PlotPartId = plotPartId
-                };
-                await context.PublicBiddingPlotPart.AddAsync(publicBiddingPlotPart);
+                    var publicBiddingPlotPart = new PublicBiddingPlotPart
+                    {
+                        PublicBiddingId = publicBidding.PublicBiddingId,
+                        PlotPartId = plotPartId
+                    };
+                    await context.PublicBiddingPlotPart.AddAsync(publicBiddingPlotPart);
+                }
             }
 
             var createdEntity = await context.PublicBiddings.AddAsync(publicBidding);
@@ -96,7 +105,7 @@ namespace PublicBidding.Data
             return publicBidding;
         }
 
-        public async Task<List<Entities.PublicBidding>> GetPublicBiddings(int numberOfApplicants = 0, Type type = null, Status status = null)
+        public async Task<List<Entities.PublicBidding>> GetPublicBiddings()
         {
             var publicBiddings = await context.PublicBiddings.Include(s => s.Status).Include(t => t.Type)
                 .ToListAsync();
@@ -126,34 +135,43 @@ namespace PublicBidding.Data
             List<Guid> buyers = publicBidding.Bidders;
             List<Guid> plotParts = publicBidding.Plots;
 
-            foreach (var authorizedPersonId in authorizedPersons)
+            if (authorizedPersons != null)
             {
-                var publicBiddingAuthorizedPerson = new PublicBiddingAuthorizedPerson
+                foreach (var authorizedPersonId in authorizedPersons)
                 {
-                    PublicBiddingId = publicBidding.PublicBiddingId,
-                    AuthorizedPersonId = authorizedPersonId
-                };
-                await context.PublicBiddingAuthorizedPerson.AddAsync(publicBiddingAuthorizedPerson);
+                    var publicBiddingAuthorizedPerson = new PublicBiddingAuthorizedPerson
+                    {
+                        PublicBiddingId = publicBidding.PublicBiddingId,
+                        AuthorizedPersonId = authorizedPersonId
+                    };
+                    await context.PublicBiddingAuthorizedPerson.AddAsync(publicBiddingAuthorizedPerson);
+                }
             }
 
-            foreach (var buyerId in buyers)
+            if (buyers != null)
             {
-                var publicBiddingBuyer = new PublicBiddingBuyer
+                foreach (var buyerId in buyers)
                 {
-                    PublicBiddingId = publicBidding.PublicBiddingId,
-                    BuyerId = buyerId
-                };
-                await context.PublicBiddingBuyer.AddAsync(publicBiddingBuyer);
+                    var publicBiddingBuyer = new PublicBiddingBuyer
+                    {
+                        PublicBiddingId = publicBidding.PublicBiddingId,
+                        BuyerId = buyerId
+                    };
+                    await context.PublicBiddingBuyer.AddAsync(publicBiddingBuyer);
+                }
             }
 
-            foreach (var plotPartId in plotParts)
+            if (plotParts != null)
             {
-                var publicBiddingPlotPart = new PublicBiddingPlotPart
+                foreach (var plotPartId in plotParts)
                 {
-                    PublicBiddingId = publicBidding.PublicBiddingId,
-                    PlotPartId = plotPartId
-                };
-                await context.PublicBiddingPlotPart.AddAsync(publicBiddingPlotPart);
+                    var publicBiddingPlotPart = new PublicBiddingPlotPart
+                    {
+                        PublicBiddingId = publicBidding.PublicBiddingId,
+                        PlotPartId = plotPartId
+                    };
+                    await context.PublicBiddingPlotPart.AddAsync(publicBiddingPlotPart);
+                }
             }
         }
     }

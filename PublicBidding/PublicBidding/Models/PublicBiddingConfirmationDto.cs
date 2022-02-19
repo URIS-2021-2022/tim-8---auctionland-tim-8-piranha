@@ -15,7 +15,7 @@ namespace PublicBidding.Models
         /// </summary>
         public double StartPricePerHa { get; set; }
         /// <summary>
-        /// Vremensi period zakupa
+        /// Vremenski period zakupa
         /// </summary>
         public int RentPeriod { get; set; }
         /// <summary>
@@ -25,6 +25,6 @@ namespace PublicBidding.Models
         /// <summary>
         /// Visina dopune depozita
         /// </summary>
-        public int DepositSupplement { get; set; }
+        public double DepositSupplement { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace PublicBidding.Data
     {
         Task SaveChanges();
 
-        Task<List<Entities.PublicBidding>> GetPublicBiddings(int numberOfApplicants = 0, Type type = null, Status status = null);
+        Task<List<Entities.PublicBidding>> GetPublicBiddings();
 
         Task<Entities.PublicBidding> GetPublicBiddingById(Guid publicBiddingId);
 

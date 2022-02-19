@@ -8,9 +8,10 @@ namespace PublicBidding.Entities
 {
     public class PublicBiddingContext : DbContext
     {
+
         public PublicBiddingContext (DbContextOptions<PublicBiddingContext> options) : base(options)
         {
-
+      
         }
 
         public DbSet<Status> Statuses { get; set; }
@@ -19,6 +20,8 @@ namespace PublicBidding.Entities
         public DbSet<PublicBiddingAuthorizedPerson> PublicBiddingAuthorizedPerson { get; set; }
         public DbSet<PublicBiddingBuyer> PublicBiddingBuyer { get; set; }
         public DbSet<PublicBiddingPlotPart> PublicBiddingPlotPart { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -88,6 +91,44 @@ namespace PublicBidding.Entities
                 {
                     TypeId = Guid.Parse("9b926999-151c-458c-8ae8-3d4a7e9f6459"),
                     TypeName = "Otvaranje zatvorenih ponuda"
+                });
+
+            //PublicBidding
+            modelBuilder.Entity<PublicBidding>().HasData(
+                new
+                {
+                    PublicBiddingId = Guid.Parse("d7d314b0-2f22-4af5-8909-238b23383249"),
+                    Date = DateTime.Parse("2018-12-10T00:00:00.000Z"),
+                    StartTime = DateTime.Parse("2018-12-10T13:45:00.000Z"),
+                    EndTime = DateTime.Parse("2018-12-10T15:45:00.000Z"),
+                    StartPricePerHa = 500.35,
+                    IsExcepted = false,
+                    TypeId = Guid.Parse("8010f254-e872-49d9-9c2c-1d5783719019"),
+                    StatusId = Guid.Parse("2233cbba-607a-4182-9f83-7ff8ffe6e5ac"),
+                    DepositSupplement = 120.5,
+                    AddressId = Guid.Parse("01f759bd-fb38-49f5-a4a7-f8a938fbd541"),
+                    Price =600.5,
+                    BuyerId = Guid.Parse("5adf06b6-605c-40b2-92bc-5fff5ca3d6f8"),
+                    RentPeriod = 2,
+                    NumberOfApplicants = 1,
+                    Round = 4
+                },new
+                {
+                     PublicBiddingId = Guid.Parse("62c28c9a-7306-45c7-a5b3-1603eed4fd5a"),
+                     Date = DateTime.Parse("2018-08-09T00:00:00.000Z"),
+                     StartTime = DateTime.Parse("2018-08-09T15:45:00.000Z"),
+                     EndTime = DateTime.Parse("2018-08-09T17:45:00.000Z"),
+                     StartPricePerHa = 1200.6,
+                     IsExcepted = false,
+                     TypeId = Guid.Parse("9b926999-151c-458c-8ae8-3d4a7e9f6459"),
+                     StatusId = Guid.Parse("770a32d4-1db9-4844-868e-6bf8171ffc20"),
+                     DepositSupplement = 200.2,
+                     AddressId = Guid.Parse("50394b74-3ed0-4364-a8f2-aeb0bcb783ef"),
+                     Price = 1800.4,
+                     BuyerId = Guid.Parse("5adf06b6-605c-40b2-92bc-5fff5ca3d6f8"),
+                     RentPeriod = 4,
+                     NumberOfApplicants = 4,
+                     Round = 2
                 });
         }
     }

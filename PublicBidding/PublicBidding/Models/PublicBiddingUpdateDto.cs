@@ -28,7 +28,7 @@ namespace PublicBidding.Models
         /// <summary>
         /// Izlicitirana cena
         /// </summary>
-        public int Price { get; set; }
+        public double Price { get; set; }
         /// <summary>
         /// Broj prijavljenih lica na javnom nadmetanju
         /// </summary>

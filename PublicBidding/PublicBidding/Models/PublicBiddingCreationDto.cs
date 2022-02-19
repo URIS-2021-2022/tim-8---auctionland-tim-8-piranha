@@ -20,17 +20,32 @@ namespace PublicBidding.Models
         /// Vremenski period zakupa
         /// </summary>
         [Required(ErrorMessage = "Period vremena na koje se deo parcele zakupljuje je obavezno uneti.")]
-        public int PeriodZakupa { get; set; }
+        public int RentPeriod { get; set; }
+        /// <summary>
+        /// Vreme početka javnog nadmetanja
+        /// </summary>
+        [Required(ErrorMessage = "Vreme početka javnog nadmetanja je obavezan podatak.")]
+        public DateTime StartTime { get; set; }
+        /// <summary>
+        /// Vreme kraja javnog nadmetanja
+        /// </summary>
+        [Required(ErrorMessage = "Vreme početka javnog nadmetanja je obavezan podatak.")]
+        public DateTime EndTime { get; set; }
+        /// <summary>
+        /// Datum održavanja javnog nadmetanja
+        /// </summary>
+        [Required(ErrorMessage = "Datum održavanja javnog nadmetanja je obavezan podatak.")]
+        public DateTime Date { get; set; }
         /// <summary>
         /// Izlicitirana cena
         /// </summary>
-        public int Price { get; set; }
+        public double Price { get; set; }
         /// <summary>
         /// Broj prijavljenih lica na javnom nadmetanju
         /// </summary>
         public int NumberOfApplicants { get; set; }
         /// <summary>
-        /// Broju kruga
+        /// Broj kruga
         /// </summary>
         public int Round { get; set; }
         /// <summary>
@@ -45,7 +60,7 @@ namespace PublicBidding.Models
         /// <summary>
         /// ID tipa javnog nadmetanja
         /// </summary>
-        [Required(ErrorMessage = "Id javnog nadmetanja je obavezno obeležje.")]
+        [Required(ErrorMessage = "Id tipa javnog nadmetanja je obavezno obeležje.")]
         public Guid TypeId { get; set; }
         /// <summary>
         /// ID kupca koji je ponudio najveću cenu

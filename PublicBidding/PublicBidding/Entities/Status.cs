@@ -7,7 +7,7 @@ namespace PublicBidding.Entities
 {
     public class Status
     {   
-        public Guid StatusId { get; set; }
+        public Guid StatusId { get; set; } = Guid.NewGuid();
 
         public string StatusName { get; set; }
     }

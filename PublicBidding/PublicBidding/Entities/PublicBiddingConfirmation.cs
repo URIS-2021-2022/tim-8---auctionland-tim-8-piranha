@@ -7,14 +7,14 @@ namespace PublicBidding.Entities
 {
     public class PublicBiddingConfirmation
     {
+        public Guid PublicBiddingId { get; set; }
+
         public DateTime StartTime { get; set; }
 
         public DateTime EndTime { get; set; }
 
         public DateTime Date { get; set; }
 
-        public int StartPricePerHa { get; set; }
-
-        public Address Address { get; set; }
+        public double StartPricePerHa { get; set; }
     }
 }

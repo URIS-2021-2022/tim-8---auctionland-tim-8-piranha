@@ -11,11 +11,10 @@
   "profiles": {
     "IIS Express": {
       "commandName": "Project",
-      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:42000"
+      "applicationUrl": "http://localhost:44200"
     },
     "PublicBidding": {
       "commandName": "Project",
@@ -31,7 +30,7 @@
       "commandName": "Project",
       "publishAllPorts": true,
       "useSSL": true,
-      "applicationUrl": "http://localhost:42000"
+      "applicationUrl": "http://localhost:44200"
     }
   }
 }

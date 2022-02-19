@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PublicBidding.Data;
 using PublicBidding.Entities;
+using PublicBidding.Models;
+using PublicBidding.ServiceCalls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +39,11 @@ namespace PublicBidding
             services.AddScoped<ITypeRepository, TypeRepository>();
             services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddScoped<IPublicBiddingRepository, PublicBiddingRepository>();
+
+            services.AddScoped<IService<AddressDto>, AddressMock<AddressDto>>();
+            services.AddScoped<IService<BuyerDto>, BuyerMock<BuyerDto>>();
+            services.AddScoped<IService<AuthorizedPersonDto>, AuthorizedPersonMock<AuthorizedPersonDto>>();
+            services.AddScoped<IService<PlotPartDto>, PlotPartMock<PlotPartDto>>();
 
             services.AddSwaggerGen(c =>
             {

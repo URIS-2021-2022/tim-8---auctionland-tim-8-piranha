@@ -7,9 +7,9 @@ namespace PublicBidding.Models
 {
     public class PlotPartDto
     {
-        public string NumberOfPlot { get; set; }
-        public string NumberOfPlotPart { get; set; }
-        public string SurfaceArea { get; set; }
+        public int NumberOfPlot { get; set; }
+        public int NumberOfPlotPart { get; set; }
+        public double SurfaceArea { get; set; }
         public string Culture { get; set; }
         public string Class { get; set; }
         public string Workability { get; set; }

@@ -13,7 +13,7 @@ namespace PublicBidding.Profiles
         public PublicBiddingConfirmationProfile()
         {
             CreateMap<PublicBiddingConfirmation, PublicBiddingConfirmationDto>();
-            CreateMap<Entities.PublicBidding, PublicBiddingConfirmationProfile>();
+            CreateMap<Entities.PublicBidding, PublicBiddingConfirmation>();
         }
     }
 }

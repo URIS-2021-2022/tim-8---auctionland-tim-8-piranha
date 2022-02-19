@@ -14,9 +14,9 @@ namespace PublicBidding.Models
     {
         public Guid PublicBiddingId { get; set; }
 
-        public Entities.Type Type { get; set; }
+        public string Type { get; set; }
 
-        public Status Status { get; set; }
+        public string Status { get; set; }
 
         [Required]
         public DateTime StartTime { get; set; }
@@ -28,13 +28,13 @@ namespace PublicBidding.Models
         public DateTime Date { get; set; }
 
         [Required]
-        public int StartPricePerHa { get; set; }
+        public double StartPricePerHa { get; set; }
 
         public bool IsExcepted { get; set; }
 
-        public AddressDto AddressId { get; set; }
+        public AddressDto Address { get; set; }
 
-        public int Price { get; set; }
+        public double Price { get; set; }
 
         public BuyerDto BestBidder { get; set; }
 
@@ -42,7 +42,7 @@ namespace PublicBidding.Models
 
         public int NumberOfApplicants { get; set; }
 
-        public int DepositSupplement { get; set; }
+        public double DepositSupplement { get; set; }
 
         public int Round { get; set; }
 

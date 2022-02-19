@@ -7,7 +7,7 @@ namespace PublicBidding.Entities
 {
     public class Type
     {
-        public Guid TypeId { get; set; }
+        public Guid TypeId { get; set; } = Guid.NewGuid();
 
         public string TypeName { get; set; }
     }
