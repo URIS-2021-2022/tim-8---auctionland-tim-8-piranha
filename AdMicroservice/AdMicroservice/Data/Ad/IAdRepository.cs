@@ -14,9 +14,10 @@ namespace AdMicroservice.Data
 
         AdConfirmation CreateAd(AdModel ad);
 
-        AdConfirmation UpdateAd(AdModel ad);
+        void UpdateAd(AdModel ad);
 
         void DeleteAd(Guid adId);
 
+        bool SaveChanges();
     }
 }

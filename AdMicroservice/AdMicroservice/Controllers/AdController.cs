@@ -73,13 +73,16 @@ namespace AdMicroservice.Controllers
             try
             {
 
-                if (adRepository.GetAdById(ad.AdId) == null)
+                var oldAd = adRepository.GetAdById(ad.AdId);
+
+                if (oldAd == null)
                 {
                     return NotFound();
                 }
                 AdModel a = mapper.Map<AdModel>(ad);
-                AdConfirmation confirmaion = adRepository.UpdateAd(a);
-                return Ok(mapper.Map<AdConfirmationDto>(confirmaion));
+                mapper.Map(a, oldAd);
+                adRepository.SaveChanges();
+                return Ok(mapper.Map<AdDto>(oldAd));
             }
             catch
             {

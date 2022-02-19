@@ -73,13 +73,16 @@ namespace AdMicroservice.Controllers
             try
             {
 
-                if (journalRepository.GetJournalById(journal.JournalId) == null)
+                var oldJournal = journalRepository.GetJournalById(journal.JournalId);
+
+                if (oldJournal == null)
                 {
                     return NotFound();
                 }
                 JournalModel jr = mapper.Map<JournalModel>(journal);
-                JournalConfirmation confirmaion = journalRepository.UpdateJournal(jr);
-                return Ok(mapper.Map<JournalConfirmationDto>(confirmaion));
+                mapper.Map(jr, oldJournal);
+                journalRepository.SaveChanges();
+                return Ok(mapper.Map<JournalDto>(oldJournal));
             }
             catch
             {

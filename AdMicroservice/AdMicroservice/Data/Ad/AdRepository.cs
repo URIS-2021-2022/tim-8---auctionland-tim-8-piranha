@@ -50,19 +50,9 @@ namespace AdMicroservice.Data.Ad
             return context.Ads.Include(a => a.Journal).FirstOrDefault(e => e.AdId == adId);
         }
 
-        public AdConfirmation UpdateAd(AdModel ad)
+        public void UpdateAd(AdModel ad)
         {
             //NE GLEDAJ OVAJ KOD   
-            AdModel a = GetAdById(ad.AdId);
-
-            a.AdId = ad.AdId;
-            a.PublicationDate = ad.PublicationDate;
-
-            return new AdConfirmation
-            {
-                AdId = a.AdId,
-                PublicationDate = a.PublicationDate
-            };
         }
     }
 }

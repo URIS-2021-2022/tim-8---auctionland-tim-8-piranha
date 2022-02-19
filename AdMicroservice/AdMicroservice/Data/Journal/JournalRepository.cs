@@ -49,19 +49,10 @@ namespace AdMicroservice.Data.Journal
             return context.Journals.FirstOrDefault(e => e.JournalId == journalId);
         }
 
-        public JournalConfirmation UpdateJournal(JournalModel journal)
+        public void UpdateJournal(JournalModel journal)
         {
             //NE GLEDAJ OVAJ KOD   
-            JournalModel jr = GetJournalById(journal.JournalId);
-
-            jr.JournalId = journal.JournalId;
-            jr.JournalNumber = journal.JournalNumber;
-
-            return new JournalConfirmation
-            {
-                JournalId = jr.JournalId,
-                JournalNumber = jr.JournalNumber
-            };
+            
         }
     }
 }

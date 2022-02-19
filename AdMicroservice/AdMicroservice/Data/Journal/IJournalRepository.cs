@@ -14,9 +14,11 @@ namespace AdMicroservice.Data.Journal
 
         JournalConfirmation CreateJournal(JournalModel journal);
 
-        JournalConfirmation UpdateJournal(JournalModel journal);
+        void UpdateJournal(JournalModel journal);
 
         void DeleteJournal(Guid journalId);
+
+        bool SaveChanges();
 
     }
 }
