@@ -51,19 +51,10 @@ namespace ComplaintMicroservice.Data.Status
             return context.ComplaintStatus.FirstOrDefault(e => e.ComplaintStatusId == complaintStatusId);
         }
 
-        public ComplaintStatusConfirmation UpdateComplaintStatus(ComplaintStatus complaintStatus)
+        public void UpdateComplaintStatus(ComplaintStatus complaintStatus)
         {
             //NE GLEDAJ OVAJ KOD   
-            ComplaintStatus cs = GetComplaintStatusById(complaintStatus.ComplaintStatusId);
-
-            cs.ComplaintStatusId = complaintStatus.ComplaintStatusId;
-            cs.Status = complaintStatus.Status;
-
-            return new ComplaintStatusConfirmation
-            {
-                ComplaintStatusId = cs.ComplaintStatusId,
-                Status = cs.Status
-            };
+            
         }
     }
 }

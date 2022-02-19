@@ -74,13 +74,17 @@ namespace ComplaintMicroservice.Controllers
             try
             {
 
-                if (complaintRepository.GetComplaintById(complaint.ComplaintId) == null)
+                var oldComplaint = complaintRepository.GetComplaintById(complaint.ComplaintId);
+
+                if (oldComplaint == null)
                 {
                     return NotFound();
                 }
                 Complaint com = mapper.Map<Complaint>(complaint);
-                ComplaintConfirmation confirmaion = complaintRepository.UpdateComplaint(com);
-                return Ok(mapper.Map<ComplaintConfirmationDto>(confirmaion));
+                mapper.Map(com, oldComplaint);
+                complaintRepository.SaveChanges();
+                string location = linkGenerator.GetPathByAction("GetComplaintById", "Complaint", new { complaintId = com.ComplaintId });
+                return Ok(location);
             }
             catch
             {

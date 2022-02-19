@@ -51,27 +51,10 @@ namespace ComplaintMicroservice.Data.Complaint
                 FirstOrDefault(e => e.ComplaintId == complaintId);
         }
 
-        public ComplaintConfirmation UpdateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint)
+        public void UpdateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint)
         {
             //NE GLEDAJ OVAJ KOD   
-            ComplaintMicroservice.Entities.Complaint.Complaint com = GetComplaintById(complaint.ComplaintId);
-
-            com.ComplaintId = complaint.ComplaintId;
-            com.SubmissionDate = complaint.SubmissionDate;
-            com.Reason = complaint.Reason;
-            com.Explanation = complaint.Explanation;
-            com.SolutionNumber = complaint.SolutionNumber;
-            com.DecisionNumber = complaint.DecisionNumber;
-
-            return new ComplaintConfirmation
-            {
-                ComplaintId = com.ComplaintId,
-                SubmissionDate = com.SubmissionDate,
-                Reason = com.Reason,
-                Explanation = com.Explanation,
-                SolutionNumber= com.SolutionNumber,
-                DecisionNumber= com.DecisionNumber
-        };
+            
         }
     }
 }

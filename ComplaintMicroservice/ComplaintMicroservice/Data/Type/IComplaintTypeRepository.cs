@@ -14,9 +14,11 @@ namespace ComplaintMicroservice.Data
 
         ComplaintTypeConfirmation CreateComplaintType(ComplaintTypeModel complaintType);
 
-        ComplaintTypeConfirmation UpdateComplaintType(ComplaintTypeModel complaintType);
+        void UpdateComplaintType(ComplaintTypeModel complaintType);
 
         void DeleteComplaintType(Guid complaintTypeId);
+
+        bool SaveChanges();
 
     }
 }

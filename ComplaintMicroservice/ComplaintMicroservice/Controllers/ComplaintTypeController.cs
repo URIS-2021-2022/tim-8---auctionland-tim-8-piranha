@@ -79,14 +79,16 @@ namespace ComplaintMicroservice.Controllers
         {
             try
             {
+                var oldComplaintType = complaintTypeRepository.GetComplaintTypeById(complaintType.ComplaintTypeId);
 
-                if (complaintTypeRepository.GetComplaintTypeById(complaintType.ComplaintTypeId) == null)
+                if (oldComplaintType == null)
                 {
                     return NotFound();
                 }
                 ComplaintTypeModel type = mapper.Map<ComplaintTypeModel>(complaintType);
-                ComplaintTypeConfirmation confirmaion = complaintTypeRepository.UpdateComplaintType(type);
-                return Ok(mapper.Map<ComplaintTypeConfirmationDto>(confirmaion));
+                mapper.Map(type, oldComplaintType);
+                complaintTypeRepository.SaveChanges();
+                return Ok(mapper.Map<ComplaintTypeDto>(oldComplaintType));
             }
             catch
             {

@@ -80,14 +80,16 @@ namespace ComplaintMicroservice.Controllers
         {
             try
             {
+                var oldComplaintEvent = complaintEventRepository.GetComplaintEventById(complaintEvent.ComplaintEventId);
 
-                if (complaintEventRepository.GetComplaintEventById(complaintEvent.ComplaintEventId) == null)
+                if (oldComplaintEvent == null)
                 {
                     return NotFound();
                 }
                 ComplaintEvent ev = mapper.Map<ComplaintEvent>(complaintEvent);
-                ComplaintEventConfirmation confirmaion = complaintEventRepository.UpdateComplaintEvent(ev);
-                return Ok(mapper.Map<ComplaintEventConfirmationDto>(confirmaion));
+                mapper.Map(ev, oldComplaintEvent);
+                complaintEventRepository.SaveChanges();
+                return Ok(mapper.Map<ComplaintEventDto>(oldComplaintEvent));
             }
             catch
             {

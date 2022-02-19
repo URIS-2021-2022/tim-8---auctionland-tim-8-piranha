@@ -14,8 +14,10 @@ namespace ComplaintMicroservice.Data
 
         ComplaintConfirmation CreateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint);
 
-        ComplaintConfirmation UpdateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint);
+        void UpdateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint);
 
         void DeleteComplaint(Guid complaintId);
+
+        bool SaveChanges();
     }
 }

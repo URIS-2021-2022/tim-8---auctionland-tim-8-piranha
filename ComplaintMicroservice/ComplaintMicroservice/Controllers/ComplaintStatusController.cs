@@ -80,13 +80,16 @@ namespace ComplaintMicroservice.Controllers
             try
             {
 
-                if (complaintStatusRepository.GetComplaintStatusById(complaintStatus.ComplaintStatusId) == null)
+                var oldComplaintStatus = complaintStatusRepository.GetComplaintStatusById(complaintStatus.ComplaintStatusId);
+
+                if (oldComplaintStatus == null)
                 {
                     return NotFound();
                 }
                 ComplaintStatus status = mapper.Map<ComplaintStatus>(complaintStatus);
-                ComplaintStatusConfirmation confirmaion = complaintStatusRepository.UpdateComplaintStatus(status);
-                return Ok(mapper.Map<ComplaintStatusConfirmationDto>(confirmaion));
+                mapper.Map(status, oldComplaintStatus);
+                complaintStatusRepository.SaveChanges();
+                return Ok(mapper.Map<ComplaintStatusDto>(oldComplaintStatus));
             }
             catch
             {

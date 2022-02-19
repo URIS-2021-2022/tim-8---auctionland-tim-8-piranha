@@ -14,8 +14,10 @@ namespace ComplaintMicroservice.Data.Status
 
         ComplaintStatusConfirmation CreateComplaintStatus(ComplaintStatus complaintStatus);
 
-        ComplaintStatusConfirmation UpdateComplaintStatus(ComplaintStatus complaintStatus);
+        void UpdateComplaintStatus(ComplaintStatus complaintStatus);
 
         void DeleteComplaintStatus(Guid complaintStatusId);
+
+        bool SaveChanges();
     }
 }

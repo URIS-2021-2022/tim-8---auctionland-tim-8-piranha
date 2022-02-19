@@ -14,8 +14,10 @@ namespace ComplaintMicroservice.Data.Event
 
         ComplaintEventConfirmation CreateComplaintEvent(ComplaintEvent complaintEvent);
 
-        ComplaintEventConfirmation UpdateComplaintEvent(ComplaintEvent complaintEvent);
+        void UpdateComplaintEvent(ComplaintEvent complaintEvent);
 
         void DeleteComplaintEvent(Guid complaintEventId);
+
+        bool SaveChanges();
     }
 }

@@ -49,19 +49,10 @@ namespace ComplaintMicroservice.Data.Event
             return context.ComplaintEvent.FirstOrDefault(e => e.ComplaintEventId == complaintEventId);
         }
 
-        public ComplaintEventConfirmation UpdateComplaintEvent(ComplaintEvent complaintEvent)
+        public void UpdateComplaintEvent(ComplaintEvent complaintEvent)
         {
             //NE GLEDAJ OVAJ KOD   
-            ComplaintEvent ct = GetComplaintEventById(complaintEvent.ComplaintEventId);
-
-            ct.ComplaintEventId = complaintEvent.ComplaintEventId;
-            ct.Event = complaintEvent.Event;
-
-            return new ComplaintEventConfirmation
-            {
-                ComplaintEventId = ct.ComplaintEventId,
-                Event = ct.Event
-            };
+            
         }
     }
 }

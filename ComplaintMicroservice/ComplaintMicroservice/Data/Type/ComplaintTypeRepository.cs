@@ -49,10 +49,10 @@ namespace ComplaintMicroservice.Data
             return context.ComplaintTypes.FirstOrDefault(e => e.ComplaintTypeId == complaintTypeId);
         }
 
-        public ComplaintTypeConfirmation UpdateComplaintType(ComplaintTypeModel complaintType)
+        public void UpdateComplaintType(ComplaintTypeModel complaintType)
         {
             //NE GLEDAJ OVAJ KOD   
-            ComplaintTypeModel ct = GetComplaintTypeById(complaintType.ComplaintTypeId);
+            /*ComplaintTypeModel ct = GetComplaintTypeById(complaintType.ComplaintTypeId);
 
             ct.ComplaintTypeId = complaintType.ComplaintTypeId;
             ct.ComplaintType = complaintType.ComplaintType;
@@ -61,7 +61,7 @@ namespace ComplaintMicroservice.Data
             {
                 ComplaintTypeId = ct.ComplaintTypeId,
                 ComplaintType = ct.ComplaintType
-            };
+            };*/
         }
 
         /*
