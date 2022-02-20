@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using PlotMicroservice.Validators;
 using PlotMicroservice.ServiceCalls;
 using Microsoft.Extensions.Logging;
+using PlotMicroservice.Models;
 
 namespace PlotMicroservice.Controllers
 {
@@ -31,6 +32,7 @@ namespace PlotMicroservice.Controllers
         private readonly IMapper Mapper;
         private readonly PlotValidator Validator;
         private readonly ILoggerService Logger;
+        private readonly IServiceCall<BuyerDto> BuyerService;
 
         /// <summary>
         /// Plot constructor.
@@ -41,13 +43,15 @@ namespace PlotMicroservice.Controllers
         /// <param name="linkGenerator"></param>
         /// <param name="validator"></param>
         /// <param name="logger"></param>
-        public PlotController(IPlotRepository plotRepository, IMapper mapper, LinkGenerator linkGenerator, PlotValidator validator, ILoggerService logger)
+        /// <param name="buyerService"></param>
+        public PlotController(IPlotRepository plotRepository, IMapper mapper, LinkGenerator linkGenerator, PlotValidator validator, ILoggerService logger, IServiceCall<BuyerDto> buyerService)
         {
             PlotRepository = plotRepository;
             LinkGenerator = linkGenerator;
             Mapper = mapper;
             Validator = validator;
             Logger = logger;
+            BuyerService = buyerService;
         }
 
         /// <summary>
@@ -70,8 +74,26 @@ namespace PlotMicroservice.Controllers
                 return NoContent();
             }
 
+            List<PlotDto> plotsDto = new List<PlotDto>();
+
+            foreach(var plot in plots)
+            {
+                PlotDto plotDto = Mapper.Map<PlotDto>(plot);
+
+                if(plot.BuyerId is not null)
+                {
+                    var buyerDto = await BuyerService.SendGetRequestAsync("");
+
+                    if(buyerDto is not null)
+                    {
+                        plotDto.Buyer = buyerDto;
+                    }
+                }
+                plotsDto.Add(plotDto);
+            }
+
             await Logger.LogMessage(LogLevel.Information, "Plot list successfully returned!", "Plot microservice", "GetPlotsAsync");
-            return Ok(Mapper.Map<List<PlotDto>>(plots));
+            return Ok(plotsDto);
         }
 
         /// <summary>

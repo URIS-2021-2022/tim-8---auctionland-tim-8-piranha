@@ -24,5 +24,10 @@ namespace PlotMicroservice.Models.PlotModel
         /// Plot real estate number. Example: LN505
         /// </summary>
         public string PlotRealEstateListNumber { get; set; }
+
+        /// <summary>
+        /// Buyer DTO.
+        /// </summary>
+        public BuyerDto Buyer { get; set; }
     }
 }

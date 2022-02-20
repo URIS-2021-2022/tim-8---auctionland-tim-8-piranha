@@ -330,7 +330,7 @@ namespace PlotMicroservice.Entities
                 });
 
 
-           // PLOTS
+            // PLOTS
 
             modelBuilder.Entity<Plot>().HasData(
                 new
@@ -343,7 +343,8 @@ namespace PlotMicroservice.Entities
                     PlotNumber = "112",
                     PlotRealEstateListNumber = "LN100",
                     PlotCurrentCulture = "",
-                    PlotCurrentWorkability = ""
+                    PlotCurrentWorkability = "",
+                    BuyerId = Guid.Parse("82604d24-94d3-4490-9ae3-3669cbbf498f")
                 });
 
             modelBuilder.Entity<Plot>().HasData(
@@ -357,7 +358,8 @@ namespace PlotMicroservice.Entities
                     PlotNumber = "146",
                     PlotRealEstateListNumber = "LN202",
                     PlotCurrentCulture = "",
-                    PlotCurrentWorkability = ""
+                    PlotCurrentWorkability = "",
+                    BuyerId = Guid.Parse("1278d3e0-5aa7-4b8b-9477-cf7e35221062")
                 });
 
             modelBuilder.Entity<Plot>().HasData(
@@ -371,7 +373,8 @@ namespace PlotMicroservice.Entities
                     PlotNumber = "5308",
                     PlotRealEstateListNumber = "LN550",
                     PlotCurrentCulture = "",
-                    PlotCurrentWorkability = ""
+                    PlotCurrentWorkability = "",
+                    BuyerId = Guid.Parse("1daad0bf-8b24-439d-ba78-a68dcd10083b")
                 });
 
             modelBuilder.Entity<Plot>().HasData(
@@ -385,7 +388,8 @@ namespace PlotMicroservice.Entities
                     PlotNumber = "97",
                     PlotRealEstateListNumber = "LN90",
                     PlotCurrentCulture = "",
-                    PlotCurrentWorkability = ""
+                    PlotCurrentWorkability = "",
+                    BuyerId = Guid.Parse("abaa1bb8-f8c7-4f61-b0db-8bb062bb3f7d")
                 });
 
 

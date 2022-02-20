@@ -12,7 +12,9 @@ using Microsoft.OpenApi.Models;
 using PlotMicroservice.Data.Interfaces;
 using PlotMicroservice.Data.Repositories;
 using PlotMicroservice.Entities;
+using PlotMicroservice.Models;
 using PlotMicroservice.ServiceCalls;
+using PlotMicroservice.ServiceCalls.Mocks;
 using PlotMicroservice.Validators;
 using System;
 using System.Collections.Generic;
@@ -53,7 +55,10 @@ namespace PlotMicroservice
             services.AddScoped<IPlotPartProtectedZoneRepository, PlotPartProtectedZoneRepository>();
             services.AddScoped<IPlotRepository, PlotRepository>();
             services.AddScoped<IPlotPartRepository, PlotPartRepository>();
+            
             services.AddScoped<ILoggerService, LoggerService>();
+
+            services.AddScoped<IServiceCall<BuyerDto>, BuyerServiceCallMock<BuyerDto>>();
 
             services.AddDbContext<PlotContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PlotDB")));
 

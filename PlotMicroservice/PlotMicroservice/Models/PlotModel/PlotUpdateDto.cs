@@ -54,5 +54,10 @@ namespace PlotMicroservice.Models.PlotModel
         /// Current plot workability.
         /// </summary>
         public string PlotCurrentWorkability { get; set; }
+
+        /// <summary>
+        /// Buyer ID.
+        /// </summary>
+        public Guid? BuyerId { get; set; }
     }
 }

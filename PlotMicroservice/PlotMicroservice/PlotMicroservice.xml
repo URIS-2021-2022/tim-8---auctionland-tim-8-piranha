@@ -83,7 +83,7 @@
             Produces JSON and XML objects as response to a request.
             </summary>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotController.#ctor(PlotMicroservice.Data.Interfaces.IPlotRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
+        <member name="M:PlotMicroservice.Controllers.PlotController.#ctor(PlotMicroservice.Data.Interfaces.IPlotRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotValidator,PlotMicroservice.ServiceCalls.ILoggerService,PlotMicroservice.ServiceCalls.IServiceCall{PlotMicroservice.Models.BuyerDto})">
             <summary>
             Plot constructor.
             Initializes properties.
@@ -93,6 +93,7 @@
             <param name="linkGenerator"></param>
             <param name="validator"></param>
             <param name="logger"></param>
+            <param name="buyerService"></param>
         </member>
         <member name="M:PlotMicroservice.Controllers.PlotController.GetPlotsAsync(System.String,System.String)">
             <summary>
@@ -695,6 +696,11 @@
             Current plot workability.
             </summary>
         </member>
+        <member name="P:PlotMicroservice.Entities.Plot.BuyerId">
+            <summary>
+            Buyer ID. Buyer ID from Buyer microservice.
+            </summary>
+        </member>
         <member name="T:PlotMicroservice.Entities.PlotCadastralMunicipality">
             <summary>
             Represents cadastral municipality of plot.
@@ -1045,6 +1051,36 @@
             Plot workability.
             </summary>
         </member>
+        <member name="T:PlotMicroservice.Models.BuyerDto">
+            <summary>
+            DTO for Buyer.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.LogModel">
+            <summary>
+            Representation of Log.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.LogModel.LogLevel">
+            <summary>
+            Log level (ex. Warn, Debug, Error, Info)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.LogModel.LogMessage">
+            <summary>
+            Message to log.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.LogModel.MicroserviceName">
+            <summary>
+            Name of microservice (ex. Plot microservice)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.LogModel.MicroserviceMethod">
+            <summary>
+            Microservice method (ex. GetPlotsAsync())
+            </summary>
+        </member>
         <member name="T:PlotMicroservice.Models.PlotCadastralMunicipalityConfirmationDto">
             <summary>
             Confirmation DTO for plot cadastral municipality.
@@ -1195,6 +1231,11 @@
             Current plot workability.
             </summary>
         </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.BuyerId">
+            <summary>
+            Buyer ID.
+            </summary>
+        </member>
         <member name="T:PlotMicroservice.Models.PlotModel.PlotDto">
             <summary>
             DTO for plot.
@@ -1213,6 +1254,11 @@
         <member name="P:PlotMicroservice.Models.PlotModel.PlotDto.PlotRealEstateListNumber">
             <summary>
             Plot real estate number. Example: LN505
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotDto.Buyer">
+            <summary>
+            Buyer DTO.
             </summary>
         </member>
         <member name="T:PlotMicroservice.Models.PlotModel.PlotUpdateDto">
@@ -1263,6 +1309,11 @@
         <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotCurrentWorkability">
             <summary>
             Current plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.BuyerId">
+            <summary>
+            Buyer ID.
             </summary>
         </member>
         <member name="T:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassConfirmationDto">

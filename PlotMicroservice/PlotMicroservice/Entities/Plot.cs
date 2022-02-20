@@ -16,7 +16,6 @@ namespace PlotMicroservice.Entities
         /// </summary>
         public Guid PlotId { get; set; }
 
-        // KorisnikParceleId ???
         /// <summary>
         /// Collection of plot parts within current plot.
         /// </summary>
@@ -76,5 +75,10 @@ namespace PlotMicroservice.Entities
         /// Current plot workability.
         /// </summary>
         public string PlotCurrentWorkability { get; set; }
+
+        /// <summary>
+        /// Buyer ID. Buyer ID from Buyer microservice.
+        /// </summary>
+        public Guid? BuyerId { get; set; }
     }
 }

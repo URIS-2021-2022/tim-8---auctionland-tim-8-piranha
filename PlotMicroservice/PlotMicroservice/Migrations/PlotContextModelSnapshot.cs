@@ -25,6 +25,9 @@ namespace PlotMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BuyerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("PlotCadastralMunicipalityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -63,6 +66,7 @@ namespace PlotMicroservice.Migrations
                         new
                         {
                             PlotId = new Guid("b281612e-8013-40cc-b9ce-f9d063295420"),
+                            BuyerId = new Guid("82604d24-94d3-4490-9ae3-3669cbbf498f"),
                             PlotCadastralMunicipalityId = new Guid("93a08cc2-1d17-46e6-bd95-4fa70bb11226"),
                             PlotCultureId = new Guid("ba9777ce-d43f-4f71-a163-7c974e36654f"),
                             PlotCurrentCulture = "",
@@ -75,6 +79,7 @@ namespace PlotMicroservice.Migrations
                         new
                         {
                             PlotId = new Guid("c6ea356d-c1c1-4374-985b-f8f91d35daa1"),
+                            BuyerId = new Guid("1278d3e0-5aa7-4b8b-9477-cf7e35221062"),
                             PlotCadastralMunicipalityId = new Guid("458adb42-62a5-4117-8101-7d933fa88abb"),
                             PlotCultureId = new Guid("60644cdd-795b-47a2-96ac-55f623862efe"),
                             PlotCurrentCulture = "",
@@ -87,6 +92,7 @@ namespace PlotMicroservice.Migrations
                         new
                         {
                             PlotId = new Guid("226480a5-74db-4507-958a-8963c4a36716"),
+                            BuyerId = new Guid("1daad0bf-8b24-439d-ba78-a68dcd10083b"),
                             PlotCadastralMunicipalityId = new Guid("0c0e2227-531a-4f0d-83f0-a1d4a52f4676"),
                             PlotCultureId = new Guid("2484a534-4e5f-4b0c-af35-190ae0d68fcc"),
                             PlotCurrentCulture = "",
@@ -99,6 +105,7 @@ namespace PlotMicroservice.Migrations
                         new
                         {
                             PlotId = new Guid("5f37ba98-ca19-4c9e-8914-708e38bba8bf"),
+                            BuyerId = new Guid("abaa1bb8-f8c7-4f61-b0db-8bb062bb3f7d"),
                             PlotCadastralMunicipalityId = new Guid("372d9458-a560-4b56-8119-ada1f7feb723"),
                             PlotCultureId = new Guid("97adad6e-f225-4164-8830-b59004c812c3"),
                             PlotCurrentCulture = "",

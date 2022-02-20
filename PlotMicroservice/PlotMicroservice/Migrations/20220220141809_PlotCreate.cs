@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PlotMicroservice.Migrations
 {
-    public partial class PlotDBCreate : Migration
+    public partial class PlotCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -91,7 +91,8 @@ namespace PlotMicroservice.Migrations
                     PlotNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PlotRealEstateListNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PlotCurrentCulture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PlotCurrentWorkability = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PlotCurrentWorkability = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BuyerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -243,13 +244,13 @@ namespace PlotMicroservice.Migrations
 
             migrationBuilder.InsertData(
                 table: "Plots",
-                columns: new[] { "PlotId", "PlotCadastralMunicipalityId", "PlotCultureId", "PlotCurrentCulture", "PlotCurrentWorkability", "PlotNumber", "PlotRealEstateListNumber", "PlotSurfaceArea", "PlotWorkabilityId" },
+                columns: new[] { "PlotId", "BuyerId", "PlotCadastralMunicipalityId", "PlotCultureId", "PlotCurrentCulture", "PlotCurrentWorkability", "PlotNumber", "PlotRealEstateListNumber", "PlotSurfaceArea", "PlotWorkabilityId" },
                 values: new object[,]
                 {
-                    { new Guid("b281612e-8013-40cc-b9ce-f9d063295420"), new Guid("93a08cc2-1d17-46e6-bd95-4fa70bb11226"), new Guid("ba9777ce-d43f-4f71-a163-7c974e36654f"), "", "", "112", "LN100", 4500, new Guid("c0615a4d-faa4-4e17-8f2f-93ec25383f9b") },
-                    { new Guid("c6ea356d-c1c1-4374-985b-f8f91d35daa1"), new Guid("458adb42-62a5-4117-8101-7d933fa88abb"), new Guid("60644cdd-795b-47a2-96ac-55f623862efe"), "", "", "146", "LN202", 5600, new Guid("c0615a4d-faa4-4e17-8f2f-93ec25383f9b") },
-                    { new Guid("226480a5-74db-4507-958a-8963c4a36716"), new Guid("0c0e2227-531a-4f0d-83f0-a1d4a52f4676"), new Guid("2484a534-4e5f-4b0c-af35-190ae0d68fcc"), "", "", "5308", "LN550", 3850, new Guid("c0615a4d-faa4-4e17-8f2f-93ec25383f9b") },
-                    { new Guid("5f37ba98-ca19-4c9e-8914-708e38bba8bf"), new Guid("372d9458-a560-4b56-8119-ada1f7feb723"), new Guid("97adad6e-f225-4164-8830-b59004c812c3"), "", "", "97", "LN90", 7602, new Guid("40d2641b-8b85-4625-b01c-a129389a6aad") }
+                    { new Guid("b281612e-8013-40cc-b9ce-f9d063295420"), new Guid("82604d24-94d3-4490-9ae3-3669cbbf498f"), new Guid("93a08cc2-1d17-46e6-bd95-4fa70bb11226"), new Guid("ba9777ce-d43f-4f71-a163-7c974e36654f"), "", "", "112", "LN100", 4500, new Guid("c0615a4d-faa4-4e17-8f2f-93ec25383f9b") },
+                    { new Guid("c6ea356d-c1c1-4374-985b-f8f91d35daa1"), new Guid("1278d3e0-5aa7-4b8b-9477-cf7e35221062"), new Guid("458adb42-62a5-4117-8101-7d933fa88abb"), new Guid("60644cdd-795b-47a2-96ac-55f623862efe"), "", "", "146", "LN202", 5600, new Guid("c0615a4d-faa4-4e17-8f2f-93ec25383f9b") },
+                    { new Guid("226480a5-74db-4507-958a-8963c4a36716"), new Guid("1daad0bf-8b24-439d-ba78-a68dcd10083b"), new Guid("0c0e2227-531a-4f0d-83f0-a1d4a52f4676"), new Guid("2484a534-4e5f-4b0c-af35-190ae0d68fcc"), "", "", "5308", "LN550", 3850, new Guid("c0615a4d-faa4-4e17-8f2f-93ec25383f9b") },
+                    { new Guid("5f37ba98-ca19-4c9e-8914-708e38bba8bf"), new Guid("abaa1bb8-f8c7-4f61-b0db-8bb062bb3f7d"), new Guid("372d9458-a560-4b56-8119-ada1f7feb723"), new Guid("97adad6e-f225-4164-8830-b59004c812c3"), "", "", "97", "LN90", 7602, new Guid("40d2641b-8b85-4625-b01c-a129389a6aad") }
                 });
 
             migrationBuilder.InsertData(
