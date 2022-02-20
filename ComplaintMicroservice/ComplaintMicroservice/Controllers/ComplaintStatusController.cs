@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace ComplaintMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/complaintStatus")]
+    [Route("api/complaints/complaintStatus")]
     [Produces("application/json", "application/xml")]
     [Authorize]
     public class ComplaintStatusController : ControllerBase
