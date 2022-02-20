@@ -2,10 +2,11 @@
 using LoggerService.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace LoggerService.Controllers
@@ -29,15 +30,16 @@ namespace LoggerService.Controllers
         {
             try
             {
-                string logMessage = logModel.LogLevel + " / " + logModel.LogMessage + " / "
-                                    + logModel.MicroserviceName + " / "
-                                    + logModel.MicroserviceMethod;
+                string logMessage = "Log level = " + logModel.LogLevel 
+                                    + " / Log message = " + logModel.LogMessage 
+                                    + " / Microservice name = " + logModel.MicroserviceName 
+                                    + " / Microservice method name = " + logModel.MicroserviceMethod + "\n\n";
 
-                if (logModel.LogLevel == LogLevel.Info)
+                if (logModel.LogLevel == LogLevel.Information)
                 {
                     Logger.LogInfo(logMessage);
                 }
-                else if (logModel.LogLevel == LogLevel.Warn)
+                else if (logModel.LogLevel == LogLevel.Warning)
                 {
                     Logger.LogWarn(logMessage);
                 } else if (logModel.LogLevel == LogLevel.Error)
@@ -48,14 +50,14 @@ namespace LoggerService.Controllers
                     Logger.LogDebug(logMessage);
                 }
 
-                return Ok(logMessage);
+
+                return Ok("Logger service logged message successfully!");
 
             } catch(Exception)
             {
-                Logger.LogError(logModel.Exception.ToString() + "\n" + new System.Diagnostics.StackTrace().ToString());
+                Logger.LogError(new System.Diagnostics.StackTrace().ToString());
                 return StatusCode(StatusCodes.Status500InternalServerError, "Some errors occured while trying to log message (internal server error)!");
             }
         }
-
     }
 }

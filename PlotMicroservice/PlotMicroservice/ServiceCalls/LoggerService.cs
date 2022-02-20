@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using NLog;
 using PlotMicroservice.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PlotMicroservice.ServiceCalls
 {
-    public class LoggerService
+    public class LoggerService : ILoggerService
     {
         private readonly IConfiguration Configuration;
 
@@ -19,19 +19,18 @@ namespace PlotMicroservice.ServiceCalls
             Configuration = configuration;
         }
 
-        public bool LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod, Exception exception = null)
+        public async Task<bool> LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod)
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                string url = Configuration["Services:LoggerService"];
+                Uri url = new Uri($"{ Configuration["Services:LoggerService"] }api/logger-service");
 
-                var log = new LogModel
+                LogModel log = new LogModel
                 {
                     LogLevel = logLevel,
                     LogMessage = logMessage,
                     MicroserviceName = microserviceName,
-                    MicroserviceMethod = microserviceMethod,
-                    Exception = exception
+                    MicroserviceMethod = microserviceMethod
                 };
 
                 HttpContent content = new StringContent(JsonConvert.SerializeObject(log));
@@ -39,12 +38,7 @@ namespace PlotMicroservice.ServiceCalls
 
                 HttpResponseMessage response = httpClient.PostAsync(url, content).Result;
 
-                if(!response.IsSuccessStatusCode)
-                {
-                    return false;
-                }
-
-                return true;
+                return await Task.FromResult(response.IsSuccessStatusCode);
             }
         }
     }

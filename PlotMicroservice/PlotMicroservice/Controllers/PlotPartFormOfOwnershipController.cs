@@ -12,6 +12,8 @@ using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
 using PlotMicroservice.Validators;
+using PlotMicroservice.ServiceCalls;
+using Microsoft.Extensions.Logging;
 
 namespace PlotMicroservice.Controllers
 {
@@ -28,6 +30,7 @@ namespace PlotMicroservice.Controllers
         private readonly IMapper Mapper;
         private readonly LinkGenerator LinkGenerator;
         private readonly PlotPartFormOfOwnershipValidator Validator;
+        private readonly ILoggerService Logger;
 
         /// <summary>
         /// Plot part form of ownership constructor.
@@ -37,12 +40,14 @@ namespace PlotMicroservice.Controllers
         /// <param name="mapper"></param>
         /// <param name="linkGenerator"></param>
         /// <param name="validator"></param>
-        public PlotPartFormOfOwnershipController(IPlotPartFormOfOwnershipRepository plotPartFormOfOwnershipRepository, IMapper mapper, LinkGenerator linkGenerator, PlotPartFormOfOwnershipValidator validator)
+        /// <param name="logger"></param>
+        public PlotPartFormOfOwnershipController(IPlotPartFormOfOwnershipRepository plotPartFormOfOwnershipRepository, IMapper mapper, LinkGenerator linkGenerator, PlotPartFormOfOwnershipValidator validator, ILoggerService logger)
         {
             PlotPartFormOfOwnershipRepository = plotPartFormOfOwnershipRepository;
             Mapper = mapper;
             LinkGenerator = linkGenerator;
             Validator = validator;
+            Logger = logger;
         }
 
         /// <summary>
@@ -60,9 +65,11 @@ namespace PlotMicroservice.Controllers
 
             if(plotPartFormOfOwnerships == null || plotPartFormOfOwnerships.Count == 0)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot part form of ownership list is empty!", "Plot microservice", "GetPlotPartFormOfOwnershipsAsync");
                 return NoContent();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot part form of ownership list successfully returned!", "Plot microservice", "GetPlotPartFormOfOwnershipsAsync");
             return Ok(Mapper.Map<List<PlotPartFormOfOwnershipDto>>(plotPartFormOfOwnerships));
         }
 
@@ -80,9 +87,11 @@ namespace PlotMicroservice.Controllers
 
             if(plotPartFormOfOwnership == null)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot part form of ownership not found!", "Plot microservice", "GetPlotPartFormOfOwnershipByIdAsync");
                 return NotFound();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot part form of ownership found and successfully returned!", "Plot microservice", "GetPlotPartFormOfOwnershipByIdAsync");
             return Ok(Mapper.Map<PlotPartFormOfOwnershipDto>(plotPartFormOfOwnership));
         }
 
@@ -117,14 +126,17 @@ namespace PlotMicroservice.Controllers
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotPartFormOfOwnerships", "PlotPartFormOfOwnership", new { plotPartFormOfOwnershipId = plotPartFormOfOwnershipConfirmation.PlotPartFormOfOwnershipId });
 
+                await Logger.LogMessage(LogLevel.Information, "Plot part form of ownership successfully created!", "Plot microservice", "CreatPlotPartFormOfOwnershipAsync");
                 return Created(uri, Mapper.Map<PlotPartFormOfOwnershipConfirmationDto>(plotPartFormOfOwnershipConfirmation));
 
             } catch (ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot part form of ownership object failed!", "Plot microservice", "CreatPlotPartFormOfOwnershipAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch (Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot part form of ownership object creation failed!", "Plot microservice", "CreatPlotPartFormOfOwnershipAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -156,6 +168,7 @@ namespace PlotMicroservice.Controllers
 
                 if(existingPlotPartFormOfOwnership == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot part form of ownership object not found!", "Plot microservice", "UpdatePlotPartFormOfOwnershipAsync");
                     return NotFound();
                 }
 
@@ -167,14 +180,17 @@ namespace PlotMicroservice.Controllers
 
                 await PlotPartFormOfOwnershipRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot part form of ownership object updated successfully!", "Plot microservice", "UpdatePlotPartFormOfOwnershipAsync");
                 return Ok(Mapper.Map<PlotPartFormOfOwnershipDto>(existingPlotPartFormOfOwnership));
 
             } catch (ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot part form of ownership object failed!", "Plot microservice", "UpdatePlotPartFormOfOwnershipAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             } 
             catch (Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot part form of ownership object updating failed!", "Plot microservice", "UpdatePlotPartFormOfOwnershipAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -196,16 +212,19 @@ namespace PlotMicroservice.Controllers
 
                 if(plotPartFormOfOwnership == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot part form of ownership object not found!", "Plot microservice", "DeletePlotPartFormOfOwnershipAsync");
                     return NotFound();
                 }
 
                 await PlotPartFormOfOwnershipRepository.DeletePlotPartFormOfOwnershipAsync(plotPartFormOfOwnershipId);
                 await PlotPartFormOfOwnershipRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot part form of ownership object deleted successfully!", "Plot microservice", "DeletePlotPartFormOfOwnershipAsync");
                 return NoContent();
 
             } catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot part form of ownership object deletion failed!", "Plot microservice", "DeletePlotPartFormOfOwnershipAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -216,9 +235,12 @@ namespace PlotMicroservice.Controllers
         /// <returns>Response header.</returns>
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPlotPartFormOfOwnershipOptions()
+        public async Task<IActionResult> GetPlotPartFormOfOwnershipOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+
+            await Logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Plot microservice", "GetPlotPartFormOfOwnershipOptions");
+
             return Ok();
         }
     }

@@ -12,6 +12,8 @@ using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
 using PlotMicroservice.Validators;
+using PlotMicroservice.ServiceCalls;
+using Microsoft.Extensions.Logging;
 
 namespace PlotMicroservice.Controllers
 {
@@ -28,6 +30,7 @@ namespace PlotMicroservice.Controllers
         private readonly IMapper Mapper;
         private readonly LinkGenerator LinkGenerator;
         private readonly PlotPartProtectedZoneValidator Validator;
+        private readonly ILoggerService Logger;
 
         /// <summary>
         /// Plot part protected zone constructor.
@@ -37,12 +40,14 @@ namespace PlotMicroservice.Controllers
         /// <param name="mapper"></param>
         /// <param name="linkGenerator"></param>
         /// <param name="validator"></param>
-        public PlotPartProtecedZoneController(IPlotPartProtectedZoneRepository plotPartProtectedZoneRepository, IMapper mapper, LinkGenerator linkGenerator, PlotPartProtectedZoneValidator validator)
+        /// <param name="logger"></param>
+        public PlotPartProtecedZoneController(IPlotPartProtectedZoneRepository plotPartProtectedZoneRepository, IMapper mapper, LinkGenerator linkGenerator, PlotPartProtectedZoneValidator validator, ILoggerService logger)
         {
             PlotPartProtectedZoneRepository = plotPartProtectedZoneRepository;
             Mapper = mapper;
             LinkGenerator = linkGenerator;
             Validator = validator;
+            Logger = logger;
         }
 
         /// <summary>
@@ -60,9 +65,11 @@ namespace PlotMicroservice.Controllers
 
             if(plotPartProtectedZones == null || plotPartProtectedZones.Count == 0)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot part protected zone list is empty!", "Plot microservice", "GetPlotPartProtectedZonesAsync");
                 return NoContent();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot part protected zone list successfully returned!", "Plot microservice", "GetPlotPartProtectedZonesAsync");
             return Ok(Mapper.Map<List<PlotPartProtectedZoneDto>>(plotPartProtectedZones));
         }
 
@@ -80,9 +87,11 @@ namespace PlotMicroservice.Controllers
 
             if(plotPartProtectedZone == null)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot part protected zone not found!", "Plot microservice", "GetPlotPartProtectedZoneByIdAsync");
                 return NotFound();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot part protected zone found and successfully returned!", "Plot microservice", "GetPlotPartProtectedZoneByIdAsync");
             return Ok(Mapper.Map<PlotPartProtectedZoneDto>(plotPartProtectedZone));
         }
 
@@ -116,14 +125,17 @@ namespace PlotMicroservice.Controllers
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotPartProtectedZones", "PlotPartProtecedZone", new { plotPartProtectedZoneId = plotPartProtectedZoneConfirmation.PlotPartProtectedZoneId});
 
+                await Logger.LogMessage(LogLevel.Information, "Plot part protected zone successfully created!", "Plot microservice", "CreatePlotPartProtectedZoneAsync");
                 return Created(uri, Mapper.Map<PlotPartProtectedZoneConfirmationDto>(plotPartProtectedZoneConfirmation));
 
             } catch (ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot part protected zone object failed!", "Plot microservice", "CreatePlotPartProtectedZoneAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot part protected zone object creation failed!", "Plot microservice", "CreatePlotPartProtectedZoneAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -155,6 +167,7 @@ namespace PlotMicroservice.Controllers
 
                 if(existingPlotPartProtectedZone == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot part protected zone object not found!", "Plot microservice", "UpdatePlotPartProtectedZoneAsync");
                     return NotFound();
                 }
 
@@ -166,14 +179,17 @@ namespace PlotMicroservice.Controllers
 
                 await PlotPartProtectedZoneRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot part protected zone object updated successfully!", "Plot microservice", "UpdatePlotPartProtectedZoneAsync");
                 return Ok(Mapper.Map<PlotPartProtectedZoneDto>(existingPlotPartProtectedZone));
 
             } catch (ValidationException ve) 
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot part protected zone object failed!", "Plot microservice", "UpdatePlotPartProtectedZoneAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }  
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot part protected zone object updating failed!", "Plot microservice", "UpdatePlotPartProtectedZoneAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -195,16 +211,19 @@ namespace PlotMicroservice.Controllers
 
                 if (plotPartProtectedZone == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot part protected zone object not found!", "Plot microservice", "DeletePlotPartProtectedZoneAsync");
                     return NotFound();
                 }
 
                 await PlotPartProtectedZoneRepository.DeletePlotPartProtectedZoneAsync(plotPartProtectedZoneId);
                 await PlotPartProtectedZoneRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot part protected zone object deleted successfully!", "Plot microservice", "DeletePlotPartProtectedZoneAsync");
                 return NoContent();
 
             } catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot part protected zone object deletion failed!", "Plot microservice", "DeletePlotPartProtectedZoneAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -215,9 +234,12 @@ namespace PlotMicroservice.Controllers
         /// <returns>Response header.</returns>
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPlotPartProtectedZoneOptions()
+        public async Task<IActionResult> GetPlotPartProtectedZoneOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+
+            await Logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Plot microservice", "GetPlotPartProtectedZoneOptions");
+
             return Ok();
         }
     }

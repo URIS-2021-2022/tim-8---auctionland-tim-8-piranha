@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
+using PlotMicroservice.ServiceCalls;
+using Microsoft.Extensions.Logging;
 
 namespace PlotMicroservice.Controllers
 {
@@ -28,6 +30,7 @@ namespace PlotMicroservice.Controllers
         private readonly IMapper Mapper;
         private readonly LinkGenerator LinkGenerator;
         private readonly PlotWorkabilityValidator Validator;
+        private readonly ILoggerService Logger;
 
         /// <summary>
         /// Plot workability constructor.
@@ -37,12 +40,13 @@ namespace PlotMicroservice.Controllers
         /// <param name="mapper"></param>
         /// <param name="linkGenerator"></param>
         /// <param name="validator"></param>
-        public PlotWorkabilityController(IPlotWorkabilityRepository plotWorkabilityRepository, IMapper mapper, LinkGenerator linkGenerator, PlotWorkabilityValidator validator)
+        public PlotWorkabilityController(IPlotWorkabilityRepository plotWorkabilityRepository, IMapper mapper, LinkGenerator linkGenerator, PlotWorkabilityValidator validator, ILoggerService logger)
         {
             PlotWorkabilityRepository = plotWorkabilityRepository;
             Mapper = mapper;
             LinkGenerator = linkGenerator;
             Validator = validator;
+            Logger = logger;
         }
 
         /// <summary>
@@ -60,9 +64,11 @@ namespace PlotMicroservice.Controllers
 
             if(plotWorkabilities == null || plotWorkabilities.Count == 0)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot workability list is empty!", "Plot microservice", "GetPlotWorkabilitiesAsync");
                 return NoContent();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot workability list successfully returned!", "Plot microservice", "GetPlotWorkabilitiesAsync");
             return Ok(Mapper.Map<List<PlotWorkabilityDto>>(plotWorkabilities));
         }
 
@@ -80,9 +86,11 @@ namespace PlotMicroservice.Controllers
 
             if(plotWorkability == null)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot workability not found!", "Plot microservice", "GetPlotWorkabilityIdAsync");
                 return NotFound();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot workability found and successfully returned!", "Plot microservice", "GetPlotWorkabilityIdAsync");
             return Ok(Mapper.Map<PlotWorkabilityDto>(plotWorkability));
         }
 
@@ -116,14 +124,17 @@ namespace PlotMicroservice.Controllers
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotWorkabilities", "PlotWorkability", new { plotWorkabilityId = plotWorkabilityConfirmation.PlotWorkabilityId });
 
+                await Logger.LogMessage(LogLevel.Information, "Plot workability successfully created!", "Plot microservice", "CreatePlotWorkabilityAsync");
                 return Created(uri, Mapper.Map<PlotWorkabilityConfirmationDto>(plotWorkabilityConfirmation));
 
             } catch(ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot workability object failed!", "Plot microservice", "CreatePlotWorkabilityAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             } 
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot workability object creation failed!", "Plot microservice", "CreatePlotWorkabilityAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -155,6 +166,7 @@ namespace PlotMicroservice.Controllers
 
                 if (existingPlotWorkability == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot workability object not found!", "Plot microservice", "UpdatePlotWorkabilityAsync");
                     return NotFound();
                 }
 
@@ -166,14 +178,17 @@ namespace PlotMicroservice.Controllers
 
                 await PlotWorkabilityRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot workability object updated successfully!", "Plot microservice", "UpdatePlotWorkabilityAsync");
                 return Ok(Mapper.Map<PlotWorkabilityDto>(existingPlotWorkability));
 
             } catch (ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot workability object failed!", "Plot microservice", "UpdatePlotWorkabilityAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch (Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot workability object updating failed!", "Plot microservice", "UpdatePlotWorkabilityAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -195,16 +210,19 @@ namespace PlotMicroservice.Controllers
 
                 if (plotWorkability == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot workability object not found!", "Plot microservice", "DeletePlotWorkabilityAsync");
                     return NotFound();
                 }
 
                 await PlotWorkabilityRepository.DeletePlotWorkabilityAsync(plotWorkabilityId);
                 await PlotWorkabilityRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot workability object deleted successfully!", "Plot microservice", "DeletePlotWorkabilityAsync");
                 return NoContent();
 
             } catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot workability object deletion failed!", "Plot microservice", "DeletePlotWorkabilityAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -215,9 +233,12 @@ namespace PlotMicroservice.Controllers
         /// <returns>Response header.</returns>
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPlotWorkabilityOptions()
+        public async Task<IActionResult> GetPlotWorkabilityOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+
+            await Logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Plot microservice", "GetPlotWorkabilityOptions");
+
             return Ok();
         }
     }

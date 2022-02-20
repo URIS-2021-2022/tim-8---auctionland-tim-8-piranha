@@ -1,4 +1,4 @@
-﻿using NLog;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,5 @@ namespace LoggerService.Models
         public string MicroserviceName { get; set; }
 
         public string MicroserviceMethod { get; set; }
-
-        public Exception Exception { get; set; }
     }
 }

@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
+using PlotMicroservice.ServiceCalls;
+using Microsoft.Extensions.Logging;
 
 namespace PlotMicroservice.Controllers
 {
@@ -28,6 +30,7 @@ namespace PlotMicroservice.Controllers
         private readonly IMapper Mapper;
         private readonly LinkGenerator LinkGenerator;
         private readonly PlotCultureValidator Validator;
+        private readonly ILoggerService Logger;
 
         /// <summary>
         /// Plot culture constructor.
@@ -37,12 +40,14 @@ namespace PlotMicroservice.Controllers
         /// <param name="mapper"></param>
         /// <param name="linkGenerator"></param>
         /// <param name="validator"></param>
-        public PlotCultureController(IPlotCultureRepository plotCultureRepository, IMapper mapper, LinkGenerator linkGenerator, PlotCultureValidator validator)
+        /// <param name="logger"></param>
+        public PlotCultureController(IPlotCultureRepository plotCultureRepository, IMapper mapper, LinkGenerator linkGenerator, PlotCultureValidator validator, ILoggerService logger)
         {
             PlotCultureRepository = plotCultureRepository;
             Mapper = mapper;
             LinkGenerator = linkGenerator;
             Validator = validator;
+            Logger = logger;
         }
 
         /// <summary>
@@ -60,9 +65,11 @@ namespace PlotMicroservice.Controllers
             
             if(plotCultures == null || plotCultures.Count == 0)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot culture list is empty!", "Plot microservice", "GetPlotCulturesAsync");
                 return NoContent();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot culture list successfully returned!", "Plot microservice", "GetPlotCulturesAsync");
             return Ok(Mapper.Map<List<PlotCultureDto>>(plotCultures));
         }
 
@@ -80,9 +87,11 @@ namespace PlotMicroservice.Controllers
 
             if(plotCulture == null)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot culture not found!", "Plot microservice", "GetPlotCultureByIdAsync");
                 return NotFound();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot culture found and successfully returned!", "Plot microservice", "GetPlotCultureByIdAsync");
             return Ok(Mapper.Map<PlotCultureDto>(plotCulture));
         }
 
@@ -118,14 +127,17 @@ namespace PlotMicroservice.Controllers
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotCultures", "PlotCulture", new { plotCultureId = plotCultureConfirmation.PlotCultureId });
 
+                await Logger.LogMessage(LogLevel.Information, "Plot culture successfully created!", "Plot microservice", "CreatePlotCultureAsync");
                 return Created(uri, Mapper.Map<PlotCultureConfirmationDto>(plotCultureConfirmation));
 
             } catch(ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot culture object failed!", "Plot microservice", "CreatePlotCultureAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
 
             } catch (Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot culture object creation failed!", "Plot microservice", "CreatePlotCultureAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -158,6 +170,7 @@ namespace PlotMicroservice.Controllers
 
                 if (existingPlotCulture == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot culture object not found!", "Plot microservice", "UpdatePlotCultureAsync");
                     return NotFound();
                 }
 
@@ -169,14 +182,17 @@ namespace PlotMicroservice.Controllers
 
                 await PlotCultureRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot culture object updated successfully!", "Plot microservice", "UpdatePlotCultureAsync");
                 return Ok(Mapper.Map<PlotCultureDto>(existingPlotCulture));
 
             } catch(ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot culture object failed!", "Plot microservice", "UpdatePlotCultureAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot culture object updating failed!", "Plot microservice", "UpdatePlotCultureAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -198,16 +214,19 @@ namespace PlotMicroservice.Controllers
 
                 if (plotCulture == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot object not found!", "Plot microservice", "DeletePlotCultureAsync");
                     return NotFound();
                 }
 
                 await PlotCultureRepository.DeletePlotCultureAsync(plotCultureId);
                 await PlotCultureRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot culture object deleted successfully!", "Plot microservice", "DeletePlotCultureAsync");
                 return NoContent();
 
             } catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot culture object deletion failed!", "Plot microservice", "DeletePlotCultureAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -218,9 +237,12 @@ namespace PlotMicroservice.Controllers
         /// <returns>Response header.</returns>
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPlotCultureOptions()
+        public async Task<IActionResult> GetPlotCultureOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+
+            await Logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Plot microservice", "GetPlotCultureOptions");
+
             return Ok();
         }
     }

@@ -12,6 +12,8 @@ using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
 using PlotMicroservice.Validators;
+using PlotMicroservice.ServiceCalls;
+using Microsoft.Extensions.Logging;
 
 namespace PlotMicroservice.Controllers
 {
@@ -28,6 +30,7 @@ namespace PlotMicroservice.Controllers
         private readonly IMapper Mapper;
         private readonly LinkGenerator LinkGenerator;
         private readonly PlotPartValidator Validator;
+        private readonly ILoggerService Logger;
 
         /// <summary>
         /// Plot part constructor.
@@ -37,12 +40,14 @@ namespace PlotMicroservice.Controllers
         /// <param name="mapper"></param>
         /// <param name="linkGenerator"></param>
         /// <param name="validator"></param>
-        public PlotPartController(IPlotPartRepository plotPartRepository, IMapper mapper, LinkGenerator linkGenerator, PlotPartValidator validator)
+        /// <param name="logger"></param>
+        public PlotPartController(IPlotPartRepository plotPartRepository, IMapper mapper, LinkGenerator linkGenerator, PlotPartValidator validator, ILoggerService logger)
         {
             PlotPartRepository = plotPartRepository;
             Mapper = mapper;
             LinkGenerator = linkGenerator;
             Validator = validator;
+            Logger = logger;
         }
 
         /// <summary>
@@ -61,9 +66,11 @@ namespace PlotMicroservice.Controllers
             
             if(plotParts == null || plotParts.Count == 0)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot part list is empty!", "Plot microservice", "GetPlotPartsAsync");
                 return NoContent();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot part list successfully returned!", "Plot microservice", "GetPlotPartsAsync");
             return Ok(Mapper.Map<List<PlotPartDto>>(plotParts));
         }
 
@@ -81,9 +88,11 @@ namespace PlotMicroservice.Controllers
 
             if(plotPart == null)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot part not found!", "Plot microservice", "GetPlotPartByIdAsync");
                 return NotFound();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot part found and successfully returned!", "Plot microservice", "GetPlotPartByIdAsync");
             return Ok(Mapper.Map<PlotPartDto>(plotPart));
         }
 
@@ -101,9 +110,11 @@ namespace PlotMicroservice.Controllers
 
             if(plotParts == null)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot part list is empty!", "Plot microservice", "GetPlotPartsByPlotIdAsync");
                 return NoContent();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot part list successfully returned!", "Plot microservice", "GetPlotPartsByPlotIdAsync");
             return Ok(Mapper.Map<List<PlotPartDto>>(plotParts));
         }
 
@@ -145,14 +156,17 @@ namespace PlotMicroservice.Controllers
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotParts", "PlotPart", new { plotPartId = plotPartConfirmation.PlotPartId });
 
+                await Logger.LogMessage(LogLevel.Information, "Plot part successfully created!", "Plot microservice", "CreatePlotPartAsync");
                 return Created(uri, Mapper.Map<PlotPartConfirmationDto>(plotPartConfirmation));
 
             } catch (ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot part object failed!", "Plot microservice", "CreatePlotPartAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             } 
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot part object creation failed!", "Plot microservice", "CreatePlotPartAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -191,6 +205,7 @@ namespace PlotMicroservice.Controllers
 
                 if(existingPlotPart == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot part object not found!", "Plot microservice", "UpdatePlotPartAsync");
                     return NotFound();
                 }
 
@@ -202,14 +217,17 @@ namespace PlotMicroservice.Controllers
 
                 await PlotPartRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot part object updated successfully!", "Plot microservice", "UpdatePlotPartAsync");
                 return Ok(Mapper.Map<PlotPartDto>(existingPlotPart));
 
             } catch (ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot part object failed!", "Plot microservice", "UpdatePlotPartAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             } 
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot part object updating failed!", "Plot microservice", "UpdatePlotPartAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -231,16 +249,19 @@ namespace PlotMicroservice.Controllers
 
                 if (plotPart == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot part object not found!", "Plot microservice", "DeletePlotPartAsync");
                     return NotFound();
                 }
 
                 await PlotPartRepository.DeletePlotPartAsync(plotPartId);
                 await PlotPartRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot part object deleted successfully!", "Plot microservice", "DeletePlotPartAsync");
                 return NoContent();
 
             } catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot part object deletion failed!", "Plot microservice", "DeletePlotPartAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -251,9 +272,12 @@ namespace PlotMicroservice.Controllers
         /// <returns>Response header.</returns>
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPlotPartOptions()
+        public async Task<IActionResult> GetPlotPartOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+
+            await Logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Plot microservice", "GetPlotPartOptions");
+
             return Ok();
         }
     }

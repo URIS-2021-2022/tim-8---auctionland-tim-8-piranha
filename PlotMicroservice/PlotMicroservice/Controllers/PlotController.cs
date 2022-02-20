@@ -12,6 +12,8 @@ using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
 using PlotMicroservice.Validators;
+using PlotMicroservice.ServiceCalls;
+using Microsoft.Extensions.Logging;
 
 namespace PlotMicroservice.Controllers
 {
@@ -28,6 +30,7 @@ namespace PlotMicroservice.Controllers
         private readonly LinkGenerator LinkGenerator;
         private readonly IMapper Mapper;
         private readonly PlotValidator Validator;
+        private readonly ILoggerService Logger;
 
         /// <summary>
         /// Plot constructor.
@@ -37,12 +40,14 @@ namespace PlotMicroservice.Controllers
         /// <param name="mapper"></param>
         /// <param name="linkGenerator"></param>
         /// <param name="validator"></param>
-        public PlotController(IPlotRepository plotRepository, IMapper mapper, LinkGenerator linkGenerator, PlotValidator validator)
+        /// <param name="logger"></param>
+        public PlotController(IPlotRepository plotRepository, IMapper mapper, LinkGenerator linkGenerator, PlotValidator validator, ILoggerService logger)
         {
             PlotRepository = plotRepository;
             LinkGenerator = linkGenerator;
             Mapper = mapper;
             Validator = validator;
+            Logger = logger;
         }
 
         /// <summary>
@@ -61,9 +66,11 @@ namespace PlotMicroservice.Controllers
 
             if(plots == null || plots.Count == 0)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot list is empty!", "Plot microservice", "GetPlotsAsync");
                 return NoContent();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot list successfully returned!", "Plot microservice", "GetPlotsAsync");
             return Ok(Mapper.Map<List<PlotDto>>(plots));
         }
 
@@ -81,9 +88,11 @@ namespace PlotMicroservice.Controllers
 
             if(plot == null)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot not found!", "Plot microservice", "GetPlotByIdAsync");
                 return NotFound();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot found and successfully returned!", "Plot microservice", "GetPlotByIdAsync");
             return Ok(Mapper.Map<PlotDto>(plot));
         }
 
@@ -124,14 +133,17 @@ namespace PlotMicroservice.Controllers
 
                 string uri = LinkGenerator.GetPathByAction("GetPlots", "Plot", new { plotId = plotConfirmation.PlotId });
 
+                await Logger.LogMessage(LogLevel.Information, "Plot successfully created!", "Plot microservice", "CreatePlotAsync");
                 return Created(uri, Mapper.Map<PlotConfirmationDto>(plotConfirmation));
 
             } catch (ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot object failed!", "Plot microservice", "CreatePlotAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             } 
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot object creation failed!", "Plot microservice", "CreatePlotAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -170,6 +182,7 @@ namespace PlotMicroservice.Controllers
 
                 if(existingPlot == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot object not found!", "Plot microservice", "UpdatePlotAsync");
                     return NotFound();
                 }
 
@@ -181,14 +194,17 @@ namespace PlotMicroservice.Controllers
 
                 await PlotRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot object updated successfully!", "Plot microservice", "UpdatePlotAsync");
                 return Ok(Mapper.Map<PlotDto>(existingPlot));
 
             } catch (ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot object failed!", "Plot microservice", "UpdatePlotAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot object updating failed!", "Plot microservice", "UpdatePlotAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -210,16 +226,19 @@ namespace PlotMicroservice.Controllers
 
                 if(plot == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot object not found!", "Plot microservice", "DeletePlotAsync");
                     return NotFound();
                 }
 
                 await PlotRepository.DeletePlotAsync(plotId);
                 await PlotRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot object deleted successfully!", "Plot microservice", "DeletePlotAsync");
                 return NoContent();
 
             } catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot object deletion failed!", "Plot microservice", "DeletePlotAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -230,9 +249,12 @@ namespace PlotMicroservice.Controllers
         /// <returns>Response header.</returns>
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPlotOptions()
+        public async Task<IActionResult> GetPlotOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+
+            await Logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Plot microservice", "GetPlotOptions");
+
             return Ok();
         }
     }

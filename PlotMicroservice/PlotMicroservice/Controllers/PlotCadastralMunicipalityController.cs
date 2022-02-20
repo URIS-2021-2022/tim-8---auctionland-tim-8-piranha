@@ -13,6 +13,8 @@ using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation.Results;
+using PlotMicroservice.ServiceCalls;
+using Microsoft.Extensions.Logging;
 
 namespace PlotMicroservice.Controllers
 {
@@ -29,6 +31,7 @@ namespace PlotMicroservice.Controllers
         private readonly LinkGenerator LinkGenerator;
         private readonly IMapper Mapper;
         private readonly PlotCadastralMunicipalityValidator Validator;
+        private readonly ILoggerService Logger;
 
         /// <summary>
         /// Plot cadastral municipality constructor.
@@ -38,12 +41,14 @@ namespace PlotMicroservice.Controllers
         /// <param name="linkGenerator"></param>
         /// <param name="mapper"></param>
         /// <param name="validator"></param>
-        public PlotCadastralMunicipalityController(IPlotCadastralMunicipalityRepository plotCadastralMunicipalityRepository, LinkGenerator linkGenerator, IMapper mapper, PlotCadastralMunicipalityValidator validator)
+        /// <param name="logger"></param>
+        public PlotCadastralMunicipalityController(IPlotCadastralMunicipalityRepository plotCadastralMunicipalityRepository, LinkGenerator linkGenerator, IMapper mapper, PlotCadastralMunicipalityValidator validator, ILoggerService logger)
         {
             PlotCadastralMunicipalityRepository = plotCadastralMunicipalityRepository;
             LinkGenerator = linkGenerator;
             Mapper = mapper;
             Validator = validator;
+            Logger = logger;
         }
 
         /// <summary>
@@ -61,9 +66,11 @@ namespace PlotMicroservice.Controllers
 
             if (municipalities == null || municipalities.Count == 0)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot cadastral municipality list is empty!", "Plot microservice", "GetPlotCadastralMunicipalitiesAsync");
                 return NoContent();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot cadastral municipality list successfully returned!", "Plot microservice", "GetPlotCadastralMunicipalitiesAsync");
             return Ok(Mapper.Map<List<PlotCadastralMunicipalityDto>>(municipalities));      
         }
 
@@ -82,9 +89,11 @@ namespace PlotMicroservice.Controllers
 
             if (municipality == null)
             {
+                await Logger.LogMessage(LogLevel.Warning, "Plot cadastral municipality not found!", "Plot microservice", "GetPlotCadastralMunicipalityByIdAsync");
                 return NotFound();
             }
 
+            await Logger.LogMessage(LogLevel.Information, "Plot cadastral municipality found and successfully returned!", "Plot microservice", "GetPlotCadastralMunicipalityByIdAsync");
             return Ok(Mapper.Map<PlotCadastralMunicipalityDto>(municipality));
         }
 
@@ -119,14 +128,17 @@ namespace PlotMicroservice.Controllers
 
                 string uri = LinkGenerator.GetPathByAction("GetPlotCadastralMunicipalities", "PlotCadastralMunicipality", new { cadastralMunicipalityId = confirmation.PlotCadastralMunicipalityId });
 
+                await Logger.LogMessage(LogLevel.Information, "Plot cadastral municipality successfully created!", "Plot microservice", "CreatePlotCadastralMunicipalityAsync");
                 return Created(uri, Mapper.Map<PlotCadastralMunicipalityConfirmationDto>(confirmation));
                
             } catch (ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot cadastral municipality object failed!", "Plot microservice", "CreatePlotCadastralMunicipalityAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot cadastral municipality object creation failed!", "Plot microservice", "CreatePlotCadastralMunicipalityAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -158,6 +170,7 @@ namespace PlotMicroservice.Controllers
                 
                 if(existingCadastralMunicipality == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot cadastral municipality object not found!", "Plot microservice", "UpdatePlotCadastralMunicipalityAsync");
                     return NotFound();
                 }
 
@@ -168,14 +181,17 @@ namespace PlotMicroservice.Controllers
                 Mapper.Map(cadastralMunicipality, existingCadastralMunicipality);
                 await PlotCadastralMunicipalityRepository.SaveChangesAsync();
 
+                await Logger.LogMessage(LogLevel.Information, "Plot cadastral municipality object updated successfully!", "Plot microservice", "UpdatePlotCadastralMunicipalityAsync");
                 return Ok(Mapper.Map<PlotCadastralMunicipalityDto>(existingCadastralMunicipality));
 
             } catch(ValidationException ve)
             {
+                await Logger.LogMessage(LogLevel.Error, "Validation for plot cadastral municipality object failed!", "Plot microservice", "UpdatePlotCadastralMunicipalityAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot cadastral municipality object updating failed!", "Plot microservice", "UpdatePlotCadastralMunicipalityAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -197,16 +213,20 @@ namespace PlotMicroservice.Controllers
                 
                 if (cadastralMunicipality == null)
                 {
+                    await Logger.LogMessage(LogLevel.Warning, "Plot cadastral municipality object not found!", "Plot microservice", "DeletePlotCadastralMunicipalityAsync");
                     return NotFound();
                 }
 
                 await PlotCadastralMunicipalityRepository.DeletePlotCadastralMunicipalityAsync(plotCadastrialMunicipalityId);
                 await PlotCadastralMunicipalityRepository.SaveChangesAsync();
+
+                await Logger.LogMessage(LogLevel.Information, "Plot cadastral municipality object deleted successfully!", "Plot microservice", "DeletePlotCadastralMunicipalityAsync");
                 return NoContent(); // Successful deletion
 
             }
             catch(Exception ex)
             {
+                await Logger.LogMessage(LogLevel.Error, "Plot cadastral municipality object deletion failed!", "Plot microservice", "DeletePlotCadastralMunicipalityAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -217,9 +237,12 @@ namespace PlotMicroservice.Controllers
         /// <returns>Response header.</returns>
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPlotCadastralMunicipalityOptions()
+        public async Task<IActionResult> GetPlotCadastralMunicipalityOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+
+            await Logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Plot microservice", "GetPlotCadastralMunicipalityOptions");
+
             return Ok();
         }
     }

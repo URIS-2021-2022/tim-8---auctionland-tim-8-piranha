@@ -10,7 +10,7 @@
             Produces JSON and XML objects as response to a request.
             </summary>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.#ctor(PlotMicroservice.Data.Interfaces.IPlotCadastralMunicipalityRepository,Microsoft.AspNetCore.Routing.LinkGenerator,AutoMapper.IMapper,PlotMicroservice.Validators.PlotCadastralMunicipalityValidator)">
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.#ctor(PlotMicroservice.Data.Interfaces.IPlotCadastralMunicipalityRepository,Microsoft.AspNetCore.Routing.LinkGenerator,AutoMapper.IMapper,PlotMicroservice.Validators.PlotCadastralMunicipalityValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
             <summary>
             Plot cadastral municipality constructor.
             Initializes properties.
@@ -19,6 +19,7 @@
             <param name="linkGenerator"></param>
             <param name="mapper"></param>
             <param name="validator"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.GetPlotCadastralMunicipalitiesAsync(System.String)">
             <summary>
@@ -82,7 +83,7 @@
             Produces JSON and XML objects as response to a request.
             </summary>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotController.#ctor(PlotMicroservice.Data.Interfaces.IPlotRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotValidator)">
+        <member name="M:PlotMicroservice.Controllers.PlotController.#ctor(PlotMicroservice.Data.Interfaces.IPlotRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
             <summary>
             Plot constructor.
             Initializes properties.
@@ -91,6 +92,7 @@
             <param name="mapper"></param>
             <param name="linkGenerator"></param>
             <param name="validator"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:PlotMicroservice.Controllers.PlotController.GetPlotsAsync(System.String,System.String)">
             <summary>
@@ -169,7 +171,7 @@
             Produces JSON and XML objects as response to a request.
             </summary>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotCultureController.#ctor(PlotMicroservice.Data.Interfaces.IPlotCultureRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotCultureValidator)">
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.#ctor(PlotMicroservice.Data.Interfaces.IPlotCultureRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotCultureValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
             <summary>
             Plot culture constructor.
             Initializes properties.
@@ -178,6 +180,7 @@
             <param name="mapper"></param>
             <param name="linkGenerator"></param>
             <param name="validator"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:PlotMicroservice.Controllers.PlotCultureController.GetPlotCulturesAsync(System.String)">
             <summary>
@@ -241,7 +244,7 @@
             Produces JSON and XML objects as response to a request.
             </summary>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartClassRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartClassValidator)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartClassRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartClassValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
             <summary>
             Plot part class constructor.
             Initializes properties.s
@@ -250,6 +253,7 @@
             <param name="mapper"></param>
             <param name="linkGenerator"></param>
             <param name="validator"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:PlotMicroservice.Controllers.PlotPartClassController.GetPlotPartClassesAsync(System.String)">
             <summary>
@@ -313,7 +317,7 @@
             Produces JSON and XML objects as response to a request.
             </summary>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartValidator)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
             <summary>
             Plot part constructor.
             Initializes properties.
@@ -322,6 +326,7 @@
             <param name="mapper"></param>
             <param name="linkGenerator"></param>
             <param name="validator"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartsAsync(System.String,System.String)">
             <summary>
@@ -407,7 +412,7 @@
             Produces JSON and XML objects as response to a request.
             </summary>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartFormOfOwnershipRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartFormOfOwnershipValidator)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartFormOfOwnershipRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartFormOfOwnershipValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
             <summary>
             Plot part form of ownership constructor.
             Initializes properties.
@@ -416,6 +421,7 @@
             <param name="mapper"></param>
             <param name="linkGenerator"></param>
             <param name="validator"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.GetPlotPartFormOfOwnershipsAsync(System.String)">
             <summary>
@@ -480,7 +486,7 @@
             Produces JSON and XML objects as response to a request.    
             </summary>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartProtectedZoneRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartProtectedZoneValidator)">
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartProtectedZoneRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartProtectedZoneValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
             <summary>
             Plot part protected zone constructor.
             Initializes properties.
@@ -489,6 +495,7 @@
             <param name="mapper"></param>
             <param name="linkGenerator"></param>
             <param name="validator"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.GetPlotPartProtectedZonesAsync(System.String)">
             <summary>
@@ -552,7 +559,7 @@
             Produces JSON and XML objects as response to a request.
             </summary>
         </member>
-        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.#ctor(PlotMicroservice.Data.Interfaces.IPlotWorkabilityRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotWorkabilityValidator)">
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.#ctor(PlotMicroservice.Data.Interfaces.IPlotWorkabilityRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotWorkabilityValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
             <summary>
             Plot workability constructor.
             Initializes properties.

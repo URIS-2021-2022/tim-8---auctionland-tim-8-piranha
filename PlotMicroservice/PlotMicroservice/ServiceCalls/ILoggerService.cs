@@ -1,4 +1,4 @@
-﻿using NLog;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,6 @@ namespace PlotMicroservice.ServiceCalls
 {
     public interface ILoggerService
     {
-        bool LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod, Exception exception = null);
+        Task<bool> LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod);
     }
 }
