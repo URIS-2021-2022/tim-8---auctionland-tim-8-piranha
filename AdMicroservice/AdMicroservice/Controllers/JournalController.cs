@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace AdMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/journals")]
+    [Route("api/ads/journals")]
     [Produces("application/json", "application/xml")]
     [Authorize]
     public class JournalController : ControllerBase
