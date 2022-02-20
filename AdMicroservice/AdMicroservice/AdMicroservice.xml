@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AdMicroservice</name>
+    </assembly>
+    <members>
+        <member name="M:AdMicroservice.Controllers.AdController.GetComplaintTypes(System.String)">
+            <summary>
+            Vraća sve oglase
+            </summary>
+            <param name="publicationDate">Datum objavljivanja oglasa</param>
+            <returns>Lista oglasa</returns>
+            <response code="200">Vraća listu oglasa</response>
+            <response code="404">Nije pronađen nijedan oglas</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.AdController.GetAdById(System.Guid)">
+            <summary>
+            Vraća jedan oglas na osnovu ID-a
+            </summary>
+            <returns>Oglas</returns>
+            <response code="200">Vraća jedan oglas</response>
+            <response code="404">Nije pronađen oglas sa tim ID-em</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.AdController.CreateAd(AdMicroservice.Models.AdCreationDto)">
+            <summary>
+            Kreira oglas
+            </summary>
+            <returns>Kreiran oglas</returns>
+            <response code="200">Vraća kreiran oglas</response>
+            <response code="500">Došlo je do greške na serveru prilikom unosa novog oglasa</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.AdController.UpdateAd(AdMicroservice.Models.AdUpdateDto)">
+            <summary>
+            Ažurira jedan oglas
+            </summary>
+            <returns>Potvrdu o modifikovanom oglas</returns>
+            <response code="200">Vraća ažuriran oglas</response>
+            <response code="400">Oglas koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja oglasa</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.AdController.DeleteComplaintType(System.Guid)">
+            <summary>
+            Vrši brisanje jednog oglasa na osnovu ID-a 
+            </summary>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Oglas uspešno obrisan</response>
+            <response code="404">Nije pronađen oglas za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja oglasa</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.AdController.GetAdOptions">
+            <summary>
+            Vraća opcije za rad sa oglasom
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdMicroservice.Controllers.JournalController.GetJournals(System.String)">
+            <summary>
+            Vraća sve sluzbene listove
+            </summary>
+            <param name="journalNumber">Broj sluzbenog lista</param>
+            <returns>Lista sluzbenih listova</returns>
+            <response code="200">Vraća listu sluzbenih listova</response>
+            <response code="404">Nije pronađen nijedan sluzbeni list</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.JournalController.GetJournalById(System.Guid)">
+            <summary>
+            Vraća jedan sluzbeni list na osnovu ID-a
+            </summary>
+            <returns>sluzbeni list</returns>
+            <response code="200">Vraća jedan sluzbeni list</response>
+            <response code="404">Nije pronađen sluzbeni list sa tim ID-em</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.JournalController.CreateJournal(AdMicroservice.Models.Journal.JournalCreationDto)">
+            <summary>
+            Kreira sluzbeni list
+            </summary>
+            <returns>Kreiran sluzbeni list</returns>
+            <response code="200">Vraća potvrdu o kreiranju sluzbenog lista</response>
+            <response code="500">Došlo je do greške na serveru prilikom unosa novog sluzbenog lista</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.JournalController.UpdateJournal(AdMicroservice.Models.Journal.JournalUpdateDto)">
+            <summary>
+            Ažurira jedan sluzbeni list
+            </summary>
+            <returns>Potvrdu o modifikovanom sluzbenom listu</returns>
+            <response code="200">Vraća ažuriran sluzbeni list</response>
+            <response code="400">sluzbeni list koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja sluzbenog lista</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.JournalController.DeleteJournal(System.Guid)">
+            <summary>
+            Vrši brisanje jednog sluzbenog lista na osnovu ID-a 
+            </summary>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Sluzbeni list uspešno obrisan</response>
+            <response code="404">Nije pronađen sluzbeni list za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja sluzbenog lista</response>
+        </member>
+        <member name="M:AdMicroservice.Controllers.JournalController.GetJournalOptions">
+            <summary>
+            Vraća opcije za rad sa sluzbenim listom
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AdMicroservice.Entities.Ad.AdConfirmation">
+            <summary>
+            Potvrda oglasa
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Ad.AdConfirmation.AdId">
+            <summary>
+            ID oglasa
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Ad.AdConfirmation.PublicationDate">
+            <summary>
+            Datum objavljivanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Ad.AdConfirmation.JournalId">
+            <summary>
+            ID sluzbenog lista
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Entities.Ad.AdModel">
+            <summary>
+            Predstavlja oglas
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Ad.AdModel.AdId">
+            <summary>
+            ID oglasa
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Ad.AdModel.PublicationDate">
+            <summary>
+            Datum objavljivanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Ad.AdModel.JournalId">
+            <summary>
+            ID sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Ad.AdModel.Journal">
+            <summary>
+            Sluzbeni list
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Entities.Journal.JournalConfirmation">
+            <summary>
+            Potvrda sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Journal.JournalConfirmation.JournalId">
+            <summary>
+            ID sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Journal.JournalConfirmation.JournalNumber">
+            <summary>
+            Broj sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Journal.JournalConfirmation.Municipality">
+            <summary>
+            Opstina
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Journal.JournalConfirmation.DateOfIssue">
+            <summary>
+            Datum izdavanja
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Entities.Journal.JournalModel">
+            <summary>
+            Predstavlja sluzbeni list
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Journal.JournalModel.JournalId">
+            <summary>
+            ID sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Journal.JournalModel.JournalNumber">
+            <summary>
+            Broj sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Journal.JournalModel.Municipality">
+            <summary>
+            Opstina
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Journal.JournalModel.DateOfIssue">
+            <summary>
+            Datum izdavanja
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.AdConfirmationDto">
+            <summary>
+            Potvrda oglasa DTO
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdConfirmationDto.AdId">
+            <summary>
+            ID oglasa
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdConfirmationDto.PublicationDate">
+            <summary>
+            Datum objavljivanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdConfirmationDto.JournalId">
+            <summary>
+            ID sluzbenog lista
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.AdCreationDto">
+            <summary>
+            Oglas DTO za kreiranje
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdCreationDto.PublicationDate">
+            <summary>
+            Datum objavljivanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdCreationDto.JournalId">
+            <summary>
+            ID sluzbenog lista
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.AdDto">
+            <summary>
+            Oglas DTO
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdDto.PublicationDate">
+            <summary>
+            Datum objavljivanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdDto.Journal">
+            <summary>
+            Sluzbeni list
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.AdUpdateDto">
+            <summary>
+            Oglas DTO za update
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdUpdateDto.AdId">
+            <summary>
+            ID oglasa
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdUpdateDto.PublicationDate">
+            <summary>
+            Datum objavljivanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdUpdateDto.JournalId">
+            <summary>
+            ID sluzbenog lista
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.Journal.JournalConfirmationDto">
+            <summary>
+            Potvrda sluzbenog lista DTO
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalConfirmationDto.JournalId">
+            <summary>
+            ID sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalConfirmationDto.JournalNumber">
+            <summary>
+            Broj sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalConfirmationDto.Municipality">
+            <summary>
+            Opstina
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalConfirmationDto.DateOfIssue">
+            <summary>
+            Datum izdavanja
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.Journal.JournalCreationDto">
+            <summary>
+            Sluzbeni list DTO za kreiranje
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalCreationDto.JournalNumber">
+            <summary>
+            Broj sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalCreationDto.Municipality">
+            <summary>
+            Opstina
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalCreationDto.DateOfIssue">
+            <summary>
+            Datum izdavanja
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.Journal.JournalDto">
+            <summary>
+            Sluzbeni list DTO
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalDto.JournalNumber">
+            <summary>
+            Broj sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalDto.Municipality">
+            <summary>
+            Opstina
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalDto.DateOfIssue">
+            <summary>
+            Datum izdavanja
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.Journal.JournalUpdateDto">
+            <summary>
+            Sluzbeni list DTO za update
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalUpdateDto.JournalId">
+            <summary>
+            ID sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalUpdateDto.JournalNumber">
+            <summary>
+            Broj sluzbenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalUpdateDto.Municipality">
+            <summary>
+            Opstina
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.Journal.JournalUpdateDto.DateOfIssue">
+            <summary>
+            Datum izdavanja
+            </summary>
+        </member>
+    </members>
+</doc>

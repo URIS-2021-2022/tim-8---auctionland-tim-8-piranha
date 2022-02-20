@@ -2,6 +2,7 @@
 using AdMicroservice.Entities.Journal;
 using AdMicroservice.Models.Journal;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -14,6 +15,8 @@ namespace AdMicroservice.Controllers
 {
     [ApiController]
     [Route("api/journals")]
+    [Produces("application/json", "application/xml")]
+    [Authorize]
     public class JournalController : ControllerBase
     {
         private readonly IJournalRepository journalRepository;
@@ -27,7 +30,16 @@ namespace AdMicroservice.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Vraća sve sluzbene listove
+        /// </summary>
+        /// <param name="journalNumber">Broj sluzbenog lista</param>
+        /// <returns>Lista sluzbenih listova</returns>
+        /// <response code="200">Vraća listu sluzbenih listova</response>
+        /// <response code="404">Nije pronađen nijedan sluzbeni list</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<List<JournalDto>> GetJournals(string journalNumber)
         {
             List<JournalModel> journals = journalRepository.GetJournals(journalNumber);
@@ -39,7 +51,15 @@ namespace AdMicroservice.Controllers
             return Ok(mapper.Map<List<JournalDto>>(journals));
         }
 
+        /// <summary>
+        /// Vraća jedan sluzbeni list na osnovu ID-a
+        /// </summary>
+        /// <returns>sluzbeni list</returns>
+        /// <response code="200">Vraća jedan sluzbeni list</response>
+        /// <response code="404">Nije pronađen sluzbeni list sa tim ID-em</response>
         [HttpGet("{journalId}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<JournalDto> GetJournalById(Guid journalId)
         {
             JournalModel journal = journalRepository.GetJournalById(journalId);
@@ -51,7 +71,15 @@ namespace AdMicroservice.Controllers
             return Ok(mapper.Map<JournalDto>(journal));
         }
 
+        /// <summary>
+        /// Kreira sluzbeni list
+        /// </summary>
+        /// <returns>Kreiran sluzbeni list</returns>
+        /// <response code="200">Vraća potvrdu o kreiranju sluzbenog lista</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom unosa novog sluzbenog lista</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<JournalConfirmationDto> CreateJournal([FromBody] JournalCreationDto journal)
         {
             try
@@ -67,7 +95,17 @@ namespace AdMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira jedan sluzbeni list
+        /// </summary>
+        /// <returns>Potvrdu o modifikovanom sluzbenom listu</returns>
+        /// <response code="200">Vraća ažuriran sluzbeni list</response>
+        /// <response code="400">sluzbeni list koji se ažurira nije pronađen</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja sluzbenog lista</response>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<JournalConfirmationDto> UpdateJournal(JournalUpdateDto journal)
         {
             try
@@ -90,6 +128,16 @@ namespace AdMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vrši brisanje jednog sluzbenog lista na osnovu ID-a 
+        /// </summary>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Sluzbeni list uspešno obrisan</response>
+        /// <response code="404">Nije pronađen sluzbeni list za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja sluzbenog lista</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{journalId}")]
         public IActionResult DeleteJournal(Guid journalId)
         {
@@ -111,7 +159,10 @@ namespace AdMicroservice.Controllers
         }
 
 
-
+        /// <summary>
+        /// Vraća opcije za rad sa sluzbenim listom
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         public IActionResult GetJournalOptions()
         {
