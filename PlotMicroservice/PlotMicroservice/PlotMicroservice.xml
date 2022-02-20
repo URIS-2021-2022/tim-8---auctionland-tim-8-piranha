@@ -1056,6 +1056,31 @@
             DTO for Buyer.
             </summary>
         </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerName">
+            <summary>
+            Buyer name.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerAddress">
+            <summary>
+            Buyer address (ex. Pap pavla 15)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerPhoneNumber">
+            <summary>
+            Buyer phone number (ex. 0603802918)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerAccountNumber">
+            <summary>
+            Buyer account number (ex. 1234567890)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerEmail">
+            <summary>
+            Buyer email (ex. test@gmail.com)
+            </summary>
+        </member>
         <member name="T:PlotMicroservice.Models.LogModel">
             <summary>
             Representation of Log.

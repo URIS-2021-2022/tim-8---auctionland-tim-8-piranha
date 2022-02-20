@@ -114,8 +114,20 @@ namespace PlotMicroservice.Controllers
                 return NotFound();
             }
 
+            PlotDto plotDto = Mapper.Map<PlotDto>(plot);
+
+            if(plot.BuyerId is not null)
+            {
+                var buyerDto = await BuyerService.SendGetRequestAsync("");
+
+                if(buyerDto is not null)
+                {
+                    plotDto.Buyer = buyerDto;
+                }
+            }
+
             await Logger.LogMessage(LogLevel.Information, "Plot found and successfully returned!", "Plot microservice", "GetPlotByIdAsync");
-            return Ok(Mapper.Map<PlotDto>(plot));
+            return Ok(plotDto);
         }
 
         /// <summary>
