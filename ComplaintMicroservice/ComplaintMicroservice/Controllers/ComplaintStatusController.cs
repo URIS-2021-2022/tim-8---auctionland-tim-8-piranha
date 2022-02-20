@@ -2,6 +2,7 @@
 using ComplaintMicroservice.Data.Status;
 using ComplaintMicroservice.Entities.ComplaintStatusEntities;
 using ComplaintMicroservice.Models.ComplaintStatusDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -14,6 +15,8 @@ namespace ComplaintMicroservice.Controllers
 {
     [ApiController]
     [Route("api/complaintStatus")]
+    [Produces("application/json", "application/xml")]
+    [Authorize]
     public class ComplaintStatusController : ControllerBase
     {
         private readonly IComplaintStatusRepository complaintStatusRepository;
@@ -27,7 +30,16 @@ namespace ComplaintMicroservice.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Vraća sve statuse zalbe
+        /// </summary>
+        /// <param name="Status">Status zalbe</param>
+        /// <returns>Lista statusa zalbe</returns>
+        /// <response code="200">Vraća listu statusa zalbe</response>
+        /// <response code="404">Nije pronađen nijedan status zalbe</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<List<ComplaintStatusDto>> GetComplaintStatuses(string Status)
         {
             List<ComplaintStatus> statuses = complaintStatusRepository.GetComplaintStatuses(Status);
@@ -39,7 +51,16 @@ namespace ComplaintMicroservice.Controllers
             return Ok(mapper.Map<List<ComplaintStatusDto>>(statuses));
         }
 
+
+        /// <summary>
+        /// Vraća jedan status zalbe na osnovu ID-a
+        /// </summary>
+        /// <returns>Status zalbe</returns>
+        /// <response code="200">Vraća jedan status zalbe</response>
+        /// <response code="404">Nije pronađen status zalbe sa tim ID-em</response>
         [HttpGet("{complaintStatusId}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ComplaintStatusDto> GetComplaintStatusById(Guid complaintStatusId)
         {
             ComplaintStatus status = complaintStatusRepository.GetComplaintStatusById(complaintStatusId);
@@ -51,7 +72,15 @@ namespace ComplaintMicroservice.Controllers
             return Ok(mapper.Map<ComplaintStatusDto>(status));
         }
 
+        /// <summary>
+        /// Kreira status zalbe
+        /// </summary>
+        /// <returns>Potvrda o kreiranju statusa zalbe</returns>
+        /// <response code="200">Vraća listu statusa zalbe</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom unosa novog statusa zalbe</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<ComplaintStatusConfirmationDto> CreateComplaintStatus([FromBody] ComplaintStatusCreationDto complaintStatus)
         {
             try
@@ -74,7 +103,17 @@ namespace ComplaintMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira jedan status zalbe
+        /// </summary>
+        /// <returns>Potvrdu o modifikovanom statusu zalbe</returns>
+        /// <response code="200">Vraća ažuriran status zalbe</response>
+        /// <response code="400">Status zalbe koji se ažurira nije pronađen</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja statusa zalbe</response>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<ComplaintStatusConfirmationDto> UpdateComplaintStatus(ComplaintStatusUpdateDto complaintStatus)
         {
             try
@@ -97,6 +136,16 @@ namespace ComplaintMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vrši brisanje jednog statusa zalbe na osnovu ID-a 
+        /// </summary>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Status zalbe uspešno obrisan</response>
+        /// <response code="404">Nije pronađen status zalbe za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja statusa zalbe</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{complaintStatusId}")]
         public IActionResult DeleteComplaintStatus(Guid complaintStatusId)
         {
@@ -118,7 +167,10 @@ namespace ComplaintMicroservice.Controllers
         }
 
 
-
+        /// <summary>
+        /// Vraća opcije za rad sa statusom zalbe
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         public IActionResult GetComplaintStatusOptions()
         {

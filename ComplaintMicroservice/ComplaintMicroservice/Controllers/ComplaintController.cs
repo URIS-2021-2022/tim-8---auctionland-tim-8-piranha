@@ -2,6 +2,7 @@
 using ComplaintMicroservice.Data;
 using ComplaintMicroservice.Entities.Complaint;
 using ComplaintMicroservice.Models.Complaint;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -14,6 +15,8 @@ namespace ComplaintMicroservice.Controllers
 {
     [ApiController]
     [Route("api/complaints")]
+    [Produces("application/json", "application/xml")]
+    [Authorize]
     public class ComplaintController : ControllerBase
     {
         private readonly IComplaintRepository complaintRepository;
@@ -27,7 +30,16 @@ namespace ComplaintMicroservice.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Vraća sve zalbe
+        /// </summary>
+        /// <param name="solutionNumber">Broj zalbe</param>
+        /// <returns>Lista zalbi</returns>
+        /// <response code="200">Vraća listu zalb</response>
+        /// <response code="404">Nije pronađena nijedna zalba</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<List<ComplaintDto>> GetComplaints(string solutionNumber)
         {
             List<Complaint> complaints = complaintRepository.GetComplaints(solutionNumber);
@@ -39,7 +51,15 @@ namespace ComplaintMicroservice.Controllers
             return Ok(mapper.Map<List<ComplaintDto>>(complaints));
         }
 
+        /// <summary>
+        /// Vraća jednu zalbu na osnovu ID-a
+        /// </summary>
+        /// <returns>Zalba</returns>
+        /// <response code="200">Vraća jednu zalbu</response>
+        /// <response code="404">Nije pronađena zalba sa tim ID-em</response>
         [HttpGet("{complaintId}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ComplaintDto> GetComplaintById(Guid complaintId)
         {
             Complaint com = complaintRepository.GetComplaintById(complaintId);
@@ -51,7 +71,15 @@ namespace ComplaintMicroservice.Controllers
             return Ok(mapper.Map<ComplaintDto>(com));
         }
 
+        /// <summary>
+        /// Kreira zalbu
+        /// </summary>
+        /// <returns>Potvrda o kreiranju zalbe</returns>
+        /// <response code="200">Vraća listu zalbi</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom unosa nove zalbe</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<ComplaintConfirmationDto> CreateComplaintEvent([FromBody] ComplaintCreationDto complaint)
         {
             try
@@ -68,7 +96,17 @@ namespace ComplaintMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira jednu zalbu
+        /// </summary>
+        /// <returns>Potvrdu o modifikovanoj zalbi</returns>
+        /// <response code="200">Vraća ažuriranu zalbu</response>
+        /// <response code="400">Zalba kojia se ažurira nije pronađena</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja zalbe</response>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<ComplaintConfirmationDto> UpdateComplaint(ComplaintUpdateDto complaint)
         {
             try
@@ -92,6 +130,16 @@ namespace ComplaintMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vrši brisanje jedne zalbe na osnovu ID-a 
+        /// </summary>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Zalba uspešno obrisana</response>
+        /// <response code="404">Nije pronađena zalba za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja zalbe</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{complaintId}")]
         public IActionResult DeleteComplaint(Guid complaintId)
         {
@@ -113,7 +161,10 @@ namespace ComplaintMicroservice.Controllers
         }
 
 
-
+        /// <summary>
+        /// Vraća opcije za rad sa zalbom
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         public IActionResult GetComplaintOptions()
         {
