@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lenovo\\source\\repos\\URIS\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj": {}
+    "C:\\Users\\PC\\source\\repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\source\\repos\\URIS\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj": {
+    "C:\\Users\\PC\\source\\repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\source\\repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj",
         "projectName": "DocumentMicroservice",
-        "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\DocumentMicroservice\\DocumentMicroservice\\obj\\",
+        "projectPath": "C:\\Users\\PC\\source\\repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\source\\repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,8 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://tfs.mca.mk/DefaultCollection/_packaging/MCA/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
@@ -45,13 +44,41 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[10.3.6, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.11.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[5.6.3, )"
+              "version": "[6.2.3, )"
             }
           },
           "imports": [
@@ -64,12 +91,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[5.0.12, 5.0.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
