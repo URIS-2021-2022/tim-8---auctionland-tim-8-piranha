@@ -112,7 +112,7 @@ namespace DocumentMicroservice.Controllers
                 await DocumentRepository.SaveChangesAsync();
 
                 
-               string uri = LinkGeneration.GetPathByAction("GetDocumentByIdAsync", "Document", new { documentId = confirmation.DocumentId });
+               string uri = LinkGeneration.GetPathByAction("GetDocumentById", "Document", new { documentId = confirmation.DocumentId });
                 //LinkGenerator --> nalazi putanju resu (naziv akcije koja se radi, naziv kontrollera bez sufiksa kontroller, new-> nesto sto jedinstveno identifikuje nas resur koji trenutno trazimo)
                 return Created(uri, Mapper.Map<DocumentConfirmationDto>(confirmation));
             }

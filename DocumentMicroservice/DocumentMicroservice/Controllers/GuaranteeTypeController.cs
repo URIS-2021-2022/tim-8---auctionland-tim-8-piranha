@@ -110,9 +110,9 @@ namespace DocumentMicroservice.Controllers
                     await GuaranteeTypeRepository.SaveChangesAsync();
 
 
-                    //string uri = LinkGeneration.GetPathByAction("GetGuaranteeTypeById", "GuaranteeType", new { guaranteeTypeId = confirmation.GuaranteeTypeID });
+                    string uri = LinkGeneration.GetPathByAction("GetGuaranteeTypeById", "GuaranteeType", new { GuaranteeTypeId = confirmation.GuaranteeTypeID });
 
-                    return Created("", Mapper.Map<GuaranteeTypeConfirmationDto>(confirmation));
+                    return Created(uri, Mapper.Map<GuaranteeTypeConfirmationDto>(confirmation));
                 }
                 catch (Exception e)
                 {

@@ -12,7 +12,7 @@ namespace DocumentMicroservice.Profiles
     {
         public DocumentStatusProfile()
         {
-
+            CreateMap<DocumentStatusConfirmation, DocumentStatusConfirmationDto>();
             CreateMap<DocumentStatus, DocumentStatusDto>();
             CreateMap<DocumentStatus, DocumentStatusConfirmation>();
             CreateMap<DocumentStatusCreationDto, DocumentStatus>();
