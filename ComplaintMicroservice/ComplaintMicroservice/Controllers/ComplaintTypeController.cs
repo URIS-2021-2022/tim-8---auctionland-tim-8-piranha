@@ -74,7 +74,7 @@ namespace ComplaintMicroservice.Controllers
         /// <summary>
         /// Kreira tip zalbe
         /// </summary>
-        /// <returns>Potvrda o kreiranju tipa zalbe</returns>
+        /// <returns>Kreiran tip zalbe</returns>
         /// <response code="200">Vraća listu tipova zalbe</response>
         /// <response code="500">Došlo je do greške na serveru prilikom unosa novog tipa zalbe</response>
         [HttpPost]

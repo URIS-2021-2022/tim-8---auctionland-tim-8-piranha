@@ -75,7 +75,7 @@ namespace ComplaintMicroservice.Controllers
         /// <summary>
         /// Kreira status zalbe
         /// </summary>
-        /// <returns>Potvrda o kreiranju statusa zalbe</returns>
+        /// <returns>Kreiran status zalbe</returns>
         /// <response code="200">Vraća listu statusa zalbe</response>
         /// <response code="500">Došlo je do greške na serveru prilikom unosa novog statusa zalbe</response>
         [HttpPost]

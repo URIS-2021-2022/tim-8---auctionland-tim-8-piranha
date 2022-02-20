@@ -76,7 +76,7 @@ namespace ComplaintMicroservice.Controllers
         /// Kreira dogadjaj na osnovu zalbe
         /// </summary>
         /// <returns>Potvrda o kreiranju dogadjaja na osnovu zalbe</returns>
-        /// <response code="200">Vraća listu dogadjaja na osnovu zalbe</response>
+        /// <response code="200">kreiran dogadjaj na osnovu zalbe</response>
         /// <response code="500">Došlo je do greške na serveru prilikom unosa novog dogadjaja na osnovu zalbe</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
