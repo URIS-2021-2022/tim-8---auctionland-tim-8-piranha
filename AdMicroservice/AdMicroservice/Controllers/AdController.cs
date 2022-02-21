@@ -1,4 +1,5 @@
 ﻿using AdMicroservice.Data;
+using AdMicroservice.Data.Journal;
 using AdMicroservice.Entities.Ad;
 using AdMicroservice.Models;
 using AutoMapper;
@@ -20,14 +21,16 @@ namespace AdMicroservice.Controllers
     public class AdController : ControllerBase
     {
         private readonly IAdRepository adRepository;
+        private readonly IJournalRepository journalRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
 
-        public AdController(IAdRepository adRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public AdController(IAdRepository adRepository, LinkGenerator linkGenerator, IMapper mapper, IJournalRepository journalRepository)
         {
             this.adRepository = adRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.journalRepository = journalRepository;
         }
 
         /// <summary>
@@ -119,8 +122,9 @@ namespace AdMicroservice.Controllers
                 }
                 AdModel a = mapper.Map<AdModel>(ad);
                 mapper.Map(a, oldAd);
+                a.Journal = journalRepository.GetJournalById(oldAd.JournalId);
                 adRepository.SaveChanges();
-                return Ok(mapper.Map<AdDto>(oldAd));
+                return Ok(a);
             }
             catch
             {
