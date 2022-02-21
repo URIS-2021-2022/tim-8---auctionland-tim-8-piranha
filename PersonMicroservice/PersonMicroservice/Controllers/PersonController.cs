@@ -134,9 +134,9 @@ namespace PersonMicroservice.Controllers
                 
                 return Ok(person);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom modifikacije licnosti." + ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom modifikacije licnosti.");
             }
         }
 

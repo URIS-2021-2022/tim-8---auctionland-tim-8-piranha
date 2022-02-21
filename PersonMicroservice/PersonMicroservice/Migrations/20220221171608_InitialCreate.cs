@@ -36,7 +36,7 @@ namespace PersonMicroservice.Migrations
                         column: x => x.PresidentId,
                         principalTable: "Persons",
                         principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,13 +54,13 @@ namespace PersonMicroservice.Migrations
                         column: x => x.BoardsBoardId,
                         principalTable: "Boards",
                         principalColumn: "BoardId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_BoardPerson_Persons_MembersPersonId",
                         column: x => x.MembersPersonId,
                         principalTable: "Persons",
                         principalColumn: "PersonId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(

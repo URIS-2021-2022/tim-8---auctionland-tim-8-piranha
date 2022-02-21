@@ -108,6 +108,7 @@ namespace PersonMicroservice.Controllers
 
                 Board mappedBoard = mapper.Map<Board>(board);
                 mappedBoard.Members = members;
+                mappedBoard.President = await personRepository.GetPersonById(mappedBoard.PresidentId);
 
                 BoardConfirmation newBoard = await boardRepository.CreateBoard(mappedBoard);
 
@@ -115,9 +116,9 @@ namespace PersonMicroservice.Controllers
 
                 return Created(location, mapper.Map<BoardConfirmationDto>(newBoard));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom kreiranja nove komisije.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom kreiranja nove komisije." + ex);
             }
         }
 
@@ -125,6 +126,7 @@ namespace PersonMicroservice.Controllers
         /// Modifikacija komisije
         /// </summary>
         /// <param name="board">Model komisije</param>
+        /// /// <param name="boardId">Id komisije</param>
         /// <returns>Potvrda o izmeni komisije</returns>
         /// <response code="200">Komisija je uspešno izmenjena</response>
         /// <response code="404">Nije pronađena komisija sa unetim ID-em</response>
@@ -134,11 +136,11 @@ namespace PersonMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<BoardConfirmationDto>> UpdateBoard(BoardUpdateDto board)
+        public async Task<ActionResult<BoardConfirmationDto>> UpdateBoard(Guid boardId, [FromBody] BoardUpdateDto board)
         {
             try
             {
-                var oldBoard = await boardRepository.GetBoardById(board.BoardId);
+                var oldBoard = await boardRepository.GetBoardById(boardId);
 
                 if (oldBoard == null)
                 {
@@ -162,6 +164,7 @@ namespace PersonMicroservice.Controllers
                         }
                     }
                 }
+
                 oldBoard.Members = members;
                 oldBoard.President = await personRepository.GetPersonById(oldBoard.PresidentId);
 
@@ -169,9 +172,9 @@ namespace PersonMicroservice.Controllers
                 
                 return Ok(mapper.Map<BoardConfirmationDto>(oldBoard));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom modifikacije komisije.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom modifikacije komisije." + ex);
             }
         }
 

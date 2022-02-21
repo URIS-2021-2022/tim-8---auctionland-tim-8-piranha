@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace PersonMicroservice.Entities
 
         public string Function { get; set; }
 
+        [NotMapped]
         public List<Board> Boards { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using PersonMicroservice.Entities;
 namespace PersonMicroservice.Migrations
 {
     [DbContext(typeof(PersonContext))]
-    [Migration("20220220231840_InitialCreate")]
+    [Migration("20220221171608_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
