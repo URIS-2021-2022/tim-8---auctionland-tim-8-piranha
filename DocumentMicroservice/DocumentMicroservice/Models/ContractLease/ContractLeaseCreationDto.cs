@@ -16,7 +16,7 @@ namespace DocumentMicroservice.Models.ContractLease
         /// <summary>
         /// Maturities - Rokovi dospeća
         /// </summary>
-        public int[] Maturities { get; set; }
+       // public int[] Maturities { get; set; }
 
 
         /// <summary>

@@ -4,14 +4,16 @@ using BuyerMicroservice.Entities.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuyerMicroservice.Migrations
 {
     [DbContext(typeof(BuyerContext))]
-    partial class BuyerContextModelSnapshot : ModelSnapshot
+    [Migration("20220221190431_BuyerM")]
+    partial class BuyerM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,12 +73,9 @@ namespace BuyerMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Discriminator")
+                    b.Property<string>("BuyerType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsIndividual")
-                        .HasColumnType("bit");
 
                     b.Property<string>("accountNumber")
                         .HasColumnType("nvarchar(max)");
@@ -125,7 +124,7 @@ namespace BuyerMicroservice.Migrations
 
                     b.ToTable("buyer");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Buyer");
+                    b.HasDiscriminator<string>("BuyerType").HasValue("Buyer");
                 });
 
             modelBuilder.Entity("BuyerMicroservice.Entities.ContactPerson", b =>
@@ -206,7 +205,6 @@ namespace BuyerMicroservice.Migrations
                         new
                         {
                             buyerID = new Guid("0ec20a3b-fd39-4c2e-8062-7d1664eb5381"),
-                            IsIndividual = true,
                             accountNumber = "4224234876",
                             addresse = "Prvomajska 5",
                             authorizedPersonID = new Guid("07af89f2-feee-4680-b489-9d0e31699588"),
@@ -241,7 +239,6 @@ namespace BuyerMicroservice.Migrations
                         new
                         {
                             buyerID = new Guid("861f142c-4707-416d-ad14-7debbd2031ed"),
-                            IsIndividual = false,
                             accountNumber = "0074234876",
                             addresse = "8765439744578",
                             authorizedPersonID = new Guid("07af89f2-feee-4680-b489-9d0e31699588"),
