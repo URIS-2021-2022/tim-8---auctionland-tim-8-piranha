@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BuyerMicroservice.Entities;
 
 namespace BuyerMicroservice.Models.AuthorizedPerson
 {
@@ -21,6 +22,6 @@ namespace BuyerMicroservice.Models.AuthorizedPerson
         public string country { get; set; }
 
 
-        public Guid boardID { get; set; }
+        //public BoardNumber[] boardNums { get; set; }
     }
 }

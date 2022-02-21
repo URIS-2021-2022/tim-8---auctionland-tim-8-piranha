@@ -14,8 +14,8 @@ namespace BuyerMicroservice.Validators
         {
             RuleFor(priority => priority.priorityType)
                  .NotEmpty()
-                 .NotNull()
-                 .Matches("^[a - zA - Z] *$");
+                 .NotNull();
+                
            
         }
     }

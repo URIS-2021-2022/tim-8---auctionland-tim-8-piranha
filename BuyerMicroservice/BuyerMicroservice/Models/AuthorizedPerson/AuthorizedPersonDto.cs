@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuyerMicroservice.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +22,6 @@ namespace BuyerMicroservice.Models.AuthorizedPerson
         public string country { get; set; }
 
 
-        public Guid boardID { get; set; }
+        //public BoardNumber[] boardNums { get; set; }
     }
 }

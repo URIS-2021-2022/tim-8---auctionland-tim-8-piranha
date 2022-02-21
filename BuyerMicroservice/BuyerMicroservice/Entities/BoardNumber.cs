@@ -7,7 +7,7 @@ namespace BuyerMicroservice.Entities
 {
     public class BoardNumber
     {
-        public List<int> boardNums = new List<int>();
+        public int boardNums { get; set; }
 
         
     }

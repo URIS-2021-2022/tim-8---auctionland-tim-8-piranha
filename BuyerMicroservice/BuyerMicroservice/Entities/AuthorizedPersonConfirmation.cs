@@ -23,7 +23,7 @@ namespace BuyerMicroservice.Entities
      
         public string country { get; set; }
 
-        public BoardNumber boardNumbers { get; set; }
+        //public BoardNumber[] boardNums { get; set; }
 
     }
 }

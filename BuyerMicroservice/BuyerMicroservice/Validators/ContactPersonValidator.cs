@@ -13,13 +13,13 @@ namespace BuyerMicroservice.Validators
         {
             RuleFor(contactPerson => contactPerson.name)
                 .NotEmpty()
-                .NotNull()
-                .Matches("^[a - zA - Z] *$");
+                .NotNull();
+
 
             RuleFor(contactPerson => contactPerson.surname)
                 .NotEmpty()
-                .NotNull()
-                .Matches("^[a - zA - Z] *$");
+                .NotNull();
+                
 
             RuleFor(contactPerson => contactPerson.phone)
                 .NotEmpty()
