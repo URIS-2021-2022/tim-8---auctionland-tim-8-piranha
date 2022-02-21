@@ -2,6 +2,7 @@ using AdMicroservice.Data;
 using AdMicroservice.Data.Ad;
 using AdMicroservice.Data.Journal;
 using AdMicroservice.Entities;
+using AdMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,6 +42,7 @@ namespace AdMicroservice
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IAdRepository, AdRepository>();
             services.AddScoped<IJournalRepository, JournalRepository>();
+            services.AddScoped<ILoggerService, LoggerService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AdMicroservice", Version = "v1" });

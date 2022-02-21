@@ -1,11 +1,13 @@
 ﻿using AdMicroservice.Data.Journal;
 using AdMicroservice.Entities.Journal;
 using AdMicroservice.Models.Journal;
+using AdMicroservice.ServiceCalls;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +24,14 @@ namespace AdMicroservice.Controllers
         private readonly IJournalRepository journalRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
+        private readonly ILoggerService Logger;
 
-        public JournalController(IJournalRepository journalRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public JournalController(IJournalRepository journalRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService loggerService)
         {
             this.journalRepository= journalRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            Logger = loggerService;
         }
 
         /// <summary>
@@ -45,9 +49,10 @@ namespace AdMicroservice.Controllers
             List<JournalModel> journals = journalRepository.GetJournals(journalNumber);
             if (journals == null || journals.Count == 0)
             {
+                Logger.LogMessage(LogLevel.Warning, "Journals list is empty!", "Ad microservice", "GetJournals");
                 return NoContent();
             }
-
+            Logger.LogMessage(LogLevel.Information, "Journals list successfully returned!", "Ad microservice", "GetJournals");
             return Ok(mapper.Map<List<JournalDto>>(journals));
         }
 
@@ -66,8 +71,10 @@ namespace AdMicroservice.Controllers
 
             if (journal == null)
             {
+                Logger.LogMessage(LogLevel.Warning, "Journal not found!", "Ad microservice", "GetJournalById");
                 return NotFound();
             }
+            Logger.LogMessage(LogLevel.Information, "Journal found and successfully returned!", "Ad microservice", "GetJournalById");
             return Ok(mapper.Map<JournalDto>(journal));
         }
 
@@ -87,10 +94,12 @@ namespace AdMicroservice.Controllers
                 JournalModel jr = mapper.Map<JournalModel>(journal);
                 JournalConfirmation confirmation = journalRepository.CreateJournal(jr);
                 string location = linkGenerator.GetPathByAction("GetJournalById", "Journal", new { journalId = jr.JournalId });
+                Logger.LogMessage(LogLevel.Information, "Journal successfully created!", "Ad microservice", "CreateJournal");
                 return Created(location, mapper.Map<JournalConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
+                Logger.LogMessage(LogLevel.Error, "Journal creation failed!", "Ad microservice", "CreateJournal");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error" + " " + ex.Message);
             }
         }
@@ -115,15 +124,18 @@ namespace AdMicroservice.Controllers
 
                 if (oldJournal == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Journal not found!", "Ad microservice", "UpdateJournal");
                     return NotFound();
                 }
                 JournalModel jr = mapper.Map<JournalModel>(journal);
                 mapper.Map(jr, oldJournal);
                 journalRepository.SaveChanges();
+                Logger.LogMessage(LogLevel.Information, "Journal successfully updated!", "Ad microservice", "UpdateJournal");
                 return Ok(mapper.Map<JournalDto>(oldJournal));
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "Journal update failed!", "Ad microservice", "UpdateJournal");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -147,13 +159,16 @@ namespace AdMicroservice.Controllers
 
                 if (journal == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Journal not found!", "Ad microservice", "DeleteJournal");
                     return NotFound();
                 }
                 journalRepository.DeleteJournal(journalId);
+                Logger.LogMessage(LogLevel.Information, "Journal deleted successfully!", "Ad microservice", "DeleteJournal");
                 return NoContent();
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "Journal deletion failed!", "Ad microservice", "DeleteJournal");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }

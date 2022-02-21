@@ -2,11 +2,13 @@
 using AdMicroservice.Data.Journal;
 using AdMicroservice.Entities.Ad;
 using AdMicroservice.Models;
+using AdMicroservice.ServiceCalls;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +26,16 @@ namespace AdMicroservice.Controllers
         private readonly IJournalRepository journalRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
+        private readonly ILoggerService Logger;
 
-        public AdController(IAdRepository adRepository, LinkGenerator linkGenerator, IMapper mapper, IJournalRepository journalRepository)
+        public AdController(IAdRepository adRepository, LinkGenerator linkGenerator, IMapper mapper, 
+            IJournalRepository journalRepository, ILoggerService loggerService)
         {
             this.adRepository = adRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.journalRepository = journalRepository;
+            Logger = loggerService;
         }
 
         /// <summary>
@@ -48,9 +53,10 @@ namespace AdMicroservice.Controllers
             List<AdModel> ads = adRepository.GetAds(publicationDate);
             if (ads == null || ads.Count == 0)
             {
+                Logger.LogMessage(LogLevel.Warning, "Ads list is empty!", "Ad microservice", "GetAds");
                 return NoContent();
             }
-
+            Logger.LogMessage(LogLevel.Information, "Ads list successfully returned!", "Ad microservice", "GetAds");
             return Ok(mapper.Map<List<AdDto>>(ads));
         }
 
@@ -69,8 +75,10 @@ namespace AdMicroservice.Controllers
 
             if (ad == null)
             {
+                Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "GetAdById");
                 return NotFound();
             }
+            Logger.LogMessage(LogLevel.Information, "Ad found and successfully returned!", "Ad microservice", "GetAdById");
             return Ok(mapper.Map<AdDto>(ad));
         }
 
@@ -90,10 +98,12 @@ namespace AdMicroservice.Controllers
                 AdModel a = mapper.Map<AdModel>(ad);
                 AdConfirmation confirmation = adRepository.CreateAd(a);
                 string location = linkGenerator.GetPathByAction("GetAdById", "Ad", new { adId = a.AdId });
+                Logger.LogMessage(LogLevel.Information, "Ad successfully created!", "Ad microservice", "CreateAd");
                 return Created(location, mapper.Map<AdConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
+                Logger.LogMessage(LogLevel.Error, "Ad creation failed!", "Ad microservice", "CreateAd");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error" + " " + ex.Message);
             }
         }
@@ -118,16 +128,19 @@ namespace AdMicroservice.Controllers
 
                 if (oldAd == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "UpdateAd");
                     return NotFound();
                 }
                 AdModel a = mapper.Map<AdModel>(ad);
                 mapper.Map(a, oldAd);
                 a.Journal = journalRepository.GetJournalById(oldAd.JournalId);
                 adRepository.SaveChanges();
+                Logger.LogMessage(LogLevel.Information, "Ad successfully updated!", "Ad microservice", "UpdateAd");
                 return Ok(a);
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "Ad update failed!", "Ad microservice", "UpdateAd");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -151,13 +164,16 @@ namespace AdMicroservice.Controllers
 
                 if (ad == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "DeleteAd");
                     return NotFound();
                 }
                 adRepository.DeleteAd(adId);
+                Logger.LogMessage(LogLevel.Information, "Ad deleted successfully!", "Ad microservice", "DeleteAd");
                 return NoContent();
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "Ad deletion failed!", "Ad microservice", "DeleteAd");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
