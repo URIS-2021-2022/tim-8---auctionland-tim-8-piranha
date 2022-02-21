@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.Individual
 {
-    public class IndividualDto : BuyerDto
+    public class IndividualConfirmationDto : BuyerConfirmationDto
     {
         public string surname { get; set; }
-        public string JMBG { get; set; }
 
+        public string JMBG { get; set; }
     }
 }

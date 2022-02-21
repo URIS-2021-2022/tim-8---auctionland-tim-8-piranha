@@ -24,6 +24,7 @@ namespace BuyerMicroservice.Data.Repositories
         public async Task<BuyerConfirmation> CreateBuyerAsync(Buyer buyer)
         {
             var createdBuyer =await buyerContext.AddAsync(buyer);
+          
             return mapper.Map<BuyerConfirmation>(createdBuyer.Entity);
         }
 

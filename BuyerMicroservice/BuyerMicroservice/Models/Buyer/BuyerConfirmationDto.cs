@@ -9,11 +9,9 @@ namespace BuyerMicroservice.Models.Buyer
     {
         public Guid priorityID { get; set; }
 
-        public bool IsIndividual { get; set; }
-
         public int realizedArea { get; set; }
 
-        public string authorizedPerson { get; set; }
+        public Guid authorizedPersonID { get; set; }
 
         public bool hasBan { get; set; }
 

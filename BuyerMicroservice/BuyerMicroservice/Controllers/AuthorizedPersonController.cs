@@ -25,6 +25,8 @@ namespace BuyerMicroservice.Controllers
         private readonly IMapper mapper;
         private readonly AuthorizedPersonValidator validator;
 
+       
+
         public AuthorizedPersonController(IAuthorizedPersonRepository authorizedPersonRepository, IMapper mapper, LinkGenerator linkGenerator, AuthorizedPersonValidator validator)
         {
             this.authorizedPersonRepository = authorizedPersonRepository;

@@ -15,9 +15,7 @@ namespace BuyerMicroservice.Validators
                 .NotEmpty()
                 .NotNull();
 
-            RuleFor(buyer => buyer.IsIndividual)
-                .NotEmpty()
-                .NotNull();
+           
 
 
             RuleFor(buyer => buyer.realizedArea)

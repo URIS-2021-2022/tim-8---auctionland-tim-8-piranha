@@ -12,7 +12,7 @@ namespace BuyerMicroservice.Models.Buyer
        
         public Guid priorityID { get; set; }
 
-        public bool IsIndividual { get; set; }
+    
 
         public int realizedArea { get; set; }
 

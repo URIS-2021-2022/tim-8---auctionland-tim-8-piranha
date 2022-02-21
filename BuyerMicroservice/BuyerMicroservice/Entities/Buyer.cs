@@ -16,14 +16,10 @@ namespace BuyerMicroservice.Entities
         [ForeignKey("Priority")]
         public Guid priorityID { get; set; }
 
-        public Priority priority { get; set; }
-
-        public bool IsIndividual { get; set; }
+        public Priority priority { get; set; } 
 
         public int realizedArea { get; set; }
         
-       
-
         [ForeignKey("AuthorizedPerson")]
         public Guid authorizedPersonID { get; set; }
 

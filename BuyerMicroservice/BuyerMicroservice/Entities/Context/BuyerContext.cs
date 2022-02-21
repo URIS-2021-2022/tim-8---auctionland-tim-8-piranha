@@ -19,16 +19,15 @@ namespace BuyerMicroservice.Entities.Context
 
         public DbSet<ContactPerson> contactPerson { get; set; }
 
-        public DbSet<Individual> individual { get; set; }
-        
-        public DbSet<LegalEntity> legalEntity { get; set; }
-
         public DbSet<Buyer> buyer { get; set; }
 
         public DbSet<AuthorizedPerson> authorizedPerson { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Buyer>(
+            e => e.HasDiscriminator<string>("BuyerType")
+        );
             //Authorized person 
             builder.Entity<AuthorizedPerson>().HasData(
                new
@@ -54,25 +53,6 @@ namespace BuyerMicroservice.Entities.Context
                    
                });
 
-
-
-            //Board number
-            /*builder.Entity<BoardNumber>().HasData(
-               new
-               {
-                  
-                   boardNum = 1
-                  
-               });
-            builder.Entity<BoardNumber>().HasData(
-              new
-              {
-               
-                  boardNum = "2"
-              });*/
-
-
-            
            
             //Contact person 
             builder.Entity<ContactPerson>().HasData(
@@ -98,7 +78,6 @@ namespace BuyerMicroservice.Entities.Context
               new
               {
                   buyerID = Guid.Parse("0ec20a3b-fd39-4c2e-8062-7d1664eb5381"),
-                  IsIndividual = true,
                   authorizedPersonID= Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588"),
                   durationOfBanInYear = 1,
                   hasBan = true,
@@ -125,7 +104,6 @@ namespace BuyerMicroservice.Entities.Context
              new
              {
                   buyerID = Guid.Parse("861f142c-4707-416d-ad14-7debbd2031ed"),
-                 IsIndividual=false,
                  authorizedPersonID=Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588"),
                  durationOfBanInYear = 1,
                  hasBan = true,

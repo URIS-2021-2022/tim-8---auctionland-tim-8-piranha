@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.LegalEntity
 {
-    public class LegalEntityDto : BuyerDto
+    public class LegalEntityConfirmationDto : BuyerConfirmationDto
     {
         public string identificationNumber { get; set; }
 
         public string fax { get; set; }
-
     }
 }

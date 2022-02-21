@@ -12,13 +12,11 @@ namespace BuyerMicroservice.Models.Buyer
         
         public Guid priorityID { get; set; }
 
-        public bool IsIndividual { get; set; }
-
         public int realizedArea { get; set; }
 
        // public string paymentID { get; set; }
         
-        public string authorizedPerson { get; set; }
+        public Guid authorizedPersonID { get; set; }
 
         public bool hasBan { get; set; }
 
@@ -28,6 +26,18 @@ namespace BuyerMicroservice.Models.Buyer
 
         public DateTime? endDateOfBan { get; set; }
 
-       // public Guid publicTender { get; set; }
+        public string name { get; set; }
+
+        public string addresse { get; set; }
+
+        public string phone1 { get; set; }
+
+        public string phone2 { get; set; }
+
+        public string email { get; set; }
+
+        public string accountNumber { get; set; }
+
+        // public Guid publicTender { get; set; }
     }
 }

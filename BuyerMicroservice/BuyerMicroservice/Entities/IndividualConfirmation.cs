@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Entities
 {
-    public class IndividualConfirmation : Buyer
+    public class IndividualConfirmation : BuyerConfirmation
     {
         
 

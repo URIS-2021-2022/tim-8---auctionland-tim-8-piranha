@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
 
 namespace BuyerMicroservice
 {
@@ -36,7 +37,14 @@ namespace BuyerMicroservice
             }).AddXmlDataContractSerializerFormatters();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+
             services.AddScoped<IBuyerRepository, BuyerRepository>();
+            services.AddScoped<IAuthorizedPersonRepository, AuthorizedPersonRepository>();
+            services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
+            
+            services.AddScoped<IPriorityRepository, PriorityRepository>();
+
 
 
             services.AddSwaggerGen(c =>
