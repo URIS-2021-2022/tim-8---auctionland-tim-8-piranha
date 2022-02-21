@@ -4,10 +4,12 @@ using ComplaintMicroservice.Data.Event;
 using ComplaintMicroservice.Data.Status;
 using ComplaintMicroservice.Entities.Complaint;
 using ComplaintMicroservice.Models.Complaint;
+using ComplaintMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +29,12 @@ namespace ComplaintMicroservice.Controllers
         private readonly IComplaintEventRepository complaintEventRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
+        private readonly ILoggerService Logger;
 
-        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, IMapper mapper, IComplaintTypeRepository complaintTypeRepository, IComplaintStatusRepository complaintStatusRepository, IComplaintEventRepository complaintEventRepository)
+        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, 
+            IMapper mapper, IComplaintTypeRepository complaintTypeRepository, 
+            IComplaintStatusRepository complaintStatusRepository, 
+            IComplaintEventRepository complaintEventRepository, ILoggerService loggerService)
         {
             this.complaintRepository = complaintRepository;
             this.linkGenerator = linkGenerator;
@@ -36,6 +42,7 @@ namespace ComplaintMicroservice.Controllers
             this.complaintTypeRepository = complaintTypeRepository;
             this.complaintStatusRepository = complaintStatusRepository;
             this.complaintEventRepository = complaintEventRepository;
+            Logger = loggerService;
         }
 
         /// <summary>
@@ -53,9 +60,10 @@ namespace ComplaintMicroservice.Controllers
             List<Complaint> complaints = complaintRepository.GetComplaints(solutionNumber);
             if (complaints == null || complaints.Count == 0)
             {
+                Logger.LogMessage(LogLevel.Warning, "Complaints list is empty!", "Complaint microservice", "GetComplaints");
                 return NoContent();
             }
-
+            Logger.LogMessage(LogLevel.Information, "Complaints list successfully returned!", "Complaint microservice", "GetComplaints");
             return Ok(mapper.Map<List<ComplaintDto>>(complaints));
         }
 
@@ -74,8 +82,10 @@ namespace ComplaintMicroservice.Controllers
 
             if (com == null)
             {
+                Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "GetComplaintById");
                 return NotFound();
             }
+            Logger.LogMessage(LogLevel.Information, "Complaint found and successfully returned!", "Complaint microservice", "GetComplaintById");
             return Ok(mapper.Map<ComplaintDto>(com));
         }
 
@@ -96,10 +106,12 @@ namespace ComplaintMicroservice.Controllers
                 Complaint com = mapper.Map<Complaint>(complaint);
                 ComplaintConfirmation confirmation = complaintRepository.CreateComplaint(com);
                 string location = linkGenerator.GetPathByAction("GetComplaintById", "Complaint", new { complaintId = com.ComplaintId });
+                Logger.LogMessage(LogLevel.Information, "Complaint successfully created!", "Complaint microservice", "CreateComplaint");
                 return Created(location, mapper.Map<ComplaintConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
+                Logger.LogMessage(LogLevel.Error, "Complaint creation failed!", "Complaint microservice", "CreateComplaint");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error" + " " + ex.Message);
             }
         }
@@ -124,6 +136,7 @@ namespace ComplaintMicroservice.Controllers
 
                 if (oldComplaint == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "UpdateComplaint");
                     return NotFound();
                 }
                 Complaint com = mapper.Map<Complaint>(complaint);
@@ -133,10 +146,12 @@ namespace ComplaintMicroservice.Controllers
                 com.ComplaintEvent = complaintEventRepository.GetComplaintEventById(oldComplaint.ComplaintEventId);
                 complaintRepository.UpdateComplaint(com);
                 string location = linkGenerator.GetPathByAction("GetComplaintById", "Complaint", new { complaintId = com.ComplaintId });
+                Logger.LogMessage(LogLevel.Information, "Complaint successfully updated!", "Complaint microservice", "UpdateComplaint");
                 return Ok(com);
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "Complaint update failed!", "Complaint microservice", "UpdateComplaint");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -160,13 +175,16 @@ namespace ComplaintMicroservice.Controllers
 
                 if (com == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "DeleteComplaint");
                     return NotFound();
                 }
                 complaintRepository.DeleteComplaint(complaintId);
+                Logger.LogMessage(LogLevel.Information, "Complaint deleted successfully!", "Complaint microservice", "DeleteComplaint");
                 return NoContent();
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "Complaint deletion failed!", "Complaint microservice", "DeleteComplaint");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }

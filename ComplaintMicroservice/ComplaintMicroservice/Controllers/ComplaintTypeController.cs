@@ -2,10 +2,12 @@
 using ComplaintMicroservice.Data;
 using ComplaintMicroservice.Entities;
 using ComplaintMicroservice.Models;
+using ComplaintMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +24,14 @@ namespace ComplaintMicroservice.Controllers
         private readonly IComplaintTypeRepository complaintTypeRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
+        private readonly ILoggerService Logger;
 
-        public ComplaintTypeController(IComplaintTypeRepository complaintTypeRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public ComplaintTypeController(IComplaintTypeRepository complaintTypeRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService loggerService)
         {
             this.complaintTypeRepository = complaintTypeRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            Logger = loggerService;
         }
 
         /// <summary>
@@ -45,9 +49,10 @@ namespace ComplaintMicroservice.Controllers
             List<ComplaintTypeModel> types = complaintTypeRepository.GetComplaintTypes(complaintType);
             if(types==null || types.Count == 0)
             {
+                Logger.LogMessage(LogLevel.Warning, "Complaint types list is empty!", "Complaint microservice", "GetComplaintTypes");
                 return NoContent();
             }
-
+            Logger.LogMessage(LogLevel.Information, "Complaint types list successfully returned!", "Complaint microservice", "GetComplaintTypes");
             return Ok(mapper.Map<List<ComplaintTypeDto>>(types));
         }
 
@@ -66,8 +71,10 @@ namespace ComplaintMicroservice.Controllers
 
             if (type == null)
             {
+                Logger.LogMessage(LogLevel.Warning, "Complaint type not found!", "Complaint microservice", "GetComplaintTypeById");
                 return NotFound();
             }
+            Logger.LogMessage(LogLevel.Information, "Complaint type found and successfully returned!", "Complaint microservice", "GetComplaintTypeById");
             return Ok(mapper.Map<ComplaintTypeDto>(type));
         }
 
@@ -88,16 +95,19 @@ namespace ComplaintMicroservice.Controllers
 
                 if (!modelValid)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Complaint type is not valid!", "Complaint microservice", "CreateComplaintType");
                     return BadRequest("Complaint type should not be empty");
                 }
 
                 ComplaintTypeModel type= mapper.Map<ComplaintTypeModel>(complaintType);
                 ComplaintTypeConfirmation confirmation = complaintTypeRepository.CreateComplaintType(type);
                 string location = linkGenerator.GetPathByAction("GetComplaintTypeById", "ComplaintType", new { complaintTypeId = type.ComplaintTypeId });
+                Logger.LogMessage(LogLevel.Information, "Complaint type successfully created!", "Complaint microservice", "CreateComplaintType");
                 return Created(location, mapper.Map<ComplaintTypeConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
+                Logger.LogMessage(LogLevel.Error, "ComplaintType creation failed!", "Complaint microservice", "CreateComplaintType");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error" + " " + ex.Message);
             }
         }
@@ -121,15 +131,18 @@ namespace ComplaintMicroservice.Controllers
 
                 if (oldComplaintType == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Complaint type not found!", "Complaint microservice", "UpdateComplaintType");
                     return NotFound();
                 }
                 ComplaintTypeModel type = mapper.Map<ComplaintTypeModel>(complaintType);
                 mapper.Map(type, oldComplaintType);
                 complaintTypeRepository.SaveChanges();
+                Logger.LogMessage(LogLevel.Information, "Complaint type successfully updated!", "Complaint microservice", "UpdateComplaintType");
                 return Ok(mapper.Map<ComplaintTypeDto>(oldComplaintType));
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "ComplaintType update failed!", "Complaint microservice", "UpdateComplaintType");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -153,13 +166,16 @@ namespace ComplaintMicroservice.Controllers
 
                 if (type == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Complaint type not found!", "Complaint microservice", "DeleteComplaintType");
                     return NotFound();
                 }
                 complaintTypeRepository.DeleteComplaintType(complaintTypeId);
+                Logger.LogMessage(LogLevel.Information, "Complaint type deleted successfully!", "Complaint microservice", "DeleteComplaintType");
                 return NoContent();
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "Complaint type deletion failed!", "Complaint microservice", "DeleteComplaintType");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }

@@ -2,10 +2,12 @@
 using ComplaintMicroservice.Data.Status;
 using ComplaintMicroservice.Entities.ComplaintStatusEntities;
 using ComplaintMicroservice.Models.ComplaintStatusDto;
+using ComplaintMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +24,14 @@ namespace ComplaintMicroservice.Controllers
         private readonly IComplaintStatusRepository complaintStatusRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
+        private readonly ILoggerService Logger;
 
-        public ComplaintStatusController(IComplaintStatusRepository complaintStatusRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public ComplaintStatusController(IComplaintStatusRepository complaintStatusRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService loggerService)
         {
             this.complaintStatusRepository = complaintStatusRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            Logger = loggerService;
         }
 
         /// <summary>
@@ -45,9 +49,10 @@ namespace ComplaintMicroservice.Controllers
             List<ComplaintStatus> statuses = complaintStatusRepository.GetComplaintStatuses(Status);
             if (statuses == null || statuses.Count == 0)
             {
+                Logger.LogMessage(LogLevel.Warning, "Complaint statuses list is empty!", "Complaint microservice", "GetComplaintStatuses");
                 return NoContent();
             }
-
+            Logger.LogMessage(LogLevel.Information, "Complaint statuses list successfully returned!", "Complaint microservice", "GetComplaintStatuses");
             return Ok(mapper.Map<List<ComplaintStatusDto>>(statuses));
         }
 
@@ -67,8 +72,10 @@ namespace ComplaintMicroservice.Controllers
 
             if (status == null)
             {
+                Logger.LogMessage(LogLevel.Warning, "Complaint status not found!", "Complaint microservice", "GetComplaintStatusById");
                 return NotFound();
             }
+            Logger.LogMessage(LogLevel.Information, "Complaint status found and successfully returned!", "Complaint microservice", "GetComplaintStatusById");
             return Ok(mapper.Map<ComplaintStatusDto>(status));
         }
 
@@ -89,16 +96,19 @@ namespace ComplaintMicroservice.Controllers
 
                 if (!modelValid)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Complaint status is not valid!", "Complaint microservice", "CreateComplaintStatus");
                     return BadRequest("Complaint status should not be empty");
                 }
 
                 ComplaintStatus status = mapper.Map<ComplaintStatus>(complaintStatus);
                 ComplaintStatusConfirmation confirmation = complaintStatusRepository.CreateComplaintStatus(status);
                 string location = linkGenerator.GetPathByAction("GetComplaintStatusById", "ComplaintStatus", new { complaintStatusId = status.ComplaintStatusId });
+                Logger.LogMessage(LogLevel.Information, "Complaint status successfully created!", "Complaint microservice", "CreateComplaintStatus");
                 return Created(location, mapper.Map<ComplaintStatusConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
+                Logger.LogMessage(LogLevel.Error, "ComplaintStatus creation failed!", "Complaint microservice", "CreateComplaintStatus");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error" + " " + ex.Message);
             }
         }
@@ -123,15 +133,18 @@ namespace ComplaintMicroservice.Controllers
 
                 if (oldComplaintStatus == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Complaint status not found!", "Complaint microservice", "UpdateComplaintStatus");
                     return NotFound();
                 }
                 ComplaintStatus status = mapper.Map<ComplaintStatus>(complaintStatus);
                 mapper.Map(status, oldComplaintStatus);
                 complaintStatusRepository.SaveChanges();
+                Logger.LogMessage(LogLevel.Information, "Complaint status successfully updated!", "Complaint microservice", "UpdateComplaintStatus");
                 return Ok(mapper.Map<ComplaintStatusDto>(oldComplaintStatus));
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "ComplaintStatus update failed!", "Complaint microservice", "UpdateComplaintStatus");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -155,13 +168,16 @@ namespace ComplaintMicroservice.Controllers
 
                 if (status == null)
                 {
+                    Logger.LogMessage(LogLevel.Warning, "Complaint status not found!", "Complaint microservice", "DeleteComplaintStatus");
                     return NotFound();
                 }
                 complaintStatusRepository.DeleteComplaintStatus(complaintStatusId);
+                Logger.LogMessage(LogLevel.Information, "Complaint status deleted successfully!", "Complaint microservice", "DeleteComplaintStatus");
                 return NoContent();
             }
             catch
             {
+                Logger.LogMessage(LogLevel.Error, "Complaint status deletion failed!", "Complaint microservice", "DeleteComplaintStatus");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
