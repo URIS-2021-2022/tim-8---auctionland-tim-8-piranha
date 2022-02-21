@@ -53,7 +53,7 @@ namespace ComplaintMicroservice.Data.Complaint
 
         public void UpdateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint)
         {
-            //NE GLEDAJ OVAJ KOD   
+            context.SaveChanges();   
             
         }
     }

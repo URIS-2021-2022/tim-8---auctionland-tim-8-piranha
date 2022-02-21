@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using ComplaintMicroservice.Data;
+using ComplaintMicroservice.Data.Event;
+using ComplaintMicroservice.Data.Status;
 using ComplaintMicroservice.Entities.Complaint;
 using ComplaintMicroservice.Models.Complaint;
 using Microsoft.AspNetCore.Authorization;
@@ -16,18 +18,24 @@ namespace ComplaintMicroservice.Controllers
     [ApiController]
     [Route("api/complaints")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
+    //[Authorize]
     public class ComplaintController : ControllerBase
     {
         private readonly IComplaintRepository complaintRepository;
+        private readonly IComplaintTypeRepository complaintTypeRepository;
+        private readonly IComplaintStatusRepository complaintStatusRepository;
+        private readonly IComplaintEventRepository complaintEventRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
 
-        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, IMapper mapper, IComplaintTypeRepository complaintTypeRepository, IComplaintStatusRepository complaintStatusRepository, IComplaintEventRepository complaintEventRepository)
         {
             this.complaintRepository = complaintRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.complaintTypeRepository = complaintTypeRepository;
+            this.complaintStatusRepository = complaintStatusRepository;
+            this.complaintEventRepository = complaintEventRepository;
         }
 
         /// <summary>
@@ -120,9 +128,12 @@ namespace ComplaintMicroservice.Controllers
                 }
                 Complaint com = mapper.Map<Complaint>(complaint);
                 mapper.Map(com, oldComplaint);
-                complaintRepository.SaveChanges();
+                com.ComplaintType = complaintTypeRepository.GetComplaintTypeById(oldComplaint.ComplaintTypeId);
+                com.ComplaintStatus = complaintStatusRepository.GetComplaintStatusById(oldComplaint.ComplaintStatusId);
+                com.ComplaintEvent = complaintEventRepository.GetComplaintEventById(oldComplaint.ComplaintEventId);
+                complaintRepository.UpdateComplaint(com);
                 string location = linkGenerator.GetPathByAction("GetComplaintById", "Complaint", new { complaintId = com.ComplaintId });
-                return Ok(location);
+                return Ok(com);
             }
             catch
             {

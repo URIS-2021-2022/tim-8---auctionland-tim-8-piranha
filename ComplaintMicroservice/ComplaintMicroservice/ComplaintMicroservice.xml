@@ -75,7 +75,7 @@
             Kreira dogadjaj na osnovu zalbe
             </summary>
             <returns>Potvrda o kreiranju dogadjaja na osnovu zalbe</returns>
-            <response code="200">Vraća listu dogadjaja na osnovu zalbe</response>
+            <response code="200">kreiran dogadjaj na osnovu zalbe</response>
             <response code="500">Došlo je do greške na serveru prilikom unosa novog dogadjaja na osnovu zalbe</response>
         </member>
         <member name="M:ComplaintMicroservice.Controllers.ComplaintEventController.UpdateComplaintEvent(ComplaintMicroservice.Models.Event.ComplaintEventUpdateDto)">
@@ -123,7 +123,7 @@
             <summary>
             Kreira status zalbe
             </summary>
-            <returns>Potvrda o kreiranju statusa zalbe</returns>
+            <returns>Kreiran status zalbe</returns>
             <response code="200">Vraća listu statusa zalbe</response>
             <response code="500">Došlo je do greške na serveru prilikom unosa novog statusa zalbe</response>
         </member>
@@ -172,7 +172,7 @@
             <summary>
             Kreira tip zalbe
             </summary>
-            <returns>Potvrda o kreiranju tipa zalbe</returns>
+            <returns>Kreiran tip zalbe</returns>
             <response code="200">Vraća listu tipova zalbe</response>
             <response code="500">Došlo je do greške na serveru prilikom unosa novog tipa zalbe</response>
         </member>
