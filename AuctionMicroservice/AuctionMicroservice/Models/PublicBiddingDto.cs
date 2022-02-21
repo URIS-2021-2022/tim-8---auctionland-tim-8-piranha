@@ -17,8 +17,8 @@ namespace AuctionMicroservice.Models
         /// public bidding ID
         /// </summary>
         #region
-        [Key]
-        public Guid PublicBiddingId { get; set; }
+       // [Key]
+        //public Guid PublicBiddingId { get; set; }
         /// <summary>
         /// Public bidding date
         /// </summary>
@@ -35,38 +35,41 @@ namespace AuctionMicroservice.Models
         /// <summary>
         /// Public bidding beggining price
         /// </summary>
-        public int BegginingPriceByHectare { get; set; }
+        public double StartPricePerHa { get; set; }
         /// <summary>
         /// Skipped item
         /// </summary>
-        public bool Skipped { get; set; }
+        public bool IsExcepted { get; set; }
         /// <summary>
         /// Auctioned price
         /// </summary>
-        public int AuctionedPrice { get; set; }
+        public double Price { get; set; }
         /// <summary>
         /// Lease period for plot
         /// </summary>
-        public int LeasePeriod { get; set; }
+        public int RentPeriod { get; set; }
         /// <summary>
         /// Number of contestants
         /// </summary>
-        public int ContestantsNumber { get; set; }
+        public int NumberOfApplicants { get; set; }
         /// <summary>
         /// Price od addition to deposit
         /// </summary>
-        public int DepositAdditionPrice { get; set; }
+        public double DepositSupplement { get; set; }
         /// <summary>
         /// Round number
         /// </summary>
         public int Round { get; set; }
 
+        public string Status { get; set; }
+
+        public string Type { get; set; }
         /// <summary>
         /// ID of auction that public bidding belongs to
         /// </summary>
-        public Guid AuctionId { get; set; }
+        //public Guid AuctionId { get; set; }
 
-        public Auction auction { get; set; }
+        //public Auction auction { get; set; }
 
         #endregion
 

@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,9 +11,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RegistrationMicroservice.Data;
 using RegistrationMicroservice.Entities;
+using RegistrationMicroservice.Models;
+using RegistrationMicroservice.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace RegistrationMicroservice
@@ -33,20 +38,57 @@ namespace RegistrationMicroservice
 
 
 
-            services.AddControllers(setup => 
+            services.AddControllers(setup =>
             {
-                setup.ReturnHttpNotAcceptable = true; 
+                setup.ReturnHttpNotAcceptable = true;
             }
-            ).AddXmlDataContractSerializerFormatters();
+            ).AddXmlDataContractSerializerFormatters().AddFluentValidation(s =>
+            {
+                s.RegisterValidatorsFromAssemblyContaining<Startup>();
+
+            });
+            
+            
 
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RegistrationMicroservice", Version = "v1" });
+                c.SwaggerDoc("RegistrationOpenApiSpecification", new OpenApiInfo 
+                { 
+                    Title = "RegistrationMicroservice", 
+                    Version = "v1" ,
+                    Description = "Using this API, it's possible to manipulate data regarding registrations",
+                    Contact = new OpenApiContact()
+                    {
+                        Name = "Luka Panic",
+                        Email = "Panic.Luka@uns.ac.rs",
+                        Url = new Uri("https://sova.uns.ac.rs/")
+                    },
+                    License = new OpenApiLicense()
+                    {
+                        Name = "Licence",
+                        Url = new Uri("https://sova.uns.ac.rs/"),
+
+                    },
+                    TermsOfService = new Uri("https://sova.uns.ac.rs/")
+
+
+
+                });
+
+                var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+
+                //c.IncludeXmlComments(xmlCommentsPath);
             });
+
 
             services.AddDbContext<RegistrationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RegistrationDB")));
             services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+            services.AddScoped<IService<AuctionDto>, AuctionMock<AuctionDto>>();
+            services.AddScoped<IService<BuyerDto>, BuyerMock<BuyerDto>>();
+
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
@@ -58,7 +100,7 @@ namespace RegistrationMicroservice
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RegistrationMicroservice v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/RegistrationOpenApiSpecification/swagger.json", "RegistrationMicroservice v1"));
             }
 
             app.UseHttpsRedirection();

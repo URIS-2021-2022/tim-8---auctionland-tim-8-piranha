@@ -43,7 +43,7 @@
              <response code="200">returns created auction</response>
              <response code="500">There's been server error</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.AuctionController.UpdateAuction(AuctionMicroservice.Models.AuctionUpdateDto)">
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.UpdateAuctionAsync(AuctionMicroservice.Models.AuctionUpdateDto)">
             <summary>
             Updates one auction 
             </summary>
@@ -256,11 +256,6 @@
             List od legal entity documentations that belong to this auction
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Entities.Auction.PublicBiddings">
-            <summary>
-            List of public bidding that belong to this auction
-            </summary>
-        </member>
         <member name="P:AuctionMicroservice.Entities.Auction.ApplicationDeadline">
             <summary>
             Date of application deadline
@@ -311,6 +306,14 @@
             Inserts seed data into database
             </summary>
             <param name="builder"></param>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionPublicBidding.AuctionId">
+            <summary>
+            Public bidding date
+            </summary>
+            <summary>
+            ID of auction that public bidding belongs to
+            </summary>
         </member>
         <member name="T:AuctionMicroservice.Entities.DocumentationIndividual">
             <summary>
@@ -546,6 +549,7 @@
             <summary>
             Date of application deadline
             </summary>
+            
         </member>
         <member name="T:AuctionMicroservice.Models.AuctionUpdateDto">
             <summary>
@@ -843,11 +847,6 @@
             Represents public bidding model
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.PublicBiddingId">
-            <summary>
-            public bidding ID
-            </summary>
-        </member>
         <member name="P:AuctionMicroservice.Models.PublicBiddingDto.Date">
             <summary>
             Public bidding date
@@ -863,32 +862,32 @@
             Public bidding end time
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.BegginingPriceByHectare">
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.StartPricePerHa">
             <summary>
             Public bidding beggining price
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.Skipped">
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.IsExcepted">
             <summary>
             Skipped item
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.AuctionedPrice">
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.Price">
             <summary>
             Auctioned price
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.LeasePeriod">
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.RentPeriod">
             <summary>
             Lease period for plot
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.ContestantsNumber">
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.NumberOfApplicants">
             <summary>
             Number of contestants
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.DepositAdditionPrice">
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.DepositSupplement">
             <summary>
             Price od addition to deposit
             </summary>
@@ -896,11 +895,6 @@
         <member name="P:AuctionMicroservice.Models.PublicBiddingDto.Round">
             <summary>
             Round number
-            </summary>
-        </member>
-        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.AuctionId">
-            <summary>
-            ID of auction that public bidding belongs to
             </summary>
         </member>
     </members>

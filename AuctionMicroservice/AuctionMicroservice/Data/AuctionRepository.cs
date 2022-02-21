@@ -26,7 +26,7 @@ namespace AuctionMicroservice.Data
             return  mapper.Map<AuctionConfirmation>(auctionEntity.Entity);
         }
 
-        public async void DeleteAuctionAsync(Guid AuctionId)
+        public async Task DeleteAuctionAsync(Guid AuctionId)
         {
             var auction =  await GetAuctionByIdAsync(AuctionId);
 
@@ -51,7 +51,7 @@ namespace AuctionMicroservice.Data
             return await context.SaveChangesAsync() > 0;
         }
 
-        public async void UpdateAuction(Auction auction)
+        public async Task UpdateAuctionAsync(Auction auction)
         {
 
         }

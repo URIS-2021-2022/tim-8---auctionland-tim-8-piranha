@@ -12,6 +12,8 @@ using FluentValidation;
 using System.Linq;
 using System.Threading.Tasks;
 using AuctionMicroservice.Validatiors;
+using Microsoft.Extensions.Logging;
+using AuctionMicroservice.Services;
 
 namespace AuctionMicroservice.Controllers
 {
@@ -26,13 +28,17 @@ namespace AuctionMicroservice.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly AuctionValidator auctionValidator;
+        private readonly ILoggerService logger;
+        private readonly IService<PublicBiddingDto> publicBiddingMock;
 
-        public AuctionController(IAuctionRepository auctionRepository, LinkGenerator linkGenerator, IMapper mapper, AuctionValidator auctionValidator)
+        public AuctionController(IAuctionRepository auctionRepository, LinkGenerator linkGenerator, IMapper mapper, AuctionValidator auctionValidator, ILoggerService logger, IService<PublicBiddingDto> publicBiddingMock)
         {
             this.linkGenerator = linkGenerator;
             this.auctionRepository = auctionRepository;
             this.mapper = mapper;
             this.auctionValidator = auctionValidator;
+            this.logger = logger;
+            this.publicBiddingMock = publicBiddingMock;
 
         }
 
@@ -49,14 +55,30 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult<List<AuctionDto>>> GetAuctionsAsync()
         {
+
             var auctions = await auctionRepository.GetAuctionsAsync();
 
             if(auctions == null || auctions.Count == 0)
             {
+                //await logger.LogMessage(LogLevel.Information, "No auctions found", "Auction microservice", "GetAuctionsAsync", null);
                 return NoContent();
             }
 
-            return Ok(mapper.Map<List<AuctionDto>>(auctions));
+            AuctionDto auctionDto = new AuctionDto();
+            PublicBiddingDto publicBidding = await publicBiddingMock.SendGetRequestAsync();
+
+           
+
+            foreach (var auction in auctions)
+            {
+                auctionDto = mapper.Map<AuctionDto>(auction);
+                auctionDto.publicBiddings.Add(publicBidding);
+            }
+
+
+            //await logger.LogMessage(LogLevel.Information, "Auction list successfully returned!", "Auction microservice", "GetAuctionsAsync", null);
+            //return Ok(mapper.Map<List<AuctionDto>>(auctions));
+            return Ok(auctionDto);
         }
 
 
@@ -76,10 +98,19 @@ namespace AuctionMicroservice.Controllers
 
             if(auction == null)
             {
+                //await logger.LogMessage(LogLevel.Information, "Auction not found", "Auction microservice", "GetAuctionsAsyncById", null);
                 return NotFound();
             }
 
-            return Ok(mapper.Map<AuctionDto>(auction));
+            AuctionDto auctionDto = new AuctionDto();
+            PublicBiddingDto publicBidding = await publicBiddingMock.SendGetRequestAsync();
+            //await logger.LogMessage(LogLevel.Information, "Auction returned", "Auction microservice", "GetAuctionsAsyncById", null);
+            //return Ok(mapper.Map<AuctionDto>(auction));
+
+            auctionDto = mapper.Map<AuctionDto>(auction);
+            auctionDto.publicBiddings.Add(publicBidding);
+
+            return Ok(auctionDto);
         }
 
         
@@ -122,14 +153,17 @@ namespace AuctionMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetAuctions", "Auction", new { AuctionId = confirmation.AuctionId });
 
+                //await logger.LogMessage(LogLevel.Information, "Auction created", "Auction microservice", "PostAuctionAsync", null);
                 return Created(location, mapper.Map<AuctionConformationDto>(confirmation));
             }
             catch(ValidationException v)
             {
+                //await logger.LogMessage(LogLevel.Information, "Bad request, check parameters", "Auction microservice", "PostAuctionAsync", null);
                 return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
             }
             catch(Exception e)
             {
+                //await logger.LogMessage(LogLevel.Information, "Internal server error", "Auction microservice", "PostAuctionAsync", null);
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -148,7 +182,7 @@ namespace AuctionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<AuctionDto>> UpdateAuction(AuctionUpdateDto auctionUpdate)
+        public async Task<ActionResult<AuctionDto>> UpdateAuctionAsync(AuctionUpdateDto auctionUpdate)
         {
             try
             {
@@ -165,11 +199,13 @@ namespace AuctionMicroservice.Controllers
 
                 await auctionRepository.SaveChangesAsync();
 
+                //await logger.LogMessage(LogLevel.Information, "Auction updated", "Auction microservice", "UpdateAuctionAsync", null);
                 return Ok(mapper.Map<AuctionDto>(oldAuction));
 
             }
             catch(Exception e)
             {
+                //await logger.LogMessage(LogLevel.Information, "Internal server error", "Auction microservice", "UpdateAuctionAsync", null);
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -195,12 +231,14 @@ namespace AuctionMicroservice.Controllers
 
                 if(auction == null)
                 {
+                    //await logger.LogMessage(LogLevel.Information, "Auction not found", "Auction microservice", "DeleteAuctionAsync", null);
                     return NotFound();
 
                 }
 
-                 auctionRepository.DeleteAuctionAsync(AuctionId);
+                await auctionRepository.DeleteAuctionAsync(AuctionId);
                 await auctionRepository.SaveChangesAsync();
+                //await logger.LogMessage(LogLevel.Information, "Auction deleted", "Auction microservice", "DeleteAuctionAsync", null);
                 return NoContent();
 
 
@@ -208,6 +246,7 @@ namespace AuctionMicroservice.Controllers
             }
             catch(Exception e)
             {
+                //await logger.LogMessage(LogLevel.Information, "Internal server error", "Auction microservice", "DeleteAuctionAsync", null);
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -219,10 +258,11 @@ namespace AuctionMicroservice.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpOptions]
-        [AllowAnonymous] //Dozvoljavamo pristup anonimnim korisnicima
+        [AllowAnonymous] 
         public IActionResult GetAuctionOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            //logger.LogMessage(LogLevel.Information, "Auction options", "Auction microservice", "GetAuctionOptions", null);
             return Ok();
         }
     }

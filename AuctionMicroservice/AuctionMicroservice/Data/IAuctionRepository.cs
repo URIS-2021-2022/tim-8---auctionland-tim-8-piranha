@@ -15,9 +15,9 @@ namespace AuctionMicroservice.Data
 
         Task<Auction> GetAuctionByIdAsync(Guid AuctionId);
 
-        void UpdateAuction(Auction auction);
+        Task UpdateAuctionAsync(Auction auction);
 
-        void DeleteAuctionAsync(Guid AuctionId);
+        Task DeleteAuctionAsync(Guid AuctionId);
 
         Task<bool> SaveChangesAsync();
 

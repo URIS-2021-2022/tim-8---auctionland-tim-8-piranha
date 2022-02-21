@@ -45,6 +45,7 @@ namespace AuctionMicroservice.Models
 
 
 
+        public List<Guid> PublicBiddings { get; set; }
         /// <summary>
         /// Date of application deadline
         /// </summary>

@@ -9,7 +9,7 @@ namespace RegistrationMicroservice.Models
     {
         #region
 
-        public Guid AuctionId { get; set; }
+        //public Guid AuctionId { get; set; }
 
         public int AuctionNum { get; set; }
 

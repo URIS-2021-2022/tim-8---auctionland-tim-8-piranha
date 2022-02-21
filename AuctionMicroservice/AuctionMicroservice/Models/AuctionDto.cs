@@ -10,6 +10,11 @@ namespace AuctionMicroservice.Models
     /// </summary>
     public class AuctionDto
     {
+
+        public AuctionDto()
+        {
+            publicBiddings = new List<PublicBiddingDto>();
+        }
         #region
         /// <summary>
         /// Auction ID
@@ -35,11 +40,14 @@ namespace AuctionMicroservice.Models
         /// Auction price step
         /// </summary>
         public int PriceStep { get; set; }
+       
 
+        public List<PublicBiddingDto> publicBiddings { get; set; }
 
         /// <summary>
         /// Date of application deadline
         /// </summary>
+        /// 
         public DateTime ApplicationDeadline { get; set; }
         #endregion
     }

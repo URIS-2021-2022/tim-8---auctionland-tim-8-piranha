@@ -22,7 +22,7 @@ namespace AuctionMicroservice.Entities
 
         public DbSet<DocumentationLegalEntity> documentationLegalEntity { get; set; }
 
-        public DbSet<PublicBiddingDto> publicBiddingDto { get; set; }
+        public DbSet<AuctionPublicBidding> auctionPublicBidding { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,7 +42,12 @@ namespace AuctionMicroservice.Entities
             //builder.Entity<Auction>().HasMany(p => p.PublicBiddings).WithOne();
 
 
-
+            builder.Entity<AuctionPublicBidding>()
+                .HasOne(p => p.auction)
+                .WithMany()
+                .HasForeignKey("AuctionId")
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
 
 
 
@@ -108,8 +113,8 @@ namespace AuctionMicroservice.Entities
 
             //});
 
-            builder.Entity<DocumentationIndividual>()
-        .HasData(new
+        builder.Entity<DocumentationIndividual>()
+                .HasData(new
         {
             DocumentationIndividualId = Guid.Parse("6a411a17-a195-48f7-8dbd-67596c3974c0"),
             FirstName = "Stefan",
@@ -120,7 +125,7 @@ namespace AuctionMicroservice.Entities
 
         });
 
-            builder.Entity<DocumentationLegalEntity>()
+         builder.Entity<DocumentationLegalEntity>()
                 .HasData(new
                 {
                     DocumentationLegalEntityId = Guid.Parse("6a411c13-a295-48f7-8dbd-67596c3974c0"),
@@ -129,7 +134,7 @@ namespace AuctionMicroservice.Entities
                     Address = "Uzun mirkova 8",
                     AuctionId = Guid.Parse("6a421c13-a195-48f7-8dbd-67596c3974c0")
 
-                });
+         });
 
             //builder.Entity<DocumentationLegalEntity>()
             //    .HasData(new
@@ -143,24 +148,24 @@ namespace AuctionMicroservice.Entities
 
             //    });
 
-            builder.Entity<PublicBiddingDto>()
-                .HasData(
-                new PublicBiddingDto
-                {
-                    PublicBiddingId = Guid.Parse("6a411c13-a295-18f7-8dbd-67536c3924c3"),
-                    Date = new DateTime(),
-                    StartTime = new DateTime(),
-                    EndTime = new DateTime(),
-                    BegginingPriceByHectare = 13,
-                    Skipped = false,
-                    AuctionedPrice = 250,
-                    LeasePeriod = 3,
-                    ContestantsNumber = 21,
-                    DepositAdditionPrice = 123,
-                    Round = 2,
-                    AuctionId = Guid.Parse("6a421c13-a195-48f7-8dbd-67596c3974c0")
-                }
-                );
+            //builder.Entity<PublicBiddingDto>()
+            //    .HasData(
+            //    new PublicBiddingDto
+            //    {
+            //        PublicBiddingId = Guid.Parse("6a411c13-a295-18f7-8dbd-67536c3924c3"),
+            //        Date = new DateTime(),
+            //        StartTime = new DateTime(),
+            //        EndTime = new DateTime(),
+            //        BegginingPriceByHectare = 13,
+            //        Skipped = false,
+            //        AuctionedPrice = 250,
+            //        LeasePeriod = 3,
+            //        ContestantsNumber = 21,
+            //        DepositAdditionPrice = 123,
+            //        Round = 2,
+            //        AuctionId = Guid.Parse("6a421c13-a195-48f7-8dbd-67596c3974c0")
+            //    }
+            //    );
 
 
 

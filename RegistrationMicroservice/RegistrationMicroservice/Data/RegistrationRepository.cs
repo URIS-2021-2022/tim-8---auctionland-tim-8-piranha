@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RegistrationMicroservice.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,35 +18,35 @@ namespace RegistrationMicroservice.Data
             this.context = context;
             this.mapper = mapper;
         }
-        public RegistrationConfirmation CreateRegistration(Registration registration)
+        public async Task<RegistrationConfirmation> CreateRegistrationAsync(Registration registration)
         {
-            var registrationEntity = context.Add(registration);
+            var registrationEntity = await context.AddAsync(registration);
             return mapper.Map<RegistrationConfirmation>(registrationEntity.Entity);
         }
 
-        public void DeleteRegistration(Guid RegistrationId)
+        public async Task DeleteRegistrationAsync(Guid RegistrationId)
         {
-            var registration = GetRegistrationById(RegistrationId);
+            var registration = await GetRegistrationByIdAsync(RegistrationId);
 
             context.Remove(registration);
         }
 
-        public Registration GetRegistrationById(Guid RegistrationId)
+        public async Task<Registration> GetRegistrationByIdAsync(Guid RegistrationId)
         {
-            return context.registration.FirstOrDefault(e => e.RegistrationId == RegistrationId);
+            return await context.registration.FirstOrDefaultAsync(e => e.RegistrationId == RegistrationId);
         }
 
-        public List<Registration> GetRegistrations()
+        public async Task<List<Registration>> GetRegistrationsAsync()
         {
-            return context.registration.ToList();
+            return await context.registration.ToListAsync();
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return context.SaveChanges() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
-        public void UpdateRegistration(Registration registration)
+        public async Task UpdateRegistrationAsync(Registration registration)
         {
 
         }

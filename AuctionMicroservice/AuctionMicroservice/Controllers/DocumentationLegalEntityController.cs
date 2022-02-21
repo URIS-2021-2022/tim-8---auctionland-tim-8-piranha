@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +25,15 @@ namespace AuctionMicroservice.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly DocumentationLegalEntityValidator validator;
+        private readonly ILogger<DocumentationLegalEntityController> logger;
 
-        public DocumentationLegalEntityController(IDocumentationLegalEntityRepository documentationLegalEntityRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentationLegalEntityValidator validator)
+        public DocumentationLegalEntityController(IDocumentationLegalEntityRepository documentationLegalEntityRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentationLegalEntityValidator validator, ILogger<DocumentationLegalEntityController> logger)
         {
             this.documentationLegalEntityRepository = documentationLegalEntityRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.validator = validator;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -49,9 +52,10 @@ namespace AuctionMicroservice.Controllers
 
             if (documentations == null || documentations.Count == 0)
             {
+                //logger.LogWarning("No legal entity documentations found");
                 return NoContent();
             }
-
+            //logger.LogInformation("Getting all the legal entity documentations");
             return Ok(mapper.Map<List<DocumentationLegalEntityDto>>(documentations));
         }
 
@@ -73,9 +77,10 @@ namespace AuctionMicroservice.Controllers
 
             if (documentation == null)
             {
+                //logger.LogWarning($"Documentations with ID {DocumentationLegalEntityId} not found");
                 return NotFound();
             }
-
+            //logger.LogInformation("Getting legal entity documentation by ID");
             return Ok(mapper.Map<DocumentationLegalEntityDto>(documentation));
         }
 
@@ -95,9 +100,10 @@ namespace AuctionMicroservice.Controllers
 
             if (documentations == null || documentations.Count == 0)
             {
+                //logger.LogWarning($"Documentations with ID {AuctionId} not found");
                 return NoContent();
             }
-
+            //logger.LogInformation("Getting all the legal entity documentations by auction ID");
             return Ok(mapper.Map<List<DocumentationLegalEntityDto>>(documentations));
         }
 
@@ -136,14 +142,17 @@ namespace AuctionMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetDocumentationLegalEntites", "DocumentationLegalEntity", new { DocumentationLegalEntityId = conformation.DocumentationLegalEntityId });
 
+                //logger.LogInformation("Documentation created");
                 return Created(location, mapper.Map<DocumentationLegalEntityConfirmationDto>(conformation));
             }
             catch(ValidationException v)
             {
+                //logger.LogWarning("Bad request, check the parameters");
                 return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
             }
             catch (Exception e)
             {
+                //logger.LogWarning("There has been internal server error");
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
@@ -180,11 +189,12 @@ namespace AuctionMicroservice.Controllers
                 mapper.Map(documentationEntity, oldDocumentation);
 
                 await documentationLegalEntityRepository.SaveChangesAsync();
-
+                //logger.LogInformation("Documentation has been updated");
                 return Ok(mapper.Map<DocumentationLegalEntityDto>(oldDocumentation));
             }
             catch (Exception e)
             {
+                //logger.LogWarning("There has been internal server error");
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -210,15 +220,18 @@ namespace AuctionMicroservice.Controllers
 
                 if (documentation == null)
                 {
+                    //logger.LogWarning($"Documentation with ID {DocumentationLegalEntityId} not found");
                     return NotFound();
                 }
 
-                documentationLegalEntityRepository.DeleteDocumentationAsync(DocumentationLegalEntityId);
+                await documentationLegalEntityRepository.DeleteDocumentationAsync(DocumentationLegalEntityId);
                 await documentationLegalEntityRepository .SaveChangesAsync();
+                //logger.LogInformation($"Documentation with ID {DocumentationLegalEntityId} has been deleted");
                 return NoContent();
             }
             catch (Exception e)
             {
+                //logger.LogWarning("There has been internal server error");
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -232,6 +245,7 @@ namespace AuctionMicroservice.Controllers
         public IActionResult GetDocumentationLegalEntityOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+           // logger.LogInformation("Getting all the options");
             return Ok();
         }
 

@@ -8,16 +8,16 @@ namespace RegistrationMicroservice.Data
 {
     public interface IRegistrationRepository
     {
-        RegistrationConfirmation CreateRegistration(Registration registration);
+        Task<RegistrationConfirmation> CreateRegistrationAsync(Registration registration);
 
-        List<Registration> GetRegistrations();
+        Task<List<Registration>> GetRegistrationsAsync();
 
-        Registration GetRegistrationById(Guid RegistrationId);
+        Task<Registration> GetRegistrationByIdAsync(Guid RegistrationId);
 
-        void UpdateRegistration(Registration registration);
+        Task UpdateRegistrationAsync(Registration registration);
 
-        void DeleteRegistration(Guid RegistrationId);
+        Task DeleteRegistrationAsync(Guid RegistrationId);
 
-        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
     }
 }

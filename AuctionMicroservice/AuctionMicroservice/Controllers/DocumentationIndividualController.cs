@@ -1,6 +1,7 @@
 ﻿using AuctionMicroservice.Data;
 using AuctionMicroservice.Entities;
 using AuctionMicroservice.Models;
+using AuctionMicroservice.Services;
 using AuctionMicroservice.Validatiors;
 using AutoMapper;
 using FluentValidation;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +27,15 @@ namespace AuctionMicroservice.Controllers
         private readonly LinkGenerator linkGenerator; 
         private readonly IMapper mapper;
         private readonly DocumentationIndividualValidator validator;
+        private readonly ILoggerService logger;
 
-        public DocumentationIndividualController(IDocumentationIndividualRepository documentationIndividualRepository,LinkGenerator linkGenerator, IMapper mapper, DocumentationIndividualValidator validator)
+        public DocumentationIndividualController(IDocumentationIndividualRepository documentationIndividualRepository,LinkGenerator linkGenerator, IMapper mapper, DocumentationIndividualValidator validator, ILoggerService logger)
         {
             this.documentationIndividualRepository = documentationIndividualRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.validator = validator;
+            this.logger = logger;
         }
 
 
@@ -51,9 +55,11 @@ namespace AuctionMicroservice.Controllers
 
             if (documentations == null || documentations.Count == 0)
             {
+                //await logger.LogMessage(LogLevel.Information, "No individual documentation found", "Auction microservice", "GetDocumentationsIndividualAsync", null);
                 return NoContent();
             }
 
+            //await logger.LogMessage(LogLevel.Information, "Getting all individual documentations", "Auction microservice", "GetDocumentationsIndividualAsync", null);
             return Ok(mapper.Map<List<DocumentationIndividualDto>>(documentations));
         }
 
@@ -73,9 +79,12 @@ namespace AuctionMicroservice.Controllers
 
             if (documentations == null || documentations.Count == 0)
             {
+                //await logger.LogMessage(LogLevel.Information, "Individual documentation not found", "Auction microservice", "GetDocumentationIndividualsByAuctionAsync", null);
                 return NoContent();
             }
 
+            
+            //await logger.LogMessage(LogLevel.Information, "Getting all the individual documentations by auction ID", "Auction microservice", "GetDocumentationIndividualsByAuctionAsync", null);
             return Ok(mapper.Map<List<DocumentationIndividualDto>>(documentations));
         }
 
@@ -97,9 +106,12 @@ namespace AuctionMicroservice.Controllers
 
             if(documentation == null)
             {
+                //await logger.LogMessage(LogLevel.Information, "Individual documentations not found", "Auction microservice", "GetDocumentationIndividualsByIdAsync", null);
                 return NotFound();
             }
 
+            
+            //await logger.LogMessage(LogLevel.Information, "Getting individual documentation by ID", "Auction microservice", "GetDocumentationIndividualsByIdAsync", null);
             return Ok(mapper.Map<DocumentationIndividualDto>(documentation));
         }
 
@@ -138,14 +150,19 @@ namespace AuctionMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetDocumentationIndividuals", "DocumentationIndividual", new { DocumentationIndividualId = conformation.DocumentationIndividualId });
 
+                
+                //await logger.LogMessage(LogLevel.Information, "Documentation created", "Auction microservice", "CreateDocumentationIndividualAsync", null);
                 return Created(location, mapper.Map<DocumentationIndividualConfirmationDto>(conformation));
             }
             catch (ValidationException v)
             {
+               // await logger.LogMessage(LogLevel.Information, "Bad request", "Auction microservice", "CreateDocumentationIndividualAsync", null);
                 return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
             }
             catch (Exception e)
             {
+                
+                //await logger.LogMessage(LogLevel.Information, "There has been internal server error", "Auction microservice", "CreateDocumentationIndividualAsync", null);
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
@@ -179,14 +196,20 @@ namespace AuctionMicroservice.Controllers
 
                 DocumentationIndividual documentationEntity = mapper.Map<DocumentationIndividual>(documentation);
 
+                validator.ValidateAndThrow(documentationEntity);
+
                 mapper.Map(documentationEntity, oldDocumentation);
 
                 await documentationIndividualRepository.SaveChangesAsync();
 
+               
+                //await logger.LogMessage(LogLevel.Information, "Documentation has been updated", "Auction microservice", "UpdateDocumentationIndividualAsync", null);
                 return Ok(mapper.Map<DocumentationIndividualDto>(oldDocumentation));
             }
             catch(Exception e )
             {
+                
+               // await logger.LogMessage(LogLevel.Information, "There has been internal server error", "Auction microservice", "UpdateDocumentationIndividualAsync", null);
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -212,15 +235,19 @@ namespace AuctionMicroservice.Controllers
 
                 if (documentation == null)
                 {
+                    await logger.LogMessage(LogLevel.Information, "documentation not found", "Auction microservice", "DeleteDocumentationIndividualAsync", null);
                     return NotFound();
                 }
 
-                documentationIndividualRepository.DeleteDocumentationAsync(DocumentationIndividualId);
+                await documentationIndividualRepository.DeleteDocumentationAsync(DocumentationIndividualId);
                 await documentationIndividualRepository.SaveChangesAsync();
+                //await logger.LogMessage(LogLevel.Information, "Documentation deleted", "Auction microservice", "DeleteDocumentationIndividualAsync", null);
                 return NoContent();
             }
             catch (Exception e)
             {
+                
+               // await logger.LogMessage(LogLevel.Information, "There has been internal server error", "Auction microservice", "DeleteDocumentationIndividualAsync", null);
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -235,6 +262,7 @@ namespace AuctionMicroservice.Controllers
         public IActionResult GetDocumentationIndividualOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            //logger.LogMessage(LogLevel.Information, "Getting all the options", "Auction microservice", "GetDocumentationIndividualOptions", null);
             return Ok();
         }
 

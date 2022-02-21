@@ -12,8 +12,10 @@ namespace AuctionMicroservice.Profiles
     { 
         public AuctionProfile()
         {
-            
-            CreateMap<Auction, AuctionDto>();//get
+
+            CreateMap<Auction, AuctionDto>();
+                //.ForMember(dest => dest.publicBiddings, opt => opt.Ignore())
+                //.ForMember(dest => dest.);//get
             CreateMap<AuctionCreationDto, Auction>();//post
             CreateMap<AuctionUpdateDto, Auction>();//put
             CreateMap<Auction, Auction>();

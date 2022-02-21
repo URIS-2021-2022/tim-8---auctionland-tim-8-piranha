@@ -22,7 +22,7 @@ namespace AuctionMicroservice.Data
         {
             var documentationEntity = await context.AddAsync(documentation);
 
-            return mapper.Map<DocumentationLegalEntityConfirmation>(documentationEntity.Entity);
+            return  mapper.Map<DocumentationLegalEntityConfirmation>(documentationEntity.Entity);
         }
 
         public async Task DeleteDocumentationAsync(Guid DocumentationLegalEntityId)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using RegistrationMicroservice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,7 @@ namespace RegistrationMicroservice.Entities
 
         public DbSet<Registration> registration { get; set; }
 
-        public DbSet<Buyer> buyer { get; set; }
-
-        public DbSet<Auction> auction { get; set; }
+       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,30 +29,30 @@ namespace RegistrationMicroservice.Entities
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Auction>()
-               .HasData(new
-               {
-                   AuctionId = Guid.Parse("6a421c13-a195-48f7-8dbd-67596c3974c0"),
-                   AuctionNum = 1,
-                   Year = 2022,
-                   Date = new DateTime(),
-                   Restriction = 25,
-                   PriceStep = 13,
-                   ApplicationDeadline = new DateTime(),
+            //builder.Entity<Auction>()
+            //   .HasData(new
+            //   {
+            //       AuctionId = Guid.Parse("6a421c13-a195-48f7-8dbd-67596c3974c0"),
+            //       AuctionNum = 1,
+            //       Year = 2022,
+            //       Date = new DateTime(),
+            //       Restriction = 25,
+            //       PriceStep = 13,
+            //       ApplicationDeadline = new DateTime(),
                    
 
-               });
+            //   });
 
-            builder.Entity<Buyer>()
-                .HasData(new
-                {
-                    BuyerId = Guid.Parse("6a421c13-a195-48f7-8dbd-67596c3974c1"),
-                    BoughtSurface = 23,
-                    RestrictionStart = new DateTime(),
-                    RestrictionPeriodInYears = 12,
-                    RestrictionEnd = new DateTime(),
+            //builder.Entity<Buyer>()
+            //    .HasData(new
+            //    {
+            //        BuyerId = Guid.Parse("6a421c13-a195-48f7-8dbd-67596c3974c1"),
+            //        BoughtSurface = 23,
+            //        RestrictionStart = new DateTime(),
+            //        RestrictionPeriodInYears = 12,
+            //        RestrictionEnd = new DateTime(),
                   
-                });
+            //    });
 
 
             builder.Entity<Registration>()

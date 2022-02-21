@@ -1,5 +1,7 @@
 using AuctionMicroservice.Data;
 using AuctionMicroservice.Entities;
+using AuctionMicroservice.Models;
+using AuctionMicroservice.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -97,7 +99,7 @@ namespace AuctionMicroservice
                 { 
                     Title = "AuctionMicroservice", 
                     Version = "1" ,
-                    Description = "Using this API, it's possible to manipulate data regarding auction",
+                    Description = "Using this API, it's possible to manipulate data regarding auctions",
                     Contact = new OpenApiContact()
                     {
                         Name = "Luka Panic",
@@ -135,6 +137,8 @@ namespace AuctionMicroservice
             services.AddScoped<IAuctionRepository, AuctionRepository>();
             services.AddScoped<IDocumentationIndividualRepository, DocumentationIndividualRepository>();
             services.AddScoped<IDocumentationLegalEntityRepository, DocumentationLegalEntityRepository>();
+            services.AddScoped<ILoggerService, LoggerService>();
+            services.AddScoped <IService<PublicBiddingDto>, PublicBiddingMock<PublicBiddingDto>>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

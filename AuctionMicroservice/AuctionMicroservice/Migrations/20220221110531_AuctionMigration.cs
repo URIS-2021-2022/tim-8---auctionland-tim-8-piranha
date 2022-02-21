@@ -25,6 +25,24 @@ namespace AuctionMicroservice.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "auctionPublicBidding",
+                columns: table => new
+                {
+                    PublicBiddingId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AuctionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_auctionPublicBidding", x => x.PublicBiddingId);
+                    table.ForeignKey(
+                        name: "FK_auctionPublicBidding_auction_AuctionId",
+                        column: x => x.AuctionId,
+                        principalTable: "auction",
+                        principalColumn: "AuctionId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "documentationIndividual",
                 columns: table => new
                 {
@@ -66,34 +84,6 @@ namespace AuctionMicroservice.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "publicBiddingDto",
-                columns: table => new
-                {
-                    PublicBiddingId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BegginingPriceByHectare = table.Column<int>(type: "int", nullable: false),
-                    Skipped = table.Column<bool>(type: "bit", nullable: false),
-                    AuctionedPrice = table.Column<int>(type: "int", nullable: false),
-                    LeasePeriod = table.Column<int>(type: "int", nullable: false),
-                    ContestantsNumber = table.Column<int>(type: "int", nullable: false),
-                    DepositAdditionPrice = table.Column<int>(type: "int", nullable: false),
-                    Round = table.Column<int>(type: "int", nullable: false),
-                    AuctionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_publicBiddingDto", x => x.PublicBiddingId);
-                    table.ForeignKey(
-                        name: "FK_publicBiddingDto_auction_AuctionId",
-                        column: x => x.AuctionId,
-                        principalTable: "auction",
-                        principalColumn: "AuctionId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "auction",
                 columns: new[] { "AuctionId", "ApplicationDeadline", "AuctionNum", "Date", "PriceStep", "Restriction", "Year" },
@@ -109,10 +99,10 @@ namespace AuctionMicroservice.Migrations
                 columns: new[] { "DocumentationLegalEntityId", "Address", "AuctionId", "IdentificationNumber", "Name" },
                 values: new object[] { new Guid("6a411c13-a295-48f7-8dbd-67596c3974c0"), "Uzun mirkova 8", new Guid("6a421c13-a195-48f7-8dbd-67596c3974c0"), "17", "Goran" });
 
-            migrationBuilder.InsertData(
-                table: "publicBiddingDto",
-                columns: new[] { "PublicBiddingId", "AuctionId", "AuctionedPrice", "BegginingPriceByHectare", "ContestantsNumber", "Date", "DepositAdditionPrice", "EndTime", "LeasePeriod", "Round", "Skipped", "StartTime" },
-                values: new object[] { new Guid("6a411c13-a295-18f7-8dbd-67536c3924c3"), new Guid("6a421c13-a195-48f7-8dbd-67596c3974c0"), 250, 13, 21, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 123, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+            migrationBuilder.CreateIndex(
+                name: "IX_auctionPublicBidding_AuctionId",
+                table: "auctionPublicBidding",
+                column: "AuctionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_documentationIndividual_AuctionId",
@@ -123,23 +113,18 @@ namespace AuctionMicroservice.Migrations
                 name: "IX_documentationLegalEntity_AuctionId",
                 table: "documentationLegalEntity",
                 column: "AuctionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_publicBiddingDto_AuctionId",
-                table: "publicBiddingDto",
-                column: "AuctionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "auctionPublicBidding");
+
+            migrationBuilder.DropTable(
                 name: "documentationIndividual");
 
             migrationBuilder.DropTable(
                 name: "documentationLegalEntity");
-
-            migrationBuilder.DropTable(
-                name: "publicBiddingDto");
 
             migrationBuilder.DropTable(
                 name: "auction");

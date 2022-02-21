@@ -60,6 +60,22 @@ namespace AuctionMicroservice.Migrations
                         });
                 });
 
+            modelBuilder.Entity("AuctionMicroservice.Entities.AuctionPublicBidding", b =>
+                {
+                    b.Property<Guid>("PublicBiddingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AuctionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PublicBiddingId");
+
+                    b.HasIndex("AuctionId");
+
+                    b.ToTable("auctionPublicBidding");
+                });
+
             modelBuilder.Entity("AuctionMicroservice.Entities.DocumentationIndividual", b =>
                 {
                     b.Property<Guid>("DocumentationIndividualId")
@@ -130,67 +146,15 @@ namespace AuctionMicroservice.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AuctionMicroservice.Models.PublicBiddingDto", b =>
+            modelBuilder.Entity("AuctionMicroservice.Entities.AuctionPublicBidding", b =>
                 {
-                    b.Property<Guid>("PublicBiddingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.HasOne("AuctionMicroservice.Entities.Auction", "auction")
+                        .WithMany()
+                        .HasForeignKey("AuctionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<Guid>("AuctionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("AuctionedPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BegginingPriceByHectare")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ContestantsNumber")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DepositAdditionPrice")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("LeasePeriod")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Round")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Skipped")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("PublicBiddingId");
-
-                    b.HasIndex("AuctionId");
-
-                    b.ToTable("publicBiddingDto");
-
-                    b.HasData(
-                        new
-                        {
-                            PublicBiddingId = new Guid("6a411c13-a295-18f7-8dbd-67536c3924c3"),
-                            AuctionId = new Guid("6a421c13-a195-48f7-8dbd-67596c3974c0"),
-                            AuctionedPrice = 250,
-                            BegginingPriceByHectare = 13,
-                            ContestantsNumber = 21,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DepositAdditionPrice = 123,
-                            EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LeasePeriod = 3,
-                            Round = 2,
-                            Skipped = false,
-                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
+                    b.Navigation("auction");
                 });
 
             modelBuilder.Entity("AuctionMicroservice.Entities.DocumentationIndividual", b =>
@@ -215,24 +179,11 @@ namespace AuctionMicroservice.Migrations
                     b.Navigation("Auction");
                 });
 
-            modelBuilder.Entity("AuctionMicroservice.Models.PublicBiddingDto", b =>
-                {
-                    b.HasOne("AuctionMicroservice.Entities.Auction", "auction")
-                        .WithMany("PublicBiddings")
-                        .HasForeignKey("AuctionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("auction");
-                });
-
             modelBuilder.Entity("AuctionMicroservice.Entities.Auction", b =>
                 {
                     b.Navigation("DocumentationIndividual");
 
                     b.Navigation("DocumentationLegalEntity");
-
-                    b.Navigation("PublicBiddings");
                 });
 #pragma warning restore 612, 618
         }

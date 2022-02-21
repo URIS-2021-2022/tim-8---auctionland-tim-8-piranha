@@ -5,18 +5,34 @@ using System.Threading.Tasks;
 
 namespace RegistrationMicroservice.Models
 {
+    /// <summary>
+    /// Represents buyer  model
+    /// </summary>
     public class BuyerDto
     {
         #region
-        public Guid BuyerId { get; set; }
+        /// <summary>
+        /// Buyer ID
+        /// </summary>
+        //public Guid BuyerId { get; set; }
+        /// <summary>
+        /// Surface bought by buyer
+        /// </summary>
+        public string BuyerName { get; set; }
+        /// <summary>
+        /// Restriction start
+        /// </summary>
+        public string BuyerAddress { get; set; }
+        /// <summary>
+        /// Restriciton period
+        /// </summary>
+        public string BuyerPhoneNumber { get; set; }
+        /// <summary>
+        /// Restriction end
+        /// </summary>
+        public string BuyerAccountNumber { get; set; }
 
-        public int BoughtSurface { get; set; }
-
-        public DateTime RestrictionStart { get; set; }
-
-        public int RestrictionPeriodInYears { get; set; }
-
-        public DateTime RestrictionEnd { get; set; }
+        public string BuyerEmail { get; set; }
 
         
         #endregion
