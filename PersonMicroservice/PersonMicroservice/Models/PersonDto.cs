@@ -11,6 +11,11 @@ namespace PersonMicroservice.Models
     public class PersonDto
     {
         /// <summary>
+        /// Id ličnosti
+        /// </summary>
+        public Guid PersonId { get; set; }
+
+        /// <summary>
         /// Ime ličnosti
         /// </summary>
         public string Name { get; set; }

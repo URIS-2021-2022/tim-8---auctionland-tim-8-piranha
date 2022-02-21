@@ -18,6 +18,14 @@ namespace PersonMicroservice.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Board>()
+                .HasMany(b => b.Members)
+                .WithMany(p => p.Boards);
+
+            modelBuilder.Entity<Board>()
+                .HasOne(b => b.President);
+
+
             //Persons
             modelBuilder.Entity<Person>().HasData(
                 new
@@ -51,14 +59,14 @@ namespace PersonMicroservice.Entities
                 new
                 {
                     BoardId = Guid.Parse("8010f254-e872-49d9-9c2c-1d5783719019"),
-                    President = Guid.Parse("2d8607c5-f3cf-4ef5-9323-a9318eee6232")
+                    PresidentId = Guid.Parse("2d8607c5-f3cf-4ef5-9323-a9318eee6232")
                 });
 
             modelBuilder.Entity<Board>().HasData(
                 new
                 {
                     BoardId = Guid.Parse("e53171cc-91f1-4716-8ea8-39b31a97dd84"),
-                    President = Guid.Parse("2d8607c5-f3cf-4ef5-9323-a9318eee6232")
+                    PresidentId = Guid.Parse("2d8607c5-f3cf-4ef5-9323-a9318eee6232")
                 });
 
         }

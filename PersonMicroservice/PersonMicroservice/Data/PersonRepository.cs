@@ -13,11 +13,12 @@ namespace PersonMicroservice.Data
 
         private readonly PersonContext context;
         private readonly IMapper mapper;
-        public PersonRepository(PersonContext context)
+        public PersonRepository(PersonContext context, IMapper mapper)
         {
             this.context = context;
-
+            this.mapper = mapper;
         }
+
         public async Task<PersonConfirmation> CreatePerson(Person person)
         {
             var createdEntity = await context.Persons.AddAsync(person);

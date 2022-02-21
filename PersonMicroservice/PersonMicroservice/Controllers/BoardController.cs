@@ -18,7 +18,7 @@ namespace PersonMicroservice.Controllers
     /// Kontroler za komisiju
     /// </summary>
     [ApiController]
-    [Route("api/board")]
+    [Route("api/person/board")]
     [Produces("application/json", "application/xml")]
     public class BoardController : ControllerBase
     {
@@ -26,14 +26,12 @@ namespace PersonMicroservice.Controllers
         private readonly IPersonRepository personRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
-        private readonly IConfiguration configuration;
 
-        public BoardController(IBoardRepository boardRepository, IPersonRepository personRepository, LinkGenerator linkGenerator, IMapper mapper, IConfiguration configuration)
+        public BoardController(IBoardRepository boardRepository, IPersonRepository personRepository, LinkGenerator linkGenerator, IMapper mapper)
         {
             this.boardRepository = boardRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
-            this.configuration = configuration;
             this.personRepository = personRepository;
         }
 
@@ -93,7 +91,7 @@ namespace PersonMicroservice.Controllers
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<BoardConfirmationDto>> CreateKomisija([FromBody] BoardCreationDto board)
+        public async Task<ActionResult<BoardConfirmationDto>> CreateBoard([FromBody] BoardCreationDto board)
         {
             try
             {
@@ -117,10 +115,97 @@ namespace PersonMicroservice.Controllers
 
                 return Created(location, mapper.Map<BoardConfirmationDto>(newBoard));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom kreiranja nove komisije.");
             }
         }
+
+        /// <summary>
+        /// Modifikacija komisije
+        /// </summary>
+        /// <param name="board">Model komisije</param>
+        /// <returns>Potvrda o izmeni komisije</returns>
+        /// <response code="200">Komisija je uspešno izmenjena</response>
+        /// <response code="404">Nije pronađena komisija sa unetim ID-em</response>
+        /// <response code="500">Serverska greška tokom izmene komisije</response>
+        [HttpPut]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<BoardConfirmationDto>> UpdateBoard(BoardUpdateDto board)
+        {
+            try
+            {
+                var oldBoard = await boardRepository.GetBoardById(board.BoardId);
+
+                if (oldBoard == null)
+                {
+                    return NotFound();
+                }
+
+                Board newBoard = mapper.Map<Board>(board);
+
+                mapper.Map(newBoard, oldBoard);
+
+                var members = new List<Person>();
+
+                if (board.Members is not null)
+                {
+                    foreach (var member in board.Members)
+                    {
+                        Person temp = await personRepository.GetPersonById(member);
+                        if (temp != null)
+                        {
+                            members.Add(temp);
+                        }
+                    }
+                }
+                oldBoard.Members = members;
+                oldBoard.President = await personRepository.GetPersonById(oldBoard.PresidentId);
+
+                await boardRepository.UpdateBoard(newBoard);
+                
+                return Ok(mapper.Map<BoardConfirmationDto>(oldBoard));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom modifikacije komisije.");
+            }
+        }
+
+        /// <summary>
+        /// Brisanje komisije sa prosleđenim ID-em
+        /// </summary>
+        /// <param name="boardId">ID komisije</param>
+        /// <response code="204">Komisija je uspešno obrisana</response>
+        /// <response code="404">Nije pronađena komisija sa unetim ID-em</response>
+        /// <response code="500">Serverska greška tokom brisanja komisije</response>
+        [HttpDelete("{boardId}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> DeleteBoard(Guid boardId)
+        {
+            try
+            {
+                var board = await boardRepository.GetBoardById(boardId);
+
+                if (board == null)
+                {
+                    return NotFound();
+                }
+
+                await boardRepository.DeleteBoard(boardId);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom brisanja komisije");
+            }
+        }
+
     }
 }
