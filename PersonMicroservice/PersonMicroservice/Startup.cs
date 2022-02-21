@@ -58,13 +58,13 @@ namespace PersonMicroservice
                     });
 
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
-                //var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+                var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
 
                 //Pravimo putanju do XML fajla sa komentarima
-                //var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
                 //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
-                //setupAction.IncludeXmlComments(xmlCommentsPath);
+                setupAction.IncludeXmlComments(xmlCommentsPath);
             });
         }
 

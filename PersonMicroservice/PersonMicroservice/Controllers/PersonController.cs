@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using PersonMicroservice.Data;
 using PersonMicroservice.Entities;
 using PersonMicroservice.Models;
+using PersonMicroservice.ServiceCalls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +26,14 @@ namespace PersonMicroservice.Controllers
         private readonly IPersonRepository personRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
+        private readonly ILoggerService logger;
 
-        public PersonController(IPersonRepository personRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public PersonController(IPersonRepository personRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService logger)
         {
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.personRepository = personRepository;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -47,9 +52,11 @@ namespace PersonMicroservice.Controllers
 
             if (persons == null || persons.Count == 0)
             {
+                await logger.LogMessage(LogLevel.Warning, "Person list is empty!", "Person microservice", "GetAllPersonss");
                 return NoContent();
             }
 
+            await logger.LogMessage(LogLevel.Information, "Person list successfully returned!", "Person microservice", "GetAllPersonss");
             return Ok(mapper.Map<List<PersonDto>>(persons));
         }
 
@@ -69,24 +76,35 @@ namespace PersonMicroservice.Controllers
 
             if (person == null)
             {
+                await logger.LogMessage(LogLevel.Warning, "Person not found!", "Person microservice", "GetPersonById");
                 return NotFound();
             }
 
+            await logger.LogMessage(LogLevel.Information, "Person found and successfully returned!", "Person microservice", "GetPersonById");
             return Ok(mapper.Map<PersonDto>(person));
         }
 
         /// <summary>
         /// Kreira novu ličnost
         /// </summary>
-        /// <param name="board">Model ličnosti</param>
+        /// <param name="person">Model ličnosti</param>
         /// <returns>Potvrda o kreiranju ličnosti</returns>
         /// <response code="201">Vraća kreiranu ličnost</response>
         /// <response code="500">Desila se greška prilikom kreiranja nove ličnosti</response>
+        /// <remarks>
+        /// Primer POST zahteva \
+        /// POST /api/person \
+        /// { \
+        ///     "name": "Dragan", \
+        ///     "surname": "Majkic", \
+        ///     "function": "Member" \
+        /// }
+        /// </remarks>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PersonConfirmationDto>> CreateBoard([FromBody] PersonCreationDto person)
+        public async Task<ActionResult<PersonConfirmationDto>> CreatePerson([FromBody] PersonCreationDto person)
         {
             try
             {
@@ -96,10 +114,12 @@ namespace PersonMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetPersonById", "Person", new { personId = newPerson.PersonId });
 
+                await logger.LogMessage(LogLevel.Information, "Person successfully created!", "Person microservice", "CreatePerson");
                 return Created(location, mapper.Map<PersonConfirmationDto>(newPerson));
             }
             catch (Exception ex)
             {
+                await logger.LogMessage(LogLevel.Error, "Person object creation failed!", "Person microservice", "CreatePerson");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom kreiranja nove ličnosti." + ex);
             }
         }
@@ -113,6 +133,16 @@ namespace PersonMicroservice.Controllers
         /// <response code="200">Izmenjena ličnost</response>
         /// <response code="404">Nije pronađena ličnost sa unetim ID-em</response>
         /// <response code="500">Serverska greška tokom izmene ličnosti</response>
+        /// /// <remarks>
+        /// Primer PUT zahteva \
+        /// PUT /api/person \
+        /// {   \
+        ///    "personId": "81f63012-16d7-4f1a-a330-55dc295a6dcd",\
+        ///    "name": "Miha",\
+        ///    "surname": "Strajin",\
+        ///    "function": "Member"\
+        /// }
+        /// </remarks>
         [HttpPut("{personId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -125,17 +155,20 @@ namespace PersonMicroservice.Controllers
 
                 if (oldPerson == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Person object not found!", "Person microservice", "UpdatePerson");
                     return NotFound();
                 }
 
                 mapper.Map(person, oldPerson);
 
                 await personRepository.UpdatePerson(mapper.Map<Person>(person));
-                
+
+                await logger.LogMessage(LogLevel.Information, "Person object updated successfully!", "Person microservice", "UpdatePerson");
                 return Ok(person);
             }
             catch (Exception)
             {
+                await logger.LogMessage(LogLevel.Error, "Person object updating failed!", "Person microservice", "UpdatePerson");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom modifikacije licnosti.");
             }
         }
@@ -160,17 +193,35 @@ namespace PersonMicroservice.Controllers
 
                 if (person == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Person object not found!", "Person microservice", "DeletePerson");
                     return NotFound();
                 }
 
                 await personRepository.DeletePerson(personId);
 
+                await logger.LogMessage(LogLevel.Information, "Person object deleted successfull!", "Person microservice", "DeletePerson");
                 return Ok();
             }
             catch (Exception)
             {
+                await logger.LogMessage(LogLevel.Error, "Person object deletion failed!", "Person microservice", "DeletePerson");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Greška prilikom brisanja licnosti");
             }
+        }
+
+        /// <summary>
+        /// Zaglavlje odgovora
+        /// </summary>
+        /// <returns>Zaglavlje odgovora</returns>
+        [HttpOptions]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPersonOptions()
+        {
+            Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+
+            await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Person microservice", "GetPersonOptions");
+
+            return Ok();
         }
     }
 }
