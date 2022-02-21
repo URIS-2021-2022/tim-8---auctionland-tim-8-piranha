@@ -59,6 +59,11 @@ namespace DocumentMicroservice.Models.ContractLease
         /// GuaranteeTypeID - ID tipa garancije
         /// </summary>
         public Guid GuaranteeTypeID { get; set; }
-        
+
+        /// <summary>
+        /// DocumentID - ID dokumenta
+        /// </summary>
+        public Guid DocumentID { get; set; }
+
     }
 }

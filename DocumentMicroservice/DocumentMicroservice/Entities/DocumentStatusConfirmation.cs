@@ -13,12 +13,12 @@ namespace DocumentMicroservice.Entities
         /// Example: 07af89f2-feee-4680-b489-9d0e31699588
         /// </summary>
         [Key]
-        public Guid DocStatusID { get; set; }
+        public Guid docStatusID { get; set; }
 
         /// <summary>
         /// Status - Status dokumenta
         /// Example:Usvojen
         /// </summary>
-        public string Status { get; set; }
+        public string status { get; set; }
     }
 }

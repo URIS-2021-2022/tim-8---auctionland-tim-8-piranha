@@ -106,7 +106,7 @@ namespace DocumentMicroservice.Controllers
                 DocumentStatusConfirmation confirmation = await DocumentStatusRepository.CreateDocumentStatusAsync(docStatus);
                 await DocumentStatusRepository.SaveChangesAsync();
 
-                string uri = LinkGeneration.GetPathByAction("GetDocumentStatusById", "DocumentStatus", new { DocumentStatusId = confirmation.DocStatusID });
+                string uri = LinkGeneration.GetPathByAction("GetDocumentStatusById", "DocumentStatus", new { DocumentStatusId = confirmation.docStatusID });
 
                
 

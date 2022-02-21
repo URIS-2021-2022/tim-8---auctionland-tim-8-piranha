@@ -14,12 +14,12 @@ namespace DocumentMicroservice.Entities
         /// Example: 07af89f2-feee-4680-b489-9d0e31699588
         /// </summary>
         [Key]
-        public Guid GuaranteeTypeID { get; set; }
+        public Guid guaranteeTypeID { get; set; }
 
         /// <summary>
         /// Type - tip garancije
         /// Example: Bankarska garancija
         /// </summary>
-        public string Type { get; set; }
+        public string type { get; set; }
     }
 }

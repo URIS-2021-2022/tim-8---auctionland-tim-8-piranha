@@ -23,6 +23,6 @@ namespace BuyerMicroservice.Entities
         // ne treba foreign key zato sto strelica pokazuje u kontra smeru 
         public string country { get; set; }
 
-           //public BoardNumber [] boardNums { get; set; }
+         public IList<BoardNumber> boardNums { get; set; }
     }
 }

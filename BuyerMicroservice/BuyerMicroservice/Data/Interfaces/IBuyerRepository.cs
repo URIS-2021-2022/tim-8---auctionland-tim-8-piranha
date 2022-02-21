@@ -12,9 +12,9 @@ namespace BuyerMicroservice.Data.Interfaces
 
         Task<Buyer> GetBuyerByIdAsync(Guid buyerID);
 
-        Task<BuyerConfirmation> CreateBuyerAsync(Buyer buyer);
+        Task<BuyerConfirmation> CreateBuyerAsync<T>(Buyer buyer) where T : BuyerConfirmation;
 
-        Task UpdateBuyerAsync(Buyer buyer);
+      
 
         Task DeleteBuyerAsync(Guid buyerID);
 

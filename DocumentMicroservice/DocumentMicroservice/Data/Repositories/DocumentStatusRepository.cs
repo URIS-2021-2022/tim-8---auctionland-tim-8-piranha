@@ -38,12 +38,12 @@ namespace DocumentMicroservice.Data.Repositories
 
         public async Task<List<DocumentStatus>> GetDocumentStatusAsync(string documentStatus = null)
         {
-            return await Context.DocumentStatus.Where(o => o.Status == null || documentStatus == null).ToListAsync();
+            return await Context.DocumentStatus.Where(o => o.status == null || documentStatus == null).ToListAsync();
         }
 
         public async Task< DocumentStatus> GetDocumentStatusByIdAsync(Guid documentStatusId)
         {
-            return await Context.DocumentStatus.FirstOrDefaultAsync(o => o.DocStatusID == documentStatusId);
+            return await Context.DocumentStatus.FirstOrDefaultAsync(o => o.docStatusID == documentStatusId);
         }
 
         public async Task UpdateDocumentStatusAsync(DocumentStatus documentStatus)

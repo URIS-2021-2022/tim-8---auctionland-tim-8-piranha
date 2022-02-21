@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Entities
 {
-    public class BuyerConfirmation
+    public abstract class BuyerConfirmation
     {
         public Guid buyerID { get; set; }
      
         public Guid priorityID { get; set; }
-        public Priority priority { get; set; }
         
-
         public int realizedArea { get; set; }
 
         public Guid authorizedPersonID { get; set; }

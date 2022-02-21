@@ -36,15 +36,15 @@ namespace DocumentMicroservice.Data.Repositories
 
         public async Task<List<GuaranteeType>> GetGuaranteeTypeAsync(string guaranteeType = null)
         {
-            return await Context.GuaranteeTypes.Where(o => o.Type == null || guaranteeType == null).ToListAsync();
+            return await Context.GuaranteeTypes.Where(o => o.type == null || guaranteeType == null).ToListAsync();
         }
         public GuaranteeType GetGuaranteeTypeById(Guid guaranteeTypeId)
         {
-            return Context.GuaranteeTypes.FirstOrDefault(o => o.GuaranteeTypeID == guaranteeTypeId);
+            return Context.GuaranteeTypes.FirstOrDefault(o => o.guaranteeTypeID == guaranteeTypeId);
         }
         public async Task<GuaranteeType> GetGuaranteeTypeByIdAsync(Guid guaranteeTypeId)
         {
-            return await Context.GuaranteeTypes.FirstOrDefaultAsync(o => o.GuaranteeTypeID == guaranteeTypeId);
+            return await Context.GuaranteeTypes.FirstOrDefaultAsync(o => o.guaranteeTypeID == guaranteeTypeId);
         }
 
         public async Task<bool> SaveChangesAsync()

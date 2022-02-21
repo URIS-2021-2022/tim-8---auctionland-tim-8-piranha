@@ -51,13 +51,13 @@ namespace BuyerMicroservice.Controllers
 
                 //validator.ValidateAndThrow(authorizedPerson);
 
+                BuyerConfirmation buyerConfirmation = await buyerRepository.CreateBuyerAsync<IndividualConfirmation>(individual);
 
-                BuyerConfirmation buyerConfirmation = await buyerRepository.CreateBuyerAsync(individual);
                 await buyerRepository.SaveChangesAsync();
 
                 string uri = linkGenerator.GetPathByAction("GetBuyerById", "Buyer", new { buyerID = buyerConfirmation.buyerID });
 
-                return Created(uri, mapper.Map<BuyerConfirmationDto>(buyerConfirmation));
+                return Created(uri, buyerConfirmation);
 
             }
             catch (ValidationException ve)
@@ -69,7 +69,6 @@ namespace BuyerMicroservice.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-
         [HttpPost("legalEntity")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -83,13 +82,13 @@ namespace BuyerMicroservice.Controllers
 
                 //validator.ValidateAndThrow(authorizedPerson);
 
+                BuyerConfirmation buyerConfirmation = await buyerRepository.CreateBuyerAsync<LegalEntityConfirmation>(legalEntity);
 
-                BuyerConfirmation buyerConfirmation = await buyerRepository.CreateBuyerAsync(legalEntity);
                 await buyerRepository.SaveChangesAsync();
 
                 string uri = linkGenerator.GetPathByAction("GetBuyerById", "Buyer", new { buyerID = buyerConfirmation.buyerID });
 
-                return Created(uri, mapper.Map<BuyerConfirmationDto>(buyerConfirmation));
+                return Created(uri, buyerConfirmation);
 
             }
             catch (ValidationException ve)
@@ -103,7 +102,77 @@ namespace BuyerMicroservice.Controllers
         }
 
 
+        [HttpPut("individual")]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<BuyerDto>> UpdateIndividualAsync(IndividualUpdateDto individualUpdate)
+        {
+            try
+            {
+                Buyer existingbuyer = await buyerRepository.GetBuyerByIdAsync(individualUpdate.buyerID);
 
+                if (existingbuyer == null)
+                {
+                    return NotFound();
+                }
+
+                // validator.ValidateAndThrow(contactPerson);
+
+                mapper.Map(individualUpdate, (Individual)existingbuyer);
+
+                await buyerRepository.SaveChangesAsync();
+
+                return Ok(mapper.Map<IndividualDto>(existingbuyer));
+
+            }
+            catch (ValidationException ve)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPut("legalEntity")]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<BuyerDto>> UpdateLegalEntityAsync(LegalEntityUpdateDto legalEntityUpdate)
+        {
+            try
+            {
+                Buyer existingbuyer = await buyerRepository.GetBuyerByIdAsync(legalEntityUpdate.buyerID);
+
+                if (existingbuyer == null)
+                {
+                    return NotFound();
+                }
+
+                // validator.ValidateAndThrow(contactPerson);
+
+                mapper.Map(legalEntityUpdate, (LegalEntity)existingbuyer);
+
+                await buyerRepository.SaveChangesAsync();
+
+                return Ok(mapper.Map<LegalEntityDto>(existingbuyer));
+
+            }
+            catch (ValidationException ve)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
 
     }

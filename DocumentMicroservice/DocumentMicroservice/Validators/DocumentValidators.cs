@@ -11,12 +11,12 @@ namespace DocumentMicroservice.Validators
     {
         public DocumentValidators()
         {
-            RuleFor(document => document.RegistrationNumber)
+            RuleFor(document => document.registrationNumber)
                 .NotEmpty()
                 .NotNull()
                 .Matches("^[0-9]+(/[0-9]+)*$");
 
-            RuleFor(document => document.DocumentTemplate)
+            RuleFor(document => document.documentTemplate)
                .NotEmpty()
                .NotNull();
              

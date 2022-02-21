@@ -25,13 +25,8 @@ namespace DocumentMicroservice.Models.ContractLease
         /// </summary>
         public DateTime? SubmissionDate { get; set; }
 
-        //ministar
-        //public PersonalityContract Minister { get; set; }
+        
 
-        //Lice
-        //public BuyerContract Person { get; set; }
-
-        //rok za vracanje zemljista
         /// <summary>
         /// DeadlineLandRestitution - Rok za vracanje zemljista
         /// </summary>
@@ -49,7 +44,11 @@ namespace DocumentMicroservice.Models.ContractLease
         /// </summary>
         public DateTime DateOfSigning { get; set; }
 
+        /// <summary>
+        /// DocumentID - ID dokumenta
+        /// </summary>
+        public Guid DocumentID { get; set; }
 
-      
+
     }
 }

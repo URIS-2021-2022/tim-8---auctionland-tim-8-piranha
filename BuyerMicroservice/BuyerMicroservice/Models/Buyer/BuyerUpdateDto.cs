@@ -12,8 +12,6 @@ namespace BuyerMicroservice.Models.Buyer
        
         public Guid priorityID { get; set; }
 
-    
-
         public int realizedArea { get; set; }
 
        // public string paymentID { get; set; }

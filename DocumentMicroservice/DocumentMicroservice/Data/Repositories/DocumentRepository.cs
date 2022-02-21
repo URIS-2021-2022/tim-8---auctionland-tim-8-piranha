@@ -29,9 +29,9 @@ namespace DocumentMicroservice.Data.Repositories
 
         
 
-        public async Task DeleteDocumentAsync(Guid DocumentId)
+        public async Task DeleteDocumentAsync(Guid documentId)
         {
-            var document =await  GetDocumentByIdAsync(DocumentId);
+            var document =await  GetDocumentByIdAsync(documentId);
             Context.Remove(document);
         }
 
@@ -39,14 +39,14 @@ namespace DocumentMicroservice.Data.Repositories
 
         public async  Task<List<Document>> GetDocumentAsync(string rNumber = null, string documentTemplate = null)
         {
-            return await Context.Document.Where(o => (o.RegistrationNumber == null || rNumber == null) && (o.DocumentTemplate == null || documentTemplate == null)).ToListAsync();
+            return await Context.Document.Where(o => (o.registrationNumber == null || rNumber == null) && (o.documentTemplate == null || documentTemplate == null)).ToListAsync();
         }
 
        
 
         public async Task<Document> GetDocumentByIdAsync(Guid documentId)
         {
-            return await Context.Document.FirstOrDefaultAsync(o => o.DocumentId == documentId);
+            return await Context.Document.FirstOrDefaultAsync(o => o.documentId == documentId);
         }
 
 

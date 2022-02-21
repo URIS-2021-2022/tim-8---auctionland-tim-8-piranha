@@ -3,6 +3,8 @@ using BuyerMicroservice.Data.Interfaces;
 using BuyerMicroservice.Data.Repositories;
 using BuyerMicroservice.Entities;
 using BuyerMicroservice.Models.Buyer;
+using BuyerMicroservice.Models.Individual;
+using BuyerMicroservice.Models.LegalEntity;
 using BuyerMicroservice.Validators;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
@@ -64,7 +66,11 @@ namespace BuyerMicroservice.Controllers
                 return NotFound();
             }
 
-            return Ok(mapper.Map<BuyerDto>(buyer));
+            return Ok(
+                buyer is Individual
+                    ? mapper.Map<IndividualDto>(buyer)
+                    : mapper.Map<LegalEntityDto>(buyer)
+            );
         }
 
         [HttpDelete("{buyerId}")]

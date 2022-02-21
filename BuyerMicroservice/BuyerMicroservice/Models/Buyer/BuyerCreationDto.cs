@@ -8,8 +8,6 @@ namespace BuyerMicroservice.Models.Buyer
     public class BuyerCreationDto
     {
         
-        public Guid buyerID { get; set; }
-        
         public Guid priorityID { get; set; }
 
         public int realizedArea { get; set; }

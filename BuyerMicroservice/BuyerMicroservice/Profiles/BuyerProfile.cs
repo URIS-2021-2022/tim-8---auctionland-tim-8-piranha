@@ -14,13 +14,22 @@ namespace BuyerMicroservice.Profiles
     {
         public BuyerProfile()
         {
-            CreateMap<IndividualCreationDto, Individual>();
-            CreateMap<LegalEntityCreationDto, LegalEntity>();
-            CreateMap<Buyer, BuyerConfirmation>();
+            CreateMap<BuyerUpdateDto, Buyer>();
+
             CreateMap<Individual, BuyerDto>();
+            CreateMap<Individual, IndividualDto>();
+            CreateMap<IndividualCreationDto, Individual>();
+            CreateMap<Individual, IndividualConfirmation>();
+            CreateMap<IndividualConfirmation, IndividualConfirmationDto>();
+            CreateMap<IndividualUpdateDto, Individual>().IncludeBase<BuyerUpdateDto,Buyer>();
+
             CreateMap<LegalEntity, BuyerDto>();
-            CreateMap<BuyerConfirmation,BuyerConfirmationDto>();
-            
+            CreateMap<LegalEntity, LegalEntityDto>();
+            CreateMap<LegalEntityCreationDto, LegalEntity>();
+            CreateMap<LegalEntity, LegalEntityConfirmation>();
+            CreateMap<LegalEntityConfirmation, LegalEntityConfirmationDto>();
+            CreateMap<LegalEntityUpdateDto, LegalEntity>().IncludeBase<BuyerUpdateDto, Buyer>() ;
+
         }
     }
 }

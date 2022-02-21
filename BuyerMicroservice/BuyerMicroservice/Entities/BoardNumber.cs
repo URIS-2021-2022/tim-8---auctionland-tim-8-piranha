@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Entities
 {
-    public class BoardNumber
+    public record BoardNumber 
     {
-        public int boardNums { get; set; }
+        public Guid authorizedPersonID { get; set; }
+        public int number { get; set; }
 
         
     }

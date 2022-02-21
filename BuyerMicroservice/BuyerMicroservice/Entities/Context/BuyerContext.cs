@@ -29,31 +29,49 @@ namespace BuyerMicroservice.Entities.Context
             e => e.HasDiscriminator<string>("BuyerType")
         );
             //Authorized person 
+           
+
+            
             builder.Entity<AuthorizedPerson>().HasData(
                new
                {
                    authorizedPersonID = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226"),
-                   name="Dimitrije",
-                   surname="Corlija",
-                   personalDocNum="8767834637274",
-                   address="Mira popare 11",
-                   country="Srbija",
+                   name = "Dimitrije",
+                   surname = "Corlija",
+                   personalDocNum = "8767834637274",
+                   address = "Mira popare 11",
+                   country = "Srbija",
                    
+
+
                });
 
             builder.Entity<AuthorizedPerson>().HasData(
                new
                {
+
                    authorizedPersonID = Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588"),
                    name = "Marko",
                    surname = "Markovic",
                    personalDocNum = "8227834666274",
                    address = "Bulevar Oslobodjenja 55",
                    country = "Zrenjanin",
-                   
-               });
+                
 
-           
+
+               });
+            /*builder.Entity<AuthorizedPerson>().OwnsMany(ap => ap.boardNums).HasData(
+                new BoardNumber { number = 3, authorizedPersonID = Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588") },
+                new BoardNumber { number = 4, authorizedPersonID = Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588") },
+                new BoardNumber { number = 1, authorizedPersonID = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226") },
+                new BoardNumber { number = 2, authorizedPersonID = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226") }
+
+                );*/
+
+
+
+
+
             //Contact person 
             builder.Entity<ContactPerson>().HasData(
               new

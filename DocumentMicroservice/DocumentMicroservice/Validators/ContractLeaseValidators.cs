@@ -12,19 +12,19 @@ namespace DocumentMicroservice.Validators
 
         public ContractLeaseValidators()
         {
-            RuleFor(contractLease => contractLease.Maturities)
+            RuleFor(contractLease => contractLease.maturities)
                 .NotEmpty()
                 .NotNull();
             // .Matches("^[0-9]+(/[0-9]+)*$");
 
            
-            RuleFor(contractLease => contractLease.SerialNumber)
+            RuleFor(contractLease => contractLease.serialNumber)
                 .NotEmpty()
                 .NotNull()
                 .Matches("^[a - zA - Z0 - 9] *$");
 
             
-                RuleFor(contractLease => contractLease.PlaceOfSigning)
+                RuleFor(contractLease => contractLease.placeOfSigning)
                 .NotEmpty()
                 .NotNull()
                 .Matches("^[a - zA - Z0 - 9] *$");

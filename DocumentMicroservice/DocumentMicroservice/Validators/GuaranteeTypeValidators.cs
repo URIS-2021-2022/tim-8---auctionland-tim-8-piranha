@@ -11,7 +11,7 @@ namespace DocumentMicroservice.Validators
     {
         public GuaranteeTypeValidators()
         {
-            RuleFor(guaranteeType => guaranteeType.Type)
+            RuleFor(guaranteeType => guaranteeType.type)
                 .NotEmpty()
                 .NotNull()
                 .Matches("^[a-zA-Z0-9 ]*$");

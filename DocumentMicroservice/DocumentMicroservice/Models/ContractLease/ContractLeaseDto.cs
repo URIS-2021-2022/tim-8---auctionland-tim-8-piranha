@@ -50,6 +50,11 @@ namespace DocumentMicroservice.Models.ContractLease
         /// </summary>
         public DateTime DateOfSigning { get; set; }
 
+        /// <summary>
+        /// DocumentID - ID dokumenta
+        /// </summary>
+        public Guid DocumentID { get; set; }
+
 
         
     }

@@ -11,6 +11,5 @@ namespace BuyerMicroservice.Models.LegalEntity
         public string identificationNumber { get; set; }
 
         public string fax { get; set; }
-
     }
 }

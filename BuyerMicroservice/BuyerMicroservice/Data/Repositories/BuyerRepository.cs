@@ -21,11 +21,11 @@ namespace BuyerMicroservice.Data.Repositories
         }
         
 
-        public async Task<BuyerConfirmation> CreateBuyerAsync(Buyer buyer)
+        public async Task<BuyerConfirmation> CreateBuyerAsync<T>(Buyer buyer) where T : BuyerConfirmation
         {
             var createdBuyer =await buyerContext.AddAsync(buyer);
           
-            return mapper.Map<BuyerConfirmation>(createdBuyer.Entity);
+            return mapper.Map<T>(createdBuyer.Entity);
         }
 
        
@@ -59,10 +59,6 @@ namespace BuyerMicroservice.Data.Repositories
 
         
 
-        public async Task UpdateBuyerAsync(Buyer buyer)
-        {
-            /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 
-              kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane */
-        }
+       
     }
 }

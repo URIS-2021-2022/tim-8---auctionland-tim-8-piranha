@@ -11,7 +11,7 @@ namespace DocumentMicroservice.Validators
     {
         public DocumentStatusValidators()
         {
-            RuleFor(documentStatus => documentStatus.Status)
+            RuleFor(documentStatus => documentStatus.status)
                 .NotEmpty()
                 .NotNull();
                 

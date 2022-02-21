@@ -19,6 +19,7 @@ namespace DocumentMicroservice.Entities.Contexts
 
         public DbSet<Document> Document { get; set; }
 
+        public DbSet<ContractLease> contractLeases { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
