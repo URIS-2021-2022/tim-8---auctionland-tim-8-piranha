@@ -44,15 +44,15 @@ namespace AdMicroservice.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<List<JournalDto>> GetJournals(string journalNumber)
+        public async Task<ActionResult<List<JournalDto>>> GetJournals(string journalNumber)
         {
-            List<JournalModel> journals = journalRepository.GetJournals(journalNumber);
+            List<JournalModel> journals = await journalRepository.GetJournals(journalNumber);
             if (journals == null || journals.Count == 0)
             {
-                Logger.LogMessage(LogLevel.Warning, "Journals list is empty!", "Ad microservice", "GetJournals");
+                await Logger.LogMessage(LogLevel.Warning, "Journals list is empty!", "Ad microservice", "GetJournals");
                 return NoContent();
             }
-            Logger.LogMessage(LogLevel.Information, "Journals list successfully returned!", "Ad microservice", "GetJournals");
+            await Logger.LogMessage(LogLevel.Information, "Journals list successfully returned!", "Ad microservice", "GetJournals");
             return Ok(mapper.Map<List<JournalDto>>(journals));
         }
 
@@ -65,16 +65,16 @@ namespace AdMicroservice.Controllers
         [HttpGet("{journalId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<JournalDto> GetJournalById(Guid journalId)
+        public async Task<ActionResult<JournalDto>> GetJournalById(Guid journalId)
         {
-            JournalModel journal = journalRepository.GetJournalById(journalId);
+            JournalModel journal = await journalRepository.GetJournalById(journalId);
 
             if (journal == null)
             {
-                Logger.LogMessage(LogLevel.Warning, "Journal not found!", "Ad microservice", "GetJournalById");
+                await Logger.LogMessage(LogLevel.Warning, "Journal not found!", "Ad microservice", "GetJournalById");
                 return NotFound();
             }
-            Logger.LogMessage(LogLevel.Information, "Journal found and successfully returned!", "Ad microservice", "GetJournalById");
+            await Logger.LogMessage(LogLevel.Information, "Journal found and successfully returned!", "Ad microservice", "GetJournalById");
             return Ok(mapper.Map<JournalDto>(journal));
         }
 
@@ -87,19 +87,19 @@ namespace AdMicroservice.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<JournalConfirmationDto> CreateJournal([FromBody] JournalCreationDto journal)
+        public async Task<ActionResult<JournalConfirmationDto>> CreateJournal([FromBody] JournalCreationDto journal)
         {
             try
             {
                 JournalModel jr = mapper.Map<JournalModel>(journal);
-                JournalConfirmation confirmation = journalRepository.CreateJournal(jr);
+                JournalConfirmation confirmation = await journalRepository.CreateJournal(jr);
                 string location = linkGenerator.GetPathByAction("GetJournalById", "Journal", new { journalId = jr.JournalId });
-                Logger.LogMessage(LogLevel.Information, "Journal successfully created!", "Ad microservice", "CreateJournal");
+                await Logger.LogMessage(LogLevel.Information, "Journal successfully created!", "Ad microservice", "CreateJournal");
                 return Created(location, mapper.Map<JournalConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
-                Logger.LogMessage(LogLevel.Error, "Journal creation failed!", "Ad microservice", "CreateJournal");
+                await Logger.LogMessage(LogLevel.Error, "Journal creation failed!", "Ad microservice", "CreateJournal");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error" + " " + ex.Message);
             }
         }
@@ -115,7 +115,7 @@ namespace AdMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<JournalConfirmationDto> UpdateJournal(JournalUpdateDto journal)
+        public async Task<ActionResult<JournalConfirmationDto>> UpdateJournal(JournalUpdateDto journal)
         {
             try
             {
@@ -124,18 +124,18 @@ namespace AdMicroservice.Controllers
 
                 if (oldJournal == null)
                 {
-                    Logger.LogMessage(LogLevel.Warning, "Journal not found!", "Ad microservice", "UpdateJournal");
+                    await Logger.LogMessage(LogLevel.Warning, "Journal not found!", "Ad microservice", "UpdateJournal");
                     return NotFound();
                 }
                 JournalModel jr = mapper.Map<JournalModel>(journal);
-                mapper.Map(jr, oldJournal);
-                journalRepository.SaveChanges();
-                Logger.LogMessage(LogLevel.Information, "Journal successfully updated!", "Ad microservice", "UpdateJournal");
+                await mapper.Map(jr, oldJournal);
+                await journalRepository.SaveChanges();
+                await Logger.LogMessage(LogLevel.Information, "Journal successfully updated!", "Ad microservice", "UpdateJournal");
                 return Ok(mapper.Map<JournalDto>(oldJournal));
             }
             catch
             {
-                Logger.LogMessage(LogLevel.Error, "Journal update failed!", "Ad microservice", "UpdateJournal");
+                await Logger.LogMessage(LogLevel.Error, "Journal update failed!", "Ad microservice", "UpdateJournal");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -151,24 +151,24 @@ namespace AdMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{journalId}")]
-        public IActionResult DeleteJournal(Guid journalId)
+        public async Task<IActionResult> DeleteJournal(Guid journalId)
         {
             try
             {
-                JournalModel journal = journalRepository.GetJournalById(journalId);
+                JournalModel journal = await journalRepository.GetJournalById(journalId);
 
                 if (journal == null)
                 {
-                    Logger.LogMessage(LogLevel.Warning, "Journal not found!", "Ad microservice", "DeleteJournal");
+                    await Logger.LogMessage(LogLevel.Warning, "Journal not found!", "Ad microservice", "DeleteJournal");
                     return NotFound();
                 }
-                journalRepository.DeleteJournal(journalId);
-                Logger.LogMessage(LogLevel.Information, "Journal deleted successfully!", "Ad microservice", "DeleteJournal");
+                await journalRepository.DeleteJournal(journalId);
+                await Logger.LogMessage(LogLevel.Information, "Journal deleted successfully!", "Ad microservice", "DeleteJournal");
                 return NoContent();
             }
             catch
             {
-                Logger.LogMessage(LogLevel.Error, "Journal deletion failed!", "Ad microservice", "DeleteJournal");
+                await Logger.LogMessage(LogLevel.Error, "Journal deletion failed!", "Ad microservice", "DeleteJournal");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }

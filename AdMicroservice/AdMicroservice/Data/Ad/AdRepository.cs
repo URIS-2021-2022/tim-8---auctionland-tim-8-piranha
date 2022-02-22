@@ -20,39 +20,41 @@ namespace AdMicroservice.Data.Ad
             this.mapper = mapper;
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChanges()
         {
-            return context.SaveChanges() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
-        public AdConfirmation CreateAd(AdModel ad)
+        public async Task<AdConfirmation> CreateAd(AdModel ad)
         {
-            var createdEntity = context.Ads.Add(ad);
+            var createdEntity = await context.Ads.AddAsync(ad);
             context.SaveChanges();
             return mapper.Map<AdConfirmation>(createdEntity.Entity);
         }
 
-        public void DeleteAd(Guid adId)
+        public async Task DeleteAd(Guid adId)
         {
-            var ad = GetAdById(adId);
+            var ad = await GetAdById(adId);
             context.Ads.Remove(ad);
             context.SaveChanges();
         }
 
-        public List<AdModel> GetAds(string publicationDate = null)
+        public async Task<List<AdModel>> GetAds(string publicationDate = null)
         {
-            return context.Ads.Include(a => a.Journal).Where(e => publicationDate == null || e.PublicationDate == publicationDate).ToList();
+            return await context.Ads.Include(a => a.Journal).Where(e => publicationDate == null || e.PublicationDate == publicationDate).ToListAsync();
 
         }
 
-        public AdModel GetAdById(Guid adId)
+        public async Task<AdModel> GetAdById(Guid adId)
         {
-            return context.Ads.Include(a => a.Journal).FirstOrDefault(e => e.AdId == adId);
+            return await context.Ads.Include(a => a.Journal).FirstOrDefaultAsync(e => e.AdId == adId);
         }
 
-        public void UpdateAd(AdModel ad)
+#pragma warning disable CS1998
+        public async Task UpdateAd(AdModel ad)
         {
-            //NE GLEDAJ OVAJ KOD   
+            //Ne treba da se implementira zbog EF
         }
+#pragma warning restore CS1998
     }
 }

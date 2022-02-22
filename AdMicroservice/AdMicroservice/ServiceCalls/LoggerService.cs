@@ -34,7 +34,9 @@ namespace AdMicroservice.ServiceCalls
                 };
 
                 HttpContent content = new StringContent(JsonConvert.SerializeObject(log));
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 content.Headers.ContentType.MediaType = "application/json";
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
                 HttpResponseMessage response = httpClient.PostAsync(url, content).Result;
 

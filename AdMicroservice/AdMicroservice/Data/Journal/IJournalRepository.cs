@@ -8,17 +8,17 @@ namespace AdMicroservice.Data.Journal
 {
     public interface IJournalRepository
     {
-        List<JournalModel> GetJournals(string journalNumber = null);
+        Task<List<JournalModel>> GetJournals(string journalNumber = null);
 
-        JournalModel GetJournalById(Guid journalId);
+        Task<JournalModel> GetJournalById(Guid journalId);
 
-        JournalConfirmation CreateJournal(JournalModel journal);
+        Task <JournalConfirmation> CreateJournal(JournalModel journal);
 
-        void UpdateJournal(JournalModel journal);
+        Task UpdateJournal(JournalModel journal);
 
-        void DeleteJournal(Guid journalId);
+        Task DeleteJournal(Guid journalId);
 
-        bool SaveChanges();
+        Task<bool> SaveChanges();
 
     }
 }

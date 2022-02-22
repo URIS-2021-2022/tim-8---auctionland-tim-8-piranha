@@ -8,16 +8,16 @@ namespace AdMicroservice.Data
 {
     public interface IAdRepository
     {
-        List<AdModel> GetAds(string publicationDate = null);
+        Task<List<AdModel>> GetAds(string publicationDate = null);
 
-        AdModel GetAdById(Guid AdId);
+        Task<AdModel> GetAdById(Guid AdId);
 
-        AdConfirmation CreateAd(AdModel ad);
+        Task<AdConfirmation> CreateAd(AdModel ad);
 
-        void UpdateAd(AdModel ad);
+        Task UpdateAd(AdModel ad);
 
-        void DeleteAd(Guid adId);
+        Task DeleteAd(Guid adId);
 
-        bool SaveChanges();
+        Task<bool> SaveChanges();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AdMicroservice.Entities;
 using AdMicroservice.Entities.Journal;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,40 +20,42 @@ namespace AdMicroservice.Data.Journal
             this.mapper = mapper;
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChanges()
         {
-            return context.SaveChanges() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
-        public JournalConfirmation CreateJournal(JournalModel journal)
+        public async Task<JournalConfirmation> CreateJournal(JournalModel journal)
         {
-            var createdEntity = context.Journals.Add(journal);
+            var createdEntity = await context.Journals.AddAsync(journal);
             context.SaveChanges();
             return mapper.Map<JournalConfirmation>(createdEntity.Entity);
         }
 
-        public void DeleteJournal(Guid journalId)
+        public async Task DeleteJournal(Guid journalId)
         {
-            var journal = GetJournalById(journalId);
+            var journal = await GetJournalById(journalId);
             context.Journals.Remove(journal);
             context.SaveChanges();
         }
 
-        public List<JournalModel> GetJournals(string journalNumber = null)
+        public async Task<List<JournalModel>> GetJournals(string journalNumber = null)
         {
-            return context.Journals.Where(e => journalNumber == null || e.JournalNumber == journalNumber).ToList();
+            return await context.Journals.Where(e => journalNumber == null || e.JournalNumber == journalNumber).ToListAsync();
 
         }
 
-        public JournalModel GetJournalById(Guid journalId)
+        public async Task<JournalModel> GetJournalById(Guid journalId)
         {
-            return context.Journals.FirstOrDefault(e => e.JournalId == journalId);
+            return await context.Journals.FirstOrDefaultAsync(e => e.JournalId == journalId);
         }
 
-        public void UpdateJournal(JournalModel journal)
+#pragma warning disable CS1998
+        public async Task UpdateJournal(JournalModel journal)
         {
-            //NE GLEDAJ OVAJ KOD   
+            //NE TREBA DA SE IMPLEMENTIRA ZBOG EF
             
         }
+#pragma warning restore CS1998
     }
 }

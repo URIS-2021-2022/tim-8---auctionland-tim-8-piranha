@@ -48,15 +48,15 @@ namespace AdMicroservice.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<List<AdDto>> GetComplaintTypes(string publicationDate)
+        public async Task<ActionResult<List<AdDto>>> GetComplaintTypes(string publicationDate)
         {
-            List<AdModel> ads = adRepository.GetAds(publicationDate);
+            List<AdModel> ads = await adRepository.GetAds(publicationDate);
             if (ads == null || ads.Count == 0)
             {
-                Logger.LogMessage(LogLevel.Warning, "Ads list is empty!", "Ad microservice", "GetAds");
+                await Logger.LogMessage(LogLevel.Warning, "Ads list is empty!", "Ad microservice", "GetAds");
                 return NoContent();
             }
-            Logger.LogMessage(LogLevel.Information, "Ads list successfully returned!", "Ad microservice", "GetAds");
+            await Logger.LogMessage(LogLevel.Information, "Ads list successfully returned!", "Ad microservice", "GetAds");
             return Ok(mapper.Map<List<AdDto>>(ads));
         }
 
@@ -69,16 +69,16 @@ namespace AdMicroservice.Controllers
         [HttpGet("{adId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<AdDto> GetAdById(Guid adId)
+        public async Task<ActionResult<AdDto>> GetAdById(Guid adId)
         {
-            AdModel ad = adRepository.GetAdById(adId);
+            AdModel ad = await adRepository.GetAdById(adId);
 
             if (ad == null)
             {
-                Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "GetAdById");
+                await Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "GetAdById");
                 return NotFound();
             }
-            Logger.LogMessage(LogLevel.Information, "Ad found and successfully returned!", "Ad microservice", "GetAdById");
+            await Logger.LogMessage(LogLevel.Information, "Ad found and successfully returned!", "Ad microservice", "GetAdById");
             return Ok(mapper.Map<AdDto>(ad));
         }
 
@@ -91,19 +91,19 @@ namespace AdMicroservice.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<AdConfirmationDto> CreateAd([FromBody] AdCreationDto ad)
+        public async Task<ActionResult<AdConfirmationDto>> CreateAd([FromBody] AdCreationDto ad)
         {
             try
             {
                 AdModel a = mapper.Map<AdModel>(ad);
-                AdConfirmation confirmation = adRepository.CreateAd(a);
+                AdConfirmation confirmation = await adRepository.CreateAd(a);
                 string location = linkGenerator.GetPathByAction("GetAdById", "Ad", new { adId = a.AdId });
-                Logger.LogMessage(LogLevel.Information, "Ad successfully created!", "Ad microservice", "CreateAd");
+                await Logger.LogMessage(LogLevel.Information, "Ad successfully created!", "Ad microservice", "CreateAd");
                 return Created(location, mapper.Map<AdConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
-                Logger.LogMessage(LogLevel.Error, "Ad creation failed!", "Ad microservice", "CreateAd");
+                await Logger.LogMessage(LogLevel.Error, "Ad creation failed!", "Ad microservice", "CreateAd");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error" + " " + ex.Message);
             }
         }
@@ -119,28 +119,28 @@ namespace AdMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<AdConfirmationDto> UpdateAd(AdUpdateDto ad)
+        public async Task<ActionResult<AdConfirmationDto>> UpdateAd(AdUpdateDto ad)
         {
             try
             {
 
-                var oldAd = adRepository.GetAdById(ad.AdId);
+                var oldAd = await adRepository.GetAdById(ad.AdId);
 
                 if (oldAd == null)
                 {
-                    Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "UpdateAd");
+                    await Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "UpdateAd");
                     return NotFound();
                 }
                 AdModel a = mapper.Map<AdModel>(ad);
                 mapper.Map(a, oldAd);
-                a.Journal = journalRepository.GetJournalById(oldAd.JournalId);
-                adRepository.SaveChanges();
-                Logger.LogMessage(LogLevel.Information, "Ad successfully updated!", "Ad microservice", "UpdateAd");
+                a.Journal = await journalRepository.GetJournalById(oldAd.JournalId);
+                await adRepository.SaveChanges();
+                await Logger.LogMessage(LogLevel.Information, "Ad successfully updated!", "Ad microservice", "UpdateAd");
                 return Ok(a);
             }
             catch
             {
-                Logger.LogMessage(LogLevel.Error, "Ad update failed!", "Ad microservice", "UpdateAd");
+                await Logger.LogMessage(LogLevel.Error, "Ad update failed!", "Ad microservice", "UpdateAd");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -156,24 +156,24 @@ namespace AdMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{adId}")]
-        public IActionResult DeleteComplaintType(Guid adId)
+        public async Task<IActionResult> DeleteComplaintType(Guid adId)
         {
             try
             {
-                AdModel ad = adRepository.GetAdById(adId);
+                AdModel ad = await adRepository.GetAdById(adId);
 
                 if (ad == null)
                 {
-                    Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "DeleteAd");
+                    await Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "DeleteAd");
                     return NotFound();
                 }
-                adRepository.DeleteAd(adId);
-                Logger.LogMessage(LogLevel.Information, "Ad deleted successfully!", "Ad microservice", "DeleteAd");
+                await adRepository.DeleteAd(adId);
+                await Logger.LogMessage(LogLevel.Information, "Ad deleted successfully!", "Ad microservice", "DeleteAd");
                 return NoContent();
             }
             catch
             {
-                Logger.LogMessage(LogLevel.Error, "Ad deletion failed!", "Ad microservice", "DeleteAd");
+                await Logger.LogMessage(LogLevel.Error, "Ad deletion failed!", "Ad microservice", "DeleteAd");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
