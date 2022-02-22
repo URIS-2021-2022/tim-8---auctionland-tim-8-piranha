@@ -79,7 +79,8 @@ namespace ComplaintMicroservice.Entities
                     DecisionNumber = "DN001",
                     ComplaintTypeId= Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                     ComplaintStatusId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
-                    ComplaintEventId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0")
+                    ComplaintEventId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    PublicBiddingId = Guid.Parse("d7d314b0-2f22-4af5-8909-238b23383249")
                 });
 
             modelBuilder.Entity<ComplaintMicroservice.Entities.Complaint.Complaint>()
@@ -93,7 +94,8 @@ namespace ComplaintMicroservice.Entities
                     DecisionNumber = "DN002",
                     ComplaintTypeId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                     ComplaintStatusId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
-                    ComplaintEventId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0")
+                    ComplaintEventId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    PublicBiddingId = Guid.Parse("d7d314b0-2f22-4af5-8909-238b23383249")
                 });
         }
     }

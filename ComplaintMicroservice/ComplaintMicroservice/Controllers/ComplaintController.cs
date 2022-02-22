@@ -3,6 +3,7 @@ using ComplaintMicroservice.Data;
 using ComplaintMicroservice.Data.Event;
 using ComplaintMicroservice.Data.Status;
 using ComplaintMicroservice.Entities.Complaint;
+using ComplaintMicroservice.Models;
 using ComplaintMicroservice.Models.Complaint;
 using ComplaintMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
@@ -30,11 +31,13 @@ namespace ComplaintMicroservice.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly ILoggerService Logger;
+        private readonly IServiceCall<PublicBiddingDto> publicBiddingService;
 
         public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, 
             IMapper mapper, IComplaintTypeRepository complaintTypeRepository, 
             IComplaintStatusRepository complaintStatusRepository, 
-            IComplaintEventRepository complaintEventRepository, ILoggerService loggerService)
+            IComplaintEventRepository complaintEventRepository, ILoggerService loggerService, 
+            IServiceCall<PublicBiddingDto> publicBiddingService)
         {
             this.complaintRepository = complaintRepository;
             this.linkGenerator = linkGenerator;
@@ -43,6 +46,7 @@ namespace ComplaintMicroservice.Controllers
             this.complaintStatusRepository = complaintStatusRepository;
             this.complaintEventRepository = complaintEventRepository;
             Logger = loggerService;
+            this.publicBiddingService = publicBiddingService;
         }
 
         /// <summary>
@@ -63,6 +67,25 @@ namespace ComplaintMicroservice.Controllers
                 await Logger.LogMessage(LogLevel.Warning, "Complaints list is empty!", "Complaint microservice", "GetComplaints");
                 return NoContent();
             }
+
+            List<ComplaintDto> complaintDtos = new List<ComplaintDto>();
+
+            foreach(var complaint in complaints)
+            {
+                ComplaintDto complaintDto = mapper.Map<ComplaintDto>(complaint);
+
+                if(complaint.PublicBiddingId is not null)
+                {
+                    var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("");
+
+                    if(publicBiddingDto is not null)
+                    {
+                        complaintDto.PublicBidding = publicBiddingDto;
+                    }
+                }
+                complaintDtos.Add(complaintDto);
+            }
+
             await Logger.LogMessage(LogLevel.Information, "Complaints list successfully returned!", "Complaint microservice", "GetComplaints");
             return Ok(mapper.Map<List<ComplaintDto>>(complaints));
         }
@@ -85,6 +108,19 @@ namespace ComplaintMicroservice.Controllers
                 await Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "GetComplaintById");
                 return NotFound();
             }
+
+            ComplaintDto complaintDto = mapper.Map<ComplaintDto>(com);
+
+            if(com.PublicBiddingId is not null)
+            {
+                var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("");
+
+                if (publicBiddingDto is not null)
+                {
+                    complaintDto.PublicBidding = publicBiddingDto;
+                }
+            }
+
             await Logger.LogMessage(LogLevel.Information, "Complaint found and successfully returned!", "Complaint microservice", "GetComplaintById");
             return Ok(mapper.Map<ComplaintDto>(com));
         }

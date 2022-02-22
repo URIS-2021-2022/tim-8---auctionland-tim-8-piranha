@@ -46,5 +46,9 @@ namespace ComplaintMicroservice.Models.Complaint
         /// DTO dogadjaja na osnovu zalbe
         /// </summary>
         public ComplaintEventDto ComplaintEvent { get; set; }
+        /// <summary>
+        /// Javnog nadmetanje
+        /// </summary>
+        public PublicBiddingDto PublicBidding { get; set; }
     }
 }

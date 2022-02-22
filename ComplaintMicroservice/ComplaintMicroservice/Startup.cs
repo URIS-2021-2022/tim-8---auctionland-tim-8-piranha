@@ -3,6 +3,7 @@ using ComplaintMicroservice.Data.Complaint;
 using ComplaintMicroservice.Data.Event;
 using ComplaintMicroservice.Data.Status;
 using ComplaintMicroservice.Entities;
+using ComplaintMicroservice.Models;
 using ComplaintMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,6 +47,7 @@ namespace ComplaintMicroservice
             services.AddScoped<IComplaintEventRepository, ComplaintEventRepository>();
             services.AddScoped<IComplaintRepository, ComplaintRepository>();
             services.AddScoped<ILoggerService, LoggerService>();
+            services.AddScoped<IServiceCall<PublicBiddingDto>, ServiceCall<PublicBiddingDto>>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ComplaintMicroservice", Version = "v1" });

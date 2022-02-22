@@ -50,5 +50,9 @@ namespace ComplaintMicroservice.Models.Complaint
         /// ID dogadjaja na osnovu zalbe
         /// </summary>
         public Guid ComplaintEventId { get; set; }
+        /// <summary>
+        /// Id javnog nadmetanja
+        /// </summary>
+        public Guid PublicBiddingId { get; set; }
     }
 }

@@ -265,6 +265,11 @@
             Dogadjaj na osnovu zalbe
             </summary>
         </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
         <member name="T:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation">
             <summary>
             Potvrda zalbe
@@ -313,6 +318,11 @@
         <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.ComplaintEventId">
             <summary>
             ID dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
             </summary>
         </member>
         <member name="T:ComplaintMicroservice.Entities.Event.ComplaintEvent">
@@ -455,6 +465,11 @@
             ID dogadjaja na osnovu zalbe
             </summary>
         </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
         <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto">
             <summary>
             Zalba DTO za kreiranje
@@ -500,6 +515,11 @@
             ID dogadjaja na osnovu zalbe
             </summary>
         </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
         <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintDto">
             <summary>
             Zalba DTO
@@ -543,6 +563,11 @@
         <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.ComplaintEvent">
             <summary>
             DTO dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
             </summary>
         </member>
         <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto">
@@ -595,6 +620,11 @@
             ID dogadjaja na osnovu zalbe
             </summary>
         </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
         <member name="T:ComplaintMicroservice.Models.Event.ComplaintEventConfirmationDto">
             <summary>
             Potvrda dogadjaja na osnovu zalbe DTO
@@ -643,6 +673,81 @@
         <member name="P:ComplaintMicroservice.Models.Event.ComplaintEventUpdateDto.Event">
             <summary>
             Dogadjaj na osnovu zalbe 
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.LogModel">
+            <summary>
+            Representation of Log.
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.LogModel.LogLevel">
+            <summary>
+            Log level (ex. Warn, Debug, Error, Info)
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.LogModel.LogMessage">
+            <summary>
+            Message to log.
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.LogModel.MicroserviceName">
+            <summary>
+            Name of microservice (ex. Plot microservice)
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.LogModel.MicroserviceMethod">
+            <summary>
+            Microservice method (ex. GetPlotsAsync())
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices">
+            <summary>
+            Model javnog nadmetanja za druge servise
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.Type">
+            <summary>
+            Tip javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.Status">
+            <summary>
+            Status pocetka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.StartTime">
+            <summary>
+            Vreme pocetka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.Date">
+            <summary>
+            Datum odrzavanja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.StartPricePerHa">
+            <summary>
+            Pocetna cena parcele
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.Address">
+            <summary>
+            Adresa odrzavanja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.RentPeriod">
+            <summary>
+            Period zakupa
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.DepositSupplement">
+            <summary>
+            Doplata depozita
             </summary>
         </member>
         <member name="T:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusConfirmationDto">
