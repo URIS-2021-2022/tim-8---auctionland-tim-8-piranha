@@ -7,4 +7,8 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PaymentMicroservice
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\x\Source\Repos\tim-8---auctionland-tim-8-piranha\PaymentMicroservice\PaymentMicroservice\
+=======
+build_property.ProjectDir = C:\Users\lukap\Source\Repos\tim-8---auctionland-tim-8-piranha\PaymentMicroservice\PaymentMicroservice\
+>>>>>>> 0478c7fc7d83d700830d829c3ef27487b65a2258
