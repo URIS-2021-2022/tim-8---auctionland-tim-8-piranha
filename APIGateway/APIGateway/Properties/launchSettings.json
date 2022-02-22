@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:34692",
-      "sslPort": 44351
+      "applicationUrl": "http://localhost:50009",
+      "sslPort": 0 // not needed for localhost
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
@@ -32,7 +32,7 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": false // not needed for localhost
     }
   }
 }
