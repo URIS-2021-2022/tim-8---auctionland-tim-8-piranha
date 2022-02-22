@@ -16,5 +16,9 @@ namespace BuyerMicroservice.Models.Buyer
         public string email { get; set; }
 
         public string accountNumber { get; set; }
+
+        public AddressDto address { get; set; }
+
+        public PaymentDto payment { get; set; }
     }
 }

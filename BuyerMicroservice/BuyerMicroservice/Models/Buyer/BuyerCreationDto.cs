@@ -37,5 +37,9 @@ namespace BuyerMicroservice.Models.Buyer
         public string accountNumber { get; set; }
 
         // public Guid publicTender { get; set; }
+
+        public Guid? addressId { get; set; }
+
+        public Guid? paymentId { get; set; }
     }
 }

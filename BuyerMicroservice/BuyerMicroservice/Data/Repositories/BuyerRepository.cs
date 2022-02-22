@@ -19,7 +19,14 @@ namespace BuyerMicroservice.Data.Repositories
             this.buyerContext = buyerContext;
             this.mapper = mapper;
         }
+
         
+        public async Task AddAuthorizedPersonToBuyer(AuthorizedPerson authorizedPerson, Guid buyerId)
+        {
+             Buyer buyer= await buyerContext.buyer.FirstOrDefaultAsync(o => o.buyerID == buyerId);
+
+            buyer.authorizedPerson.Add(authorizedPerson);
+        }
 
         public async Task<BuyerConfirmation> CreateBuyerAsync<T>(Buyer buyer) where T : BuyerConfirmation
         {
@@ -50,7 +57,13 @@ namespace BuyerMicroservice.Data.Repositories
             return await buyerContext.buyer.FirstOrDefaultAsync(o => o.buyerID == buyerID);
         }
 
-       
+      
+        public async Task RemoveAuthorizedPersonFromBuyer(AuthorizedPerson authorizedPerson, Guid buyerId)
+        {
+            Buyer buyer = await buyerContext.buyer.FirstOrDefaultAsync(o => o.buyerID == buyerId);
+
+            buyer.authorizedPerson.Remove(authorizedPerson);
+        }
 
         public async Task<bool> SaveChangesAsync()
         {

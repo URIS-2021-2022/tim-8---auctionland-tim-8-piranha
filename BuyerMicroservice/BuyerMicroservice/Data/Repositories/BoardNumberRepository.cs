@@ -20,15 +20,17 @@ namespace BuyerMicroservice.Data.Repositories
             this.mapper = mapper;
         }
 
-        public async Task<BoardNumberConfirmation> CreatePriorityAsync(BoardNumber boardNumber)
+        public async Task<BoardNumberConfirmation> CreateBoardNumberAsync(BoardNumber boardNumber)
         {
             var createdBoardNumber = await buyerContext.AddAsync(boardNumber);
             return mapper.Map<BoardNumberConfirmation>(createdBoardNumber.Entity);
         }
 
+       
+
         public async Task DeleteBoardNumberAsync(Guid boardNumberID)
         {
-            var boardNumber = await GetPriorityByIdAsync(boardNumberID);
+            var boardNumber = await GetBoardNumberByIdAsync(boardNumberID);
             buyerContext.Remove(boardNumber);
         }
 
@@ -37,10 +39,12 @@ namespace BuyerMicroservice.Data.Repositories
             return await buyerContext.boardNumber.Where(o => (o.number == number || number == 0)).ToListAsync();
         }
 
-        public async Task<BoardNumber> GetPriorityByIdAsync(Guid boardNumberID)
+        public async Task<BoardNumber> GetBoardNumberByIdAsync(Guid boardNumberID)
         {
             return buyerContext.boardNumber.FirstOrDefault(o => o.boardNumberID == boardNumberID);
         }
+
+       
 
         public async Task<bool> SaveChangesAsync()
         {

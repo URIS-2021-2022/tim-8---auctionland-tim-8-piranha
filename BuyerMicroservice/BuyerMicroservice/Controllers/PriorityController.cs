@@ -2,12 +2,14 @@
 using BuyerMicroservice.Data.Interfaces;
 using BuyerMicroservice.Entities;
 using BuyerMicroservice.Models.Priority;
+using BuyerMicroservice.ServiceCalls;
 using BuyerMicroservice.Validators;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +26,15 @@ namespace BuyerMicroservice.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly PriorityValidator validator;
+        private readonly ILoggerService logger;
 
-        public PriorityController(IPriorityRepository priorityRepository, IMapper mapper, LinkGenerator linkGenerator, PriorityValidator validator)
+        public PriorityController(IPriorityRepository priorityRepository, IMapper mapper, LinkGenerator linkGenerator, PriorityValidator validator, ILoggerService logger)
         {
             this.priorityRepository = priorityRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.validator = validator;
-
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -44,8 +47,11 @@ namespace BuyerMicroservice.Controllers
 
             if (priority == null || priority.Count == 0)
             {
+                await logger.LogMessage(LogLevel.Warning, "Priority culture list is empty!", "Buyer microservice", "GetPriorityAsync");
+
                 return NoContent();
             }
+            await logger.LogMessage(LogLevel.Information, "Priority list successfully returned!", "Buyer microservice", "GetPriorityAsync");
 
             return Ok(mapper.Map<List<PriorityDto>>(priority));
         }
@@ -59,8 +65,12 @@ namespace BuyerMicroservice.Controllers
 
             if (priority == null)
             {
+                await logger.LogMessage(LogLevel.Warning, "Priority not found!", "Buyer microservice", "GetContactPersonByIdAsync");
+
                 return NotFound();
             }
+
+            await logger.LogMessage(LogLevel.Information, "Priority found and successfully returned!", "Buyer microservice", "GetContactPersonByIdAsync");
 
             return Ok(mapper.Map<PriorityDto>(priority));
         }
@@ -83,15 +93,20 @@ namespace BuyerMicroservice.Controllers
 
                 string uri = linkGenerator.GetPathByAction("GetPriority", "Priority", new { priorityId = priorityConfirmation.priorityID });
 
+                await logger.LogMessage(LogLevel.Information, "Priority  successfully created!", "Buyer microservice", "CreatePriorityAsync");
+
                 return Created(uri, mapper.Map<PriorityConfirmationDto>(priorityConfirmation));
 
             }
             catch (ValidationException ve)
             {
+                await logger.LogMessage(LogLevel.Error, "Validation for Priority object failed!", "Buyer microservice", "CreatePriorityAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+
             }
             catch (Exception ex)
             {
+                await logger.LogMessage(LogLevel.Error, "Priority object creation failed!", "Buyer microservice", "CreatePriorityAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -102,7 +117,7 @@ namespace BuyerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PriorityDto>> UpdatePriority(PriorityUpdateDto priorityUpdate)
+        public async Task<ActionResult<PriorityDto>> UpdatePriorityAsync(PriorityUpdateDto priorityUpdate)
         {
             try
             {
@@ -110,6 +125,8 @@ namespace BuyerMicroservice.Controllers
 
                 if (existingPriority == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Priority object not found!", "Buyer microservice", "UpdatePriorityAsync");
+
                     return NotFound();
                 }
 
@@ -121,15 +138,19 @@ namespace BuyerMicroservice.Controllers
 
                 await priorityRepository.SaveChangesAsync();
 
+                await logger.LogMessage(LogLevel.Information, "Priority object updated successfully!", "Buyer microservice", "UpdatePriorityAsync");
+
                 return Ok(mapper.Map<PriorityDto>(existingPriority));
 
             }
             catch (ValidationException ve)
             {
+                await logger.LogMessage(LogLevel.Error, "Validation for Priority  object failed!", "Buyer microservice", "UpdatePriorityAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch (Exception ex)
             {
+                await logger.LogMessage(LogLevel.Error, "Priority object updating failed!", "Buyer microservice", "UpdatePriorityAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -146,26 +167,33 @@ namespace BuyerMicroservice.Controllers
 
                 if (priority == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Priority object not found!", "Buyer microservice", "DeletePriorityAsync");
+
                     return NotFound();
                 }
 
                 await priorityRepository.DeletePriorityAsync(priorityId);
                await priorityRepository.SaveChangesAsync();
 
+                await logger.LogMessage(LogLevel.Information, "Priority object deleted successfully!", "Buyer microservice", "DeletePriorityAsync");
+
                 return NoContent();
 
             }
             catch (Exception ex)
             {
+                await logger.LogMessage(LogLevel.Error, "Priority object deletion failed!", "Buyer microservice", "DeletePriorityAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPriorityOptions()
+        public async Task<IActionResult> GetPriorityOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Buyer microservice", "GetPriorityOptions");
+
             return Ok();
         }
     }

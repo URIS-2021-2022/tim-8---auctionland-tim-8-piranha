@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuyerMicroservice.Migrations
 {
     [DbContext(typeof(BuyerContext))]
-    [Migration("20220220155541_BuyerDb")]
-    partial class BuyerDb
+    [Migration("20220222192426_BuyerDB2")]
+    partial class BuyerDB2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace BuyerMicroservice.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("AuthorizedPersonBuyer", b =>
+                {
+                    b.Property<Guid>("authorizedPersonID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("buyersbuyerID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("authorizedPersonID", "buyersbuyerID");
+
+                    b.HasIndex("buyersbuyerID");
+
+                    b.ToTable("AuthorizedPersonBuyer");
+                });
 
             modelBuilder.Entity("BuyerMicroservice.Entities.AuthorizedPerson", b =>
                 {
@@ -67,27 +82,50 @@ namespace BuyerMicroservice.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BuyerMicroservice.Entities.BoardNumber", b =>
+                {
+                    b.Property<Guid>("boardNumberID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("number")
+                        .HasColumnType("int");
+
+                    b.HasKey("boardNumberID");
+
+                    b.ToTable("boardNumber");
+
+                    b.HasData(
+                        new
+                        {
+                            boardNumberID = new Guid("8d951bd9-497a-47ec-b1a7-c944492f4c8c"),
+                            number = 5
+                        },
+                        new
+                        {
+                            boardNumberID = new Guid("2018f35a-f49b-462f-a1c9-a105f297864b"),
+                            number = 10
+                        });
+                });
+
             modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>
                 {
                     b.Property<Guid>("buyerID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Discriminator")
+                    b.Property<string>("BuyerType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsIndividual")
-                        .HasColumnType("bit");
 
                     b.Property<string>("accountNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("addressId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("addresse")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("authorizedPersonID")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("durationOfBanInYear")
                         .HasColumnType("int");
@@ -103,6 +141,9 @@ namespace BuyerMicroservice.Migrations
 
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("paymentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("phone1")
                         .HasColumnType("nvarchar(max)");
@@ -121,13 +162,11 @@ namespace BuyerMicroservice.Migrations
 
                     b.HasKey("buyerID");
 
-                    b.HasIndex("authorizedPersonID");
-
                     b.HasIndex("priorityID");
 
                     b.ToTable("buyer");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Buyer");
+                    b.HasDiscriminator<string>("BuyerType").HasValue("Buyer");
                 });
 
             modelBuilder.Entity("BuyerMicroservice.Entities.ContactPerson", b =>
@@ -208,10 +247,8 @@ namespace BuyerMicroservice.Migrations
                         new
                         {
                             buyerID = new Guid("0ec20a3b-fd39-4c2e-8062-7d1664eb5381"),
-                            IsIndividual = true,
                             accountNumber = "4224234876",
                             addresse = "Prvomajska 5",
-                            authorizedPersonID = new Guid("07af89f2-feee-4680-b489-9d0e31699588"),
                             durationOfBanInYear = 1,
                             email = "dinoR@gmail.com",
                             endDateOfBan = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -243,10 +280,8 @@ namespace BuyerMicroservice.Migrations
                         new
                         {
                             buyerID = new Guid("861f142c-4707-416d-ad14-7debbd2031ed"),
-                            IsIndividual = false,
                             accountNumber = "0074234876",
                             addresse = "8765439744578",
-                            authorizedPersonID = new Guid("07af89f2-feee-4680-b489-9d0e31699588"),
                             durationOfBanInYear = 1,
                             email = "rosa@gmail.com",
                             endDateOfBan = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -262,21 +297,28 @@ namespace BuyerMicroservice.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>
+            modelBuilder.Entity("AuthorizedPersonBuyer", b =>
                 {
-                    b.HasOne("BuyerMicroservice.Entities.AuthorizedPerson", "authorizedPerson")
+                    b.HasOne("BuyerMicroservice.Entities.AuthorizedPerson", null)
                         .WithMany()
                         .HasForeignKey("authorizedPersonID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BuyerMicroservice.Entities.Buyer", null)
+                        .WithMany()
+                        .HasForeignKey("buyersbuyerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>
+                {
                     b.HasOne("BuyerMicroservice.Entities.Priority", "priority")
                         .WithMany()
                         .HasForeignKey("priorityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("authorizedPerson");
 
                     b.Navigation("priority");
                 });

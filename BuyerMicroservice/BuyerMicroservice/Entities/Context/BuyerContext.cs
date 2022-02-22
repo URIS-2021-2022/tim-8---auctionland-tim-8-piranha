@@ -41,10 +41,7 @@ namespace BuyerMicroservice.Entities.Context
                    surname = "Corlija",
                    personalDocNum = "8767834637274",
                    address = "Mira popare 11",
-                   country = "Srbija",
-                   
-
-
+                   country = "Srbija"
                });
 
             builder.Entity<AuthorizedPerson>().HasData(
@@ -56,10 +53,7 @@ namespace BuyerMicroservice.Entities.Context
                    surname = "Markovic",
                    personalDocNum = "8227834666274",
                    address = "Bulevar Oslobodjenja 55",
-                   country = "Zrenjanin",
-                
-
-
+                   country = "Zrenjanin"
                });
             
             //Contact person 
@@ -148,6 +142,25 @@ namespace BuyerMicroservice.Entities.Context
             {
                 priorityID = Guid.Parse("21200907-0d08-44f3-8506-dc807ca2215b"),
                 priorityType = "2",
+
+
+            });
+
+
+            builder.Entity<BoardNumber>().HasData(
+            new
+            {
+                boardNumberID = Guid.Parse("8d951bd9-497a-47ec-b1a7-c944492f4c8c"),
+                number = 5
+
+
+            });
+
+            builder.Entity<BoardNumber>().HasData(
+            new
+            {
+                boardNumberID = Guid.Parse("2018f35a-f49b-462f-a1c9-a105f297864b"),
+                number = 10
 
 
             });

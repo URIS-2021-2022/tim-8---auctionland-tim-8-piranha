@@ -20,10 +20,7 @@ namespace BuyerMicroservice.Entities
 
         public int realizedArea { get; set; }
         
-        [ForeignKey("AuthorizedPerson")]
-        public Guid authorizedPersonID { get; set; }
-
-        public AuthorizedPerson authorizedPerson { get; set; }
+        public ICollection<AuthorizedPerson> authorizedPerson { get; set; }
 
         public bool hasBan { get; set; }
 
@@ -44,6 +41,15 @@ namespace BuyerMicroservice.Entities
         public string email { get; set; }
 
         public string accountNumber { get; set; }
+
+        /// <summary>
+        /// Address ID. Address ID from Address microservice.
+        /// </summary>
+        public Guid? addressId { get; set; }
+
+        public Guid? paymentId { get; set; }
+
+        
 
     }
 }

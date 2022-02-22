@@ -14,7 +14,9 @@ namespace BuyerMicroservice.Data.Interfaces
 
         Task<BuyerConfirmation> CreateBuyerAsync<T>(Buyer buyer) where T : BuyerConfirmation;
 
-      
+        Task AddAuthorizedPersonToBuyer(AuthorizedPerson authorizedPerson,Guid buyerId);
+
+        Task RemoveAuthorizedPersonFromBuyer(AuthorizedPerson authorizedPerson, Guid buyerId);
 
         Task DeleteBuyerAsync(Guid buyerID);
 

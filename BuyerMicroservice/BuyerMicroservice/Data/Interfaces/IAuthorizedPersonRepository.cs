@@ -17,6 +17,10 @@ namespace BuyerMicroservice.Data.Interfaces
 
         Task UpdateAuthorizedPersonAsync(AuthorizedPerson authorizedPerson);
 
+        Task AddBuyerToAuthorizedPerson(Buyer buyer, Guid authorizedPersonId);
+
+        Task RemoveBuyerFromAuthorizedPerson(Buyer buyer, Guid authorizedPersonId);
+
         Task DeleteAuthorizedPersonAsync(Guid authorizedPersonID);
 
         Task<bool> SaveChangesAsync();

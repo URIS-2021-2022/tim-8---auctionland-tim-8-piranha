@@ -16,6 +16,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
+using BuyerMicroservice.ServiceCalls;
+using BuyerMicroservice.Models.Buyer;
+using BuyerMicroservice.Models;
+using BuyerMicroservice.ServiceCalls.Mocks;
 
 namespace BuyerMicroservice
 {
@@ -43,7 +47,10 @@ namespace BuyerMicroservice
             services.AddScoped<IAuthorizedPersonRepository, AuthorizedPersonRepository>();
             services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
             services.AddScoped<IBoardNumberRepository, BoardNumberRepository>();
-            
+            services.AddScoped<ILoggerService, LoggerService>();
+            services.AddScoped<IServiceCall<AddressDto>, AddressServiceCallMock<AddressDto>>();
+            services.AddScoped<IServiceCall<PaymentDto>, PaymentServiceCallMock<PaymentDto>>();
+
             services.AddScoped<IPriorityRepository, PriorityRepository>();
 
 
