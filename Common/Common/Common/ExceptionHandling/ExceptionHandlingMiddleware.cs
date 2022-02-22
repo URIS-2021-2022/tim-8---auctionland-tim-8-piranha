@@ -9,10 +9,11 @@ namespace Commons.ExceptionHandling
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate next;
+
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
             this.next = next;
-}
+        }
 
         public async Task Invoke(HttpContext context)
         {
@@ -24,7 +25,7 @@ namespace Commons.ExceptionHandling
             {
                 await HandleExceptionAsync(context, ex);
             }
-}
+        }
 
         private static Task HandleExceptionAsync(HttpContext context, BaseException ex)
         {

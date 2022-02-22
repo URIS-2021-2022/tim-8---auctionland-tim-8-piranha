@@ -37,7 +37,7 @@ namespace APIGateway
             })
             .ConfigureLogging((hostingContext, logging) =>
             {
-                // TODO: add logging
+                // TODO: should add logging
             })
             .UseIISIntegration()
             .Configure(app =>
