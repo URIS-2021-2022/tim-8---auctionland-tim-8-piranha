@@ -46,6 +46,7 @@ namespace PersonMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task<ActionResult<List<PersonDto>>> GetAllPersonss()
         {
             var persons = await personRepository.GetAllPersons();
@@ -70,6 +71,7 @@ namespace PersonMicroservice.Controllers
         [HttpGet("{personId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task<ActionResult<PersonDto>> GetPersonById(Guid personId)
         {
             var person = await personRepository.GetPersonById(personId);
@@ -104,6 +106,7 @@ namespace PersonMicroservice.Controllers
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task<ActionResult<PersonConfirmationDto>> CreatePerson([FromBody] PersonCreationDto person)
         {
             try
@@ -147,6 +150,7 @@ namespace PersonMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task<ActionResult<PersonUpdateDto>> UpdatePerson(Guid personId, [FromBody] PersonUpdateDto person)
         {
             try
@@ -185,6 +189,7 @@ namespace PersonMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task<ActionResult> DeletePerson(Guid personId)
         {
             try
@@ -215,6 +220,7 @@ namespace PersonMicroservice.Controllers
         /// <returns>Zaglavlje odgovora</returns>
         [HttpOptions]
         [AllowAnonymous]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task<IActionResult> GetPersonOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
