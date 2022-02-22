@@ -122,6 +122,11 @@
             ID sluzbenog lista
             </summary>
         </member>
+        <member name="P:AdMicroservice.Entities.Ad.AdConfirmation.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
         <member name="T:AdMicroservice.Entities.Ad.AdModel">
             <summary>
             Predstavlja oglas
@@ -145,6 +150,11 @@
         <member name="P:AdMicroservice.Entities.Ad.AdModel.Journal">
             <summary>
             Sluzbeni list
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Entities.Ad.AdModel.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
             </summary>
         </member>
         <member name="T:AdMicroservice.Entities.Journal.JournalConfirmation">
@@ -217,6 +227,11 @@
             ID sluzbenog lista
             </summary>
         </member>
+        <member name="P:AdMicroservice.Models.AdConfirmationDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
         <member name="T:AdMicroservice.Models.AdCreationDto">
             <summary>
             Oglas DTO za kreiranje
@@ -245,6 +260,11 @@
         <member name="P:AdMicroservice.Models.AdDto.Journal">
             <summary>
             Sluzbeni list
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdDto.PublicBidding">
+            <summary>
+            Javnog nadmetanje
             </summary>
         </member>
         <member name="T:AdMicroservice.Models.AdUpdateDto">
@@ -355,6 +375,76 @@
         <member name="P:AdMicroservice.Models.Journal.JournalUpdateDto.DateOfIssue">
             <summary>
             Datum izdavanja
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.LogModel">
+            <summary>
+            Representation of Log.
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.LogModel.LogLevel">
+            <summary>
+            Log level (ex. Warn, Debug, Error, Info)
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.LogModel.LogMessage">
+            <summary>
+            Message to log.
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.LogModel.MicroserviceName">
+            <summary>
+            Name of microservice (ex. Plot microservice)
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.LogModel.MicroserviceMethod">
+            <summary>
+            Microservice method (ex. GetPlotsAsync())
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.PublicBiddingDto.Type">
+            <summary>
+            Tip javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.PublicBiddingDto.Status">
+            <summary>
+            Status pocetka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.PublicBiddingDto.StartTime">
+            <summary>
+            Vreme pocetka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.PublicBiddingDto.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.PublicBiddingDto.Date">
+            <summary>
+            Datum odrzavanja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.PublicBiddingDto.StartPricePerHa">
+            <summary>
+            Pocetna cena parcele
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.PublicBiddingDto.Address">
+            <summary>
+            Adresa odrzavanja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.PublicBiddingDto.RentPeriod">
+            <summary>
+            Period zakupa
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.PublicBiddingDto.DepositSupplement">
+            <summary>
+            Doplata depozita
             </summary>
         </member>
     </members>

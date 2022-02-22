@@ -28,6 +28,9 @@ namespace AdMicroservice.Migrations
                     b.Property<Guid>("JournalId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("PublicBiddingId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("PublicationDate")
                         .HasColumnType("nvarchar(max)");
 
@@ -42,12 +45,14 @@ namespace AdMicroservice.Migrations
                         {
                             AdId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             JournalId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                            PublicBiddingId = new Guid("d7d314b0-2f22-4af5-8909-238b23383249"),
                             PublicationDate = "01.06.2020."
                         },
                         new
                         {
                             AdId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                             JournalId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                            PublicBiddingId = new Guid("d7d314b0-2f22-4af5-8909-238b23383249"),
                             PublicationDate = "01.06.2020."
                         });
                 });
