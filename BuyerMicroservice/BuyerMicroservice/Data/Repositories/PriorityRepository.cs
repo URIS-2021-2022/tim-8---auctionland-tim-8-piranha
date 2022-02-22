@@ -19,11 +19,7 @@ namespace BuyerMicroservice.Data.Repositories
             this.buyerContext = buyerContext;
             this.mapper = mapper;
         }
-        public PriorityConfirmation CreatePriority(Priority priority)
-        {
-            var createdPriority = buyerContext.Add(priority);
-            return mapper.Map<PriorityConfirmation>(createdPriority.Entity);
-        }
+        
 
         public async Task<PriorityConfirmation> CreatePriorityAsync(Priority priority)
         {

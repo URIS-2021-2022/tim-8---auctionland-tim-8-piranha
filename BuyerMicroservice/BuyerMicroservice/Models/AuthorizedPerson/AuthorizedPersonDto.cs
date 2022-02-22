@@ -22,6 +22,6 @@ namespace BuyerMicroservice.Models.AuthorizedPerson
         public string country { get; set; }
 
 
-        public IList<BoardNumber> boardNums { get; set; }
+        //public IList<BoardNumber> boardNums { get; set; }
     }
 }

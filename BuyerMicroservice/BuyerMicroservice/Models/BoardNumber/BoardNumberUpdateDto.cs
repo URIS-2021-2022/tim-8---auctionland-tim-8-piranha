@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BuyerMicroservice.Entities
+namespace BuyerMicroservice.Models.BoardNumber
 {
-    public class BoardNumber 
+    public class BoardNumberUpdateDto
     {
-        [Key]
         public Guid boardNumberID { get; set; }
         public int number { get; set; }
-
-        
     }
 }

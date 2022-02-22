@@ -42,6 +42,7 @@ namespace BuyerMicroservice
             services.AddScoped<IBuyerRepository, BuyerRepository>();
             services.AddScoped<IAuthorizedPersonRepository, AuthorizedPersonRepository>();
             services.AddScoped<IContactPersonRepository, ContactPersonRepository>();
+            services.AddScoped<IBoardNumberRepository, BoardNumberRepository>();
             
             services.AddScoped<IPriorityRepository, PriorityRepository>();
 

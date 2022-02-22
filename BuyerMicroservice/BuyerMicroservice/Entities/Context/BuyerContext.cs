@@ -13,7 +13,6 @@ namespace BuyerMicroservice.Entities.Context
 
         }
 
-        
 
         public DbSet<Priority> priority { get; set; }
 
@@ -22,6 +21,8 @@ namespace BuyerMicroservice.Entities.Context
         public DbSet<Buyer> buyer { get; set; }
 
         public DbSet<AuthorizedPerson> authorizedPerson { get; set; }
+
+        public DbSet<BoardNumber> boardNumber { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -60,18 +61,7 @@ namespace BuyerMicroservice.Entities.Context
 
 
                });
-            /*builder.Entity<AuthorizedPerson>().OwnsMany(ap => ap.boardNums).HasData(
-                new BoardNumber { number = 3, authorizedPersonID = Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588") },
-                new BoardNumber { number = 4, authorizedPersonID = Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588") },
-                new BoardNumber { number = 1, authorizedPersonID = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226") },
-                new BoardNumber { number = 2, authorizedPersonID = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226") }
-
-                );*/
-
-
-
-
-
+            
             //Contact person 
             builder.Entity<ContactPerson>().HasData(
               new
