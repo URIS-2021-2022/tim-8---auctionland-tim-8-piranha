@@ -16,7 +16,7 @@ namespace PublicBidding.Controllers
     /// <summary>
     /// Kontroler za tip javnog nadmetanja
     /// </summary>
-    [Route("api/publicBidding/type")]
+    [Route("api/public-bidding/type")]
     [ApiController]
     [Produces("application/json", "application/xml")]
     public class TypeController : ControllerBase

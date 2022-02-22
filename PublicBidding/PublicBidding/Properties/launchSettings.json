@@ -15,7 +15,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:44200"
+      "applicationUrl": "http://localhost:40010"
     },
     "PublicBidding": {
       "commandName": "Project",
@@ -31,7 +31,7 @@
       "commandName": "Project",
       "publishAllPorts": true,
       "useSSL": true,
-      "applicationUrl": "http://localhost:44200"
+      "applicationUrl": "http://localhost:40010"
     }
   }
 }

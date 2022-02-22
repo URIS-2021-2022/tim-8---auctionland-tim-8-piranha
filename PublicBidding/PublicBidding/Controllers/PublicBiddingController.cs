@@ -19,7 +19,7 @@ namespace PublicBidding.Controllers
     /// Kontroler za javno nadmetanje
     /// </summary>
     [ApiController]
-    [Route("api/publicBidding")]
+    [Route("api/public-bidding")]
     [Produces("application/json", "application/xml")]
     public class PublicBiddingController : ControllerBase
     {

@@ -17,7 +17,7 @@ namespace PublicBidding.Controllers
     /// <summary>
     /// Kontroler za status javnog nadmetanja
     /// </summary>
-    [Route("api/publicBidding/status")]
+    [Route("api/public-bidding/status")]
     [ApiController]
     [Produces("application/json", "application/xml")]
     public class StatusController : ControllerBase
