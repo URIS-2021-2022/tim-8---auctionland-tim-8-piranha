@@ -5,16 +5,24 @@ using System.Threading.Tasks;
 
 namespace PublicBidding.Models
 {
+    /// <summary>
+    /// DTO za deo parcele
+    /// </summary>
     public class PlotPartDto
     {
-        public int NumberOfPlot { get; set; }
-        public int NumberOfPlotPart { get; set; }
-        public double SurfaceArea { get; set; }
-        public string Culture { get; set; }
-        public string Class { get; set; }
-        public string Workability { get; set; }
-        public string ProtectedZone { get; set; }
-        public string Drainage { get; set; }
-        public string CadastralMunicipality { get; set; }
+        /// <summary>
+        /// Broj dela parcele
+        /// </summary>
+        public string PlotPartNumber { get; set; }
+
+        /// <summary>
+        /// Povrsina dela parcele
+        /// </summary>
+        public int PlotPartSurfaceArea { get; set; }
+
+        /// <summary>
+        /// Id parcele
+        /// </summary>
+        public Guid PlotId { get; set; }
     }
 }
