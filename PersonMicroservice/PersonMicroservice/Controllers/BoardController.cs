@@ -166,6 +166,7 @@ namespace PersonMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task<ActionResult<BoardConfirmationDto>> UpdateBoard(Guid boardId, [FromBody] BoardUpdateDto board)
         {
             try
@@ -222,6 +223,7 @@ namespace PersonMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task<ActionResult> DeleteBoard(Guid boardId)
         {
             try
@@ -253,6 +255,7 @@ namespace PersonMicroservice.Controllers
         /// <returns>Zaglavlje odgovora</returns>
         [HttpOptions]
         [AllowAnonymous]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task<IActionResult> GetBoardOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
