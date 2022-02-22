@@ -43,6 +43,7 @@ namespace PublicBidding.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
         public async Task<ActionResult<List<StatusDto>>> GetAllStatuses()
         {
             var statuses = await statusRepository.GetStatuses();
@@ -67,6 +68,7 @@ namespace PublicBidding.Controllers
         [HttpGet("{statusId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
         public async Task<ActionResult<StatusDto>> GetStatusById(Guid statusId)
         {
             var status = await statusRepository.GetStatusById(statusId);
@@ -87,6 +89,7 @@ namespace PublicBidding.Controllers
         /// <returns>Zaglavlje odgovora</returns>
         [HttpOptions]
         [AllowAnonymous]
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
         public async Task<IActionResult> GetStatusOptions()
         {
             Response.Headers.Add("Allow", "GET");

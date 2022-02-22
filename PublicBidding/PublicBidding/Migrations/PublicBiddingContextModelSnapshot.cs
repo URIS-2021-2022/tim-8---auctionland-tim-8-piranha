@@ -234,7 +234,7 @@ namespace PublicBidding.Migrations
                     b.HasOne("PublicBidding.Entities.PublicBidding", "PublicBidding")
                         .WithMany()
                         .HasForeignKey("PublicBiddingId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PublicBidding");
@@ -245,7 +245,7 @@ namespace PublicBidding.Migrations
                     b.HasOne("PublicBidding.Entities.PublicBidding", "PublicBidding")
                         .WithMany()
                         .HasForeignKey("PublicBiddingId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PublicBidding");
@@ -256,7 +256,7 @@ namespace PublicBidding.Migrations
                     b.HasOne("PublicBidding.Entities.PublicBidding", "PublicBidding")
                         .WithMany()
                         .HasForeignKey("PublicBiddingId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PublicBidding");

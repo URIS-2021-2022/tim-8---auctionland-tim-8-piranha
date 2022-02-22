@@ -52,6 +52,7 @@ namespace PublicBidding.Controllers
         [HttpHead]    
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
         public async Task<ActionResult<List<PublicBiddingDto>>> GetPublicBiddings()
         {
             var publicBiddings = await publicBiddingRepository.GetPublicBiddings();
@@ -83,6 +84,7 @@ namespace PublicBidding.Controllers
         [HttpGet("{publicBiddingId}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
         public async Task<ActionResult<PublicBiddingDto>> GetPublicBiddingById(Guid publicBiddingId)
         {
             var publicBidding = await publicBiddingRepository.GetPublicBiddingById(publicBiddingId);
@@ -110,24 +112,21 @@ namespace PublicBidding.Controllers
         [HttpGet("info")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<List<PublicBiddingForOtherServices>>> GetPublicBiddingsById(List<string> publicBiddings)
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
+        public async Task<ActionResult<PublicBiddingForOtherServices>> GetPublicBiddingsById(Guid publicBiddingId)
         {
-            List<PublicBiddingForOtherServices> publicBiddingsForOtherServices = new List<PublicBiddingForOtherServices>();
 
-            foreach (var publicBiddingId in publicBiddings)
-            {
-                var publicBiddingForOtherServices = mapper.Map<PublicBiddingForOtherServices>(await publicBiddingRepository.GetPublicBiddingById(Guid.Parse(publicBiddingId)));
-                publicBiddingsForOtherServices.Add(publicBiddingForOtherServices);
-            }
+            var publicBiddingForOtherServices = mapper.Map<PublicBiddingForOtherServices>(await publicBiddingRepository.GetPublicBiddingById(publicBidding));
 
-            if (publicBiddingsForOtherServices is null)
+
+            if (publicBiddingForOtherServices is null)
             {
                 await logger.LogMessage(LogLevel.Warning, "Public biddings not found!", "PublicBidding microservice", "GetPublicBiddingsById");
                 return NotFound();
             }
 
             await logger.LogMessage(LogLevel.Information, "Public biddings found and successfully returned!", "PublicBidding microservice", "GetPublicBiddingsById");
-            return Ok(publicBiddingsForOtherServices);
+            return Ok(publicBiddingForOtherServices);
 
         }
 
@@ -163,6 +162,7 @@ namespace PublicBidding.Controllers
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, OperaterNadmetanja")]
         public async Task<ActionResult<PublicBiddingConfirmationDto>> CreatePublicBidding([FromBody] PublicBiddingCreationDto publicBidding)
         {
             try
@@ -186,7 +186,6 @@ namespace PublicBidding.Controllers
         /// Modifikacija javnog nadmetanja
         /// </summary>
         /// <param name="publicBidding">Model javnog nadmetanja</param>
-        /// <param name="publicBiddingId">Id javnog nadmetanja</param>
         /// <returns>Potvrda o izmeni javnog nadmetanja</returns>
         /// <response code="200">Izmenjeno javno nadmetanje</response>
         /// <response code="404">Nije pronađeno javno nadmetanje sa unetim ID-em</response>
@@ -220,6 +219,7 @@ namespace PublicBidding.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, OperaterNadmetanja")]
         public async Task<ActionResult<PublicBiddingDto>> UpdatePublicBidding([FromBody] PublicBiddingUpdateDto publicBidding)
         {
             try
@@ -230,7 +230,7 @@ namespace PublicBidding.Controllers
 
                 if (oldPublicBidding == null)
                 {
-                    //await logger.LogMessage(LogLevel.Warning, "Public bidding object not found!", "PublicBidding microservice", "UpdatePublicBidding");
+                    await logger.LogMessage(LogLevel.Warning, "Public bidding object not found!", "PublicBidding microservice", "UpdatePublicBidding");
                     return NotFound();
                 }
 
@@ -241,12 +241,12 @@ namespace PublicBidding.Controllers
                 await publicBiddingRepository.UpdatePublicBidding(mapper.Map<Entities.PublicBidding>(publicBidding));
                 await publicBiddingRepository.SaveChanges();
 
-                //await logger.LogMessage(LogLevel.Information, "Public bidding object updated successfully!", "PublicBidding microservice", "UpdatePublicBidding");
+                await logger.LogMessage(LogLevel.Information, "Public bidding object updated successfully!", "PublicBidding microservice", "UpdatePublicBidding");
                 return Ok(mapper.Map<PublicBiddingDto>(oldPublicBidding));
             }
             catch (Exception ex)
             {
-                //await logger.LogMessage(LogLevel.Error, "Public bidding object updating failed!", "PublicBidding microservice", "UpdatePublicBidding");
+                await logger.LogMessage(LogLevel.Error, "Public bidding object updating failed!", "PublicBidding microservice", "UpdatePublicBidding");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Greška pri modifikaciji javnog nadmetanja. " + ex);
             }
 
@@ -264,6 +264,7 @@ namespace PublicBidding.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, OperaterNadmetanja")]
         public async Task<IActionResult> DeletePublicBidding(Guid publicBiddingId)
         {
             try
@@ -296,6 +297,7 @@ namespace PublicBidding.Controllers
         /// <returns>Zaglavlje odgovora</returns>
         [HttpOptions]
         [AllowAnonymous]
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
         public async Task<IActionResult> GetPublicBiddingOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");

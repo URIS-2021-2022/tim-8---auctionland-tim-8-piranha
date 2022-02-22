@@ -16,7 +16,7 @@ namespace PublicBidding.Data
 
         Task<Entities.PublicBidding> GetPublicBiddingById(Guid publicBiddingId);
 
-        Task<List<PublicBiddingForOtherServices>> GetPublicBiddingsById(List<Guid> publicBiddings);
+        Task<PublicBiddingForOtherServices> GetPublicBiddingsById(Guid publicBiddingId);
 
         Task<PublicBiddingConfirmation> CreatePublicBidding(Entities.PublicBidding publicBidding);
 

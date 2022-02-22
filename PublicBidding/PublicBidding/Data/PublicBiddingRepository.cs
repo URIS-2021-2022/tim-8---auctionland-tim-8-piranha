@@ -105,12 +105,12 @@ namespace PublicBidding.Data
             return publicBidding;
         }
 
-        public async Task<List<PublicBiddingForOtherServices>> GetPublicBiddingsById(List<Guid> publicBiddings)
+        public async Task<PublicBiddingForOtherServices> GetPublicBiddingsById(Guid publicBiddingId)
         {
-            var listOfPublicBiddings = await context.PublicBiddings.Include(s => s.Status).Include(t => t.Type)
-                .ToListAsync();
+            var publicBidding = await context.PublicBiddings.Include(s => s.Status).Include(t => t.Type)
+                .FirstOrDefaultAsync(pb => pb.PublicBiddingId == publicBiddingId);
 
-            return mapper.Map<List<PublicBiddingForOtherServices>>(listOfPublicBiddings);
+            return mapper.Map<PublicBiddingForOtherServices>(publicBidding);
         }
 
         public async Task<List<Entities.PublicBidding>> GetPublicBiddings()

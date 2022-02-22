@@ -43,6 +43,7 @@ namespace PublicBidding.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
         public async Task<ActionResult<List<TypeDto>>> GetAllTypes()
         {
             var types = await typeRepository.GetAllTypes();
@@ -67,6 +68,7 @@ namespace PublicBidding.Controllers
         [HttpGet("{typeId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
         public async Task<ActionResult<TypeDto>> GetTypeById(Guid typeId)
         {
             var type = await typeRepository.GetTypeById(typeId);
@@ -87,6 +89,7 @@ namespace PublicBidding.Controllers
         /// <returns>Zaglavlje odgovora</returns>
         [HttpOptions]
         [AllowAnonymous]
+        [Authorize(Roles = "Administrator, Superuser, Manager, OperaterNadmetanja")]
         public async Task<IActionResult> GetTypeOptions()
         {
             Response.Headers.Add("Allow", "GET");

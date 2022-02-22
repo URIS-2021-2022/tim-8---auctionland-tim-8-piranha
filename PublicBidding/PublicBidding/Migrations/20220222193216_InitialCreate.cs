@@ -83,7 +83,7 @@ namespace PublicBidding.Migrations
                         column: x => x.PublicBiddingId,
                         principalTable: "PublicBiddings",
                         principalColumn: "PublicBiddingId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,7 +101,7 @@ namespace PublicBidding.Migrations
                         column: x => x.PublicBiddingId,
                         principalTable: "PublicBiddings",
                         principalColumn: "PublicBiddingId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,7 +119,7 @@ namespace PublicBidding.Migrations
                         column: x => x.PublicBiddingId,
                         principalTable: "PublicBiddings",
                         principalColumn: "PublicBiddingId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
