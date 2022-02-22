@@ -19,7 +19,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
-
+using DocumentMicroservice.ServiceCalls;
+using DocumentMicroservice.Models;
+using DocumentMicroservice.ServiceCalls.Mocks;
 
 namespace DocumentMicroservice
 {
@@ -49,6 +51,13 @@ namespace DocumentMicroservice
             services.AddScoped<IDocumentStatusRepository, DocumentStatusRepository>();
             services.AddScoped<IGuaranteeTypeRepository, GuaranteeTypeRepository>();
             services.AddScoped<IContractLeaseRepository, ContractLeaseRepository>();
+
+            services.AddScoped<ILoggerService, LoggerService>();
+
+            services.AddScoped<IServiceCall<BuyerDto>, BuyerServiceCallMock<BuyerDto>>();
+            services.AddScoped<IServiceCall<PersonDto>, PersonServiceCallMock<PersonDto>>();
+            services.AddScoped<IServiceCall<AuctionDto>, AuctionServiceCallMock<AuctionDto>>();
+            services.AddScoped<IServiceCall<UserDto>, UserServiceCallMock<UserDto>>();
 
             //services.AddScoped<IDocumentStatusRepository, PlotCadastralMunicipalityRepository>();
             //-- svaki put kada stigne novi rikvest od klijenta uvek se pravi nova instanca(to je vezano za parametar konstruktora u kontroleru)

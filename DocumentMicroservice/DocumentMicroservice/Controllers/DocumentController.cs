@@ -167,6 +167,8 @@ namespace DocumentMicroservice.Controllers
                 
                string uri = linkGenerator.GetPathByAction("GetDocumentById", "Document", new { documentId = confirmation.documentId });
                 //LinkGenerator --> nalazi putanju resu (naziv akcije koja se radi, naziv kontrollera bez sufiksa kontroller, new-> nesto sto jedinstveno identifikuje nas resur koji trenutno trazimo)
+                await logger.LogMessage(LogLevel.Information, "Document  protected zone successfully created!", "Plot microservice", "CreateDocumentAsync");
+
                 return Created(uri, mapper.Map<DocumentConfirmationDto>(confirmation));
             }
             catch (ValidationException ve)
@@ -202,7 +204,7 @@ namespace DocumentMicroservice.Controllers
 
                 if (existingDocument == null)
                 {
-                    await logger.LogMessage(LogLevel.Warning, "Document object not found!", "Document microservice", "UpdateDocumentAsync");
+                   await logger.LogMessage(LogLevel.Warning, "Document object not found!", "Document microservice", "UpdateDocumentAsync");
                     return NotFound();
                 }
 

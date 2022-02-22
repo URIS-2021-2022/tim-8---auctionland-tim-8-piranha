@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-
-
+using System.Collections.Generic;
 
 namespace DocumentMicroservice.Entities.Contexts
 {
@@ -130,7 +129,9 @@ namespace DocumentMicroservice.Entities.Contexts
                   placeOfSigning = "Zrenjanin",
                   dateOfSigning = new DateTime(),
                   guaranteeTypeID = Guid.Parse("68bf5d70-f26b-4c53-b014-bab74b7b86a0"),
-                  documentId = Guid.Parse("3a3e6366-3a20-4d3b-ae15-be85ba277683")
+                  documentId = Guid.Parse("3a3e6366-3a20-4d3b-ae15-be85ba277683"),
+
+                  
 
               });
 

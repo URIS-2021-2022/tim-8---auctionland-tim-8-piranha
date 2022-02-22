@@ -2,12 +2,14 @@
 using DocumentMicroservice.Data.Interfaces;
 using DocumentMicroservice.Entities;
 using DocumentMicroservice.Models;
+using DocumentMicroservice.ServiceCalls;
 using DocumentMicroservice.Validators;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +27,16 @@ namespace DocumentMicroservice.Controllers
         private readonly LinkGenerator LinkGeneration;
         private readonly IMapper Mapper;
         private readonly DocumentStatusValidators validator;
+        private readonly ILoggerService logger;
 
-        public DocumentStatusController(IDocumentStatusRepository documentStatusRepository, LinkGenerator linkGeneration, IMapper mapper, DocumentStatusValidators validator)
+
+        public DocumentStatusController(IDocumentStatusRepository documentStatusRepository, LinkGenerator linkGeneration, IMapper mapper, DocumentStatusValidators validator, ILoggerService logger)
         {
             DocumentStatusRepository = documentStatusRepository;
             LinkGeneration = linkGeneration;
             Mapper = mapper;
             this.validator = validator;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -49,9 +54,11 @@ namespace DocumentMicroservice.Controllers
 
             if (documentStatusList == null || documentStatusList.Count == 0)
             {
+                await logger.LogMessage(LogLevel.Warning, "Document statsu list is empty!", "Document microservice", "GetDocumentStatusAsync");
                 return NoContent();
             }
 
+            await logger.LogMessage(LogLevel.Information, "Document status list successfully returned!", "Document microservice", "GetDocumentStatusAsync");
             return Ok(Mapper.Map <List<DocumentStatusDto>>(documentStatusList));
         }
 
@@ -71,8 +78,11 @@ namespace DocumentMicroservice.Controllers
 
             if (docStatus == null)
             {
+                await logger.LogMessage(LogLevel.Warning, "Document status not found!", "Document microservice", "GetDocumentStatusByIdAsync");
+
                 return NotFound();
             }
+            await logger.LogMessage(LogLevel.Information, "Document status found and successfully returned!", "Document microservice", "GetDocumentStatusByIdAsync");
             return Ok(Mapper.Map<DocumentStatusDto>(docStatus));
         }
 
@@ -108,15 +118,22 @@ namespace DocumentMicroservice.Controllers
 
                 string uri = LinkGeneration.GetPathByAction("GetDocumentStatusById", "DocumentStatus", new { DocumentStatusId = confirmation.docStatusID });
 
-               
 
 
-               //LinkGenerator --> nalazi putanju resu (naziv akcije koja se radi, naziv kontrollera bez sufiksa kontroller, new-> nesto sto jedinstveno identifikuje nas resur koji trenutno trazimo)
+               await logger.LogMessage(LogLevel.Information, "Document status protected zone successfully created!", "Document microservice", "CreateDocumentStatusAsync");
+
+                //LinkGenerator --> nalazi putanju resu (naziv akcije koja se radi, naziv kontrollera bez sufiksa kontroller, new-> nesto sto jedinstveno identifikuje nas resur koji trenutno trazimo)
                 return Created(uri, Mapper.Map<DocumentStatusConfirmationDto>(confirmation));
             }
-            catch (Exception e )
+            catch (ValidationException ve)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                await logger.LogMessage(LogLevel.Error, "Validation for document status  object failed!", "Document microservice", "CreateDocumentStatusAsync");
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            }
+            catch (Exception ex)
+            {
+                await logger.LogMessage(LogLevel.Error, "Document status  object creation failed!", "Document microservice", "CreateDocumentStatusAsync");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -141,6 +158,8 @@ namespace DocumentMicroservice.Controllers
 
                 if (existingDocumentStatus == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Document status object not found!", "Document microservice", "UpdateDocumentStatusAsync");
+
                     return NotFound();
                 }
 
@@ -151,12 +170,20 @@ namespace DocumentMicroservice.Controllers
                 Mapper.Map(docStatus, existingDocumentStatus);
                 await DocumentStatusRepository .SaveChangesAsync();
 
+               await logger.LogMessage(LogLevel.Information, "Document status object updated successfully!", "Document microservice", "UpdateDocumentStatusAsync");
+
                 return Ok(Mapper.Map<DocumentStatusDto>(existingDocumentStatus));
 
             }
-            catch (Exception)
+            catch (ValidationException ve)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while updating document status object");
+                await logger.LogMessage(LogLevel.Error, "Validation for document status object failed!", "Document microservice", "UpdateDocumentStatusAsync");
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            }
+            catch (Exception ex)
+            {
+                await logger.LogMessage(LogLevel.Error, "Document status object updating failed!", "Document microservice", "UpdateDocumentStatusAsync");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -179,17 +206,22 @@ namespace DocumentMicroservice.Controllers
                 DocumentStatus docStatus = await DocumentStatusRepository.GetDocumentStatusByIdAsync(documentStatusId);
                 if (docStatus == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Document status object not found!", "Document microservice", "DeleteDocumentStatusAsync");
+
                     return NotFound();
                 }
 
                 await DocumentStatusRepository.DeleteDocumentStatusAsync(documentStatusId);
                 await DocumentStatusRepository.SaveChangesAsync();
+                await logger.LogMessage(LogLevel.Information, "Document status object deleted successfully!", "Document microservice", "DeleteDocumentStatusAsync");
+
                 return NoContent(); // Successful deletion -- sve je okej proslo ali ne vraca nikakav sadrzaj--> iz familije je 200
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while deleting document status object!");
+                await logger.LogMessage(LogLevel.Error, "Document status object deletion failed!", "Document microservice", "DeleteDocumentStatusAsync");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
         /// <summary>
@@ -198,9 +230,10 @@ namespace DocumentMicroservice.Controllers
         /// <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetDocumentStatusOptions()
+        public async Task<IActionResult> GetDocumentStatusOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Document microservice", "GetDocumentStatusOptions");
             return Ok();
         }
 

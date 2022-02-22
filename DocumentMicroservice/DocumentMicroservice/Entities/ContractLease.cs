@@ -16,10 +16,7 @@ namespace DocumentMicroservice.Entities
         public Guid contractLeaseID { get; set; }
 
         
-        /// <summary>
-        /// Maturities - Rokovi dospeća
-        /// </summary>
-       // public ICollection<int> maturities { get; set; }
+        
 
        
         /// <summary>

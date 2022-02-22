@@ -59,7 +59,7 @@ namespace DocumentMicroservice.Controllers
 
             if (contractLeaseList == null || contractLeaseList.Count == 0)
             {
-                await logger.LogMessage(LogLevel.Warning, "ContractLease list is empty!", "Contract lease microservice", "GetContractLeaseAsync");
+                await logger.LogMessage(LogLevel.Warning, "ContractLease list is empty!", "Document microservice", "GetContractLeaseAsync");
                 return NoContent();
             }
 
@@ -83,7 +83,7 @@ namespace DocumentMicroservice.Controllers
                 contractLeasesDto.Add(contractLeasestDto);
             }
 
-            await logger.LogMessage(LogLevel.Information, "Contract lease list successfully returned!", "Contract lease microservice", "GetContractLeaseAsync");
+            await logger.LogMessage(LogLevel.Information, "Contract lease list successfully returned!", "Document microservice", "GetContractLeaseAsync");
             return Ok(contractLeasesDto);
         }
 
@@ -103,7 +103,7 @@ namespace DocumentMicroservice.Controllers
 
             if (contractLease == null)
             {
-                await logger.LogMessage(LogLevel.Warning, "Contract lease not found!", "Contract lease  microservice", "GetContractLeaseByIdAsync");
+                await logger.LogMessage(LogLevel.Warning, "Contract lease not found!", "Document  microservice", "GetContractLeaseByIdAsync");
                 return NotFound();
             }
             ContractLeaseDto contractLeaseDto = mapper.Map<ContractLeaseDto>(contractLease);
@@ -120,7 +120,7 @@ namespace DocumentMicroservice.Controllers
                 }
             }
 
-            await logger.LogMessage(LogLevel.Information, "Contract lease found and successfully returned!", "Contract lease microservice", "GetContractLeaseByIdAsync");
+            //await logger.LogMessage(LogLevel.Information, "Contract lease found and successfully returned!", "Document microservice", "GetContractLeaseByIdAsync");
             return Ok(contractLeaseDto);
         }
 
@@ -157,17 +157,18 @@ namespace DocumentMicroservice.Controllers
 
 
                 string uri = linkGenerator.GetPathByAction("GetContractLeaseById", "ContractLease", new { contractLeaseID = confirmation.contractLeaseID });
+                await logger.LogMessage(LogLevel.Information, "Contract Lease  protected zone successfully created!", "Document microservice", "CreateContractLeaseAsync");
 
                 return Created(uri, mapper.Map<ContractLeaseConfirmationDto>(confirmation));
             }
             catch (ValidationException ve)
             {
-                await logger.LogMessage(LogLevel.Error, "Validation for contract lease object failed!", "Contract lease microservice", "CreateContractLeaseAsync");
+                await logger.LogMessage(LogLevel.Error, "Validation for contract lease object failed!", "Document microservice", "CreateContractLeaseAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch (Exception ex)
             {
-                await logger.LogMessage(LogLevel.Error, "Contract lease object creation failed!", "Contract lease microservice", "CreateContractLeaseAsync");
+                await logger.LogMessage(LogLevel.Error, "Contract lease object creation failed!", "Document microservice", "CreateContractLeaseAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -193,7 +194,7 @@ namespace DocumentMicroservice.Controllers
 
                 if (existingContractLease == null)
                 {
-                    await logger.LogMessage(LogLevel.Warning, "Contract Lease object not found!", "Contract lease microservice", "UpdateContractLeaseAsync");
+                    await logger.LogMessage(LogLevel.Warning, "Contract Lease object not found!", "Document microservice", "UpdateContractLeaseAsync");
                     return NotFound();
                 }
 
@@ -204,19 +205,19 @@ namespace DocumentMicroservice.Controllers
                 mapper.Map(cl, existingContractLease);
                 await contractLeaseRepository.SaveChangesAsync();
 
-                await logger.LogMessage(LogLevel.Information, "Contract Lease object updated successfully!", "Contract lease microservice", "UpdateContractLeaseAsync");
+                await logger.LogMessage(LogLevel.Information, "Contract Lease object updated successfully!", "Document microservice", "UpdateContractLeaseAsync");
 
                 return Ok(mapper.Map<ContractLeaseDto>(existingContractLease));
 
             }
             catch (ValidationException ve)
             {
-                await logger.LogMessage(LogLevel.Error, "Validation for contract lease object failed!", "Contract lease microservice", "UpdateContractLeaseAsync");
+                await logger.LogMessage(LogLevel.Error, "Validation for contract lease object failed!", "Document microservice", "UpdateContractLeaseAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch (Exception ex)
             {
-                await logger.LogMessage(LogLevel.Error, "Contract lease object updating failed!", "contract lease microservice", "UpdateContractLeaseAsync");
+                await logger.LogMessage(LogLevel.Error, "Contract lease object updating failed!", "Document microservice", "UpdateContractLeaseAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -240,21 +241,21 @@ namespace DocumentMicroservice.Controllers
                 ContractLease contractLease = await contractLeaseRepository.GetContractLeaseByIdAsync(contractLeaseID);
                 if (contractLease == null)
                 {
-                    await logger.LogMessage(LogLevel.Warning, "Contract lease object not found!", "Contract lease microservice", "DeleteContractLeaseAsync");
+                    await logger.LogMessage(LogLevel.Warning, "Contract lease object not found!", "Document microservice", "DeleteContractLeaseAsync");
                     return NotFound();
                 }
 
                 await contractLeaseRepository.DeleteContractLeaseAsync(contractLeaseID);
                 await contractLeaseRepository.SaveChangesAsync();
 
-                await logger.LogMessage(LogLevel.Information, "Contract lease object deleted successfully!", "Contract lease microservice", "DeleteContractLeaseAsync");
+                await logger.LogMessage(LogLevel.Information, "Contract lease object deleted successfully!", "Document microservice", "DeleteContractLeaseAsync");
 
                 return NoContent(); // Successful deletion
 
             }
             catch (Exception ex)
             {
-                await logger.LogMessage(LogLevel.Error, "Contract lease object deletion failed!", "Contract lease microservice", "DeleteContractLeaseAsync");
+                await logger.LogMessage(LogLevel.Error, "Contract lease object deletion failed!", "Document microservice", "DeleteContractLeaseAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

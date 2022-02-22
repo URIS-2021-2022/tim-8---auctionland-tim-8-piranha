@@ -2,12 +2,14 @@
 using DocumentMicroservice.Data.Interfaces;
 using DocumentMicroservice.Entities;
 using DocumentMicroservice.Models.GuaranteeType;
+using DocumentMicroservice.ServiceCalls;
 using DocumentMicroservice.Validators;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,15 +27,17 @@ namespace DocumentMicroservice.Controllers
             private readonly LinkGenerator LinkGeneration;
             private readonly IMapper Mapper;
             private readonly GuaranteeTypeValidators validator;
+            private readonly ILoggerService logger;
 
-            
-            public GuaranteeTypeController(IGuaranteeTypeRepository guaranteeTypeRepository, LinkGenerator linkGeneration, IMapper mapper, GuaranteeTypeValidators validator)
+
+        public GuaranteeTypeController(IGuaranteeTypeRepository guaranteeTypeRepository, LinkGenerator linkGeneration, IMapper mapper, GuaranteeTypeValidators validator, ILoggerService logger)
             {
                 GuaranteeTypeRepository = guaranteeTypeRepository;
                 LinkGeneration = linkGeneration;
                 Mapper = mapper;
                 this.validator = validator;
-            }
+                this.logger = logger;
+        }
 
             /// <summary>
             /// Vraća sve tipove garancija
@@ -51,10 +55,14 @@ namespace DocumentMicroservice.Controllers
 
                 if (guaranteeTypeList == null || guaranteeTypeList.Count == 0)
                 {
-                    return NoContent();
+                await logger.LogMessage(LogLevel.Warning, "Guarantee Type list is empty!", "Document microservice", "GetGuaranteeTypeAsync");
+
+                return NoContent();
                 }
 
-                return Ok(Mapper.Map<List<GuaranteeTypeDto>>(guaranteeTypeList));
+            await logger.LogMessage(LogLevel.Information, "Guarantee Type list successfully returned!", "Document microservice", "GetGuaranteeTypeAsync");
+
+            return Ok(Mapper.Map<List<GuaranteeTypeDto>>(guaranteeTypeList));
             }
 
             /// <summary>
@@ -73,9 +81,13 @@ namespace DocumentMicroservice.Controllers
 
                 if (guaranteeType == null)
                 {
-                    return NotFound();
+                await logger.LogMessage(LogLevel.Warning, "Guarantee Type not found!", "Document microservice", "GetGuaranteeTypeByIdAsync");
+
+                return NotFound();
                 }
-                return Ok(Mapper.Map<GuaranteeTypeDto>(guaranteeType));
+            await logger.LogMessage(LogLevel.Information, "Guarantee Type found and successfully returned!", "Document microservice", "GetGuaranteeTypeByIdAsync");
+
+            return Ok(Mapper.Map<GuaranteeTypeDto>(guaranteeType));
             }
 
 
@@ -112,13 +124,21 @@ namespace DocumentMicroservice.Controllers
 
                     string uri = LinkGeneration.GetPathByAction("GetGuaranteeTypeById", "GuaranteeType", new { GuaranteeTypeId = confirmation.guaranteeTypeID });
 
-                    return Created(uri, Mapper.Map<GuaranteeTypeConfirmationDto>(confirmation));
+                await logger.LogMessage(LogLevel.Information, "Guarantee Type  protected zone successfully created!", "Plot microservice", "CreateGuaranteeTypeAsync");
+
+                return Created(uri, Mapper.Map<GuaranteeTypeConfirmationDto>(confirmation));
                 }
-                catch (Exception e)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
-                }
+            catch (ValidationException ve)
+            {
+               await logger.LogMessage(LogLevel.Error, "Validation for Guarantee Type object failed!", "Document microservice", "CreateGuaranteeTypeAsync");
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
+            catch (Exception ex)
+            {
+                await logger.LogMessage(LogLevel.Error, "Guarantee Type object creation failed!", "Document microservice", "CreateGuaranteeTypeAsync");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
         /// <summary>
         /// Ažurira jedan tip garancije
@@ -141,7 +161,9 @@ namespace DocumentMicroservice.Controllers
 
                     if (existingGuaranteeType == null)
                     {
-                        return NotFound();
+                    await logger.LogMessage(LogLevel.Warning, "Guarantee Type object not found!", "Document microservice", "UpdateGuaranteeTypeAsync");
+
+                    return NotFound();
                     }
 
                     GuaranteeType guarType = Mapper.Map<GuaranteeType>(guaranteeType);
@@ -151,14 +173,22 @@ namespace DocumentMicroservice.Controllers
                     Mapper.Map(guarType, existingGuaranteeType);
                     await GuaranteeTypeRepository.SaveChangesAsync();
 
-                    return Ok(Mapper.Map<GuaranteeTypeDto>(existingGuaranteeType));
+                await logger.LogMessage(LogLevel.Information, "Guarantee Type object updated successfully!", "Document microservice", "UpdateGuaranteeTypeAsync");
+
+                return Ok(Mapper.Map<GuaranteeTypeDto>(existingGuaranteeType));
 
                 }
-                catch (Exception)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "Error while updating guarantee Type object");
-                }
+            catch (ValidationException ve)
+            {
+               await logger.LogMessage(LogLevel.Error, "Validation for GuaranteeType object failed!", "Document microservice", "UpdateGuaranteeTypeAsync");
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
+            catch (Exception ex)
+            {
+                await logger.LogMessage(LogLevel.Error, " GuaranteeType object updating failed!", "Document microservice", "UpdateGuaranteeTypeAsync");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
         /// <summary>
         /// Briše tip garancije na osnovu ID-ja
@@ -179,19 +209,24 @@ namespace DocumentMicroservice.Controllers
                 GuaranteeType guaranteeType = await  GuaranteeTypeRepository.GetGuaranteeTypeByIdAsync(guaranteeTypeId);
                     if (guaranteeType == null)
                     {
-                        return NotFound();
+                    await logger.LogMessage(LogLevel.Warning, "Guarantee Type object not found!", "Document microservice", "DeleteGuaranteeTypeAsync");
+
+                    return NotFound();
                     }
 
                     await GuaranteeTypeRepository.DeleteGuaranteeTypeAsync(guaranteeTypeId);
                     await GuaranteeTypeRepository.SaveChangesAsync();
-                    return NoContent(); // Successful deletion
+                await logger.LogMessage(LogLevel.Information, "Guarantee Type object deleted successfully!", "Document microservice", "DeleteGuaranteeTypeAsync");
+
+                return NoContent(); // Successful deletion
 
                 }
-                catch (Exception)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "Error while deleting guarantee type object!");
-                }
+            catch (Exception ex)
+            {
+                await logger.LogMessage(LogLevel.Error, "Guarantee Type object deletion failed!", "Document microservice", "DeleteGuaranteeTypeAsync");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+        }
 
             /// <summary>
             /// Vraća informacije o opcijama koje je moguće izvršiti za sve tipove garancije
@@ -200,10 +235,12 @@ namespace DocumentMicroservice.Controllers
             [HttpOptions]
             [ProducesResponseType(StatusCodes.Status200OK)]
             [AllowAnonymous]
-            public IActionResult GetGuaranteeTypeOptions()
+            public async Task<IActionResult>  GetGuaranteeTypeOptions()
             {
                 Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
-                return Ok();
+            await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Document microservice", "GetGuaranteeTypeOptions");
+
+            return Ok();
             }
         }
 }

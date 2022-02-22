@@ -8,10 +8,7 @@ namespace DocumentMicroservice.Models.ContractLease
     public class ContractLeaseConfirmationDto
     {
 
-        /// <summary>
-        /// Maturities - Rokovi dospeća
-        /// </summary>
-       // public ICollection<int> maturities { get; set; }
+        
 
 
         /// <summary>

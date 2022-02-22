@@ -14,7 +14,7 @@ namespace DocumentMicroservice.ServiceCalls.Mocks
             {
                 Name = "Dimitrije",
                 Surname = "Corlija",
-                Function = "Ministar",
+                Function = "Ministar"
                
             };
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DocumentMicroservice.Migrations
 {
     [DbContext(typeof(DocumentContext))]
-    [Migration("20220222130134_docDB")]
-    partial class docDB
+    [Migration("20220222214551_DocumentDB")]
+    partial class DocumentDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace DocumentMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("buyerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("dateOfSigning")
                         .HasColumnType("datetime2");
 
@@ -37,6 +40,9 @@ namespace DocumentMicroservice.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("guaranteeTypeID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("personId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("placeOfSigning")
@@ -76,6 +82,9 @@ namespace DocumentMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("auctionId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("docStatusID")
                         .HasColumnType("uniqueidentifier");
 
@@ -93,6 +102,9 @@ namespace DocumentMicroservice.Migrations
 
                     b.Property<string>("registrationNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("userId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("documentId");
 
