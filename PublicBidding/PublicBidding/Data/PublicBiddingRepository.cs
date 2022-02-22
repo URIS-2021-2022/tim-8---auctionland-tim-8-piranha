@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PublicBidding.Entities;
+using PublicBidding.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,9 +38,6 @@ namespace PublicBidding.Data
             }
 
             List<Guid> authorizedPersons = publicBidding.AuthorizedPersons;
-            List<Guid> buyers = publicBidding.Bidders;
-            List<Guid> plotParts = publicBidding.Plots;
-
             if(authorizedPersons != null)
             {
                 foreach (var authorizedPersonId in authorizedPersons)
@@ -52,8 +50,9 @@ namespace PublicBidding.Data
                     await context.PublicBiddingAuthorizedPerson.AddAsync(publicBiddingAuthorizedPerson);
                 }
             }
-            
-            if(buyers != null)
+
+            List<Guid> buyers = publicBidding.Bidders;
+            if (buyers != null)
             {
                 foreach (var buyerId in buyers)
                 {
@@ -66,7 +65,9 @@ namespace PublicBidding.Data
                 }
             }
 
-            if(plotParts != null)
+
+            List<Guid> plotParts = publicBidding.Plots;
+            if (plotParts != null)
             {
                 foreach (var plotPartId in plotParts)
                 {
@@ -104,6 +105,14 @@ namespace PublicBidding.Data
             return publicBidding;
         }
 
+        public async Task<List<PublicBiddingForOtherServices>> GetPublicBiddingsById(List<Guid> publicBiddings)
+        {
+            var listOfPublicBiddings = await context.PublicBiddings.Include(s => s.Status).Include(t => t.Type)
+                .ToListAsync();
+
+            return mapper.Map<List<PublicBiddingForOtherServices>>(listOfPublicBiddings);
+        }
+
         public async Task<List<Entities.PublicBidding>> GetPublicBiddings()
         {
             var publicBiddings = await context.PublicBiddings.Include(s => s.Status).Include(t => t.Type)
@@ -121,6 +130,8 @@ namespace PublicBidding.Data
 
         public async Task UpdatePublicBidding(Entities.PublicBidding publicBidding)
         {
+            var publicBiddingToUpdate = context.PublicBiddings.FirstOrDefault(e => e.PublicBiddingId == publicBidding.PublicBiddingId);
+
             var authorizedPerson = await context.PublicBiddingAuthorizedPerson.Where(pa => pa.PublicBiddingId == publicBidding.PublicBiddingId).ToListAsync();
             context.PublicBiddingAuthorizedPerson.RemoveRange(authorizedPerson);
 
@@ -131,7 +142,7 @@ namespace PublicBidding.Data
             context.PublicBiddingPlotPart.RemoveRange(plotPart);
 
             List<Guid> authorizedPersons = publicBidding.AuthorizedPersons;
-            List<Guid> buyers = publicBidding.Bidders;
+            List<Guid> bidders = publicBidding.Bidders;
             List<Guid> plotParts = publicBidding.Plots;
 
             if (authorizedPersons != null)
@@ -147,9 +158,9 @@ namespace PublicBidding.Data
                 }
             }
 
-            if (buyers != null)
+            if (bidders != null)
             {
-                foreach (var buyerId in buyers)
+                foreach (var buyerId in bidders)
                 {
                     var publicBiddingBuyer = new PublicBiddingBuyer
                     {
@@ -172,6 +183,9 @@ namespace PublicBidding.Data
                     await context.PublicBiddingPlotPart.AddAsync(publicBiddingPlotPart);
                 }
             }
+
+            var newValues = mapper.Map<Entities.PublicBidding>(publicBidding);
+            mapper.Map(newValues, publicBiddingToUpdate);
         }
     }
 }

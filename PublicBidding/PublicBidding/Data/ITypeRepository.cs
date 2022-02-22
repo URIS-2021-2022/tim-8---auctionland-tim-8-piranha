@@ -7,7 +7,7 @@ namespace PublicBidding.Data
 {
     public interface ITypeRepository
     {
-        Task<List<Entities.Type>> GetTypes();
+        Task<List<Entities.Type>> GetAllTypes();
 
         Task<Entities.Type> GetTypeById(Guid typeId);
     }

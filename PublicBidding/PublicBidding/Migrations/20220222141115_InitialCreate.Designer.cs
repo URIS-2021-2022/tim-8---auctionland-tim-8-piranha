@@ -10,7 +10,7 @@ using PublicBidding.Entities;
 namespace PublicBidding.Migrations
 {
     [DbContext(typeof(PublicBiddingContext))]
-    [Migration("20220218214759_InitialCreate")]
+    [Migration("20220222141115_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace PublicBidding.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AddressId")
+                    b.Property<Guid?>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("BestBidder")
@@ -160,6 +160,7 @@ namespace PublicBidding.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("StatusName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StatusId");
@@ -191,6 +192,7 @@ namespace PublicBidding.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TypeName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TypeId");
@@ -234,7 +236,7 @@ namespace PublicBidding.Migrations
                     b.HasOne("PublicBidding.Entities.PublicBidding", "PublicBidding")
                         .WithMany()
                         .HasForeignKey("PublicBiddingId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("PublicBidding");
@@ -245,7 +247,7 @@ namespace PublicBidding.Migrations
                     b.HasOne("PublicBidding.Entities.PublicBidding", "PublicBidding")
                         .WithMany()
                         .HasForeignKey("PublicBiddingId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("PublicBidding");
@@ -256,7 +258,7 @@ namespace PublicBidding.Migrations
                     b.HasOne("PublicBidding.Entities.PublicBidding", "PublicBidding")
                         .WithMany()
                         .HasForeignKey("PublicBiddingId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("PublicBidding");

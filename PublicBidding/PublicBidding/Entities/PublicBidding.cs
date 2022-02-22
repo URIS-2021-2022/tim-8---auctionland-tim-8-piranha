@@ -34,7 +34,7 @@ namespace PublicBidding.Entities
 
         public bool IsExcepted{ get; set; }
 
-        public Guid AddressId { get; set; }
+        public Guid? AddressId { get; set; }
 
         [NotMapped]
         public List<Guid> AuthorizedPersons { get; set; }

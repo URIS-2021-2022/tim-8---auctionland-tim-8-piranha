@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using PublicBidding.Data;
 using PublicBidding.Models;
+using PublicBidding.ServiceCalls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,24 +17,25 @@ namespace PublicBidding.Controllers
     /// <summary>
     /// Kontroler za status javnog nadmetanja
     /// </summary>
-    [Route("api/status")]
+    [Route("api/publicBidding/status")]
     [ApiController]
     [Produces("application/json", "application/xml")]
     public class StatusController : ControllerBase
     {
         private readonly IStatusRepository statusRepository;
         private readonly IMapper mapper;
+        private readonly ILoggerService logger;
 
-        public StatusController(IStatusRepository statusRepository, IMapper mapper)
+        public StatusController(IStatusRepository statusRepository, IMapper mapper, ILoggerService logger)
         {
-            statusRepository = statusRepository;
-            mapper = mapper;
+            this.statusRepository = statusRepository;
+            this.mapper = mapper;
+            this.logger = logger;
         }
 
         /// <summary>
         /// Vraća sve statuse javnog nadmetanja
         /// </summary>
-        /// <param name="statusName">Naziv statusa javnog nadmetanja</param>
         /// <returns>Lista mogućih statusa javnog nadmetanja</returns>
         /// <response code="200">Vraća listu mogućih statusa javnog nadmetanja</response>
         /// <response code="404">Nije pronađen ni jedan status javnog nadmetanja</response>
@@ -45,9 +49,11 @@ namespace PublicBidding.Controllers
 
             if (statuses == null || statuses.Count == 0)
             {
-               return NoContent();
+                await logger.LogMessage(LogLevel.Warning, "Status list is empty!", "PublicBidding microservice", "GetAllStatuses");
+                return NoContent();
             }
 
+            await logger.LogMessage(LogLevel.Information, "Status list successfully returned!", "PublicBidding microservice", "GetAllStatuses");
             return Ok(mapper.Map<List<StatusDto>>(statuses));
         }
 
@@ -57,7 +63,7 @@ namespace PublicBidding.Controllers
         /// <param name="statusId">ID statusa</param>
         /// <returns>Status javnog nadmetanja</returns>
         /// <response code="200">Vraća traženi status javnog nadmetanja</response>
-        /// <response code="404">Nije pronađen status za uneti ID</response>
+        /// <response code="404">Nije pronađen status sa unetim ID-em</response>
         [HttpGet("{statusId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -67,10 +73,27 @@ namespace PublicBidding.Controllers
 
             if (status == null)
             {
+                await logger.LogMessage(LogLevel.Warning, "Status not found!", "PublicBidding microservice", "GetStatusById");
                 return NotFound();
             }
 
+            await logger.LogMessage(LogLevel.Information, "Status found and successfully returned!", "PublicBidding microservice", "GetStatusById");
             return Ok(mapper.Map<StatusDto>(status));
+        }
+
+        /// <summary>
+        /// Pregled zaglavlja odgovora
+        /// </summary>
+        /// <returns>Zaglavlje odgovora</returns>
+        [HttpOptions]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetStatusOptions()
+        {
+            Response.Headers.Add("Allow", "GET");
+
+            await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "PublicBidding microservice", "GetPublicBiddingOptions");
+
+            return Ok();
         }
     }
 }

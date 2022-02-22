@@ -12,6 +12,12 @@ namespace PublicBidding.Models
     /// </summary>
     public class PublicBiddingDto
     {
+        public PublicBiddingDto()
+        {
+            Bidders = new List<BuyerDto>();
+            AuthorizedPersons = new List<AuthorizedPersonDto>();
+            PlotParts = new List<PlotPartDto>();
+        }
         public Guid PublicBiddingId { get; set; }
 
         public string Type { get; set; }
@@ -58,6 +64,6 @@ namespace PublicBidding.Models
         /// <summary>
         /// Lista kupaca
         /// </summary>
-        public List<BuyerDto> Buyers { get; set; }
+        public List<BuyerDto> Bidders { get; set; }
     }
 }

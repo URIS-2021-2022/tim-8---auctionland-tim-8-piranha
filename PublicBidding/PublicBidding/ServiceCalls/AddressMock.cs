@@ -9,7 +9,7 @@ namespace PublicBidding.ServiceCalls
 {
     public class AddressMock<T> : IService<T>
     {
-        public async Task<T> SendGetRequestAsync()
+        public async Task<T> SendGetRequestAsync(string url)
         {
             var address = new AddressDto
             {

@@ -4,6 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>44da3e3b-0bad-4a29-9641-5dce4b5767db</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702,1591</NoWarn>
+    <DocumentationFile>PublicBidding.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

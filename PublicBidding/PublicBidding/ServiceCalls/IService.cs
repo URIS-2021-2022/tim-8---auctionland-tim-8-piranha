@@ -7,6 +7,6 @@ namespace PublicBidding.ServiceCalls
 {
     public interface IService<T>
     {
-        Task<T> SendGetRequestAsync();
+        Task<T> SendGetRequestAsync(string url);
     }
 }

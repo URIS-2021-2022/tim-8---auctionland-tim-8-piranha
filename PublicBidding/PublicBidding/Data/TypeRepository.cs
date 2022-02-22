@@ -16,14 +16,14 @@ namespace PublicBidding.Data
             this.context = context;
         }
 
-        public async Task<Entities.Type> GetTypeById(Guid typeId)
-        {
-            return await context.Types.FirstOrDefaultAsync(e => e.TypeId == typeId);
-        }
-
-        public async Task<List<Entities.Type>> GetTypes()
+        public async Task<List<Entities.Type>> GetAllTypes()
         {
             return await context.Types.ToListAsync();
+        }
+
+        public async Task<Entities.Type> GetTypeById(Guid typeId)
+        {
+            return await context.Types.FirstOrDefaultAsync(t => t.TypeId == typeId);
         }
     }
 }

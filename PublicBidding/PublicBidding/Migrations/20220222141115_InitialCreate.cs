@@ -12,7 +12,7 @@ namespace PublicBidding.Migrations
                 columns: table => new
                 {
                     StatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StatusName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    StatusName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -24,7 +24,7 @@ namespace PublicBidding.Migrations
                 columns: table => new
                 {
                     TypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TypeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    TypeName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,7 +43,7 @@ namespace PublicBidding.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartPricePerHa = table.Column<double>(type: "float", nullable: false),
                     IsExcepted = table.Column<bool>(type: "bit", nullable: false),
-                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
                     BestBidder = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     RentPeriod = table.Column<int>(type: "int", nullable: false),
@@ -83,7 +83,7 @@ namespace PublicBidding.Migrations
                         column: x => x.PublicBiddingId,
                         principalTable: "PublicBiddings",
                         principalColumn: "PublicBiddingId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,7 +101,7 @@ namespace PublicBidding.Migrations
                         column: x => x.PublicBiddingId,
                         principalTable: "PublicBiddings",
                         principalColumn: "PublicBiddingId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,7 +119,7 @@ namespace PublicBidding.Migrations
                         column: x => x.PublicBiddingId,
                         principalTable: "PublicBiddings",
                         principalColumn: "PublicBiddingId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(

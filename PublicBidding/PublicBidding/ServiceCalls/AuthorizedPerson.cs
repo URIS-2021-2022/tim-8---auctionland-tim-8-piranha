@@ -8,7 +8,7 @@ namespace PublicBidding.ServiceCalls
 {
     public class AuthorizedPersonMock<T> : IService<T>
     {
-        public async Task<T> SendGetRequestAsync()
+        public async Task<T> SendGetRequestAsync(string url)
         {
             var authorizedPerson = new AuthorizedPersonDto
             {

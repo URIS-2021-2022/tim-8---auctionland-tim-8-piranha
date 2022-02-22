@@ -1,4 +1,5 @@
 ﻿using PublicBidding.Entities;
+using PublicBidding.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace PublicBidding.Data
         Task<List<Entities.PublicBidding>> GetPublicBiddings();
 
         Task<Entities.PublicBidding> GetPublicBiddingById(Guid publicBiddingId);
+
+        Task<List<PublicBiddingForOtherServices>> GetPublicBiddingsById(List<Guid> publicBiddings);
 
         Task<PublicBiddingConfirmation> CreatePublicBidding(Entities.PublicBidding publicBidding);
 

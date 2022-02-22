@@ -8,7 +8,7 @@ namespace PublicBidding.ServiceCalls
 {
     public class PlotPartMock<T> : IService<T>
     {
-        public async Task<T> SendGetRequestAsync()
+        public async Task<T> SendGetRequestAsync(string url)
         {
             var plotPart = new PlotPartDto
             {
