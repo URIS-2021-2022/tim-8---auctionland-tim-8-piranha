@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ComplaintMicroservice.Entities;
 using ComplaintMicroservice.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,37 +20,38 @@ namespace ComplaintMicroservice.Data
             this.mapper = mapper;
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChanges()
         {
-            return context.SaveChanges() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
-        public ComplaintTypeConfirmation CreateComplaintType(ComplaintTypeModel complaintType)
+        public async Task<ComplaintTypeConfirmation> CreateComplaintType(ComplaintTypeModel complaintType)
         {
-            var createdEntity = context.ComplaintTypes.Add(complaintType);
+            var createdEntity = await context.ComplaintTypes.AddAsync(complaintType);
             context.SaveChanges();
             return mapper.Map<ComplaintTypeConfirmation>(createdEntity.Entity); 
         }
 
-        public void DeleteComplaintType(Guid complaintTypeId)
+        public async Task DeleteComplaintType(Guid complaintTypeId)
         {
-            var type = GetComplaintTypeById(complaintTypeId);
+            var type = await GetComplaintTypeById(complaintTypeId);
             context.ComplaintTypes.Remove(type);
             context.SaveChanges();
         }
 
-        public List<ComplaintTypeModel> GetComplaintTypes(string complaintType = null)
+        public async Task<List<ComplaintTypeModel>> GetComplaintTypes(string complaintType = null)
         {
-            return context.ComplaintTypes.Where(e => complaintType == null || e.ComplaintType==complaintType).ToList();
+            return await context.ComplaintTypes.Where(e => complaintType == null || e.ComplaintType == complaintType).ToListAsync();
                         
         }
 
-        public ComplaintTypeModel GetComplaintTypeById(Guid complaintTypeId)
+        public async Task<ComplaintTypeModel> GetComplaintTypeById(Guid complaintTypeId)
         {
-            return context.ComplaintTypes.FirstOrDefault(e => e.ComplaintTypeId == complaintTypeId);
+            return await context.ComplaintTypes.FirstOrDefaultAsync(e => e.ComplaintTypeId == complaintTypeId);
         }
 
-        public void UpdateComplaintType(ComplaintTypeModel complaintType)
+#pragma warning disable CS1998
+        public async Task UpdateComplaintType(ComplaintTypeModel complaintType)
         {
             //NE GLEDAJ OVAJ KOD   
             /*ComplaintTypeModel ct = GetComplaintTypeById(complaintType.ComplaintTypeId);
@@ -63,6 +65,7 @@ namespace ComplaintMicroservice.Data
                 ComplaintType = ct.ComplaintType
             };*/
         }
+#pragma warning restore CS1998
 
         /*
          * public static List<ComplaintTypeModel> ComplaintTypes { get; set; } = new List<ComplaintTypeModel>();

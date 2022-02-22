@@ -44,15 +44,15 @@ namespace ComplaintMicroservice.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<List<ComplaintTypeDto>> GetComplaintTypes(string complaintType)
+        public async Task<ActionResult<List<ComplaintTypeDto>>> GetComplaintTypes(string complaintType)
         {
-            List<ComplaintTypeModel> types = complaintTypeRepository.GetComplaintTypes(complaintType);
+            List<ComplaintTypeModel> types = await complaintTypeRepository.GetComplaintTypes(complaintType);
             if(types==null || types.Count == 0)
             {
-                Logger.LogMessage(LogLevel.Warning, "Complaint types list is empty!", "Complaint microservice", "GetComplaintTypes");
+                await Logger.LogMessage(LogLevel.Warning, "Complaint types list is empty!", "Complaint microservice", "GetComplaintTypes");
                 return NoContent();
             }
-            Logger.LogMessage(LogLevel.Information, "Complaint types list successfully returned!", "Complaint microservice", "GetComplaintTypes");
+            await Logger .LogMessage(LogLevel.Information, "Complaint types list successfully returned!", "Complaint microservice", "GetComplaintTypes");
             return Ok(mapper.Map<List<ComplaintTypeDto>>(types));
         }
 
@@ -65,16 +65,16 @@ namespace ComplaintMicroservice.Controllers
         [HttpGet("{complaintTypeId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<ComplaintTypeDto> GetComplaintTypeById(Guid complaintTypeId)
+        public async Task<ActionResult<ComplaintTypeDto>> GetComplaintTypeById(Guid complaintTypeId)
         {
-            ComplaintTypeModel type = complaintTypeRepository.GetComplaintTypeById(complaintTypeId);
+            ComplaintTypeModel type = await complaintTypeRepository .GetComplaintTypeById(complaintTypeId);
 
             if (type == null)
             {
-                Logger.LogMessage(LogLevel.Warning, "Complaint type not found!", "Complaint microservice", "GetComplaintTypeById");
+                await Logger .LogMessage(LogLevel.Warning, "Complaint type not found!", "Complaint microservice", "GetComplaintTypeById");
                 return NotFound();
             }
-            Logger.LogMessage(LogLevel.Information, "Complaint type found and successfully returned!", "Complaint microservice", "GetComplaintTypeById");
+            await Logger.LogMessage(LogLevel.Information, "Complaint type found and successfully returned!", "Complaint microservice", "GetComplaintTypeById");
             return Ok(mapper.Map<ComplaintTypeDto>(type));
         }
 
@@ -87,7 +87,7 @@ namespace ComplaintMicroservice.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ComplaintTypeConfirmationDto> CreateComplaintType([FromBody] ComplaintTypeCreationDto complaintType)
+        public async Task<ActionResult<ComplaintTypeConfirmationDto>> CreateComplaintType([FromBody] ComplaintTypeCreationDto complaintType)
          {
             try
             {
@@ -95,19 +95,19 @@ namespace ComplaintMicroservice.Controllers
 
                 if (!modelValid)
                 {
-                    Logger.LogMessage(LogLevel.Warning, "Complaint type is not valid!", "Complaint microservice", "CreateComplaintType");
+                    await Logger .LogMessage(LogLevel.Warning, "Complaint type is not valid!", "Complaint microservice", "CreateComplaintType");
                     return BadRequest("Complaint type should not be empty");
                 }
 
                 ComplaintTypeModel type= mapper.Map<ComplaintTypeModel>(complaintType);
-                ComplaintTypeConfirmation confirmation = complaintTypeRepository.CreateComplaintType(type);
+                ComplaintTypeConfirmation confirmation = await complaintTypeRepository .CreateComplaintType(type);
                 string location = linkGenerator.GetPathByAction("GetComplaintTypeById", "ComplaintType", new { complaintTypeId = type.ComplaintTypeId });
-                Logger.LogMessage(LogLevel.Information, "Complaint type successfully created!", "Complaint microservice", "CreateComplaintType");
+                await Logger.LogMessage(LogLevel.Information, "Complaint type successfully created!", "Complaint microservice", "CreateComplaintType");
                 return Created(location, mapper.Map<ComplaintTypeConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
-                Logger.LogMessage(LogLevel.Error, "ComplaintType creation failed!", "Complaint microservice", "CreateComplaintType");
+                await Logger.LogMessage(LogLevel.Error, "ComplaintType creation failed!", "Complaint microservice", "CreateComplaintType");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error" + " " + ex.Message);
             }
         }
@@ -123,26 +123,26 @@ namespace ComplaintMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ComplaintTypeConfirmationDto> UpdateComplaintType(ComplaintTypeUpdateDto complaintType)
+        public async Task<ActionResult<ComplaintTypeConfirmationDto>> UpdateComplaintType(ComplaintTypeUpdateDto complaintType)
         {
             try
             {
-                var oldComplaintType = complaintTypeRepository.GetComplaintTypeById(complaintType.ComplaintTypeId);
+                var oldComplaintType = await complaintTypeRepository.GetComplaintTypeById(complaintType.ComplaintTypeId);
 
                 if (oldComplaintType == null)
                 {
-                    Logger.LogMessage(LogLevel.Warning, "Complaint type not found!", "Complaint microservice", "UpdateComplaintType");
+                    await Logger.LogMessage(LogLevel.Warning, "Complaint type not found!", "Complaint microservice", "UpdateComplaintType");
                     return NotFound();
                 }
                 ComplaintTypeModel type = mapper.Map<ComplaintTypeModel>(complaintType);
                 mapper.Map(type, oldComplaintType);
-                complaintTypeRepository.SaveChanges();
-                Logger.LogMessage(LogLevel.Information, "Complaint type successfully updated!", "Complaint microservice", "UpdateComplaintType");
+                await complaintTypeRepository.SaveChanges();
+                await Logger.LogMessage(LogLevel.Information, "Complaint type successfully updated!", "Complaint microservice", "UpdateComplaintType");
                 return Ok(mapper.Map<ComplaintTypeDto>(oldComplaintType));
             }
             catch
             {
-                Logger.LogMessage(LogLevel.Error, "ComplaintType update failed!", "Complaint microservice", "UpdateComplaintType");
+                await Logger.LogMessage(LogLevel.Error, "ComplaintType update failed!", "Complaint microservice", "UpdateComplaintType");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -158,24 +158,24 @@ namespace ComplaintMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{complaintTypeId}")]
-        public IActionResult DeleteComplaintType(Guid complaintTypeId)
+        public async Task<IActionResult> DeleteComplaintType(Guid complaintTypeId)
         {
             try
             {
-                ComplaintTypeModel type = complaintTypeRepository.GetComplaintTypeById(complaintTypeId);
+                ComplaintTypeModel type = await complaintTypeRepository.GetComplaintTypeById(complaintTypeId);
 
                 if (type == null)
                 {
-                    Logger.LogMessage(LogLevel.Warning, "Complaint type not found!", "Complaint microservice", "DeleteComplaintType");
+                    await Logger.LogMessage(LogLevel.Warning, "Complaint type not found!", "Complaint microservice", "DeleteComplaintType");
                     return NotFound();
                 }
-                complaintTypeRepository.DeleteComplaintType(complaintTypeId);
-                Logger.LogMessage(LogLevel.Information, "Complaint type deleted successfully!", "Complaint microservice", "DeleteComplaintType");
+                await complaintTypeRepository.DeleteComplaintType(complaintTypeId);
+                await Logger.LogMessage(LogLevel.Information, "Complaint type deleted successfully!", "Complaint microservice", "DeleteComplaintType");
                 return NoContent();
             }
             catch
             {
-                Logger.LogMessage(LogLevel.Error, "Complaint type deletion failed!", "Complaint microservice", "DeleteComplaintType");
+                await Logger.LogMessage(LogLevel.Error, "Complaint type deletion failed!", "Complaint microservice", "DeleteComplaintType");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }

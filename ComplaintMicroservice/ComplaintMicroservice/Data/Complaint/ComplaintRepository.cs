@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ComplaintMicroservice.Data.Complaint
 {
@@ -19,42 +20,44 @@ namespace ComplaintMicroservice.Data.Complaint
             this.mapper = mapper;
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChanges()
         {
-            return context.SaveChanges() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
-        public ComplaintConfirmation CreateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint)
+        public async Task<ComplaintConfirmation> CreateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint)
         {
-            var createdEntity = context.Complaint.Add(complaint);
+            var createdEntity = await context.Complaint.AddAsync(complaint);
             context.SaveChanges();
             return mapper.Map<ComplaintConfirmation>(createdEntity.Entity);
         }
 
-        public void DeleteComplaint(Guid complaintId)
+        public async Task DeleteComplaint(Guid complaintId)
         {
-            var com = GetComplaintById(complaintId);
+            var com = await GetComplaintById(complaintId);
             context.Complaint.Remove(com);
             context.SaveChanges();
         }
 
-        public List<ComplaintMicroservice.Entities.Complaint.Complaint> GetComplaints(string solutionNumber = null)
+        public async Task<List<ComplaintMicroservice.Entities.Complaint.Complaint>> GetComplaints(string solutionNumber = null)
         {
-            return context.Complaint.Include(c => c.ComplaintType).Include(c=> c.ComplaintStatus).Include(c=> c.ComplaintEvent).
-                Where(c => solutionNumber == null || c.SolutionNumber == solutionNumber).ToList();
+            return await context.Complaint.Include(c => c.ComplaintType).Include(c=> c.ComplaintStatus).Include(c=> c.ComplaintEvent).
+                Where(c => solutionNumber == null || c.SolutionNumber == solutionNumber).ToListAsync();
 
         }
 
-        public ComplaintMicroservice.Entities.Complaint.Complaint GetComplaintById(Guid complaintId)
+        public async Task<ComplaintMicroservice.Entities.Complaint.Complaint> GetComplaintById(Guid complaintId)
         {
-            return context.Complaint.Include(c => c.ComplaintType).Include(c => c.ComplaintStatus).Include(c => c.ComplaintEvent).
-                FirstOrDefault(e => e.ComplaintId == complaintId);
+            return await context.Complaint.Include(c => c.ComplaintType).Include(c => c.ComplaintStatus).Include(c => c.ComplaintEvent).
+                FirstOrDefaultAsync(e => e.ComplaintId == complaintId);
         }
 
-        public void UpdateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint)
+#pragma warning disable CS199
+        public async Task UpdateComplaint(ComplaintMicroservice.Entities.Complaint.Complaint complaint)
         {
-            context.SaveChanges();   
+            await context.SaveChangesAsync();   
             
         }
+#pragma warning restore CS1998
     }
 }

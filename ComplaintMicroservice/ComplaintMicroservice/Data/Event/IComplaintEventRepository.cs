@@ -8,16 +8,16 @@ namespace ComplaintMicroservice.Data.Event
 {
     public interface IComplaintEventRepository
     {
-        List<ComplaintEvent> GetComplaintEvents(string complaintEvent = null);
+        Task<List<ComplaintEvent>> GetComplaintEvents(string complaintEvent = null);
 
-        ComplaintEvent GetComplaintEventById(Guid complaintEventId);
+        Task<ComplaintEvent> GetComplaintEventById(Guid complaintEventId);
 
-        ComplaintEventConfirmation CreateComplaintEvent(ComplaintEvent complaintEvent);
+        Task<ComplaintEventConfirmation> CreateComplaintEvent(ComplaintEvent complaintEvent);
 
-        void UpdateComplaintEvent(ComplaintEvent complaintEvent);
+        Task UpdateComplaintEvent(ComplaintEvent complaintEvent);
 
-        void DeleteComplaintEvent(Guid complaintEventId);
+        Task DeleteComplaintEvent(Guid complaintEventId);
 
-        bool SaveChanges();
+        Task<bool> SaveChanges();
     }
 }

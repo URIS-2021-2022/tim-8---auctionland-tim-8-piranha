@@ -8,16 +8,16 @@ namespace ComplaintMicroservice.Data.Status
 {
     public interface IComplaintStatusRepository
     {
-        List<ComplaintStatus> GetComplaintStatuses(string Status = null);
+        Task<List<ComplaintStatus>> GetComplaintStatuses(string Status = null);
 
-        ComplaintStatus GetComplaintStatusById(Guid complaintStatusId);
+        Task<ComplaintStatus> GetComplaintStatusById(Guid complaintStatusId);
 
-        ComplaintStatusConfirmation CreateComplaintStatus(ComplaintStatus complaintStatus);
+        Task<ComplaintStatusConfirmation> CreateComplaintStatus(ComplaintStatus complaintStatus);
 
-        void UpdateComplaintStatus(ComplaintStatus complaintStatus);
+        Task UpdateComplaintStatus(ComplaintStatus complaintStatus);
 
-        void DeleteComplaintStatus(Guid complaintStatusId);
+        Task DeleteComplaintStatus(Guid complaintStatusId);
 
-        bool SaveChanges();
+        Task<bool> SaveChanges();
     }
 }

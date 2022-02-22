@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ComplaintMicroservice.Entities;
 using ComplaintMicroservice.Entities.Event;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,40 +20,42 @@ namespace ComplaintMicroservice.Data.Event
             this.mapper = mapper;
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChanges()
         {
-            return context.SaveChanges() > 0;
+            return await context.SaveChangesAsync() > 0;
         }
 
-        public ComplaintEventConfirmation CreateComplaintEvent(ComplaintEvent complaintEvent)
+        public async Task<ComplaintEventConfirmation> CreateComplaintEvent(ComplaintEvent complaintEvent)
         {
-            var createdEntity = context.ComplaintEvent.Add(complaintEvent);
+            var createdEntity = await context.ComplaintEvent.AddAsync(complaintEvent);
             context.SaveChanges();
             return mapper.Map<ComplaintEventConfirmation>(createdEntity.Entity);
         }
 
-        public void DeleteComplaintEvent(Guid complaintEventId)
+        public async Task DeleteComplaintEvent(Guid complaintEventId)
         {
-            var ev = GetComplaintEventById(complaintEventId);
+            var ev = await GetComplaintEventById(complaintEventId);
             context.ComplaintEvent.Remove(ev);
             context.SaveChanges();
         }
 
-        public List<ComplaintEvent> GetComplaintEvents(string complaintEvent = null)
+        public async Task<List<ComplaintEvent>> GetComplaintEvents(string complaintEvent = null)
         {
-            return context.ComplaintEvent.Where(e => complaintEvent == null || e.Event == complaintEvent).ToList();
+            return await context.ComplaintEvent.Where(e => complaintEvent == null || e.Event == complaintEvent).ToListAsync();
 
         }
 
-        public ComplaintEvent GetComplaintEventById(Guid complaintEventId)
+        public async Task<ComplaintEvent> GetComplaintEventById(Guid complaintEventId)
         {
-            return context.ComplaintEvent.FirstOrDefault(e => e.ComplaintEventId == complaintEventId);
+            return await context.ComplaintEvent.FirstOrDefaultAsync(e => e.ComplaintEventId == complaintEventId);
         }
 
-        public void UpdateComplaintEvent(ComplaintEvent complaintEvent)
+#pragma warning disable CS1998
+        public async Task UpdateComplaintEvent(ComplaintEvent complaintEvent)
         {
             //NE GLEDAJ OVAJ KOD   
             
         }
+#pragma warning restore CS1998
     }
 }

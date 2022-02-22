@@ -20,7 +20,7 @@ namespace ComplaintMicroservice.Controllers
     [ApiController]
     [Route("api/complaints")]
     [Produces("application/json", "application/xml")]
-    //[Authorize]
+    [Authorize]
     public class ComplaintController : ControllerBase
     {
         private readonly IComplaintRepository complaintRepository;
@@ -55,15 +55,15 @@ namespace ComplaintMicroservice.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<List<ComplaintDto>> GetComplaints(string solutionNumber)
+        public async Task<ActionResult<List<ComplaintDto>>> GetComplaints(string solutionNumber)
         {
-            List<Complaint> complaints = complaintRepository.GetComplaints(solutionNumber);
+            List<Complaint> complaints = await complaintRepository.GetComplaints(solutionNumber);
             if (complaints == null || complaints.Count == 0)
             {
-                Logger.LogMessage(LogLevel.Warning, "Complaints list is empty!", "Complaint microservice", "GetComplaints");
+                await Logger.LogMessage(LogLevel.Warning, "Complaints list is empty!", "Complaint microservice", "GetComplaints");
                 return NoContent();
             }
-            Logger.LogMessage(LogLevel.Information, "Complaints list successfully returned!", "Complaint microservice", "GetComplaints");
+            await Logger.LogMessage(LogLevel.Information, "Complaints list successfully returned!", "Complaint microservice", "GetComplaints");
             return Ok(mapper.Map<List<ComplaintDto>>(complaints));
         }
 
@@ -76,16 +76,16 @@ namespace ComplaintMicroservice.Controllers
         [HttpGet("{complaintId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<ComplaintDto> GetComplaintById(Guid complaintId)
+        public async Task<ActionResult<ComplaintDto>> GetComplaintById(Guid complaintId)
         {
-            Complaint com = complaintRepository.GetComplaintById(complaintId);
+            Complaint com = await complaintRepository.GetComplaintById(complaintId);
 
             if (com == null)
             {
-                Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "GetComplaintById");
+                await Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "GetComplaintById");
                 return NotFound();
             }
-            Logger.LogMessage(LogLevel.Information, "Complaint found and successfully returned!", "Complaint microservice", "GetComplaintById");
+            await Logger.LogMessage(LogLevel.Information, "Complaint found and successfully returned!", "Complaint microservice", "GetComplaintById");
             return Ok(mapper.Map<ComplaintDto>(com));
         }
 
@@ -98,20 +98,20 @@ namespace ComplaintMicroservice.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ComplaintConfirmationDto> CreateComplaintEvent([FromBody] ComplaintCreationDto complaint)
+        public async Task<ActionResult<ComplaintConfirmationDto>> CreateComplaintEvent([FromBody] ComplaintCreationDto complaint)
         {
             try
             {
 
                 Complaint com = mapper.Map<Complaint>(complaint);
-                ComplaintConfirmation confirmation = complaintRepository.CreateComplaint(com);
+                ComplaintConfirmation confirmation = await complaintRepository.CreateComplaint(com);
                 string location = linkGenerator.GetPathByAction("GetComplaintById", "Complaint", new { complaintId = com.ComplaintId });
-                Logger.LogMessage(LogLevel.Information, "Complaint successfully created!", "Complaint microservice", "CreateComplaint");
+                await Logger.LogMessage(LogLevel.Information, "Complaint successfully created!", "Complaint microservice", "CreateComplaint");
                 return Created(location, mapper.Map<ComplaintConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
-                Logger.LogMessage(LogLevel.Error, "Complaint creation failed!", "Complaint microservice", "CreateComplaint");
+                await Logger.LogMessage(LogLevel.Error, "Complaint creation failed!", "Complaint microservice", "CreateComplaint");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error" + " " + ex.Message);
             }
         }
@@ -127,31 +127,31 @@ namespace ComplaintMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ComplaintConfirmationDto> UpdateComplaint(ComplaintUpdateDto complaint)
+        public async Task<ActionResult<ComplaintConfirmationDto>> UpdateComplaint(ComplaintUpdateDto complaint)
         {
             try
             {
 
-                var oldComplaint = complaintRepository.GetComplaintById(complaint.ComplaintId);
+                var oldComplaint = await complaintRepository.GetComplaintById(complaint.ComplaintId);
 
                 if (oldComplaint == null)
                 {
-                    Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "UpdateComplaint");
+                    await Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "UpdateComplaint");
                     return NotFound();
                 }
                 Complaint com = mapper.Map<Complaint>(complaint);
                 mapper.Map(com, oldComplaint);
-                com.ComplaintType = complaintTypeRepository.GetComplaintTypeById(oldComplaint.ComplaintTypeId);
-                com.ComplaintStatus = complaintStatusRepository.GetComplaintStatusById(oldComplaint.ComplaintStatusId);
-                com.ComplaintEvent = complaintEventRepository.GetComplaintEventById(oldComplaint.ComplaintEventId);
-                complaintRepository.UpdateComplaint(com);
+                com.ComplaintType = await complaintTypeRepository.GetComplaintTypeById(oldComplaint.ComplaintTypeId);
+                com.ComplaintStatus = await complaintStatusRepository.GetComplaintStatusById(oldComplaint.ComplaintStatusId);
+                com.ComplaintEvent = await complaintEventRepository.GetComplaintEventById(oldComplaint.ComplaintEventId);
+                await complaintRepository.UpdateComplaint(com);
                 string location = linkGenerator.GetPathByAction("GetComplaintById", "Complaint", new { complaintId = com.ComplaintId });
-                Logger.LogMessage(LogLevel.Information, "Complaint successfully updated!", "Complaint microservice", "UpdateComplaint");
+                await Logger.LogMessage(LogLevel.Information, "Complaint successfully updated!", "Complaint microservice", "UpdateComplaint");
                 return Ok(com);
             }
             catch
             {
-                Logger.LogMessage(LogLevel.Error, "Complaint update failed!", "Complaint microservice", "UpdateComplaint");
+                await Logger.LogMessage(LogLevel.Error, "Complaint update failed!", "Complaint microservice", "UpdateComplaint");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -167,24 +167,24 @@ namespace ComplaintMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{complaintId}")]
-        public IActionResult DeleteComplaint(Guid complaintId)
+        public async Task<IActionResult> DeleteComplaint(Guid complaintId)
         {
             try
             {
-                Complaint com = complaintRepository.GetComplaintById(complaintId);
+                Complaint com = await complaintRepository.GetComplaintById(complaintId);
 
                 if (com == null)
                 {
-                    Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "DeleteComplaint");
+                    await Logger.LogMessage(LogLevel.Warning, "Complaint not found!", "Complaint microservice", "DeleteComplaint");
                     return NotFound();
                 }
-                complaintRepository.DeleteComplaint(complaintId);
-                Logger.LogMessage(LogLevel.Information, "Complaint deleted successfully!", "Complaint microservice", "DeleteComplaint");
+                await complaintRepository.DeleteComplaint(complaintId);
+                await Logger.LogMessage(LogLevel.Information, "Complaint deleted successfully!", "Complaint microservice", "DeleteComplaint");
                 return NoContent();
             }
             catch
             {
-                Logger.LogMessage(LogLevel.Error, "Complaint deletion failed!", "Complaint microservice", "DeleteComplaint");
+                await Logger.LogMessage(LogLevel.Error, "Complaint deletion failed!", "Complaint microservice", "DeleteComplaint");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
