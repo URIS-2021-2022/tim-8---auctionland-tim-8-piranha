@@ -23,6 +23,10 @@ namespace BuyerMicroservice.Entities
         // ne treba foreign key zato sto strelica pokazuje u kontra smeru 
         public string country { get; set; }
 
+        [ForeignKey("BoardNumber")]
+        public Guid boardNumbID { get; set; }
+        public BoardNumber board { get; set; }
+
         public ICollection<Buyer> buyers { get; set; }
 
         

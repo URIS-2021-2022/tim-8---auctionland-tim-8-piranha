@@ -58,6 +58,7 @@ namespace DocumentMicroservice
             services.AddScoped<IServiceCall<PersonDto>, PersonServiceCallMock<PersonDto>>();
             services.AddScoped<IServiceCall<AuctionDto>, AuctionServiceCallMock<AuctionDto>>();
             services.AddScoped<IServiceCall<UserDto>, UserServiceCallMock<UserDto>>();
+            services.AddScoped<IServiceCall<PlotDto>, PlotServiceCallMock<PlotDto>>();
 
             //services.AddScoped<IDocumentStatusRepository, PlotCadastralMunicipalityRepository>();
             //-- svaki put kada stigne novi rikvest od klijenta uvek se pravi nova instanca(to je vezano za parametar konstruktora u kontroleru)

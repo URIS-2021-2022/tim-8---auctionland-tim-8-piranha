@@ -22,7 +22,9 @@ namespace BuyerMicroservice.Models.AuthorizedPerson
     
         public string country { get; set; }
 
+        public Guid boardNumbID { get; set; }
 
-       // public IList<BoardNumber> boardNums = new List<BoardNumber>();
+
+       
     }
 }

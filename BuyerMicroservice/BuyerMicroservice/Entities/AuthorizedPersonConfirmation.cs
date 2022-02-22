@@ -8,8 +8,9 @@ namespace BuyerMicroservice.Entities
 {
     public class AuthorizedPersonConfirmation
     {
-        [Key]
+       
         public Guid authorizedPersonID { get; set; }
+        public Guid boardNumbID { get; set; }
 
         public string name { get; set; }
 

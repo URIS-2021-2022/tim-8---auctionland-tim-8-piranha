@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuyerMicroservice.Migrations
 {
     [DbContext(typeof(BuyerContext))]
-    [Migration("20220222183706_BuyerDB")]
-    partial class BuyerDB
+    [Migration("20220222225001_BuyerDB1")]
+    partial class BuyerDB1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,12 @@ namespace BuyerMicroservice.Migrations
                     b.Property<string>("address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("boardNumbID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("boardNumberID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("country")
                         .HasColumnType("nvarchar(max)");
 
@@ -59,6 +65,8 @@ namespace BuyerMicroservice.Migrations
 
                     b.HasKey("authorizedPersonID");
 
+                    b.HasIndex("boardNumberID");
+
                     b.ToTable("authorizedPerson");
 
                     b.HasData(
@@ -66,6 +74,7 @@ namespace BuyerMicroservice.Migrations
                         {
                             authorizedPersonID = new Guid("93a08cc2-1d17-46e6-bd95-4fa70bb11226"),
                             address = "Mira popare 11",
+                            boardNumbID = new Guid("21200907-0d08-44f3-8506-dc807ca2215b"),
                             country = "Srbija",
                             name = "Dimitrije",
                             personalDocNum = "8767834637274",
@@ -75,6 +84,7 @@ namespace BuyerMicroservice.Migrations
                         {
                             authorizedPersonID = new Guid("07af89f2-feee-4680-b489-9d0e31699588"),
                             address = "Bulevar Oslobodjenja 55",
+                            boardNumbID = new Guid("21200907-0d08-44f3-8506-dc807ca2215b"),
                             country = "Zrenjanin",
                             name = "Marko",
                             personalDocNum = "8227834666274",
@@ -94,6 +104,18 @@ namespace BuyerMicroservice.Migrations
                     b.HasKey("boardNumberID");
 
                     b.ToTable("boardNumber");
+
+                    b.HasData(
+                        new
+                        {
+                            boardNumberID = new Guid("8d951bd9-497a-47ec-b1a7-c944492f4c8c"),
+                            number = 5
+                        },
+                        new
+                        {
+                            boardNumberID = new Guid("2018f35a-f49b-462f-a1c9-a105f297864b"),
+                            number = 10
+                        });
                 });
 
             modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>
@@ -298,6 +320,15 @@ namespace BuyerMicroservice.Migrations
                         .HasForeignKey("buyersbuyerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BuyerMicroservice.Entities.AuthorizedPerson", b =>
+                {
+                    b.HasOne("BuyerMicroservice.Entities.BoardNumber", "board")
+                        .WithMany()
+                        .HasForeignKey("boardNumberID");
+
+                    b.Navigation("board");
                 });
 
             modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>

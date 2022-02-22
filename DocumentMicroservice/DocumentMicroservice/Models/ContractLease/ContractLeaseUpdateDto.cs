@@ -65,5 +65,7 @@ namespace DocumentMicroservice.Models.ContractLease
 
         public Guid? personId { get; set; }
 
+        public Guid? plotId { get; set; }
+
     }
 }

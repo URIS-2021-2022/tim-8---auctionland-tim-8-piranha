@@ -58,7 +58,7 @@ namespace BuyerMicroservice.Controllers
 
                 return NoContent();
             }
-            await logger.LogMessage(LogLevel.Information, "Authorized person list successfully returned!", "Buyer microservice", "GetAuthorizedPersonAsync");
+          await logger.LogMessage(LogLevel.Information, "Authorized person list successfully returned!", "Buyer microservice", "GetAuthorizedPersonAsync");
 
             return Ok(mapper.Map<List<AuthorizedPersonDto>>(authorizedPerson));
         }
@@ -72,7 +72,7 @@ namespace BuyerMicroservice.Controllers
 
             if (authorizedPerson == null)
             {
-                await logger.LogMessage(LogLevel.Warning, "Authorized person not found!", "Buyer microservice", "GetAuthorizedPersonByIdAsync");
+              await logger.LogMessage(LogLevel.Warning, "Authorized person not found!", "Buyer microservice", "GetAuthorizedPersonByIdAsync");
 
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace BuyerMicroservice.Controllers
                 
                 string uri = linkGenerator.GetPathByAction("GetAuthorizedPerson", "AuthorizedPerson", new { authorizedPersonId = authorizedPersonConfirmation.authorizedPersonID });
                
-                await logger.LogMessage(LogLevel.Information, "Authorized person  successfully created!", "Buyer microservice", "CreateAuthorizedPersonAsync");
+               await logger.LogMessage(LogLevel.Information, "Authorized person  successfully created!", "Buyer microservice", "CreateAuthorizedPersonAsync");
 
                 return Created(uri, mapper.Map<AuthorizedPersonConfirmationDto>(authorizedPersonConfirmation));
 
@@ -114,7 +114,7 @@ namespace BuyerMicroservice.Controllers
             }
             catch (Exception ex)
             {
-                await logger.LogMessage(LogLevel.Error, "Authorized Person object creation failed!", "Buyer microservice", "CreateAuthorizedPersonAsync");
+               await logger.LogMessage(LogLevel.Error, "Authorized Person object creation failed!", "Buyer microservice", "CreateAuthorizedPersonAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -133,7 +133,7 @@ namespace BuyerMicroservice.Controllers
 
                 if (existingAuthorizedPerson == null)
                 {
-                    await logger.LogMessage(LogLevel.Warning, "Authorized Person object not found!", "Buyer microservice", "UpdateAuthorizedPersonAsync");
+                   await logger.LogMessage(LogLevel.Warning, "Authorized Person object not found!", "Buyer microservice", "UpdateAuthorizedPersonAsync");
 
                     return NotFound();
                 }
@@ -145,19 +145,19 @@ namespace BuyerMicroservice.Controllers
                 mapper.Map(authorizedPerson, existingAuthorizedPerson);
 
                 await authorizedPersonRepository.SaveChangesAsync();
-                await logger.LogMessage(LogLevel.Information, "Authorized person  object updated successfully!", "Buyer microservice", "UpdateAuthorizedPersonAsync");
+               await logger.LogMessage(LogLevel.Information, "Authorized person  object updated successfully!", "Buyer microservice", "UpdateAuthorizedPersonAsync");
 
                 return Ok(mapper.Map<AuthorizedPersonDto>(existingAuthorizedPerson));
 
             }
             catch (ValidationException ve)
             {
-                await logger.LogMessage(LogLevel.Error, "Validation for Authorized person  object failed!", "Buyer microservice", "UpdateAuthorizedPersonAsync");
+               await logger.LogMessage(LogLevel.Error, "Validation for Authorized person  object failed!", "Buyer microservice", "UpdateAuthorizedPersonAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
             }
             catch (Exception ex)
             {
-                await logger.LogMessage(LogLevel.Error, "Authorized person object updating failed!", "Buyer microservice", "UpdateAuthorizedPersonAsync");
+               await logger.LogMessage(LogLevel.Error, "Authorized person object updating failed!", "Buyer microservice", "UpdateAuthorizedPersonAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -213,7 +213,7 @@ namespace BuyerMicroservice.Controllers
             await authorizedPersonRepository.RemoveBuyerFromAuthorizedPerson(b, apbDto.authorizedPersonId);
             await authorizedPersonRepository.SaveChangesAsync();
 
-            await logger.LogMessage(LogLevel.Error, "Buyer has been successfully deleted !", "Buyer microservice", "DeleteAuthorizedPersonBuyer");
+           await logger.LogMessage(LogLevel.Error, "Buyer has been successfully deleted !", "Buyer microservice", "DeleteAuthorizedPersonBuyer");
 
 
             return NoContent();
@@ -225,7 +225,7 @@ namespace BuyerMicroservice.Controllers
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
 
-            await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Buyer microservice", "GetAuthorizedPersonOptions");
+           await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Buyer microservice", "GetAuthorizedPersonOptions");
 
             return Ok();
         }

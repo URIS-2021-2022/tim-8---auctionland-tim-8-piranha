@@ -31,6 +31,7 @@ namespace DocumentMicroservice.Controllers
         private readonly ILoggerService logger;
         private readonly IServiceCall<AuctionDto> auctionService;
         private readonly IServiceCall<UserDto> userService;
+        
 
 
         public DocumentController(IDocumentRepository documentRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentValidators validator, ILoggerService logger, IServiceCall<AuctionDto> auctionService, IServiceCall<UserDto> userService)
@@ -42,6 +43,7 @@ namespace DocumentMicroservice.Controllers
             this.logger = logger;
             this.auctionService = auctionService;
             this.userService = userService;
+            
         }
 
         /// <summary>

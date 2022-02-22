@@ -72,6 +72,8 @@ namespace DocumentMicroservice.Entities
 
         public Guid? personId { get; set; }
 
+        public Guid? plotId { get; set; }
+
 
 
 

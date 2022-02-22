@@ -51,7 +51,7 @@ namespace DocumentMicroservice.Models.ContractLease
         /// </summary>
         public Guid documentId { get; set; }
 
-        public Guid personId { get; set; }
+        
 
 
     }

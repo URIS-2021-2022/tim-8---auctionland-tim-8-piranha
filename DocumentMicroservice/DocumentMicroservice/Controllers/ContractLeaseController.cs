@@ -30,9 +30,9 @@ namespace DocumentMicroservice.Controllers
         private readonly ILoggerService logger;
         private readonly IServiceCall<BuyerDto> buyerService;
         private readonly IServiceCall<PersonDto> personService;
+        private readonly IServiceCall<PlotDto> plotService;
 
-
-        public ContractLeaseController(IContractLeaseRepository contractLeaseRepository, LinkGenerator linkGenerator, IMapper mapper, ContractLeaseValidators validator, ILoggerService logger, IServiceCall<BuyerDto> buyerService, IServiceCall<PersonDto> personService)
+        public ContractLeaseController(IContractLeaseRepository contractLeaseRepository, LinkGenerator linkGenerator, IMapper mapper, ContractLeaseValidators validator, ILoggerService logger, IServiceCall<BuyerDto> buyerService, IServiceCall<PersonDto> personService, IServiceCall<PlotDto> plotService)
         {
             this.contractLeaseRepository = contractLeaseRepository;
             this.linkGenerator = linkGenerator;
@@ -41,6 +41,7 @@ namespace DocumentMicroservice.Controllers
             this.logger = logger;
             this.buyerService = buyerService;
             this.personService = personService;
+            this.plotService = plotService;
         }
 
         /// <summary>
@@ -69,15 +70,17 @@ namespace DocumentMicroservice.Controllers
             {
                 ContractLeaseDto contractLeasestDto = mapper.Map<ContractLeaseDto>(cl);
 
-                if (cl.buyerId is not null && cl.personId is not null)
+                if (cl.buyerId is not null && cl.personId is not null && cl.plotId is not null)
                 {
                     var buyerDto = await buyerService.SendGetRequestAsync("");
                     var personDto = await personService.SendGetRequestAsync("");
+                    var plotDto = await plotService.SendGetRequestAsync("");
 
-                    if (buyerDto is not null && personDto is not null)
+                    if (buyerDto is not null && personDto is not null && plotDto is not null)
                     {
                         contractLeasestDto.buyer = buyerDto;
                         contractLeasestDto.person = personDto;
+                        contractLeasestDto.plot = plotDto;
                     }
                 }
                 contractLeasesDto.Add(contractLeasestDto);
@@ -108,15 +111,17 @@ namespace DocumentMicroservice.Controllers
             }
             ContractLeaseDto contractLeaseDto = mapper.Map<ContractLeaseDto>(contractLease);
 
-            if (contractLease.buyerId is not null && contractLease.personId is not null)
+            if (contractLease.buyerId is not null && contractLease.personId is not null && contractLease.plotId is not null)
             {
                 var buyerDto = await buyerService.SendGetRequestAsync("");
                 var personDto = await personService.SendGetRequestAsync("");
+                var plotDto = await plotService.SendGetRequestAsync("");
 
-                if (buyerDto is not null && personDto is not null)
+                if (buyerDto is not null && personDto is not null && plotDto is not null)
                 {
                     contractLeaseDto.buyer = buyerDto;
                     contractLeaseDto.person = personDto;
+                    contractLeaseDto.plot = plotDto;
                 }
             }
 

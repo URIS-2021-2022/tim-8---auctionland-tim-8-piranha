@@ -37,6 +37,7 @@ namespace BuyerMicroservice.Entities.Context
                new
                {
                    authorizedPersonID = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226"),
+                   boardNumbID = Guid.Parse("21200907-0d08-44f3-8506-dc807ca2215b"),
                    name = "Dimitrije",
                    surname = "Corlija",
                    personalDocNum = "8767834637274",
@@ -49,6 +50,7 @@ namespace BuyerMicroservice.Entities.Context
                {
 
                    authorizedPersonID = Guid.Parse("07af89f2-feee-4680-b489-9d0e31699588"),
+                   boardNumbID = Guid.Parse("21200907-0d08-44f3-8506-dc807ca2215b"),
                    name = "Marko",
                    surname = "Markovic",
                    personalDocNum = "8227834666274",

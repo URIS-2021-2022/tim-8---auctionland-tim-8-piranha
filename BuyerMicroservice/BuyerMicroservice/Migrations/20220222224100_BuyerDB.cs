@@ -8,22 +8,6 @@ namespace BuyerMicroservice.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "authorizedPerson",
-                columns: table => new
-                {
-                    authorizedPersonID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    personalDocNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    country = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_authorizedPerson", x => x.authorizedPersonID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "boardNumber",
                 columns: table => new
                 {
@@ -59,6 +43,30 @@ namespace BuyerMicroservice.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_priority", x => x.priorityID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "authorizedPerson",
+                columns: table => new
+                {
+                    authorizedPersonID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    personalDocNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    boardNumbID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    boardNumberID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_authorizedPerson", x => x.authorizedPersonID);
+                    table.ForeignKey(
+                        name: "FK_authorizedPerson_boardNumber_boardNumberID",
+                        column: x => x.boardNumberID,
+                        principalTable: "boardNumber",
+                        principalColumn: "boardNumberID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,11 +131,20 @@ namespace BuyerMicroservice.Migrations
 
             migrationBuilder.InsertData(
                 table: "authorizedPerson",
-                columns: new[] { "authorizedPersonID", "address", "country", "name", "personalDocNum", "surname" },
+                columns: new[] { "authorizedPersonID", "address", "boardNumbID", "boardNumberID", "country", "name", "personalDocNum", "surname" },
                 values: new object[,]
                 {
-                    { new Guid("93a08cc2-1d17-46e6-bd95-4fa70bb11226"), "Mira popare 11", "Srbija", "Dimitrije", "8767834637274", "Corlija" },
-                    { new Guid("07af89f2-feee-4680-b489-9d0e31699588"), "Bulevar Oslobodjenja 55", "Zrenjanin", "Marko", "8227834666274", "Markovic" }
+                    { new Guid("93a08cc2-1d17-46e6-bd95-4fa70bb11226"), "Mira popare 11", new Guid("21200907-0d08-44f3-8506-dc807ca2215b"), null, "Srbija", "Dimitrije", "8767834637274", "Corlija" },
+                    { new Guid("07af89f2-feee-4680-b489-9d0e31699588"), "Bulevar Oslobodjenja 55", new Guid("21200907-0d08-44f3-8506-dc807ca2215b"), null, "Zrenjanin", "Marko", "8227834666274", "Markovic" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "boardNumber",
+                columns: new[] { "boardNumberID", "number" },
+                values: new object[,]
+                {
+                    { new Guid("8d951bd9-497a-47ec-b1a7-c944492f4c8c"), 5 },
+                    { new Guid("2018f35a-f49b-462f-a1c9-a105f297864b"), 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -159,6 +176,11 @@ namespace BuyerMicroservice.Migrations
                 values: new object[] { new Guid("861f142c-4707-416d-ad14-7debbd2031ed"), "LegalEntity", "0074234876", null, "8765439744578", 1, "rosa@gmail.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "212693-2377", true, "12121212333", "Rosa", null, "061999999", "067662529", new Guid("784c7edd-c937-45e6-a493-f0b8dedab85f"), 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
+                name: "IX_authorizedPerson_boardNumberID",
+                table: "authorizedPerson",
+                column: "boardNumberID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AuthorizedPersonBuyer_buyersbuyerID",
                 table: "AuthorizedPersonBuyer",
                 column: "buyersbuyerID");
@@ -175,9 +197,6 @@ namespace BuyerMicroservice.Migrations
                 name: "AuthorizedPersonBuyer");
 
             migrationBuilder.DropTable(
-                name: "boardNumber");
-
-            migrationBuilder.DropTable(
                 name: "contactPerson");
 
             migrationBuilder.DropTable(
@@ -185,6 +204,9 @@ namespace BuyerMicroservice.Migrations
 
             migrationBuilder.DropTable(
                 name: "buyer");
+
+            migrationBuilder.DropTable(
+                name: "boardNumber");
 
             migrationBuilder.DropTable(
                 name: "priority");

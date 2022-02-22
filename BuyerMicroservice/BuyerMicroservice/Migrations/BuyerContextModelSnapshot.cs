@@ -43,6 +43,12 @@ namespace BuyerMicroservice.Migrations
                     b.Property<string>("address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("boardNumbID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("boardNumberID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("country")
                         .HasColumnType("nvarchar(max)");
 
@@ -57,6 +63,8 @@ namespace BuyerMicroservice.Migrations
 
                     b.HasKey("authorizedPersonID");
 
+                    b.HasIndex("boardNumberID");
+
                     b.ToTable("authorizedPerson");
 
                     b.HasData(
@@ -64,6 +72,7 @@ namespace BuyerMicroservice.Migrations
                         {
                             authorizedPersonID = new Guid("93a08cc2-1d17-46e6-bd95-4fa70bb11226"),
                             address = "Mira popare 11",
+                            boardNumbID = new Guid("21200907-0d08-44f3-8506-dc807ca2215b"),
                             country = "Srbija",
                             name = "Dimitrije",
                             personalDocNum = "8767834637274",
@@ -73,6 +82,7 @@ namespace BuyerMicroservice.Migrations
                         {
                             authorizedPersonID = new Guid("07af89f2-feee-4680-b489-9d0e31699588"),
                             address = "Bulevar Oslobodjenja 55",
+                            boardNumbID = new Guid("21200907-0d08-44f3-8506-dc807ca2215b"),
                             country = "Zrenjanin",
                             name = "Marko",
                             personalDocNum = "8227834666274",
@@ -308,6 +318,15 @@ namespace BuyerMicroservice.Migrations
                         .HasForeignKey("buyersbuyerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BuyerMicroservice.Entities.AuthorizedPerson", b =>
+                {
+                    b.HasOne("BuyerMicroservice.Entities.BoardNumber", "board")
+                        .WithMany()
+                        .HasForeignKey("boardNumberID");
+
+                    b.Navigation("board");
                 });
 
             modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>

@@ -57,6 +57,7 @@ namespace DocumentMicroservice.Models.ContractLease
 
         public PersonDto person { get; set; }
 
+        public PlotDto plot { get; set; }
 
 
     }
