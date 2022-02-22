@@ -15,7 +15,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5000"
+      "applicationUrl": "http://localhost:40003"
     },
     "AuctionMicroservice": {
       "commandName": "Project",
@@ -24,7 +24,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": "true",
-      "applicationUrl": "http://localhost:5000",
+      "applicationUrl": "http://localhost:40003",
       "jsWebView2Debugging": false
     },
     "Docker": {

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace AuctionMicroservice.Services
                     {
                         return default;
                     }
-                    await Logger.LogMessage(LogLevel.Information, "Communication with  microservice succeeded!", "Auction microservice", "SendGetRequestAsync");
+                    await logger.LogMessage(LogLevel.Information, "Communication with  microservice succeeded!", "Auction microservice", "SendGetRequestAsync");
                     return JsonConvert.DeserializeObject<List<T>>(content);
                 }
 
@@ -44,7 +45,7 @@ namespace AuctionMicroservice.Services
 
             }catch(Exception)
             {
-                 await Logger.LogMessage(LogLevel.Error, "Error while trying to communicate with microservice!", "Auction microservice", "SendGetRequestAsync");
+                 await logger.LogMessage(LogLevel.Error, "Error while trying to communicate with microservice!", "Auction microservice", "SendGetRequestAsync");
                 return default;
             }
         }

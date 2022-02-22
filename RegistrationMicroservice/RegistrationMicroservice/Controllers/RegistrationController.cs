@@ -96,7 +96,6 @@ namespace RegistrationMicroservice.Controllers
 
 
 
-            //return Ok(mapper.Map<List<RegistrationDto>>(registrations));
             await logger.LogMessage(LogLevel.Information, "Registration list successfully returned!", "Registration microservice", "GetRegistrationsAsync");
             return Ok(registrationDtos);
         }
@@ -148,7 +147,6 @@ namespace RegistrationMicroservice.Controllers
 
             await logger.LogMessage(LogLevel.Information, "Registration found and successfully returned!", "Plot microservice", "GetRegistrationByIdAsync");
             return Ok(registrationDto);
-            //return Ok(mapper.Map<RegistrationDto>(registration));
         }
 
 
