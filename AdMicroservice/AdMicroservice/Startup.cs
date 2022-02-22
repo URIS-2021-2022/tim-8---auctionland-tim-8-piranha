@@ -2,7 +2,9 @@ using AdMicroservice.Data;
 using AdMicroservice.Data.Ad;
 using AdMicroservice.Data.Journal;
 using AdMicroservice.Entities;
+using AdMicroservice.Models;
 using AdMicroservice.ServiceCalls;
+using ComplaintMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,6 +45,7 @@ namespace AdMicroservice
             services.AddScoped<IAdRepository, AdRepository>();
             services.AddScoped<IJournalRepository, JournalRepository>();
             services.AddScoped<ILoggerService, LoggerService>();
+            services.AddScoped<IServiceCall<PublicBiddingDto>, ServiceCall<PublicBiddingDto>>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AdMicroservice", Version = "v1" });

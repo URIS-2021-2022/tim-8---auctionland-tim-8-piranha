@@ -27,15 +27,18 @@ namespace AdMicroservice.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly ILoggerService Logger;
+        private readonly IServiceCall<PublicBiddingDto> publicBiddingService;
 
         public AdController(IAdRepository adRepository, LinkGenerator linkGenerator, IMapper mapper, 
-            IJournalRepository journalRepository, ILoggerService loggerService)
+            IJournalRepository journalRepository, ILoggerService loggerService,
+            IServiceCall<PublicBiddingDto> publicBiddingService)
         {
             this.adRepository = adRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.journalRepository = journalRepository;
             Logger = loggerService;
+            this.publicBiddingService = publicBiddingService;
         }
 
         /// <summary>
@@ -56,8 +59,27 @@ namespace AdMicroservice.Controllers
                 await Logger.LogMessage(LogLevel.Warning, "Ads list is empty!", "Ad microservice", "GetAds");
                 return NoContent();
             }
+
+            List<AdDto> adDtos = new List<AdDto>();
+
+            foreach (var ad in ads)
+            {
+                AdDto adDto = mapper.Map<AdDto>(ad);
+
+                if (ad.PublicBiddingId is not null)
+                {
+                    var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("");
+
+                    if (publicBiddingDto is not null)
+                    {
+                        adDto.PublicBidding = publicBiddingDto;
+                    }
+                }
+                adDtos.Add(adDto);
+            }
+
             await Logger.LogMessage(LogLevel.Information, "Ads list successfully returned!", "Ad microservice", "GetAds");
-            return Ok(mapper.Map<List<AdDto>>(ads));
+            return Ok(adDtos);
         }
 
         /// <summary>
@@ -78,8 +100,21 @@ namespace AdMicroservice.Controllers
                 await Logger.LogMessage(LogLevel.Warning, "Ad not found!", "Ad microservice", "GetAdById");
                 return NotFound();
             }
+
+            AdDto adDto = mapper.Map<AdDto>(ad);
+
+            if (ad.PublicBiddingId is not null)
+            {
+                var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("");
+
+                if (publicBiddingDto is not null)
+                {
+                    adDto.PublicBidding = publicBiddingDto;
+                }
+            }
+
             await Logger.LogMessage(LogLevel.Information, "Ad found and successfully returned!", "Ad microservice", "GetAdById");
-            return Ok(mapper.Map<AdDto>(ad));
+            return Ok(adDto);
         }
 
         /// <summary>

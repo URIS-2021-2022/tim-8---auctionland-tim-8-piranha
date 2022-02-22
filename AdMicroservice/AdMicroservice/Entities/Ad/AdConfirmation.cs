@@ -22,5 +22,9 @@ namespace AdMicroservice.Entities.Ad
         /// ID sluzbenog lista
         /// </summary>
         public Guid JournalId { get; set; }
+        /// <summary>
+        /// Id javnog nadmetanja
+        /// </summary>
+        public Guid PublicBiddingId { get; set; }
     }
 }

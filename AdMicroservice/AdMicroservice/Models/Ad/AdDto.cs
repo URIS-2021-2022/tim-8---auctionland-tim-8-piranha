@@ -19,5 +19,9 @@ namespace AdMicroservice.Models
         /// Sluzbeni list
         /// </summary>
         public JournalDto Journal { get; set; }
+        /// <summary>
+        /// Javnog nadmetanje
+        /// </summary>
+        public PublicBiddingDto PublicBidding { get; set; }
     }
 }
