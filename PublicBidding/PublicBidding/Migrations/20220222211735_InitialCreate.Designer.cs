@@ -10,7 +10,7 @@ using PublicBidding.Entities;
 namespace PublicBidding.Migrations
 {
     [DbContext(typeof(PublicBiddingContext))]
-    [Migration("20220222193216_InitialCreate")]
+    [Migration("20220222211735_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

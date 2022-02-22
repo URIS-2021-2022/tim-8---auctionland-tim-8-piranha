@@ -26,7 +26,7 @@
             <response code="200">Vraća traženo status javno nadmetanje</response>
             <response code="404">Nije pronađeno javno nadmetanje sa unetim ID-em</response>
         </member>
-        <member name="M:PublicBidding.Controllers.PublicBiddingController.GetPublicBiddingsById(System.Collections.Generic.List{System.String})">
+        <member name="M:PublicBidding.Controllers.PublicBiddingController.GetPublicBiddingsById(System.Guid)">
             <summary>
             Vraća listu javnih nadmetanja za druge servise na osnovu prosleđene liste ID-eva
             </summary>
@@ -69,7 +69,6 @@
              Modifikacija javnog nadmetanja
              </summary>
              <param name="publicBidding">Model javnog nadmetanja</param>
-             <param name="publicBiddingId">Id javnog nadmetanja</param>
              <returns>Potvrda o izmeni javnog nadmetanja</returns>
              <response code="200">Izmenjeno javno nadmetanje</response>
              <response code="404">Nije pronađeno javno nadmetanje sa unetim ID-em</response>

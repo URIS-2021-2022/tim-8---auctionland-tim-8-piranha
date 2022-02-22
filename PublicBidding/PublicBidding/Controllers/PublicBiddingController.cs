@@ -116,7 +116,7 @@ namespace PublicBidding.Controllers
         public async Task<ActionResult<PublicBiddingForOtherServices>> GetPublicBiddingsById(Guid publicBiddingId)
         {
 
-            var publicBiddingForOtherServices = mapper.Map<PublicBiddingForOtherServices>(await publicBiddingRepository.GetPublicBiddingById(publicBidding));
+            var publicBiddingForOtherServices = mapper.Map<PublicBiddingForOtherServices>(await publicBiddingRepository.GetPublicBiddingById(publicBiddingId));
 
 
             if (publicBiddingForOtherServices is null)
