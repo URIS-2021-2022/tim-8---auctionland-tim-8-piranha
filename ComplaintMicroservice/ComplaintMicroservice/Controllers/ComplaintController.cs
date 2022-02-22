@@ -32,12 +32,13 @@ namespace ComplaintMicroservice.Controllers
         private readonly IMapper mapper;
         private readonly ILoggerService Logger;
         private readonly IServiceCall<PublicBiddingDto> publicBiddingService;
+        private readonly IServiceCall<BuyerDto> BuyerService;
 
         public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, 
             IMapper mapper, IComplaintTypeRepository complaintTypeRepository, 
             IComplaintStatusRepository complaintStatusRepository, 
             IComplaintEventRepository complaintEventRepository, ILoggerService loggerService, 
-            IServiceCall<PublicBiddingDto> publicBiddingService)
+            IServiceCall<PublicBiddingDto> publicBiddingService, IServiceCall<BuyerDto> BuyerService)
         {
             this.complaintRepository = complaintRepository;
             this.linkGenerator = linkGenerator;
@@ -47,6 +48,7 @@ namespace ComplaintMicroservice.Controllers
             this.complaintEventRepository = complaintEventRepository;
             Logger = loggerService;
             this.publicBiddingService = publicBiddingService;
+            this.BuyerService = BuyerService;
         }
 
         /// <summary>
@@ -83,11 +85,22 @@ namespace ComplaintMicroservice.Controllers
                         complaintDto.PublicBidding = publicBiddingDto;
                     }
                 }
+
+                if(complaint.BuyerId is not null)
+                {
+                    var buyerDto = await BuyerService.SendGetRequestAsync("");
+
+                    if (buyerDto is not null)
+                    {
+                        complaintDto.Buyer = buyerDto;
+                    }
+                }
+
                 complaintDtos.Add(complaintDto);
             }
 
             await Logger.LogMessage(LogLevel.Information, "Complaints list successfully returned!", "Complaint microservice", "GetComplaints");
-            return Ok(mapper.Map<List<ComplaintDto>>(complaints));
+            return Ok(complaintDtos);
         }
 
         /// <summary>
@@ -122,7 +135,7 @@ namespace ComplaintMicroservice.Controllers
             }
 
             await Logger.LogMessage(LogLevel.Information, "Complaint found and successfully returned!", "Complaint microservice", "GetComplaintById");
-            return Ok(mapper.Map<ComplaintDto>(com));
+            return Ok(complaintDto);
         }
 
         /// <summary>

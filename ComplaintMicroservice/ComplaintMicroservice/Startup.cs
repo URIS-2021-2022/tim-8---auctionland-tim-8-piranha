@@ -48,6 +48,7 @@ namespace ComplaintMicroservice
             services.AddScoped<IComplaintRepository, ComplaintRepository>();
             services.AddScoped<ILoggerService, LoggerService>();
             services.AddScoped<IServiceCall<PublicBiddingDto>, ServiceCall<PublicBiddingDto>>();
+            services.AddScoped<IServiceCall<BuyerDto>, ServiceCall<BuyerDto>>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ComplaintMicroservice", Version = "v1" });

@@ -50,5 +50,9 @@ namespace ComplaintMicroservice.Entities.Complaint
         /// Id javnog nadmetanja
         /// </summary>
         public Guid PublicBiddingId { get; set; }
+        /// <summary>
+        /// Id kupca
+        /// </summary>
+        public Guid BuyerId { get; set; }
     }
 }

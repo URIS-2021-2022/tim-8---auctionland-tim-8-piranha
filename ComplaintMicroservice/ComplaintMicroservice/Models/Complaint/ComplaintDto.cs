@@ -47,8 +47,12 @@ namespace ComplaintMicroservice.Models.Complaint
         /// </summary>
         public ComplaintEventDto ComplaintEvent { get; set; }
         /// <summary>
-        /// Javnog nadmetanje
+        /// Javno nadmetanje
         /// </summary>
         public PublicBiddingDto PublicBidding { get; set; }
+        /// <summary>
+        /// Kupca
+        /// </summary>
+        public BuyerDto Buyer { get; set; }
     }
 }
