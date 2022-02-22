@@ -48,6 +48,7 @@ namespace DocumentMicroservice
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IDocumentStatusRepository, DocumentStatusRepository>();
             services.AddScoped<IGuaranteeTypeRepository, GuaranteeTypeRepository>();
+            services.AddScoped<IContractLeaseRepository, ContractLeaseRepository>();
 
             //services.AddScoped<IDocumentStatusRepository, PlotCadastralMunicipalityRepository>();
             //-- svaki put kada stigne novi rikvest od klijenta uvek se pravi nova instanca(to je vezano za parametar konstruktora u kontroleru)

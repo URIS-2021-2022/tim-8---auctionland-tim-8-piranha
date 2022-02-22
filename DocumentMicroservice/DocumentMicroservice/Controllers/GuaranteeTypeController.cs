@@ -176,8 +176,8 @@ namespace DocumentMicroservice.Controllers
             {
                 try
                 {
-                GuaranteeType docStatus =await  GuaranteeTypeRepository.GetGuaranteeTypeByIdAsync(guaranteeTypeId);
-                    if (docStatus == null)
+                GuaranteeType guaranteeType = await  GuaranteeTypeRepository.GetGuaranteeTypeByIdAsync(guaranteeTypeId);
+                    if (guaranteeType == null)
                     {
                         return NotFound();
                     }

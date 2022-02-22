@@ -38,10 +38,7 @@ namespace DocumentMicroservice.Data.Repositories
         {
             return await Context.GuaranteeTypes.Where(o => o.type == null || guaranteeType == null).ToListAsync();
         }
-        public GuaranteeType GetGuaranteeTypeById(Guid guaranteeTypeId)
-        {
-            return Context.GuaranteeTypes.FirstOrDefault(o => o.guaranteeTypeID == guaranteeTypeId);
-        }
+        
         public async Task<GuaranteeType> GetGuaranteeTypeByIdAsync(Guid guaranteeTypeId)
         {
             return await Context.GuaranteeTypes.FirstOrDefaultAsync(o => o.guaranteeTypeID == guaranteeTypeId);

@@ -13,7 +13,7 @@ namespace DocumentMicroservice.Entities
         /// ID dokumenta
         /// Example:07af89f2-feee-4680-b489-9d0e31699588
         /// </summary>
-        [Key]
+      
         public Guid documentId { get; set; }
 
         /// <summary>
@@ -40,8 +40,9 @@ namespace DocumentMicroservice.Entities
         /// <summary>
         /// Document status - Status dokumenta 
         /// </summary>
-        [ForeignKey("DocumentStatus")]
+        
         public Guid docStatusID { get; set; }
+
         
     }
 }

@@ -44,5 +44,11 @@ namespace DocumentMicroservice.Entities
         public Guid docStatusID { get; set; }
         public DocumentStatus documentStatus { get; set; }
 
+        /// <summary>
+        /// Buyer ID. Buyer ID from Buyer microservice.
+        /// </summary>
+        public Guid? auctionId { get; set; }
+
+        public Guid? userId { get; set; }
     }
 }

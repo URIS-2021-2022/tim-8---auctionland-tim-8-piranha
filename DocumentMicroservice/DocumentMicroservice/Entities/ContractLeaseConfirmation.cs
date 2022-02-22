@@ -17,7 +17,7 @@ namespace DocumentMicroservice.Entities
         /// <summary>
         /// Maturities - Rokovi dospeća
         /// </summary>
-        public int[] maturities { get; set; }
+        public ICollection<int> maturities { get; set; }
 
 
         /// <summary>

@@ -40,5 +40,15 @@ namespace DocumentMicroservice.Models.Document
         /// </summary>
         public Guid DocStatusID { get; set; }
 
+        /// <summary>
+        /// Buyer DTO.
+        /// </summary>
+        public AuctionDto auction { get; set; }
+
+        /// <summary>
+        /// User DTO
+        /// </summary>
+        public UserDto user { get; set; }
+
     }
 }

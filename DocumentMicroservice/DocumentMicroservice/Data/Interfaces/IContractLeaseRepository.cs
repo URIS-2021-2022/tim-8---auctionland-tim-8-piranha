@@ -10,7 +10,7 @@ namespace DocumentMicroservice.Data.Interfaces
     {
         Task<List<ContractLease>> GetContractLeaseAsync(string serialNumber = null);
 
-        Task<ContractLease> GetContractLeaseByIdAsync(Guid documentId);
+        Task<ContractLease> GetContractLeaseByIdAsync(Guid contractLeaseID);
 
         Task<ContractLeaseConfirmation> CreateContractLeaseAsync(ContractLease contractLease);
 

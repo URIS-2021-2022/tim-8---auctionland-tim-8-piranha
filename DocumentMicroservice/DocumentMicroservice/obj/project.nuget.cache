@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TPZLq9gM9x188b51BZ/ReJBCqP7XydNmW4Nw0GMxw+Cvfw+QCq7Au30fKO6xOGP/OenA2SHY93g4vstrQiPrNg==",
+  "dgSpecHash": "NL3XkLc0yP3Wz8HLXmn8vBxzfPMi4meiByjp50f8+Xwy7DBGImWeWinQtdvG2sNlM9XfPlYFjx2eyauMV2zxpw==",
   "success": true,
   "projectFilePath": "C:\\Users\\PC\\source\\repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj",
   "expectedPackageFiles": [
@@ -43,6 +43,8 @@
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\nlog\\4.7.11\\nlog.4.7.11.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\nlog.extensions.logging\\1.7.4\\nlog.extensions.logging.1.7.4.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",

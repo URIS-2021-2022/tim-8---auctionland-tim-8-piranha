@@ -19,7 +19,7 @@ namespace DocumentMicroservice.Entities
         /// <summary>
         /// Maturities - Rokovi dospeća
         /// </summary>
-        public int[] maturities { get; set; }
+       // public ICollection<int> maturities { get; set; }
 
        
         /// <summary>
@@ -68,11 +68,18 @@ namespace DocumentMicroservice.Entities
 
         public Document document { get; set; }
 
+        /// <summary>
+        /// Buyer ID. Buyer ID from Buyer microservice.
+        /// </summary>
+        public Guid? buyerId { get; set; }
+
+        public Guid? personId { get; set; }
 
 
 
 
-        
+
+
 
 
 

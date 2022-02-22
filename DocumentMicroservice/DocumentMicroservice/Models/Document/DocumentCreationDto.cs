@@ -38,7 +38,17 @@ namespace DocumentMicroservice.Models.Document
         /// Document status - Status dokumenta 
         /// </summary>
         public Guid DocStatusID { get; set; }
-      
+
+        /// <summary>
+        /// Buyer ID.
+        /// </summary>
+        public Guid? auctionId { get; set; }
+
+        /// <summary>
+        /// User ID.
+        /// </summary>
+        public Guid? userId { get; set; }
+
 
 
     }

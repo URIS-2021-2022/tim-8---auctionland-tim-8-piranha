@@ -10,60 +10,63 @@ namespace DocumentMicroservice.Models.ContractLease
         /// <summary>
         /// ContractLeaseID - ID ugovora o zakupu
         /// </summary>
-        public Guid ContractLeaseID { get; set; }
+        public Guid contractLeaseID { get; set; }
 
 
         /// <summary>
         /// Maturities - Rokovi dospeća
         /// </summary>
-        public int[] Maturities { get; set; }
+       // public ICollection<int> maturities { get; set; }
 
 
         /// <summary>
         /// SerialNumber - Zavodni broj
         /// </summary>
-        public string SerialNumber { get; set; }
+        public string serialNumber { get; set; }
 
 
         /// <summary>
         /// SubmissionDate - Datum zavodjenja
         /// </summary>
-        public DateTime? SubmissionDate { get; set; }
+        public DateTime? submissionDate { get; set; }
 
-        //ministar
-        //public PersonalityContract Minister { get; set; }
-
-        //Lice
-        //public BuyerContract Person { get; set; }
+        
 
         //rok za vracanje zemljista
         /// <summary>
         /// DeadlineLandRestitution - Rok za vracanje zemljista
         /// </summary>
-        public DateTime? DeadlineLandRestitution { get; set; }
+        public DateTime? deadlineLandRestitution { get; set; }
 
 
         /// <summary>
         /// Place Of Signing - Mesto potpisivanja 
         /// </summary>
-        public string PlaceOfSigning { get; set; }
+        public string placeOfSigning { get; set; }
 
 
         /// <summary>
         /// Date Of Signing - Datum potpisivanja
         /// </summary>
-        public DateTime DateOfSigning { get; set; }
+        public DateTime dateOfSigning { get; set; }
 
 
         /// <summary>
         /// GuaranteeTypeID - ID tipa garancije
         /// </summary>
-        public Guid GuaranteeTypeID { get; set; }
+        public Guid guaranteeTypeID { get; set; }
 
         /// <summary>
         /// DocumentID - ID dokumenta
         /// </summary>
-        public Guid DocumentID { get; set; }
+        public Guid documentID { get; set; }
+
+        /// <summary>
+        /// Buyer ID.
+        /// </summary>
+        public Guid? buyerId { get; set; }
+
+        public Guid? personId { get; set; }
 
     }
 }

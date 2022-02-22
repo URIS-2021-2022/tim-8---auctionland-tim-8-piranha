@@ -4,14 +4,16 @@ using DocumentMicroservice.Entities.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DocumentMicroservice.Migrations
 {
     [DbContext(typeof(DocumentContext))]
-    partial class DocumentContextModelSnapshot : ModelSnapshot
+    [Migration("20220222130134_docDB")]
+    partial class docDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

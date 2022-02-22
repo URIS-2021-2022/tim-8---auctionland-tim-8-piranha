@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using DocumentMicroservice.Data.Interfaces;
 using DocumentMicroservice.Entities;
+using DocumentMicroservice.Models;
 using DocumentMicroservice.Models.Document;
+using DocumentMicroservice.ServiceCalls;
 using DocumentMicroservice.Validators;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +24,24 @@ namespace DocumentMicroservice.Controllers
 
     public class DocumentController : ControllerBase
     {
-        private readonly IDocumentRepository DocumentRepository;
-        private readonly LinkGenerator LinkGeneration;
-        private readonly IMapper Mapper;
+        private readonly IDocumentRepository documentRepository;
+        private readonly LinkGenerator linkGenerator;
+        private readonly IMapper mapper;
         private readonly DocumentValidators validator;
+        private readonly ILoggerService logger;
+        private readonly IServiceCall<AuctionDto> auctionService;
+        private readonly IServiceCall<UserDto> userService;
 
-        public DocumentController(IDocumentRepository documentRepository, LinkGenerator linkGeneration, IMapper mapper, DocumentValidators validator)
+
+        public DocumentController(IDocumentRepository documentRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentValidators validator, ILoggerService logger, IServiceCall<AuctionDto> auctionService, IServiceCall<UserDto> userService)
         {
-            DocumentRepository = documentRepository;
-            LinkGeneration = linkGeneration;
-            Mapper = mapper;
+            this.documentRepository = documentRepository;
+            this.linkGenerator = linkGenerator;
+            this.mapper = mapper;
             this.validator = validator;
+            this.logger = logger;
+            this.auctionService = auctionService;
+            this.userService = userService;
         }
 
         /// <summary>
@@ -46,14 +56,38 @@ namespace DocumentMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult<List<DocumentDto>>> GetDocumentAsync(string document)
         {
-            List<Document> documentList = await DocumentRepository.GetDocumentAsync(document);
+            List<Document> documentList = await documentRepository.GetDocumentAsync(document);
 
             if (documentList == null || documentList.Count == 0)
             {
+                await logger.LogMessage(LogLevel.Warning, "Document list is empty!", "Document microservice", "GetDocumentAsync");
                 return NoContent();
             }
 
-            return Ok(Mapper.Map<List<DocumentDto>>(documentList));
+            List<DocumentDto> documentsDto = new List<DocumentDto>();
+
+            foreach (var doc in documentList)
+            {
+                DocumentDto documentDto = mapper.Map<DocumentDto>(doc);
+
+                if (doc.auctionId is not null && doc.userId is not null)
+                {
+                    var auctionDto = await auctionService.SendGetRequestAsync("");
+                    var userDto = await userService.SendGetRequestAsync("");
+
+                    if (auctionDto is not null && userDto is not null)
+                    {
+                        documentDto.auction = auctionDto;
+                        documentDto.user = userDto;
+                    }
+                }
+                documentsDto.Add(documentDto);
+            }
+
+            await logger.LogMessage(LogLevel.Information, "Document list successfully returned!", "Document microservice", "GetDocumentsAsync");
+            return Ok(documentsDto);
+
+            /* return Ok(mapper.Map<List<DocumentDto>>(documentList));*/
         }
 
         /// <summary>
@@ -68,13 +102,32 @@ namespace DocumentMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<DocumentDto>> GetDocumentByIdAsync(Guid DocumentId)
         {
-            Document doc = await DocumentRepository.GetDocumentByIdAsync(DocumentId);
+            Document doc = await documentRepository.GetDocumentByIdAsync(DocumentId);
 
             if (doc == null)
             {
+                await logger.LogMessage(LogLevel.Warning, "Document not found!", "Document microservice", "GetDocumentByIdAsync");
                 return NotFound();
             }
-            return Ok(Mapper.Map<DocumentDto>(doc));
+
+            DocumentDto documentDto = mapper.Map<DocumentDto>(doc);
+
+            if (doc.auctionId is not null && doc.userId is not null )
+            {
+                var auctionDto = await auctionService.SendGetRequestAsync("");
+                var userDto = await userService.SendGetRequestAsync("");
+
+                if (auctionDto is not null && userDto is not null)
+                {
+                    documentDto.auction = auctionDto;
+                    documentDto.user = userDto;
+                }
+            }
+
+            await logger.LogMessage(LogLevel.Information, "Document found and successfully returned!", "Document microservice", "GetDocumentByIdAsync");
+            return Ok(documentDto);
+
+            //return Ok(mapper.Map<DocumentDto>(doc));
         }
 
         /// <summary>
@@ -103,22 +156,28 @@ namespace DocumentMicroservice.Controllers
         {
             try
             {
-                Document doc = Mapper.Map<Document>(document);
+                Document doc = mapper.Map<Document>(document);
 
                 validator.ValidateAndThrow(doc);
 
 
-                DocumentConfirmation confirmation = await DocumentRepository.CreateDocumentAsync(doc);
-                await DocumentRepository.SaveChangesAsync();
+                DocumentConfirmation confirmation = await documentRepository.CreateDocumentAsync(doc);
+                await documentRepository.SaveChangesAsync();
 
                 
-               string uri = LinkGeneration.GetPathByAction("GetDocumentById", "Document", new { documentId = confirmation.documentId });
+               string uri = linkGenerator.GetPathByAction("GetDocumentById", "Document", new { documentId = confirmation.documentId });
                 //LinkGenerator --> nalazi putanju resu (naziv akcije koja se radi, naziv kontrollera bez sufiksa kontroller, new-> nesto sto jedinstveno identifikuje nas resur koji trenutno trazimo)
-                return Created(uri, Mapper.Map<DocumentConfirmationDto>(confirmation));
+                return Created(uri, mapper.Map<DocumentConfirmationDto>(confirmation));
             }
-            catch (Exception e)
+            catch (ValidationException ve)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                await logger.LogMessage(LogLevel.Error, "Validation for document object failed!", "Document microservice", "CreateDocumentAsync");
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            }
+            catch ( Exception ex)
+            {
+                await logger.LogMessage(LogLevel.Error, "Document object creation failed!", "Document microservice", "CreateDocumentAsync");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -139,26 +198,33 @@ namespace DocumentMicroservice.Controllers
         {
             try
             {
-                Document existingDocument = await DocumentRepository.GetDocumentByIdAsync(document.DocumentId);
+                Document existingDocument = await documentRepository.GetDocumentByIdAsync(document.DocumentId);
 
                 if (existingDocument == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Document object not found!", "Document microservice", "UpdateDocumentAsync");
                     return NotFound();
                 }
 
-                Document doc = Mapper.Map<Document>(document);
+                Document doc = mapper.Map<Document>(document);
 
                 validator.ValidateAndThrow(doc);
 
-                Mapper.Map(doc, existingDocument);
-                await DocumentRepository.SaveChangesAsync();
+                mapper.Map(doc, existingDocument);
+                await documentRepository.SaveChangesAsync();
 
-                return Ok(Mapper.Map<DocumentDto>(existingDocument));
+                await logger.LogMessage(LogLevel.Information, "Document object updated successfully!", "Document microservice", "UpdateDocumentAsync");
+                return Ok(mapper.Map<DocumentDto>(existingDocument));
 
-            }
-            catch (Exception)
+            }catch(ValidationException ve)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error while updating document object");
+                await logger.LogMessage(LogLevel.Error, "Validation for document object failed!", "Document microservice", "UpdateDocumentAsync");
+                return StatusCode(StatusCodes.Status400BadRequest, ve.Errors);
+            }
+            catch (Exception ex)
+            {
+                await logger.LogMessage(LogLevel.Error, "Document object updating failed!", "Document microservice", "UpdateDocumentAsync");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -178,20 +244,24 @@ namespace DocumentMicroservice.Controllers
         {
             try
             {
-                Document doc = await DocumentRepository.GetDocumentByIdAsync(documentId);
+                Document doc = await documentRepository.GetDocumentByIdAsync(documentId);
                 if (doc == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Document object not found!", "Document microservice", "DeleteDocumentAsync");
                     return NotFound();
                 }
 
-                await DocumentRepository.DeleteDocumentAsync(documentId);
-                 await DocumentRepository.SaveChangesAsync();
+                await documentRepository.DeleteDocumentAsync(documentId);
+                 await documentRepository.SaveChangesAsync();
+
+                await logger.LogMessage(LogLevel.Information, "Document object deleted successfully!", "Document microservice", "DeleteDocumentAsync");
                 return NoContent(); // Successful deletion -- sve je okej proslo ali ne vraca nikakav sadrzaj--> iz familije je 200
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                await logger.LogMessage(LogLevel.Error, "Document object deletion failed!", "Document microservice", "DeleteDocumentAsync");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
         /// <summary>
@@ -200,9 +270,11 @@ namespace DocumentMicroservice.Controllers
         /// <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetDocumentOptions()
+        public async Task<IActionResult> GetDocumentOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Document microservice", "GetDocumentOptions");
+
             return Ok();
         }
 

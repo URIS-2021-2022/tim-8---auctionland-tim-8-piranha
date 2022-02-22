@@ -12,22 +12,23 @@ namespace DocumentMicroservice.Validators
 
         public ContractLeaseValidators()
         {
-            RuleFor(contractLease => contractLease.maturities)
+           /* RuleFor(contractLease => contractLease.maturities)
                 .NotEmpty()
                 .NotNull();
-            // .Matches("^[0-9]+(/[0-9]+)*$");
+            // .Matches("^[0-9]+(/[0-9]+)*$");*/
 
-           
+
             RuleFor(contractLease => contractLease.serialNumber)
                 .NotEmpty()
-                .NotNull()
-                .Matches("^[a - zA - Z0 - 9] *$");
+                .NotNull();
 
-            
+
+
+
                 RuleFor(contractLease => contractLease.placeOfSigning)
                 .NotEmpty()
-                .NotNull()
-                .Matches("^[a - zA - Z0 - 9] *$");
+                .NotNull();
+                
 
 
         }
