@@ -78,9 +78,10 @@ namespace ComplaintMicroservice.Controllers
 
                 if(complaint.PublicBiddingId is not null)
                 {
-                    var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("");
-
-                    if(publicBiddingDto is not null)
+#pragma warning disable S1075
+                    var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("http://localhost:40010");
+#pragma warning restore S1075
+                    if (publicBiddingDto is not null)
                     {
                         complaintDto.PublicBidding = publicBiddingDto;
                     }
@@ -88,8 +89,9 @@ namespace ComplaintMicroservice.Controllers
 
                 if(complaint.BuyerId is not null)
                 {
-                    var buyerDto = await BuyerService.SendGetRequestAsync("");
-
+#pragma warning disable S1075
+                    var buyerDto = await BuyerService.SendGetRequestAsync("http://localhost:40004");
+#pragma warning restore S1075
                     if (buyerDto is not null)
                     {
                         complaintDto.Buyer = buyerDto;
@@ -126,11 +128,19 @@ namespace ComplaintMicroservice.Controllers
 
             if(com.PublicBiddingId is not null)
             {
-                var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("");
-
+#pragma warning disable S1075
+                var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("http://localhost:40010");
+#pragma warning restore S1075
                 if (publicBiddingDto is not null)
                 {
                     complaintDto.PublicBidding = publicBiddingDto;
+                }
+#pragma warning disable S1075
+                var buyerDto = await BuyerService.SendGetRequestAsync("http://localhost:40004");
+#pragma warning restore S1075
+                if (buyerDto is not null)
+                {
+                    complaintDto.Buyer = buyerDto;
                 }
             }
 
