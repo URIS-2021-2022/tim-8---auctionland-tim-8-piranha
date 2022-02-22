@@ -68,7 +68,7 @@ namespace AdMicroservice.Controllers
 
                 if (ad.PublicBiddingId is not null)
                 {
-                    var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("");
+                    var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("http://localhost:40010");
 
                     if (publicBiddingDto is not null)
                     {
@@ -105,7 +105,7 @@ namespace AdMicroservice.Controllers
 
             if (ad.PublicBiddingId is not null)
             {
-                var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("");
+                var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("http://localhost:40010");
 
                 if (publicBiddingDto is not null)
                 {
