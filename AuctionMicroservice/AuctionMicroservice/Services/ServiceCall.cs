@@ -9,12 +9,12 @@ namespace AuctionMicroservice.Services
 {
     public class ServiceCall<T> : IService<T>
     {
-        //private readonly ILoggerService logger;
+        private readonly ILoggerService logger;
 
-        //public ServiceCall(ILoggerService logger)
-        //{
-        //    this.logger = logger;
-        //}
+        public ServiceCall(ILoggerService logger)
+        {
+            this.logger = logger;
+        }
         public async Task<List<T>> SendGetRequestAsync(string url)
         {
             try
@@ -35,7 +35,7 @@ namespace AuctionMicroservice.Services
                     {
                         return default;
                     }
-
+                    await Logger.LogMessage(LogLevel.Information, "Communication with  microservice succeeded!", "Auction microservice", "SendGetRequestAsync");
                     return JsonConvert.DeserializeObject<List<T>>(content);
                 }
 
@@ -44,6 +44,7 @@ namespace AuctionMicroservice.Services
 
             }catch(Exception)
             {
+                 await Logger.LogMessage(LogLevel.Error, "Error while trying to communicate with microservice!", "Auction microservice", "SendGetRequestAsync");
                 return default;
             }
         }

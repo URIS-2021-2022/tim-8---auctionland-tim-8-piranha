@@ -35,7 +35,6 @@ namespace AuctionMicroservice
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -126,12 +125,7 @@ namespace AuctionMicroservice
 
 
 
-            //services.AddDbContext<DocumentationIndividualContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuctionDB")));
-            //services.AddScoped<IDocumentationIndividualRepository, DocumentationIndividualRepository>();
-
-
-            //services.AddDbContext<DocumentationLegalEntityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuctionDB")));
-            //services.AddScoped<IDocumentationLegalEntityRepository, DocumentationLegalEntityRepository>();
+            
 
             services.AddDbContext<AuctionContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuctionDB")));
             services.AddScoped<IAuctionRepository, AuctionRepository>();
@@ -149,7 +143,7 @@ namespace AuctionMicroservice
 
 
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
