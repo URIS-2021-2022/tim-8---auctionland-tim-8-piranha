@@ -11,27 +11,26 @@ namespace RegistrationMicroservice.Models
     public class BuyerDto
     {
         #region
+       
         /// <summary>
-        /// Buyer ID
-        /// </summary>
-        //public Guid BuyerId { get; set; }
-        /// <summary>
-        /// Surface bought by buyer
+        /// Buyer name
         /// </summary>
         public string BuyerName { get; set; }
         /// <summary>
-        /// Restriction start
+        /// Buyer address
         /// </summary>
         public string BuyerAddress { get; set; }
         /// <summary>
-        /// Restriciton period
+        /// Buyer phone number
         /// </summary>
         public string BuyerPhoneNumber { get; set; }
         /// <summary>
-        /// Restriction end
+        /// Buyer account number
         /// </summary>
         public string BuyerAccountNumber { get; set; }
-
+        /// <summary>
+        /// Buyer email
+        /// </summary>
         public string BuyerEmail { get; set; }
 
         

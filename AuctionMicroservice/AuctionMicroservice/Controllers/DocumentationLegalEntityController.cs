@@ -1,6 +1,7 @@
 ﻿using AuctionMicroservice.Data;
 using AuctionMicroservice.Entities;
 using AuctionMicroservice.Models;
+using AuctionMicroservice.Services;
 using AuctionMicroservice.Validatiors;
 using AutoMapper;
 using FluentValidation;
@@ -25,9 +26,9 @@ namespace AuctionMicroservice.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly DocumentationLegalEntityValidator validator;
-        private readonly ILogger<DocumentationLegalEntityController> logger;
+        private readonly ILoggerService logger;
 
-        public DocumentationLegalEntityController(IDocumentationLegalEntityRepository documentationLegalEntityRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentationLegalEntityValidator validator, ILogger<DocumentationLegalEntityController> logger)
+        public DocumentationLegalEntityController(IDocumentationLegalEntityRepository documentationLegalEntityRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentationLegalEntityValidator validator, ILoggerService logger)
         {
             this.documentationLegalEntityRepository = documentationLegalEntityRepository;
             this.linkGenerator = linkGenerator;
@@ -52,10 +53,10 @@ namespace AuctionMicroservice.Controllers
 
             if (documentations == null || documentations.Count == 0)
             {
-                //logger.LogWarning("No legal entity documentations found");
+                await logger.LogMessage(LogLevel.Information, "No legal entity documentations found", "Auction microservice", "GetDocumentationLegalEntitesAsync", null);
                 return NoContent();
             }
-            //logger.LogInformation("Getting all the legal entity documentations");
+            await logger.LogMessage(LogLevel.Information, "Getting all legal entity documentations", "Auction microservice", "GetDocumentationLegalEntitesAsync", null);
             return Ok(mapper.Map<List<DocumentationLegalEntityDto>>(documentations));
         }
 
@@ -77,10 +78,10 @@ namespace AuctionMicroservice.Controllers
 
             if (documentation == null)
             {
-                //logger.LogWarning($"Documentations with ID {DocumentationLegalEntityId} not found");
+                await logger.LogMessage(LogLevel.Information, "Legal entity documentations not found", "Auction microservice", "GetDocumentationByIdAsync", null);
                 return NotFound();
             }
-            //logger.LogInformation("Getting legal entity documentation by ID");
+            await logger.LogMessage(LogLevel.Information, "Getting legal entity documentation by ID", "Auction microservice", "GetDocumentationByIdAsync", null);
             return Ok(mapper.Map<DocumentationLegalEntityDto>(documentation));
         }
 
@@ -100,10 +101,10 @@ namespace AuctionMicroservice.Controllers
 
             if (documentations == null || documentations.Count == 0)
             {
-                //logger.LogWarning($"Documentations with ID {AuctionId} not found");
+                await logger.LogMessage(LogLevel.Information, "Legal entity documentation not found", "Auction microservice", "GetDocumentationLegalEntitesByAuctionAsync", null);
                 return NoContent();
             }
-            //logger.LogInformation("Getting all the legal entity documentations by auction ID");
+            await logger.LogMessage(LogLevel.Information, "Getting all the legal entity documentations by auction ID", "Auction microservice", "GetDocumentationLegalEntitesByAuctionAsync", null);
             return Ok(mapper.Map<List<DocumentationLegalEntityDto>>(documentations));
         }
 
@@ -142,17 +143,17 @@ namespace AuctionMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetDocumentationLegalEntites", "DocumentationLegalEntity", new { DocumentationLegalEntityId = conformation.DocumentationLegalEntityId });
 
-                //logger.LogInformation("Documentation created");
+                await logger.LogMessage(LogLevel.Information, "Documentation created", "Auction microservice", "CreateDocumentationLegalEntityAsync", null);
                 return Created(location, mapper.Map<DocumentationLegalEntityConfirmationDto>(conformation));
             }
             catch(ValidationException v)
             {
-                //logger.LogWarning("Bad request, check the parameters");
+                await logger.LogMessage(LogLevel.Information, "Bad request", "Auction microservice", "CreateDocumentationLegalEntityAsync", null);
                 return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
             }
             catch (Exception e)
             {
-                //logger.LogWarning("There has been internal server error");
+                await logger.LogMessage(LogLevel.Information, "There has been internal server error", "Auction microservice", "CreateDocumentationLegalEntityAsync", null);
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
@@ -181,6 +182,8 @@ namespace AuctionMicroservice.Controllers
 
                 if (oldDocumentation == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Documentation object not found!", "Auction microservice", "UpdateDocumentationLegalEntityAsync");
+
                     return NotFound();
                 }
 
@@ -189,12 +192,12 @@ namespace AuctionMicroservice.Controllers
                 mapper.Map(documentationEntity, oldDocumentation);
 
                 await documentationLegalEntityRepository.SaveChangesAsync();
-                //logger.LogInformation("Documentation has been updated");
+                await logger.LogMessage(LogLevel.Information, "Documentation has been updated", "Auction microservice", "UpdateDocumentationLegalEntityAsync", null);
                 return Ok(mapper.Map<DocumentationLegalEntityDto>(oldDocumentation));
             }
             catch (Exception e)
             {
-                //logger.LogWarning("There has been internal server error");
+                await logger.LogMessage(LogLevel.Information, "There has been internal server error", "Auction microservice", "UpdateDocumentationLegalEntityAsync", null);
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -220,18 +223,18 @@ namespace AuctionMicroservice.Controllers
 
                 if (documentation == null)
                 {
-                    //logger.LogWarning($"Documentation with ID {DocumentationLegalEntityId} not found");
+                    await logger.LogMessage(LogLevel.Information, "documentation not found", "Auction microservice", "DeleteDocumentationLegalEntityAsync", null);
                     return NotFound();
                 }
 
                 await documentationLegalEntityRepository.DeleteDocumentationAsync(DocumentationLegalEntityId);
                 await documentationLegalEntityRepository .SaveChangesAsync();
-                //logger.LogInformation($"Documentation with ID {DocumentationLegalEntityId} has been deleted");
+                await logger.LogMessage(LogLevel.Information, "Documentation deleted", "Auction microservice", "DeleteDocumentationLegalEntityAsync", null);
                 return NoContent();
             }
             catch (Exception e)
             {
-                //logger.LogWarning("There has been internal server error");
+                await logger.LogMessage(LogLevel.Information, "There has been internal server error", "Auction microservice", "DeleteDocumentationLegalEntityAsync", null);
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -245,7 +248,7 @@ namespace AuctionMicroservice.Controllers
         public IActionResult GetDocumentationLegalEntityOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
-           // logger.LogInformation("Getting all the options");
+            logger.LogMessage(LogLevel.Information, "Getting all the options", "Auction microservice", "GetDocumentationLegalEntityOptions", null);
             return Ok();
         }
 

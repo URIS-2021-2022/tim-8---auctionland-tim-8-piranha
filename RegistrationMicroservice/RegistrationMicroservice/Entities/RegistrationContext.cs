@@ -26,7 +26,10 @@ namespace RegistrationMicroservice.Entities
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("RegistrationDB"));
 
         }
-
+        /// <summary>
+        /// Inserts seed data into database
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //builder.Entity<Auction>()

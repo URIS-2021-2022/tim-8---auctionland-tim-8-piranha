@@ -7,6 +7,6 @@ namespace AuctionMicroservice.Services
 {
     public interface IService<T>
     {
-        Task<T> SendGetRequestAsync();
+        Task<List<T>> SendGetRequestAsync(string url);
     }
 }

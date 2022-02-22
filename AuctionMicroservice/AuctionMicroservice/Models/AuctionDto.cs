@@ -41,7 +41,9 @@ namespace AuctionMicroservice.Models
         /// </summary>
         public int PriceStep { get; set; }
        
-
+        /// <summary>
+        /// List of public biddings
+        /// </summary>
         public List<PublicBiddingDto> publicBiddings { get; set; }
 
         /// <summary>

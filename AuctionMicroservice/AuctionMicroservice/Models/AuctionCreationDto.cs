@@ -40,7 +40,9 @@ namespace AuctionMicroservice.Models
         [Required]
         public int PriceStep { get; set; }
 
-
+        /// <summary>
+        /// List od public bidding IDs
+        /// </summary>
         public List<Guid> PublicBiddings { get; set; }
         /// <summary>
         /// Date of application deadline

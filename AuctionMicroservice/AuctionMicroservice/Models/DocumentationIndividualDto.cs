@@ -35,7 +35,7 @@ namespace AuctionMicroservice.Models
         /// </summary>
 
         public Guid AuctionId { get; set; }
-        //public AuctionDto AuctionDto { get; set; }
+        
 
         #endregion
     }

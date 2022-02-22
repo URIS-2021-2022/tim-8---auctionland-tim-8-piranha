@@ -23,15 +23,7 @@ namespace RegistrationMicroservice.Models
         /// Registration location
         /// </summary>
         public string Location { get; set; }
-        /// <summary>
-        /// Auction ID that registration belongs to
-        /// </summary>
-        //public Guid? AuctionId { get; set; }
-
-        /// <summary>
-        /// Buyer ID that registration belongs to
-        /// </summary>
-        //public Guid? BuyerId { get; set; }
+       
         
 
         #endregion

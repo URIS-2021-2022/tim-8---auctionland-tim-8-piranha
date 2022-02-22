@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using RegistrationMicroservice.Data;
 using RegistrationMicroservice.Entities;
 using RegistrationMicroservice.Models;
@@ -11,7 +12,6 @@ using RegistrationMicroservice.Services;
 using RegistrationMicroservice.Validators;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RegistrationMicroservice.Controllers
@@ -26,17 +26,19 @@ namespace RegistrationMicroservice.Controllers
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
         private readonly RegistrationValidator validator;
-        private readonly IService<AuctionDto> auctionMock;
-        private readonly IService<BuyerDto> buyerMock;
+        private readonly IService<AuctionDto> auctionService;
+        private readonly IService<BuyerDto> buyerService;
+        private readonly ILoggerService logger;
 
-        public RegistrationController(IRegistrationRepository registrationRepository, IMapper mapper, LinkGenerator linkGenerator, RegistrationValidator validator, IService<AuctionDto> auctionMock, IService<BuyerDto> buyerMock)
+        public RegistrationController(IRegistrationRepository registrationRepository, IMapper mapper, LinkGenerator linkGenerator, RegistrationValidator validator, IService<AuctionDto> auctionService, IService<BuyerDto> buyerService, ILoggerService logger)
         {
             this.registrationRepository = registrationRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
             this.validator = validator;
-            this.auctionMock = auctionMock;
-            this.buyerMock = buyerMock;
+            this.auctionService = auctionService;
+            this.buyerService = buyerService;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -54,22 +56,23 @@ namespace RegistrationMicroservice.Controllers
         {
             var registrations = await registrationRepository.GetRegistrationsAsync();
 
-            if(registrations == null || registrations.Count == 0)
+            if (registrations == null || registrations.Count == 0)
             {
+                await logger.LogMessage(LogLevel.Warning, "Registration list is empty!", "Registration microservice", "GetRegistrationsAsync");
                 return NoContent();
             }
 
             List<RegistrationDto> registrationDtos = new List<RegistrationDto>();
-            
 
-            foreach(var registration in registrations)
+
+            foreach (var registration in registrations)
             {
                 RegistrationDto registrationDto = mapper.Map<RegistrationDto>(registration);
 
                 if (registration.BuyerId is not null)
                 {
-                    var buyerDto = await buyerMock.SendGetRequestAsync();
-                    
+                    var buyerDto = await buyerService.SendGetRequestAsync("");
+
 
                     if (buyerDto is not null)
                     {
@@ -79,7 +82,7 @@ namespace RegistrationMicroservice.Controllers
 
                 if (registration.AuctionId is not null)
                 {
-                    var auctionDto = await auctionMock.SendGetRequestAsync();
+                    var auctionDto = await auctionService.SendGetRequestAsync("");
 
 
                     if (auctionDto is not null)
@@ -94,6 +97,7 @@ namespace RegistrationMicroservice.Controllers
 
 
             //return Ok(mapper.Map<List<RegistrationDto>>(registrations));
+            await logger.LogMessage(LogLevel.Information, "Registration list successfully returned!", "Registration microservice", "GetRegistrationsAsync");
             return Ok(registrationDtos);
         }
 
@@ -111,19 +115,38 @@ namespace RegistrationMicroservice.Controllers
         {
             var registration = await registrationRepository.GetRegistrationByIdAsync(RegistrationId);
 
-            if(registration == null)
+            if (registration == null)
             {
+                await logger.LogMessage(LogLevel.Warning, "Registration not found!", "Registration microservice", "GetRegistrationByIdAsync");
                 return NotFound();
             }
 
-            RegistrationDto registrationDto = new RegistrationDto();
-            AuctionDto auction = await auctionMock.SendGetRequestAsync();
-            BuyerDto buyer = await buyerMock.SendGetRequestAsync();
+            RegistrationDto registrationDto = mapper.Map<RegistrationDto>(registration);
 
-            registrationDto = mapper.Map<RegistrationDto>(registration);
-            registrationDto.AuctionDto = auction;
-            registrationDto.BuyerDto = buyer;
+            if (registration.BuyerId is not null)
+            {
+                var buyerDto = await buyerService.SendGetRequestAsync("");
 
+
+                if (buyerDto is not null)
+                {
+                    registrationDto.BuyerDto = buyerDto;
+                }
+            }
+
+            if (registration.AuctionId is not null)
+            {
+                var auctionDto = await auctionService.SendGetRequestAsync("");
+
+
+                if (auctionDto is not null)
+                {
+                    registrationDto.AuctionDto = auctionDto;
+                }
+            }
+
+
+            await logger.LogMessage(LogLevel.Information, "Registration found and successfully returned!", "Plot microservice", "GetRegistrationByIdAsync");
             return Ok(registrationDto);
             //return Ok(mapper.Map<RegistrationDto>(registration));
         }
@@ -165,14 +188,17 @@ namespace RegistrationMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetRegistrations", "Registration", new { RegistrationId = registrationConfirmation.RegistrationId });
 
+                await logger.LogMessage(LogLevel.Information, "Registration successfully created!", "Registration microservice", "CreateRegistrationAsync");
                 return Created(location, mapper.Map<RegistrationConfirmationDto>(registrationConfirmation));
             }
-            catch(ValidationException v)
+            catch (ValidationException v)
             {
+                await logger.LogMessage(LogLevel.Error, "Validation for registration object failed!", "Registration microservice", "CreateRegistrationAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
+                await logger.LogMessage(LogLevel.Error, "Registration object creation failed!", "Registration microservice", "CreateRegistrationAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -196,8 +222,9 @@ namespace RegistrationMicroservice.Controllers
             {
                 var oldRegistration = await registrationRepository.GetRegistrationByIdAsync(registrationUpdate.RegistrationId);
 
-                if(oldRegistration == null)
+                if (oldRegistration == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Registration object not found!", "Registration microservice", "UpdateRegistrationAsync");
                     return NotFound();
                 }
 
@@ -208,15 +235,17 @@ namespace RegistrationMicroservice.Controllers
                 mapper.Map(registration, oldRegistration);
 
                 await registrationRepository.SaveChangesAsync();
-
+                await logger.LogMessage(LogLevel.Information, "Registration object updated successfully!", "Registration microservice", "UpdateRegistrationAsync");
                 return Ok(mapper.Map<RegistrationDto>(oldRegistration));
             }
             catch (ValidationException v)
             {
+                await logger.LogMessage(LogLevel.Error, "Validation for registration object failed!", "Registration microservice", "UpdateRegistrationAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
             }
             catch (Exception e)
             {
+                await logger.LogMessage(LogLevel.Error, "Registration object updating failed!", "Registration microservice", "UpdateRegistrationAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -239,8 +268,9 @@ namespace RegistrationMicroservice.Controllers
             {
                 var registration = await registrationRepository.GetRegistrationByIdAsync(RegistrationId);
 
-                if(registration == null)
+                if (registration == null)
                 {
+                    await logger.LogMessage(LogLevel.Warning, "Registration object not found!", "Registration microservice", "DeleteRegistrationAsync");
                     return NotFound();
                 }
 
@@ -248,10 +278,12 @@ namespace RegistrationMicroservice.Controllers
 
                 await registrationRepository.SaveChangesAsync();
 
+                await logger.LogMessage(LogLevel.Information, "Registration object deleted successfully!", "Registration microservice", "DeleteRegistrationAsync");
                 return NoContent();
             }
             catch (Exception e)
             {
+                await logger.LogMessage(LogLevel.Error, "Registration object deletion failed!", "Registration microservice", "DeleteRegistrationAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -263,10 +295,12 @@ namespace RegistrationMicroservice.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpOptions]
-        [AllowAnonymous] 
-        public IActionResult GetRegistrationOptions()
+        [AllowAnonymous]
+        public async Task<IActionResult> GetRegistrationOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+
+            await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Registration microservice", "GetRegistrationOptions");
             return Ok();
         }
     }

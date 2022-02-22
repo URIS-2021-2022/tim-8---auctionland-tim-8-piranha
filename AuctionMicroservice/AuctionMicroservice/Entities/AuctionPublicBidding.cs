@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace AuctionMicroservice.Entities
 {
+    /// <summary>
+    /// Represent AuctionPublicBidding entity
+    /// </summary>
     public class AuctionPublicBidding
     {
         #region
+        /// <summary>
+        /// Public bidding ID
+        /// </summary>
        [Key]
         public Guid PublicBiddingId { get; set; }
-        /// <summary>
-        /// Public bidding date
-        /// </summary>
+       
         /// <summary>
         /// ID of auction that public bidding belongs to
         /// </summary>

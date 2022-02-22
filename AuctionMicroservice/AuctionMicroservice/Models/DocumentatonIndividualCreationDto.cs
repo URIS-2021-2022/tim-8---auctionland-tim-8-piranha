@@ -39,7 +39,6 @@ namespace AuctionMicroservice.Models
         /// ID of auction that this documentation belongs to
         /// </summary>
         public Guid AuctionId { get; set; }
-        //public AuctionDto AuctionDto { get; set; }
 
         /// <summary>
         /// Validates inidividual surname and first name

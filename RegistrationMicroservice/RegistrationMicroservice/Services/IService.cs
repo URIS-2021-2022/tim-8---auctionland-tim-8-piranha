@@ -7,6 +7,6 @@ namespace RegistrationMicroservice.Services
 {
     public interface IService<T>
     {
-        Task<T> SendGetRequestAsync();
+        Task<T> SendGetRequestAsync(string url);
     }
 }

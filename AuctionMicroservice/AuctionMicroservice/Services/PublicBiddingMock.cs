@@ -8,9 +8,11 @@ namespace AuctionMicroservice.Services
 {
     public class PublicBiddingMock<T> : IService<T>
     {
-        public async Task<T> SendGetRequestAsync()
+        public async Task<List<T>> SendGetRequestAsync(string url)
         {
-            var publicBidding = new PublicBiddingDto
+            List<PublicBiddingDto> publicBidding = new List<PublicBiddingDto>();
+            publicBidding.Add(new PublicBiddingDto
+
             {
                 Date = new DateTime(),
                 StartTime = new DateTime(),
@@ -25,9 +27,9 @@ namespace AuctionMicroservice.Services
                 Type = "Test",
                 Status = "Test",
                 
-            };
+            });
 
-            return await Task.FromResult((T)Convert.ChangeType(publicBidding, typeof(T)));
+            return await Task.FromResult((List<T>)Convert.ChangeType(publicBidding, typeof(List<T>)));
 
         }
     }

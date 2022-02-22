@@ -55,10 +55,7 @@ namespace AuctionMicroservice.Entities
         public List<DocumentationLegalEntity> DocumentationLegalEntity { get; set; }
 
         
-        /// <summary>
-        /// List of public bidding that belong to this auction
-        /// </summary>
-        //public List<PublicBiddingDto> PublicBiddings { get; set; }
+       
 
         /// <summary>
         /// Date of application deadline

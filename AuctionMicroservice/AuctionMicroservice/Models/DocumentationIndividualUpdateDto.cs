@@ -42,7 +42,7 @@ namespace AuctionMicroservice.Models
         /// </summary>
         [Required]
         public Guid AuctionId { get; set; }
-        //public AuctionDto AuctionDto { get; set; }
+        
 
 
         /// <summary>

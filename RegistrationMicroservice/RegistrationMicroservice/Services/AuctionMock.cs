@@ -8,7 +8,7 @@ namespace RegistrationMicroservice.Services
 {
     public class AuctionMock<T> : IService<T>
     {
-        public async Task<T> SendGetRequestAsync()
+        public async Task<T> SendGetRequestAsync(string url)
         {
             var auction = new AuctionDto
             {

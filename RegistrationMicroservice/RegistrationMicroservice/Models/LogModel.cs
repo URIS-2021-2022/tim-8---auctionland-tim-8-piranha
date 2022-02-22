@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AuctionMicroservice.Models
+namespace RegistrationMicroservice.Models
 {
-    /// <summary>
-    /// Representation of Log.
-    /// </summary>
     public class LogModel
     {
         /// <summary>

@@ -17,8 +17,7 @@ namespace AuctionMicroservice.Models
         /// public bidding ID
         /// </summary>
         #region
-       // [Key]
-        //public Guid PublicBiddingId { get; set; }
+       
         /// <summary>
         /// Public bidding date
         /// </summary>
@@ -67,9 +66,7 @@ namespace AuctionMicroservice.Models
         /// <summary>
         /// ID of auction that public bidding belongs to
         /// </summary>
-        //public Guid AuctionId { get; set; }
-
-        //public Auction auction { get; set; }
+        
 
         #endregion
 

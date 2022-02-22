@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace RegistrationMicroservice.Models
 {
+    /// <summary>
+    /// Represents auction model
+    /// </summary>
     public class AuctionDto
     {
         #region
