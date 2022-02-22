@@ -55,7 +55,9 @@ namespace ComplaintMicroservice.Migrations
                     DecisionNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ComplaintTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ComplaintStatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ComplaintEventId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ComplaintEventId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PublicBiddingId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BuyerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -109,13 +111,13 @@ namespace ComplaintMicroservice.Migrations
 
             migrationBuilder.InsertData(
                 table: "Complaint",
-                columns: new[] { "ComplaintId", "ComplaintEventId", "ComplaintStatusId", "ComplaintTypeId", "DecisionNumber", "Explanation", "Reason", "SolutionNumber", "SubmissionDate" },
-                values: new object[] { new Guid("eb6bac2d-aea4-485a-8cb6-991bf8b1e1d4"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), "DN001", "Complaint explanation", "Complaint reason", "SN001", new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ComplaintId", "BuyerId", "ComplaintEventId", "ComplaintStatusId", "ComplaintTypeId", "DecisionNumber", "Explanation", "PublicBiddingId", "Reason", "SolutionNumber", "SubmissionDate" },
+                values: new object[] { new Guid("eb6bac2d-aea4-485a-8cb6-991bf8b1e1d4"), new Guid("861f142c-4707-416d-ad14-7debbd2031ed"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), "DN001", "Complaint explanation", new Guid("d7d314b0-2f22-4af5-8909-238b23383249"), "Complaint reason", "SN001", new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Complaint",
-                columns: new[] { "ComplaintId", "ComplaintEventId", "ComplaintStatusId", "ComplaintTypeId", "DecisionNumber", "Explanation", "Reason", "SolutionNumber", "SubmissionDate" },
-                values: new object[] { new Guid("b16abef5-5d4e-43a5-9bf3-1fe0618da6f7"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), "DN002", "Complaint explanation 2", "Complaint reason 2", "SN002", new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ComplaintId", "BuyerId", "ComplaintEventId", "ComplaintStatusId", "ComplaintTypeId", "DecisionNumber", "Explanation", "PublicBiddingId", "Reason", "SolutionNumber", "SubmissionDate" },
+                values: new object[] { new Guid("b16abef5-5d4e-43a5-9bf3-1fe0618da6f7"), new Guid("861f142c-4707-416d-ad14-7debbd2031ed"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), "DN002", "Complaint explanation 2", new Guid("d7d314b0-2f22-4af5-8909-238b23383249"), "Complaint reason 2", "SN002", new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Complaint_ComplaintEventId",

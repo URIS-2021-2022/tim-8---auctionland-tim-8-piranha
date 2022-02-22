@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComplaintMicroservice.Migrations
 {
     [DbContext(typeof(ComplaintContext))]
-    [Migration("20220214202507_ComplaintMigration")]
+    [Migration("20220222210816_ComplaintMigration")]
     partial class ComplaintMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace ComplaintMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BuyerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("ComplaintEventId")
                         .HasColumnType("uniqueidentifier");
 
@@ -41,6 +44,9 @@ namespace ComplaintMicroservice.Migrations
 
                     b.Property<string>("Explanation")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("PublicBiddingId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
@@ -65,11 +71,13 @@ namespace ComplaintMicroservice.Migrations
                         new
                         {
                             ComplaintId = new Guid("eb6bac2d-aea4-485a-8cb6-991bf8b1e1d4"),
+                            BuyerId = new Guid("861f142c-4707-416d-ad14-7debbd2031ed"),
                             ComplaintEventId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                             ComplaintStatusId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                             ComplaintTypeId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                             DecisionNumber = "DN001",
                             Explanation = "Complaint explanation",
+                            PublicBiddingId = new Guid("d7d314b0-2f22-4af5-8909-238b23383249"),
                             Reason = "Complaint reason",
                             SolutionNumber = "SN001",
                             SubmissionDate = new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -77,11 +85,13 @@ namespace ComplaintMicroservice.Migrations
                         new
                         {
                             ComplaintId = new Guid("b16abef5-5d4e-43a5-9bf3-1fe0618da6f7"),
+                            BuyerId = new Guid("861f142c-4707-416d-ad14-7debbd2031ed"),
                             ComplaintEventId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                             ComplaintStatusId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                             ComplaintTypeId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                             DecisionNumber = "DN002",
                             Explanation = "Complaint explanation 2",
+                            PublicBiddingId = new Guid("d7d314b0-2f22-4af5-8909-238b23383249"),
                             Reason = "Complaint reason 2",
                             SolutionNumber = "SN002",
                             SubmissionDate = new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)

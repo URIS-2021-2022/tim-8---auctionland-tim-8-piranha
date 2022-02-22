@@ -270,6 +270,11 @@
             Id javnog nadmetanja
             </summary>
         </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.BuyerId">
+            <summary>
+            Id kupca
+            </summary>
+        </member>
         <member name="T:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation">
             <summary>
             Potvrda zalbe
@@ -323,6 +328,11 @@
         <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.PublicBiddingId">
             <summary>
             Id javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.BuyerId">
+            <summary>
+            Id kupca
             </summary>
         </member>
         <member name="T:ComplaintMicroservice.Entities.Event.ComplaintEvent">
@@ -415,6 +425,31 @@
             Tip zalbe
             </summary>
         </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.name">
+            <summary>
+            Ime kupca
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.addresse">
+            <summary>
+            Adresa kupca
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.phone1">
+            <summary>
+            Telefon kupca
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.email">
+            <summary>
+            Mail kupca
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.accountNumber">
+            <summary>
+            Broj naloga
+            </summary>
+        </member>
         <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto">
             <summary>
             Potvrda zalbe DTO
@@ -468,6 +503,11 @@
         <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.PublicBiddingId">
             <summary>
             Id javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.BuyerId">
+            <summary>
+            Id kupca
             </summary>
         </member>
         <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto">
@@ -565,9 +605,14 @@
             DTO dogadjaja na osnovu zalbe
             </summary>
         </member>
-        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.PublicBiddingId">
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.PublicBidding">
             <summary>
-            Id javnog nadmetanja
+            Javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.Buyer">
+            <summary>
+            Kupca
             </summary>
         </member>
         <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto">
