@@ -12,15 +12,9 @@ namespace PublicBidding.ServiceCalls
         {
             var plotPart = new PlotPartDto
             {
-                NumberOfPlot = 2345,
-                NumberOfPlotPart = 2,
-                CadastralMunicipality = "Palic",
-                Class = "I",
-                Culture = "Njive",
-                Workability = "Obradivo",
-                Drainage = "I",
-                SurfaceArea = 250,
-                ProtectedZone = "2"
+                PlotPartNumber = "2",
+                PlotPartSurfaceArea = 45,
+                PlotId = Guid.Parse("53576442-a7c2-474e-9620-523b0707b36c")
             };
 
             return await Task.FromResult((T)Convert.ChangeType(plotPart, typeof(T)));

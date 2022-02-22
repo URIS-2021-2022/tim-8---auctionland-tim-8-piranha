@@ -5,23 +5,30 @@ using System.Threading.Tasks;
 
 namespace PublicBidding.Models
 {
+    /// <summary>
+    /// Dto za kupca
+    /// </summary>
     public class BuyerDto
     {
         /// <summary>
         /// Naziv kupca
         /// </summary>
-        public string Name { get; set; }
+        public string name { get; set; }
         /// <summary>
         /// Broj telefona kupca
         /// </summary>
-        public string PhoneNumber { get; set; }
+        public string phone1 { get; set; }
         /// <summary>
         /// Emali kupca
         /// </summary>
-        public string Email { get; set; }
+        public string email { get; set; }
         /// <summary>
         /// Broj računa kupca
         /// </summary>
-        public string AccountNumber { get; set; }
+        public string accountNumber { get; set; }
+        /// <summary>
+        /// Adresa kupca
+        /// </summary>
+        public AddressDto address { get; set; }
     }
 }

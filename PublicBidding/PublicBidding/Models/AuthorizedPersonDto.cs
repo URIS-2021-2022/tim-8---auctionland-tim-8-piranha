@@ -15,7 +15,6 @@ namespace PublicBidding.Models
 
         public string address { get; set; }
 
-
         public string country { get; set; }
     }
 }

@@ -171,24 +171,169 @@
             </summary>
             <returns>Zaglavlje odgovora</returns>
         </member>
-        <member name="P:PublicBidding.Models.BuyerDto.Name">
+        <member name="T:PublicBidding.Entities.PublicBidding">
+            <summary>
+            Entitet javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.TypeId">
+            <summary>
+            Id tipa javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.Type">
+            <summary>
+            Tip javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.StatusId">
+            <summary>
+            Id statusa javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.Status">
+            <summary>
+            Status javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.StartTime">
+            <summary>
+            Vreme početka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.Date">
+            <summary>
+            Datum javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.StartPricePerHa">
+            <summary>
+            Početna cena
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.IsExcepted">
+            <summary>
+            Izuzetost javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.AddressId">
+            <summary>
+            Id adrese javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.AuthorizedPersons">
+            <summary>
+            Ovlascena lica
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.Bidders">
+            <summary>
+            Kupci
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.Plots">
+            <summary>
+            Delovi parcela koji ucestvuju na javnom nadmetanju
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.Price">
+            <summary>
+            Konačna cena
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.BestBidder">
+            <summary>
+            Najbolji ponudjac
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.RentPeriod">
+            <summary>
+            Vreme zakupa
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.NumberOfApplicants">
+            <summary>
+            Broj prijavljenih na javnom nadmetanju
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.DepositSupplement">
+            <summary>
+            Dopuna depozita javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.PublicBidding.Round">
+            <summary>
+            Runda javnog nadmetanja
+            </summary>
+        </member>
+        <member name="T:PublicBidding.Entities.Status">
+            <summary>
+            Entitet statusa
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.Status.StatusId">
+            <summary>
+            Id statusa
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.Status.StatusName">
+            <summary>
+            Naziv statusa
+            </summary>
+        </member>
+        <member name="T:PublicBidding.Entities.Type">
+            <summary>
+            Entitet tipa
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.Type.TypeId">
+            <summary>
+            Id tipa
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Entities.Type.TypeName">
+            <summary>
+            Naziv statusa
+            </summary>
+        </member>
+        <member name="T:PublicBidding.Models.BuyerDto">
+            <summary>
+            Dto za kupca
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Models.BuyerDto.name">
             <summary>
             Naziv kupca
             </summary>
         </member>
-        <member name="P:PublicBidding.Models.BuyerDto.PhoneNumber">
+        <member name="P:PublicBidding.Models.BuyerDto.phone1">
             <summary>
             Broj telefona kupca
             </summary>
         </member>
-        <member name="P:PublicBidding.Models.BuyerDto.Email">
+        <member name="P:PublicBidding.Models.BuyerDto.email">
             <summary>
             Emali kupca
             </summary>
         </member>
-        <member name="P:PublicBidding.Models.BuyerDto.AccountNumber">
+        <member name="P:PublicBidding.Models.BuyerDto.accountNumber">
             <summary>
             Broj računa kupca
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Models.BuyerDto.address">
+            <summary>
+            Adresa kupca
             </summary>
         </member>
         <member name="T:PublicBidding.Models.LogModel">
@@ -214,6 +359,26 @@
         <member name="P:PublicBidding.Models.LogModel.MicroserviceMethod">
             <summary>
             Metoda mikroservisa
+            </summary>
+        </member>
+        <member name="T:PublicBidding.Models.PlotPartDto">
+            <summary>
+            DTO za deo parcele
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Models.PlotPartDto.PlotPartNumber">
+            <summary>
+            Broj dela parcele
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Models.PlotPartDto.PlotPartSurfaceArea">
+            <summary>
+            Povrsina dela parcele
+            </summary>
+        </member>
+        <member name="P:PublicBidding.Models.PlotPartDto.PlotId">
+            <summary>
+            Id parcele
             </summary>
         </member>
         <member name="T:PublicBidding.Models.PublicBiddingConfirmationDto">

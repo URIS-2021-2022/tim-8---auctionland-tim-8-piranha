@@ -12,9 +12,11 @@ namespace PublicBidding.ServiceCalls
         {
             var authorizedPerson = new AuthorizedPersonDto
             {
-                AuthorizedPerson = "Davor Jelic",
-                NumberOfDocument = "013124124112",
-                Housing = "Save Kovacevica 15 Novi Sad, Srbija"
+                name = "Davor",
+                surname = "Jelic",
+                personalDocNum = "013124124112",
+                address = "Save Kovacevica 15 Novi Sad",
+                country = "Srbija"
             };
 
             return await Task.FromResult((T)Convert.ChangeType(authorizedPerson, typeof(T)));
