@@ -194,7 +194,7 @@ namespace ComplaintMicroservice.Controllers
             return Ok();
         }
 
-        private bool ValidateComplaintType(ComplaintStatusCreationDto complaintStatus)
+        private static bool ValidateComplaintType(ComplaintStatusCreationDto complaintStatus)
         {
             if (complaintStatus.Status== "")
             {
