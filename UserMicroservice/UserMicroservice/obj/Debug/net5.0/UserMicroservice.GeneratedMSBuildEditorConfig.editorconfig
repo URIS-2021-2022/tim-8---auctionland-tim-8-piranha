@@ -7,3 +7,7 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = UserMicroservice
+<<<<<<< HEAD
+build_property.ProjectDir = C:\Users\PC\Source\Repos\tim-8---auctionland-tim-8-piranha\UserMicroservice\UserMicroservice\
+=======
+>>>>>>> ef50130ca9ae3c914cf523d4ba77ca585bb8ea85

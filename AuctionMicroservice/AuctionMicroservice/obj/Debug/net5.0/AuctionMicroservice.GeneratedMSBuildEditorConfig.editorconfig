@@ -7,5 +7,9 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = AuctionMicroservice
+<<<<<<< HEAD
+build_property.ProjectDir = C:\Users\PC\Source\Repos\tim-8---auctionland-tim-8-piranha\AuctionMicroservice\AuctionMicroservice\
+=======
 build_property.ProjectDir = C:\Davor\VII semestar\Uris projekat\tim-8---auctionland-tim-8-piranha\AuctionMicroservice\AuctionMicroservice\
 
+>>>>>>> ef50130ca9ae3c914cf523d4ba77ca585bb8ea85
