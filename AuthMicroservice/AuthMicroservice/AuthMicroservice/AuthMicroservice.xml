@@ -146,6 +146,11 @@
             Client username.
             </summary>
         </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.Password">
+            <summary>
+            Client password.
+            </summary>
+        </member>
         <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.UserType">
             <summary>
             Type of the user.
@@ -490,6 +495,11 @@
             Client repository interface. 
             </summary>
         </member>
+        <member name="T:AuthMicroservice.Repositories.Abstractions.IUserTypeRepository">
+            <summary>
+            Repository interface for user type.
+            </summary>
+        </member>
         <member name="T:AuthMicroservice.Repositories.Implementations.AuthRepository">
             <summary>
             Auth repository interface implementation.
@@ -507,6 +517,17 @@
             </summary>
         </member>
         <member name="M:AuthMicroservice.Repositories.Implementations.ClientRepository.#ctor(AuthMicroservice.Utils.DatabaseContext)">
+            <summary>
+            Default, needed, constructor for the client repository.
+            </summary>
+            <param name="context">Database context.</param>
+        </member>
+        <member name="T:AuthMicroservice.Repositories.Implementations.UserTypeRepository">
+            <summary>
+            Interface implementation of user type repository.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Repositories.Implementations.UserTypeRepository.#ctor(AuthMicroservice.Utils.DatabaseContext)">
             <summary>
             Default, needed, constructor for the client repository.
             </summary>
@@ -603,11 +624,13 @@
             Client service interface implementation.
             </summary>
         </member>
-        <member name="M:AuthMicroservice.Services.Implementations.ClientService.#ctor(AuthMicroservice.Repositories.Abstractions.IClientRepository,AutoMapper.IMapper)">
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.#ctor(AuthMicroservice.Repositories.Abstractions.IClientRepository,AutoMapper.IMapper,AuthMicroservice.Repositories.Abstractions.IUserTypeRepository)">
             <summary>
             Client service constructor.
             </summary>
-            <param name="clientRepository">Auth repository.</param>
+            <param name="clientRepository">Client repository.</param>
+            <param name="autoMapper">Auto model mapper.</param>
+            <param name="userTypeRepository">User type repository.</param>
         </member>
         <member name="M:AuthMicroservice.Services.Implementations.ClientService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO)">
             <summary>
@@ -615,6 +638,13 @@
             </summary>
             <param name="requestDTO">Info about user that is to be created.</param>
             <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.FindOneByEmailAddress(System.String)">
+            <summary>
+            Method for finding a client with the specified email.
+            </summary>
+            <param name="email">Email of the user.</param>
+            <returns>Client</returns>
         </member>
         <member name="M:AuthMicroservice.Services.Implementations.ClientService.Delete(System.String)">
             <summary>

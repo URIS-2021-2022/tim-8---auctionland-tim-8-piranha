@@ -26,6 +26,12 @@
         public string Username { get; set; }
 
         /// <summary>
+        /// Client password.
+        /// </summary>
+        [Required]
+        public string Password { get; set; }
+
+        /// <summary>
         /// Type of the user.
         /// </summary>
         [Required]
