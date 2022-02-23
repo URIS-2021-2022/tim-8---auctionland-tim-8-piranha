@@ -12,6 +12,20 @@ namespace DocumentMicroservice.Models.ContractLease
         /// </summary>
         public Guid contractLeaseID { get; set; }
 
+<<<<<<< HEAD
+=======
+
+<<<<<<< Updated upstream
+        
+=======
+        /// <summary>
+        /// Maturities - Rokovi dospeća
+        /// </summary>
+        //public int[] Maturities { get; set; }
+>>>>>>> Stashed changes
+
+
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         /// <summary>
         /// SerialNumber - Zavodni broj
         /// </summary>

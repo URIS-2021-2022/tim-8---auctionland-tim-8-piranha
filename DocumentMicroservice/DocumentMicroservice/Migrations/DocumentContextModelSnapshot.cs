@@ -25,9 +25,18 @@ namespace DocumentMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+<<<<<<< HEAD
                     b.Property<Guid?>("buyerId")
                         .HasColumnType("uniqueidentifier");
 
+=======
+<<<<<<< Updated upstream
+                    b.Property<Guid?>("buyerId")
+                        .HasColumnType("uniqueidentifier");
+
+=======
+>>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                     b.Property<DateTime>("dateOfSigning")
                         .HasColumnType("datetime2");
 
@@ -40,6 +49,10 @@ namespace DocumentMicroservice.Migrations
                     b.Property<Guid>("guaranteeTypeID")
                         .HasColumnType("uniqueidentifier");
 
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                     b.Property<Guid?>("personId")
                         .HasColumnType("uniqueidentifier");
 
@@ -49,9 +62,17 @@ namespace DocumentMicroservice.Migrations
                     b.Property<Guid?>("plotId")
                         .HasColumnType("uniqueidentifier");
 
+<<<<<<< HEAD
                     b.Property<string>("placeOfSigning")
                         .HasColumnType("nvarchar(max)");
 
+=======
+=======
+                    b.Property<string>("placeOfSigning")
+                        .HasColumnType("nvarchar(max)");
+
+>>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                     b.Property<string>("serialNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -69,6 +90,10 @@ namespace DocumentMicroservice.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                             contractLeaseID = new Guid("68bf5d70-f26b-4c53-b014-bab74b7b86a0"),
                             dateOfSigning = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             deadlineLandRestitution = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -76,6 +101,18 @@ namespace DocumentMicroservice.Migrations
                             guaranteeTypeID = new Guid("68bf5d70-f26b-4c53-b014-bab74b7b86a0"),
                             placeOfSigning = "Zrenjanin",
                             serialNumber = "12345",
+<<<<<<< HEAD
+=======
+=======
+                            contractLeaseID = new Guid("86c9ac76-a632-4ffc-b2a2-26ea8600dc86"),
+                            dateOfSigning = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            deadlineLandRestitution = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            documentId = new Guid("0ec20a3b-fd39-4c2e-8062-7d1664eb5381"),
+                            guaranteeTypeID = new Guid("e54364be-1fe6-43b5-9401-8b8bd2165aba"),
+                            placeOfSigning = "Zrenjanin",
+                            serialNumber = "2342323",
+>>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                             submissionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -86,9 +123,18 @@ namespace DocumentMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+<<<<<<< HEAD
                     b.Property<Guid?>("auctionId")
                         .HasColumnType("uniqueidentifier");
 
+=======
+<<<<<<< Updated upstream
+                    b.Property<Guid?>("auctionId")
+                        .HasColumnType("uniqueidentifier");
+
+=======
+>>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                     b.Property<Guid>("docStatusID")
                         .HasColumnType("uniqueidentifier");
 
@@ -107,9 +153,18 @@ namespace DocumentMicroservice.Migrations
                     b.Property<string>("registrationNumber")
                         .HasColumnType("nvarchar(max)");
 
+<<<<<<< HEAD
                     b.Property<Guid?>("userId")
                         .HasColumnType("uniqueidentifier");
 
+=======
+<<<<<<< Updated upstream
+                    b.Property<Guid?>("userId")
+                        .HasColumnType("uniqueidentifier");
+
+=======
+>>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                     b.HasKey("documentId");
 
                     b.HasIndex("documentStatusdocStatusID");

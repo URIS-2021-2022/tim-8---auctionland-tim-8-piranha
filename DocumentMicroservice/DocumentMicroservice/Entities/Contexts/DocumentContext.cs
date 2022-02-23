@@ -54,8 +54,16 @@ namespace DocumentMicroservice.Entities.Contexts
                    documentCreationDate= new DateTime(),
                    documentDate = new DateTime(),
                    documentTemplate ="Kreiranje predloga plana",
+<<<<<<< HEAD
                    docStatusID = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226")
 
+=======
+<<<<<<< Updated upstream
+                   docStatusID = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226")
+=======
+                   docStatusID= Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226"),
+>>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
                });
             builder.Entity<Document>().HasData(
@@ -66,8 +74,16 @@ namespace DocumentMicroservice.Entities.Contexts
                    documentCreationDate = new DateTime(),
                    documentDate = new DateTime(),
                    documentTemplate = "Obrazovanje komisije za davanje misljenja",
+<<<<<<< HEAD
                    docStatusID = Guid.Parse("458adb42-62a5-4117-8101-7d933fa88abb")
 
+=======
+<<<<<<< Updated upstream
+                   docStatusID = Guid.Parse("458adb42-62a5-4117-8101-7d933fa88abb")
+=======
+                   docStatusID = Guid.Parse("458adb42-62a5-4117-8101-7d933fa88abb"),
+>>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
                });
             builder.Entity<Document>().HasData(
@@ -78,9 +94,20 @@ namespace DocumentMicroservice.Entities.Contexts
                    documentCreationDate = new DateTime(),
                    documentDate = new DateTime(),
                    documentTemplate = "Saglasnost ministra",
+<<<<<<< HEAD
                   docStatusID = Guid.Parse("84ff030b-7067-45b7-8bb2-10719534f91e")
 
                });
+=======
+<<<<<<< Updated upstream
+                   docStatusID = Guid.Parse("84ff030b-7067-45b7-8bb2-10719534f91e")
+=======
+                   docStatusID = Guid.Parse("84ff030b-7067-45b7-8bb2-10719534f91e"),
+>>>>>>> Stashed changes
+
+               });
+           
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
             //Guarantee Type
 
@@ -119,19 +146,48 @@ namespace DocumentMicroservice.Entities.Contexts
                   type = "Uplata gotovine"
 
               });
+<<<<<<< HEAD
 
+=======
+<<<<<<< Updated upstream
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
+            builder.Entity<ContractLease>().HasData(
+              new
+              {
+<<<<<<< HEAD
+                  contractLeaseID = Guid.Parse("86c9ac76-a632-4ffc-b2a2-26ea8600dc86"),
+                  serialNumber = "2342323",
+=======
+                  contractLeaseID = Guid.Parse("68bf5d70-f26b-4c53-b014-bab74b7b86a0"),
+                  serialNumber = "12345",
+=======
             builder.Entity<ContractLease>().HasData(
               new
               {
                   contractLeaseID = Guid.Parse("86c9ac76-a632-4ffc-b2a2-26ea8600dc86"),
                   serialNumber = "2342323",
+>>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                   submissionDate = new DateTime(),
                   deadlineLandRestitution = new DateTime(),
                   placeOfSigning = "Zrenjanin",
                   dateOfSigning = new DateTime(),
+<<<<<<< HEAD
                   guaranteeTypeID = Guid.Parse("68bf5d70-f26b-4c53-b014-bab74b7b86a0"),
                   documentId = Guid.Parse("3a3e6366-3a20-4d3b-ae15-be85ba277683"),
+=======
+<<<<<<< Updated upstream
+                  guaranteeTypeID = Guid.Parse("68bf5d70-f26b-4c53-b014-bab74b7b86a0"),
+                  documentId = Guid.Parse("3a3e6366-3a20-4d3b-ae15-be85ba277683"),
+
+                  
+=======
+                  guaranteeTypeID = Guid.Parse("e54364be-1fe6-43b5-9401-8b8bd2165aba"),
+                  documentId = Guid.Parse("0ec20a3b-fd39-4c2e-8062-7d1664eb5381")
+>>>>>>> Stashed changes
+
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
               });
 
 

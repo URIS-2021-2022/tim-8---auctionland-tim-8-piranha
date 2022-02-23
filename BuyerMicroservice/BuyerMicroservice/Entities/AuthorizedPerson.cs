@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BuyerMicroservice.Entities
 {
+<<<<<<< HEAD
     /// <summary>
     /// Authorized person model
     /// </summary>
@@ -56,6 +57,28 @@ namespace BuyerMicroservice.Entities
         /// <summary>
         /// Buyers- lista kupaca
         /// </summary>
+=======
+    public class AuthorizedPerson
+    {
+        [Key]
+        public Guid authorizedPersonID { get; set; }
+
+        public string name { get; set; }
+
+        public string surname { get; set; }
+
+        public string personalDocNum { get; set; }
+
+        public string address { get; set; }
+        //lice za koje se vrsi aukcija 
+        // ne treba foreign key zato sto strelica pokazuje u kontra smeru 
+        public string country { get; set; }
+
+        [ForeignKey("BoardNumber")]
+        public Guid boardNumbID { get; set; }
+        public BoardNumber board { get; set; }
+
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public ICollection<Buyer> buyers { get; set; }
 
         

@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models.ContractLease
 {
+<<<<<<< HEAD
     /// <summary>
     /// Contract Lease confirmation DTO model
     /// </summary>
+
     public class ContractLeaseConfirmationDto
     {
 
         /// <summary>
         /// SerialNumber - Zavodni broj
-        /// Example:2342323
         /// </summary>
         public string serialNumber { get; set; }
 
@@ -24,17 +25,14 @@ namespace DocumentMicroservice.Models.ContractLease
         /// </summary>
         public DateTime? submissionDate { get; set; }
 
-
-
         /// <summary>
         /// DeadlineLandRestitution - Rok za vracanje zemljista
-        /// Example: "2021-02-01 00:00:00"
         /// </summary>
         public DateTime? deadlineLandRestitution { get; set; }
 
 
         /// <summary>
-        /// Place Of Signing - Mesto potpisivanja 
+        /// Place Of Signing - Mesto potpisivanja
         /// Example:Zrenjanin
         /// </summary>
         public string placeOfSigning { get; set; }
@@ -43,6 +41,7 @@ namespace DocumentMicroservice.Models.ContractLease
         /// <summary>
         /// Date Of Signing - Datum potpisivanja
         /// Example : "2021-02-01 00:00:00"
+
         /// </summary>
         public DateTime dateOfSigning { get; set; }
 
@@ -57,6 +56,5 @@ namespace DocumentMicroservice.Models.ContractLease
         /// Example: 3a3e6366-3a20-4d3b-ae15-be85ba277683
         /// </summary>
         public Guid documentId { get; set; }
-
     }
 }

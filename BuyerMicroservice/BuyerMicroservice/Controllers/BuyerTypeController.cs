@@ -7,7 +7,10 @@ using BuyerMicroservice.Models.LegalEntity;
 using BuyerMicroservice.ServiceCalls;
 using BuyerMicroservice.Validators;
 using FluentValidation;
+<<<<<<< HEAD
 using Microsoft.AspNetCore.Authorization;
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -44,6 +47,7 @@ namespace BuyerMicroservice.Controllers
             this.validator = validator;
 
         }
+<<<<<<< HEAD
         /// <summary>
         /// Kreira novo fizicko lice
         /// </summary>
@@ -54,12 +58,18 @@ namespace BuyerMicroservice.Controllers
         /// </remarks>
         /// <response code = "201">Vraća kreirano fizicko lice</response>
         /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja fizickog lica</response>
+=======
+
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPost("individual")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<BuyerConfirmationDto>> CreateIndividualAsync([FromBody] IndividualCreationDto individualCreation)
         {
             try
@@ -90,6 +100,7 @@ namespace BuyerMicroservice.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+<<<<<<< HEAD
         /// <summary>
         /// Kreira novo pravno lice
         /// </summary>
@@ -100,12 +111,17 @@ namespace BuyerMicroservice.Controllers
         /// </remarks>
         /// <response code = "201">Vraća kreirano pravno lice</response>
         /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja pravnog lica</response>
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPost("legalEntity")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<BuyerConfirmationDto>> CreateLegalEntityAsync([FromBody] LegalEntityCreationDto legalEntityCreation)
         {
             try
@@ -137,6 +153,7 @@ namespace BuyerMicroservice.Controllers
             }
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Ažurira jedno fizicko lice
         /// </summary>
@@ -145,13 +162,19 @@ namespace BuyerMicroservice.Controllers
         /// <response code="200">Vraća ažurirano fizicko lice</response>
         /// <response code="404">Nije pronađeno fizicko lice za ažuriranje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja fizickog lica</response>
+=======
+
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPut("individual")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<BuyerDto>> UpdateIndividualAsync(IndividualUpdateDto individualUpdate)
         {
             try
@@ -190,6 +213,7 @@ namespace BuyerMicroservice.Controllers
             }
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Ažurira jedno pravno lice
         /// </summary>
@@ -198,13 +222,18 @@ namespace BuyerMicroservice.Controllers
         /// <response code="200">Vraća ažurirano pravno lice</response>
         /// <response code="404">Nije pronađena pravno lice za ažuriranje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja pravnog lica</response>
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPut("legalEntity")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<BuyerDto>> UpdateLegalEntityAsync(LegalEntityUpdateDto legalEntityUpdate)
         {
             try
@@ -238,6 +267,7 @@ namespace BuyerMicroservice.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+<<<<<<< HEAD
         /// <summary>
         /// Vraća informacije o opcijama koje je moguće izvršiti za sve kupce
         /// </summary>
@@ -251,6 +281,8 @@ namespace BuyerMicroservice.Controllers
             await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Buyer microservice", "GetBuyerOptions");
             return Ok();
         }
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
 
     }

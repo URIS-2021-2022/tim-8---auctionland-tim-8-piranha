@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.Buyer
 {
+<<<<<<< HEAD
     /// <summary>
     /// Buyer Creation Dto model for communication with user 
     /// </summary>
@@ -90,6 +91,43 @@ namespace BuyerMicroservice.Models.Buyer
         /// Payment ID(Payment entity) from payment microservice
         /// Example : 861f142c-4707-416d-ad14-7debbd2031ed
         /// </summary>
+=======
+    public class BuyerCreationDto
+    {
+        
+        public Guid priorityID { get; set; }
+
+        public int realizedArea { get; set; }
+
+       // public string paymentID { get; set; }
+        
+        public Guid authorizedPersonID { get; set; }
+
+        public bool hasBan { get; set; }
+
+        public DateTime? startDateOfBan { get; set; }
+
+        public int durationOfBanInYear { get; set; }
+
+        public DateTime? endDateOfBan { get; set; }
+
+        public string name { get; set; }
+
+        public string addresse { get; set; }
+
+        public string phone1 { get; set; }
+
+        public string phone2 { get; set; }
+
+        public string email { get; set; }
+
+        public string accountNumber { get; set; }
+
+        // public Guid publicTender { get; set; }
+
+        public Guid? addressId { get; set; }
+
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public Guid? paymentId { get; set; }
     }
 }

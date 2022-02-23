@@ -6073,19 +6073,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha\\PublicBidding\\PublicBidding\\PublicBidding.csproj",
       "projectName": "PublicBidding",
-      "projectPath": "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha\\PublicBidding\\PublicBidding\\PublicBidding.csproj",
+      "projectPath": "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha(2)\\PublicBidding\\PublicBidding\\PublicBidding.csproj",
       "packagesPath": "C:\\Users\\Davor\\.nuget\\packages\\",
-      "outputPath": "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha\\PublicBidding\\PublicBidding\\obj\\",
+      "outputPath": "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha(2)\\PublicBidding\\PublicBidding\\obj\\",
       "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\Davor\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-      ],
-      "originalTargetFrameworks": [
-        "net5.0"
-      ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}

@@ -14,12 +14,11 @@ namespace DocumentMicroservice.Entities
         /// ContractLeaseID - ID ugovora o zakupu
         /// Example: 86c9ac76-a632-4ffc-b2a2-26ea8600dc86
         /// </summary>
-
         public Guid contractLeaseID { get; set; }
+
 
         /// <summary>
         /// SerialNumber - Zavodni broj
-        /// Example:2342323
         /// </summary>
         public string serialNumber { get; set; }
 
@@ -64,5 +63,9 @@ namespace DocumentMicroservice.Entities
         /// Example: 3a3e6366-3a20-4d3b-ae15-be85ba277683
         /// </summary>
         public Guid documentId { get; set; }
+
+
+        public Document document { get; set; }
+
     }
 }

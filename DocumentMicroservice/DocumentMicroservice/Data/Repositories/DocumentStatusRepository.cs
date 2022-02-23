@@ -23,6 +23,11 @@ namespace DocumentMicroservice.Data.Repositories
             Mapper = mapper;
             
         }
+<<<<<<< HEAD
+=======
+
+      
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<DocumentStatusConfirmation> CreateDocumentStatusAsync(DocumentStatus documentStatus)
         {
             var createdEntity = await Context.AddAsync(documentStatus);
@@ -54,6 +59,11 @@ namespace DocumentMicroservice.Data.Repositories
         {
             return await Context.SaveChangesAsync() > 0;
         }
+<<<<<<< HEAD
   
+=======
+
+        
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     }
 }

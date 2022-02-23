@@ -43,17 +43,24 @@ namespace BuyerMicroservice.Controllers
 
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Vraća sva ovlascena lica
         /// </summary>
         /// <returns>Lista ovlascenih lica</returns>
         /// <response code = "200">Vraća listu ovlascenih lica</response>
         /// <response code = "204">Ne postoji nijedno ovlasceno lice</response>
+=======
+
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<List<AuthorizedPersonDto>>> GetAuthorizedPersonAsync(string personalDocNum = null)
         {
             List<AuthorizedPerson> authorizedPerson =await authorizedPersonRepository.GetAuthorizedPersonAsync(personalDocNum);
@@ -69,6 +76,7 @@ namespace BuyerMicroservice.Controllers
             return Ok(mapper.Map<List<AuthorizedPersonDto>>(authorizedPerson));
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Vraća traženo ovlasceno lice po ID-ju
         /// </summary>
@@ -80,6 +88,11 @@ namespace BuyerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+        [HttpGet("{authorizedPersonId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<AuthorizedPersonDto>> GetAuthorizedPersonByIdAsync(Guid AuthorizedPersonID)
         {
             AuthorizedPerson authorizedPerson =await authorizedPersonRepository.GetAuthorizedPersonByIdAsync(AuthorizedPersonID);
@@ -95,6 +108,7 @@ namespace BuyerMicroservice.Controllers
             return Ok(mapper.Map<AuthorizedPersonDto>(authorizedPerson));
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Kreira novo ovlasceno lice
         /// </summary>
@@ -115,12 +129,17 @@ namespace BuyerMicroservice.Controllers
         /// </remarks>
         /// <response code = "201">Vraća kreirano ovlasceno lice</response>
         /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja ovlascenog lica</response>
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task< ActionResult<AuthorizedPersonConfirmationDto>> CreateAuthorizedPersonAsync([FromBody] AuthorizedPersonCreationDto authorizedPersonCreation)
         {
             try
@@ -154,6 +173,7 @@ namespace BuyerMicroservice.Controllers
             }
         }
 
+<<<<<<< HEAD
 
         /// <summary>
         /// Ažurira jedno ovlasceno lice 
@@ -163,13 +183,18 @@ namespace BuyerMicroservice.Controllers
         /// <response code="200">Vraća ažuriranu banku</response>
         /// <response code="404">Nije pronađeno ovlasceno lice za ažuriranje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja ovlascenog lica</response>
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async  Task<ActionResult<AuthorizedPersonDto>> UpdateAuthorizedPersonAsync(AuthorizedPersonUpdateDto authorizedPersonUpdate)
         {
             try
@@ -206,6 +231,7 @@ namespace BuyerMicroservice.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+<<<<<<< HEAD
         /// <summary>
         /// Briše ovlascena lica na osnovu ID-ja
         /// </summary>
@@ -214,11 +240,17 @@ namespace BuyerMicroservice.Controllers
         /// <response code="204">Ovlasceno lice uspešno obrisano</response>
         /// <response code="404">Nije pronađeno ovlasceno lice za brisanje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom brisanja ovlascenog lica</response>
+=======
+
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpDelete("{authorizedPersonId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult> DeleteAuthorizedPersonAsync(Guid authorizedPersonId)
         {
             try
@@ -247,6 +279,7 @@ namespace BuyerMicroservice.Controllers
             }
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Povezivanje kupca sa ovlascenim licem
         /// </summary>
@@ -260,6 +293,9 @@ namespace BuyerMicroservice.Controllers
         /// <response code = "500">Došlo je do greške na serveru prilikom povezivanja kupca i ovlascenog lica</response>
         [HttpPost("AddBuyer")]
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+        [HttpPost("AddBuyer")]
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult> AddAuthorizedPersonBuyer(AuthorizedPersonBuyerDto apbDto)
         {
             Buyer b = await buyerRepository.GetBuyerByIdAsync(apbDto.buyerId);
@@ -271,6 +307,7 @@ namespace BuyerMicroservice.Controllers
             return NoContent();
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Brisanje veze ovlascenog lica sa kupcem
         /// </summary>
@@ -284,6 +321,9 @@ namespace BuyerMicroservice.Controllers
         /// <response code = "500">Došlo je do greške na serveru prilikom brisanja veze kupca i ovlascenog lica</response>
         [HttpDelete("DeleteBuyer")]
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+        [HttpDelete("DeleteBuyer")]
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult> DeleteAuthorizedPersonBuyer(AuthorizedPersonBuyerDto apbDto)
         {
             Buyer b = await buyerRepository.GetBuyerByIdAsync(apbDto.buyerId);
@@ -296,6 +336,7 @@ namespace BuyerMicroservice.Controllers
             return NoContent();
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Vraća informacije o opcijama koje je moguće izvršiti za sva ovlascena lica
         /// </summary>
@@ -303,6 +344,10 @@ namespace BuyerMicroservice.Controllers
         [HttpOptions]
         [AllowAnonymous]
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+        [HttpOptions]
+        [AllowAnonymous]
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult> GetAuthorizedPersonOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");

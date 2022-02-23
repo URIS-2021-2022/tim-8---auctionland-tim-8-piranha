@@ -21,7 +21,10 @@ namespace DocumentMicroservice.Controllers
     [ApiController]
     [Route("api/contractLease")]
     [Produces("application/json", "application/xml")]
+<<<<<<< HEAD
     
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     public class ContractLeaseController : ControllerBase
     {
         private readonly IContractLeaseRepository contractLeaseRepository;
@@ -45,17 +48,24 @@ namespace DocumentMicroservice.Controllers
             this.plotService = plotService;
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Vraća sve ugovore o zakupu
         /// </summary>
         /// <returns>Lista ugovora o zakupu</returns>
         /// <response code = "200">Vraća listu ugovora o zakupu</response>
         /// <response code = "204">Ne postoji nijedan ugovor o zakupu</response>
+=======
+     
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<List<ContractLeaseDto>>> GetContractLeaseAsync(string serialNumber)
         {
             List<ContractLease> contractLeaseList = await contractLeaseRepository.GetContractLeaseAsync(serialNumber);
@@ -92,6 +102,7 @@ namespace DocumentMicroservice.Controllers
             return Ok(contractLeasesDto);
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Vraća traženi ugovor o zakupu po ID-ju
         /// </summary>
@@ -103,6 +114,12 @@ namespace DocumentMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+
+        [HttpGet("{contractLeaseID}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<ContractLeaseDto>> GetContractLeaseByIdAsync(Guid contractLeaseID)
         {
             ContractLease contractLease = await contractLeaseRepository.GetContractLeaseByIdAsync(contractLeaseID);
@@ -133,6 +150,7 @@ namespace DocumentMicroservice.Controllers
         }
 
 
+<<<<<<< HEAD
         /// <summary>
         /// Kreira novi ugovor o zakupu
         /// </summary>
@@ -153,11 +171,17 @@ namespace DocumentMicroservice.Controllers
         /// </remarks>
         /// <response code = "201">Vraća kreirani ugovor o zakupu</response>
         /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja ugovora o zakupu</response>
+=======
+      
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<ContractLeaseConfirmationDto>> CreateContractLeaseAsync([FromBody] ContractLeaseCreationDto ContractLeaseCreation)
         {
             try
@@ -187,6 +211,7 @@ namespace DocumentMicroservice.Controllers
             }
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Ažurira jedan ugovor o zakupu
         /// </summary>
@@ -195,12 +220,18 @@ namespace DocumentMicroservice.Controllers
         /// <response code="200">Vraća ažurirani ugovor o zakupu</response>
         /// <response code="404">Nije pronađen ugovor o zakupu za ažuriranje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja ugovora o zakupu</response>
+=======
+       
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<ContractLeaseDto>> UpdateContractLeaseAsync(ContractLeaseUpdateDto contractLease)
         {
             try
@@ -237,6 +268,7 @@ namespace DocumentMicroservice.Controllers
             }
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Briše ugovor o zakupu na osnovu ID-ja
         /// </summary>
@@ -245,11 +277,17 @@ namespace DocumentMicroservice.Controllers
         /// <response code="204">Ugovor o zakupu uspešno obrisan</response>
         /// <response code="404">Nije pronađeN ugovor o zakupu za brisanje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom brisanja ugovora o zakupu</response>
+=======
+        
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpDelete("{contractLeaseID}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult> DeleteContractLeaseAsync(Guid contractLeaseID)
         {
             try
@@ -276,6 +314,7 @@ namespace DocumentMicroservice.Controllers
             }
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Vraća informacije o opcijama koje je moguće izvršiti za sve ugovore o zakupu
         /// </summary>
@@ -284,6 +323,12 @@ namespace DocumentMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [AllowAnonymous]
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+      
+        [HttpOptions]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [AllowAnonymous]
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult> GetContractLeaseOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");

@@ -21,7 +21,11 @@ namespace DocumentMicroservice.Controllers
     [ApiController]
     [Route("api/Document")]
     [Produces("application/json", "application/xml")]
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     public class DocumentController : ControllerBase
     {
         private readonly IDocumentRepository documentRepository;
@@ -56,7 +60,10 @@ namespace DocumentMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<List<DocumentDto>>> GetDocumentAsync(string document)
         {
             List<Document> documentList = await documentRepository.GetDocumentAsync(document);
@@ -103,7 +110,10 @@ namespace DocumentMicroservice.Controllers
         [HttpGet("{DocumentId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<DocumentDto>> GetDocumentByIdAsync(Guid DocumentId)
         {
             Document doc = await documentRepository.GetDocumentByIdAsync(DocumentId);
@@ -144,8 +154,13 @@ namespace DocumentMicroservice.Controllers
         /// POST /api/Document \
         /// { \
         ///  "RegistrationNumber" : "119833332", \
+<<<<<<< HEAD
         ///  "DocumentCreationDate" : "11-02-2020 08:00:00", \
         ///  "DocumentDate" : "11-02-2020 08:00:00", \
+=======
+        ///  "DocumentCreationDate" : "11-02-2020,08:00:00", \
+        ///  "DocumentDate" : "11-02-2020,08:00:00", \
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         ///  "DocumentTemplate" : "Kreiranje predloga plana", \
         ///  "DocStatusID" : Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226") \
         /// } 
@@ -156,7 +171,10 @@ namespace DocumentMicroservice.Controllers
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<DocumentConfirmationDto>> CreateDocumentAsync([FromBody] DocumentCreationDto document)
         {
             try
@@ -201,7 +219,10 @@ namespace DocumentMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<DocumentDto>> UpdateDocumentAsync(DocumentUpdateDto document)
         {
             try
@@ -248,7 +269,10 @@ namespace DocumentMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult> DeleteDocumentAsync(Guid documentId)
         {
             try
@@ -279,7 +303,10 @@ namespace DocumentMicroservice.Controllers
         /// <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
         [HttpOptions]
         [AllowAnonymous]
+<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult> GetDocumentOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");

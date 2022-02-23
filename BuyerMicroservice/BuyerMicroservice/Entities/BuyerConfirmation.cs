@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Entities
 {
+<<<<<<< HEAD
     /// <summary>
     /// Buyer confirmation model 
     /// </summary>
@@ -93,6 +94,37 @@ namespace BuyerMicroservice.Entities
         /// <summary>
         /// Address ID(address entity) from Address microservice.
         /// </summary>
+=======
+    public abstract class BuyerConfirmation
+    {
+        public Guid buyerID { get; set; }
+     
+        public Guid priorityID { get; set; }
+        
+        public int realizedArea { get; set; }
+
+        public Guid authorizedPersonID { get; set; }
+
+        public bool hasBan { get; set; }
+
+        public DateTime? startDateOfBan { get; set; }
+
+        public int durationOfBanInYear { get; set; }
+
+        public DateTime? endDateOfBan { get; set; }
+
+        public string name { get; set; }
+
+        public string addresse { get; set; }
+
+        public string phone1 { get; set; }
+
+        public string phone2 { get; set; }
+
+        public string email { get; set; }
+
+        public string accountNumber { get; set; }
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
 
     }

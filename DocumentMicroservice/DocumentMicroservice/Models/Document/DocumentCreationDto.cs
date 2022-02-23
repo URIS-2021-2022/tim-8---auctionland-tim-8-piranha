@@ -5,21 +5,29 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models.Document
 {
+<<<<<<< HEAD
     /// <summary>
     /// Document creation DTO model for commnication with user
     /// </summary>
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     public class DocumentCreationDto
     {
         /// <summary>
         /// ID dokumenta
         /// Example:07af89f2-feee-4680-b489-9d0e31699588
         /// </summary>
+<<<<<<< HEAD
         public Guid documentId { get; set; }
+=======
+        public Guid DocumentId { get; set; }
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
         /// <summary>
         /// Registration number - broj registracije 
         /// Exaple: 1123232323
         /// </summary>
+<<<<<<< HEAD
         public string registrationNumber { get; set; }
 
         /// <summary>
@@ -37,10 +45,27 @@ namespace DocumentMicroservice.Models.Document
         /// <summary>
         /// Document template - Šablon dokumenta
         /// Example : Kreiranje predloga plana 
+=======
+        public string RegistrationNumber { get; set; }
+
+        /// <summary>
+        /// Document creation date - Datum krairanja dokumenta
+        /// </summary>
+        public DateTime? DocumentCreationDate { get; set; }
+
+        /// <summary>
+        /// Document date - Datum u dokumenta 
+        /// </summary>
+        public DateTime? DocumentDate { get; set; }
+
+        /// <summary>
+        /// Document template - Šablon dokumenta
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         /// </summary>
         public string DocumentTemplate { get; set; }
 
         /// <summary>
+<<<<<<< HEAD
         /// Document status ID 
         /// This is Foreign Key from Entity "DocumentStatus"
         /// Example : Example:07af89f2-feee-4680-b489-9d0e31699588
@@ -51,13 +76,25 @@ namespace DocumentMicroservice.Models.Document
         /// Auction ID from Auction microservice.
         /// This is optional attribute
         /// Example:07af89f2-feee-4680-b489-9d0e31699588
+=======
+        /// Document status - Status dokumenta 
+        /// </summary>
+        public Guid DocStatusID { get; set; }
+
+        /// <summary>
+        /// Buyer ID.
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         /// </summary>
         public Guid? auctionId { get; set; }
 
         /// <summary>
+<<<<<<< HEAD
         /// User ID from User microservice.
         /// This is optional attribute
         /// Example:07af89f2-feee-4680-b489-9d0e31699588
+=======
+        /// User ID.
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         /// </summary>
         public Guid? userId { get; set; }
 

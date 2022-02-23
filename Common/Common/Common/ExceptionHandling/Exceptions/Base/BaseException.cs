@@ -8,8 +8,6 @@
 
         public string message { get; set; }
 
-        public string origin { get; set; }
-
         public HttpStatusCode code { get; set; }
 
         public override string Message
@@ -17,10 +15,9 @@
             get { return this.message; }
         }
 
-        public BaseException(string message, string origin, HttpStatusCode code)
+        public BaseException(string message, HttpStatusCode code)
         {
             this.message = message;
-            this.origin = origin;
             this.code = code;
         }
     }
