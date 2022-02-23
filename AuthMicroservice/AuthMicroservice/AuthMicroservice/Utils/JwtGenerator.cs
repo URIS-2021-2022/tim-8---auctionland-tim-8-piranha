@@ -8,15 +8,28 @@
     using System.Security.Claims;
     using System.Text;
 
+    /// <summary>
+    /// JWT token generator class.
+    /// </summary>
     public class JwtGenerator
     {
         private IOptions<AudienceModel> _options;
 
+        /// <summary>
+        /// Constructor for the JWT token generator class.
+        /// </summary>
+        /// <param name="options"></param>
         public JwtGenerator(IOptions<AudienceModel> options)
         {
             _options = options;
         }
 
+        /// <summary>
+        /// Method used for generating JWT token.
+        /// </summary>
+        /// <param name="uid">User uid.</param>
+        /// <param name="role">User role.</param>
+        /// <returns>string</returns>
         public string Generate(string uid, string role)
         {
             DateTime now = DateTime.UtcNow;

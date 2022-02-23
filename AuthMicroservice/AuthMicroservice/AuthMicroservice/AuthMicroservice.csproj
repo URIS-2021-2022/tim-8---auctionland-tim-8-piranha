@@ -5,6 +5,10 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Lenovo\source\repos\URIS\AuthMicroservice\AuthMicroservice\AuthMicroservice\AuthMicroservice.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="BCrypt.Net" Version="0.1.0" />
     <PackageReference Include="BouncyCastle" Version="1.8.9" />

@@ -8,15 +8,28 @@
     using System.Net.Http;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Service call interface implementation.
+    /// </summary>
+    /// <typeparam name="T">Type of the service.</typeparam>
     public class ServiceCall<T> : IServiceCall<T>
     {
         private readonly ILoggerService Logger;
 
+        /// <summary>
+        /// Constructor for declaring logger service as a service to which the requests are made.
+        /// </summary>
+        /// <param name="logger"></param>
         public ServiceCall(ILoggerService logger)
         {
             Logger = logger;
         }
 
+        /// <summary>
+        /// Method used for sending a request to a service.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public async Task<T> SendGetRequestAsync(string url)
         {
             try

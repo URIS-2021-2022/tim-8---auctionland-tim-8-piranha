@@ -29,6 +29,13 @@
         private IOptions<AudienceModel> _appSettings;
         private readonly ILoggerService loggerService;
 
+        /// <summary>
+        /// Auth service constructor.
+        /// </summary>
+        /// <param name="authRepository">Auth repository.</param>
+        /// <param name="jwtGenerator">JWT generator.</param>
+        /// <param name="_appSettings">App settings.</param>
+        /// <param name="loggerService">Logger service.</param>
         public AuthService(IAuthRepository authRepository, 
             JwtGenerator jwtGenerator, 
             IOptions<AudienceModel> _appSettings,
