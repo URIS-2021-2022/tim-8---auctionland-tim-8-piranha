@@ -18,7 +18,7 @@
         public void InitializeServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IAuthService, AuthService>();
-            //services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IClientService, ClientService>();
         }
     }
 }

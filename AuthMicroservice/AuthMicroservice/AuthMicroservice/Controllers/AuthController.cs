@@ -19,7 +19,7 @@
         /// <summary>
         /// Constructor for the auth controller.
         /// </summary>
-        /// <param name="authService"></param>
+        /// <param name="authService">Auth service.</param>
         public AuthController(IAuthService authService)
         {
             this.authService = authService;
