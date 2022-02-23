@@ -4,6 +4,7 @@
     using AuthMicroservice.Controllers.DTOs.Request;
     using AuthMicroservice.Controllers.DTOs.Response;
     using AuthMicroservice.Services.Abstractions;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
@@ -30,6 +31,7 @@
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<List<ClientResponseDTO>> HandleGetAllClients()
         {
             return Ok(clientService.GetAllClients());
@@ -42,6 +44,7 @@
         /// <param name="uid">Uid of the user.</param>
         /// <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
         [HttpGet(RouteConsts.ROUTE_CLIENT_GET_ONE_BY_UID)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ClientResponseDTO> HandleGetClientByUid(string uid)
         {
             return Ok(clientService.GetOneByUid(uid));
@@ -52,6 +55,7 @@
         /// </summary>
         /// <returns>ActionResult</returns>
         [HttpOptions]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult HandleGetClientOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
@@ -64,6 +68,8 @@
         /// <param name="requestDTO">Attributes of the client.</param>
         /// <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public ActionResult<ClientResponseDTO> HandleCreateClient([FromBody] CreateClientRequestDTO requestDTO)
         {
             return Ok(clientService.Create(requestDTO));
@@ -76,6 +82,8 @@
         /// <param name="requestDTO">Attributes of the user.</param>
         /// <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
         [HttpPut(RouteConsts.ROUTE_CLIENT_GET_ONE_BY_UID)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ClientResponseDTO> HandleUpdateClient(string uid, [FromBody] UpdateClientRequestDTO requestDTO)
         {
             return Ok(clientService.Update(uid, requestDTO));
@@ -87,9 +95,10 @@
         /// <param name="uid">Uid of the user.</param>
         /// <returns>Void</returns>
         [HttpDelete(RouteConsts.ROUTE_CLIENT_GET_ONE_BY_UID)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult HandleDeleteClient(string uid)
         {
-            clientService.Delete(uid);
+            clientService.DeleteAsync(uid);
             return Ok();
         }
     }

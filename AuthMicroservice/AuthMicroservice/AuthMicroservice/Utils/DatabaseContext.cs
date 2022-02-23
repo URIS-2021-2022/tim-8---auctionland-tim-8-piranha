@@ -22,7 +22,6 @@
         /// <param name="options">Options to be applied to database context.</param>
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-
         }
 
         /// <summary>
@@ -43,14 +42,62 @@
         /// <param name="modelBuilder">Model builder.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            string userTypeUid = Guid.NewGuid().ToString();
+            string superUserTypeUid = Guid.NewGuid().ToString();
+
+            #region Creating user types
 
             modelBuilder.Entity<UserType>().HasData(
                 new
                 {
-                    Uid = userTypeUid,
+                    Uid = superUserTypeUid,
+                    Name = "Superuser"
+                });
+            modelBuilder.Entity<UserType>().HasData(
+                new
+                {
+                    Uid = Guid.NewGuid().ToString(),
                     Name = "Operater"
                 });
+            modelBuilder.Entity<UserType>().HasData(
+                new
+                {
+                    Uid = Guid.NewGuid().ToString(),
+                    Name = "Tehnicki sekretar"
+                });
+            modelBuilder.Entity<UserType>().HasData(
+                new
+                {
+                    Uid = Guid.NewGuid().ToString(),
+                    Name = "Prva komisija"
+                });
+            modelBuilder.Entity<UserType>().HasData(
+                new
+                {
+                    Uid = Guid.NewGuid().ToString(),
+                    Name = "Operater nadmetanja"
+                });
+            modelBuilder.Entity<UserType>().HasData(
+                new
+                {
+                    Uid = Guid.NewGuid().ToString(),
+                    Name = "Licitant"
+                });
+            modelBuilder.Entity<UserType>().HasData(
+                new
+                {
+                    Uid = Guid.NewGuid().ToString(),
+                    Name = "Menadzer"
+                });
+            modelBuilder.Entity<UserType>().HasData(
+                new
+                {
+                    Uid = Guid.NewGuid().ToString(),
+                    Name = "Administrator"
+                });
+
+            #endregion
+
+            #region Creating Clients
 
             modelBuilder.Entity<Client>().HasData(
                 new
@@ -59,9 +106,11 @@
                     FirstName = "Stefan",
                     LastName = "Radojevic",
                     Username = "Stefi99R",
-                    Password = "knjg",
-                    UserTypeUid = userTypeUid
+                    Password = "Qwerty1!",
+                    UserTypeUid = superUserTypeUid
                 });
+
+            #endregion
         }
     }
 }

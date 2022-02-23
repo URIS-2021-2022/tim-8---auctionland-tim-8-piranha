@@ -19,6 +19,7 @@
         {
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IUserTypeService, UserTypeService>();
         }
     }
 }
