@@ -22,7 +22,7 @@
         public void InitializeServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddSwaggerGen(setupAction => {
-                setupAction.SwaggerDoc("v1", new OpenApiInfo
+                setupAction.SwaggerDoc("UserMicroserviceOpenApiSpecification", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = GeneralConsts.MICROSERVICE_NAME,
