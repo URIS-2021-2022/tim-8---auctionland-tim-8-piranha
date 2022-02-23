@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj": {}
+    "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj": {
+    "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
         "projectName": "PaymentMicroservice",
-        "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\obj\\",
+        "projectPath": "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
+        "packagesPath": "C:\\Users\\x\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\x\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,8 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://tfs.mca.mk/DefaultCollection/_packaging/MCA/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
@@ -64,12 +59,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[5.0.12, 5.0.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -78,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
         }
       }
     }

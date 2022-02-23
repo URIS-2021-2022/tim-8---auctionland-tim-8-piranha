@@ -6180,11 +6180,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\x\\source\\repos\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
+      "projectUniqueName": "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
       "projectName": "ComplaintMicroservice",
-      "projectPath": "C:\\Users\\x\\source\\repos\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
+      "projectPath": "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
       "packagesPath": "C:\\Users\\x\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\x\\source\\repos\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\obj\\",
+      "outputPath": "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\x\\AppData\\Roaming\\NuGet\\NuGet.Config",

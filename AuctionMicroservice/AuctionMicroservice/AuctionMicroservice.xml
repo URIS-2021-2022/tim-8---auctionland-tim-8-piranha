@@ -307,10 +307,17 @@
             </summary>
             <param name="builder"></param>
         </member>
-        <member name="P:AuctionMicroservice.Entities.AuctionPublicBidding.AuctionId">
+        <member name="T:AuctionMicroservice.Entities.AuctionPublicBidding">
             <summary>
-            Public bidding date
+            Represent AuctionPublicBidding entity
             </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionPublicBidding.PublicBiddingId">
+            <summary>
+            Public bidding ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionPublicBidding.AuctionId">
             <summary>
             ID of auction that public bidding belongs to
             </summary>
@@ -505,6 +512,11 @@
             Auction price step
             </summary>
         </member>
+        <member name="P:AuctionMicroservice.Models.AuctionCreationDto.PublicBiddings">
+            <summary>
+            List od public bidding IDs
+            </summary>
+        </member>
         <member name="P:AuctionMicroservice.Models.AuctionCreationDto.ApplicationDeadline">
             <summary>
             Date of application deadline
@@ -543,6 +555,11 @@
         <member name="P:AuctionMicroservice.Models.AuctionDto.PriceStep">
             <summary>
             Auction price step
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionDto.publicBiddings">
+            <summary>
+            List of public biddings
             </summary>
         </member>
         <member name="P:AuctionMicroservice.Models.AuctionDto.ApplicationDeadline">
@@ -584,6 +601,11 @@
         <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.PriceStep">
             <summary>
             Auction price step
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.PublicBiddings">
+            <summary>
+            List of public bidding IDs
             </summary>
         </member>
         <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.ApplicationDeadline">
@@ -841,6 +863,31 @@
             </summary>
             <param name="validationContext"></param>
             <returns></returns>
+        </member>
+        <member name="T:AuctionMicroservice.Models.LogModel">
+            <summary>
+            Representation of Log.
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.LogModel.LogLevel">
+            <summary>
+            Log level (ex. Warn, Debug, Error, Info)
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.LogModel.LogMessage">
+            <summary>
+            Message to log.
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.LogModel.MicroserviceName">
+            <summary>
+            Name of microservice (ex. Plot microservice)
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.LogModel.MicroserviceMethod">
+            <summary>
+            Microservice method (ex. GetPlotsAsync())
+            </summary>
         </member>
         <member name="T:AuctionMicroservice.Models.PublicBiddingDto">
             <summary>
