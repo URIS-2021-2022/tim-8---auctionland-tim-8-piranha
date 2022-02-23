@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models
 {
+<<<<<<< HEAD
+    /// <summary>
+    /// Document status update DTO model for commnication with user
+    /// </summary>
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     public class DocumentStatusUpdateDto
     {
         /// <summary>

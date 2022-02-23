@@ -12,6 +12,11 @@ namespace DocumentMicroservice.Validators
 
         public ContractLeaseValidators()
         {
+<<<<<<< HEAD
+            RuleFor(contractLease => contractLease.serialNumber)
+                .NotEmpty()
+                .NotNull();
+=======
 <<<<<<< Updated upstream
           
 
@@ -31,10 +36,13 @@ namespace DocumentMicroservice.Validators
 
 
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
                 RuleFor(contractLease => contractLease.placeOfSigning)
                 .NotEmpty()
                 .NotNull();
+<<<<<<< HEAD
+=======
 =======
 
 
@@ -45,6 +53,7 @@ namespace DocumentMicroservice.Validators
 >>>>>>> Stashed changes
                 
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
         }
     }

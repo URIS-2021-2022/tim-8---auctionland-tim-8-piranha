@@ -305,6 +305,9 @@ namespace BuyerMicroservice.Migrations
                         });
                 });
 
+<<<<<<< HEAD
+            modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>
+=======
 <<<<<<< Updated upstream
             modelBuilder.Entity("AuthorizedPersonBuyer", b =>
 =======
@@ -336,6 +339,7 @@ namespace BuyerMicroservice.Migrations
 
             modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>
 >>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                 {
                     b.HasOne("BuyerMicroservice.Entities.AuthorizedPerson", null)
                         .WithMany()

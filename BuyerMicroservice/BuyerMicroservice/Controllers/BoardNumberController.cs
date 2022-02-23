@@ -40,10 +40,23 @@ namespace BuyerMicroservice.Controllers
             this.logger = logger;
         }
 
+<<<<<<< HEAD
+        /// <summary>
+        /// Vraća sve brojeve table
+        /// </summary>
+        /// <returns>Lista brojeva table</returns>
+        /// <response code = "200">Vraća listu brojeva table</response>
+        /// <response code = "204">Ne postoji nijedna broj table</response>
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+<<<<<<< HEAD
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<List<BoardNumberDto>>> GetBoardNumberAsync(int number = 0)
         {
             List<BoardNumber> boardNumber = await boardNumberRepository.GetBoardNumberAsync(number);
@@ -59,9 +72,24 @@ namespace BuyerMicroservice.Controllers
             return Ok(mapper.Map<List<BoardNumberDto>>(boardNumber));
         }
 
+<<<<<<< HEAD
+
+        /// <summary>
+        /// Vraća traženi broj table po ID-ju
+        /// </summary>
+        /// <param name="boardNumberID">ID broja table</param>
+        /// <returns>Traženi broj table</returns>
+        /// <response code = "200">Vraća traženi broj table</response>
+        /// <response code = "404">Nije pronađen traženi broj table</response>
         [HttpGet("{boardNumberID}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+        [HttpGet("{boardNumberID}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<BoardNumberDto>> GetBoardNumberByIdAsync(Guid boardNumberID)
         {
             BoardNumber boardNumber = await boardNumberRepository.GetBoardNumberByIdAsync(boardNumberID);
@@ -76,12 +104,34 @@ namespace BuyerMicroservice.Controllers
 
             return Ok(mapper.Map<BoardNumberDto>(boardNumber));
         }
+<<<<<<< HEAD
+        /// <summary>
+        /// Kreira novi broj table
+        /// </summary>
+        /// <param name="BoardNumberCreation"> model broja table</param>
+        /// <returns>Potvrda o kreiranom broju table</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje novog broja table \
+        /// POST /api/boardNumber \
+        /// { \
+        ///  "boardNumberID" : "8d951bd9-497a-47ec-b1a7-c944492f4c8c", \
+        ///  "number" : "5", \
+        /// } 
+        /// </remarks>
+        /// <response code = "201">Vraća kreirani broj table</response>
+        /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja broja table</response>
+=======
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<BoardNumberConfirmationDto>> CreateBoardNumberAsync([FromBody] BoardNumberCreationDto BoardNumberCreation)
         {
             try
@@ -113,12 +163,27 @@ namespace BuyerMicroservice.Controllers
             }
         }
 
+<<<<<<< HEAD
+        /// <summary>
+        /// Ažurira jedan broj table
+        /// </summary>
+        /// <param name="boardNumberUpdate">Model broja table koja se ažurira</param>
+        /// <returns>Potvrda o ažuriranom broju table</returns>
+        /// <response code="200">Vraća ažurirani broj table</response>
+        /// <response code="404">Nije pronađen broj table za ažuriranje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja broja table</response>
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<ActionResult<BoardNumberDto>> UpdateBoardNumberAsync(BoardNumberUpdateDto boardNumberUpdate)
         {
             try
@@ -155,11 +220,26 @@ namespace BuyerMicroservice.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+<<<<<<< HEAD
+        /// <summary>
+        /// Briše broj table na osnovu ID-ja
+        /// </summary>
+        /// <param name="boardNumberID">ID broja table</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Broj table uspešno obrisan</response>
+        /// <response code="404">Nije pronađen broj table za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja broja table</response>
+=======
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpDelete("{boardNumberID}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+<<<<<<< HEAD
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+=======
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult> DeleteBoardNumberAsync(Guid boardNumberID)
         {
             try
@@ -188,8 +268,18 @@ namespace BuyerMicroservice.Controllers
             }
         }
 
+<<<<<<< HEAD
+        /// <summary>
+        /// Vraća informacije o opcijama koje je moguće izvršiti za sve brojeve table
+        /// </summary>
+        /// <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
         [HttpOptions]
         [AllowAnonymous]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+=======
+        [HttpOptions]
+        [AllowAnonymous]
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<IActionResult>  GetBoardNumberOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");

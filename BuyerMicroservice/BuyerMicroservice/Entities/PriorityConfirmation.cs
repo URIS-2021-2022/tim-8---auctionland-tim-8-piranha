@@ -6,11 +6,28 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Entities
 {
+<<<<<<< HEAD
+    /// <summary>
+    /// Priority confirmation model
+    /// </summary>
+    public class PriorityConfirmation
+    {
+        /// <summary>
+        /// priority ID 
+        /// Example:  861f142c-4707-416d-ad14-7debbd2031ed
+        /// </summary>
+        public Guid priorityID { get; set; }
+        /// <summary>
+        ///  Priority Type - tip prioriteta 
+        ///  Example : 1
+        /// </summary>
+=======
     public class PriorityConfirmation
     {
         [Key]
         public Guid priorityID { get; set; }
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public string priorityType { get; set; }
     }
 }

@@ -5,23 +5,16 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Entities
 {
+    /// <summary>
+    /// Contract Lease confirmation model
+    /// </summary>
     public class ContractLeaseConfirmation
     {
         /// <summary>
         /// ContractLeaseID - ID ugovora o zakupu
+        /// Example: 86c9ac76-a632-4ffc-b2a2-26ea8600dc86
         /// </summary>
-      
         public Guid contractLeaseID { get; set; }
-
-
-<<<<<<< Updated upstream
-      
-=======
-        /// <summary>
-        /// Maturities - Rokovi dospeća
-        /// </summary>
-       // public int[] maturities { get; set; }
->>>>>>> Stashed changes
 
 
         /// <summary>
@@ -32,6 +25,7 @@ namespace DocumentMicroservice.Entities
 
         /// <summary>
         /// SubmissionDate - Datum zavodjenja
+        /// Example:"2021-02-01 00:00:00"
         /// </summary>
         public DateTime? submissionDate { get; set; }
 
@@ -39,18 +33,21 @@ namespace DocumentMicroservice.Entities
 
         /// <summary>
         /// DeadlineLandRestitution - Rok za vracanje zemljista
+        /// Example: "2021-02-01 00:00:00"
         /// </summary>
         public DateTime? deadlineLandRestitution { get; set; }
 
 
         /// <summary>
         /// Place Of Signing - Mesto potpisivanja 
+        /// Example:Zrenjanin
         /// </summary>
         public string placeOfSigning { get; set; }
 
 
         /// <summary>
         /// Date Of Signing - Datum potpisivanja
+        /// Example : "2021-02-01 00:00:00"
         /// </summary>
         public DateTime dateOfSigning { get; set; }
 
@@ -63,10 +60,12 @@ namespace DocumentMicroservice.Entities
 
         /// <summary>
         /// DocumentId - ID dokumenta
+        /// Example: 3a3e6366-3a20-4d3b-ae15-be85ba277683
         /// </summary>
-        
         public Guid documentId { get; set; }
 
+
         public Document document { get; set; }
+
     }
 }

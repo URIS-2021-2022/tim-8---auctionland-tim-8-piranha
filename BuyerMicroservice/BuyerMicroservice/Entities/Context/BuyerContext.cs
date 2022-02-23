@@ -42,12 +42,17 @@ namespace BuyerMicroservice.Entities.Context
                    surname = "Corlija",
                    personalDocNum = "8767834637274",
                    address = "Mira popare 11",
+<<<<<<< HEAD
+                   country = "Srbija",
+
+=======
 <<<<<<< Updated upstream
                    country = "Srbija"
 =======
                    country = "Srbija",
 
 >>>>>>> Stashed changes
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
                });
 
             builder.Entity<AuthorizedPerson>().HasData(
@@ -62,6 +67,9 @@ namespace BuyerMicroservice.Entities.Context
                    address = "Bulevar Oslobodjenja 55",
                    country = "Zrenjanin"
                });
+<<<<<<< HEAD
+                
+=======
 <<<<<<< Updated upstream
             
 =======
@@ -74,6 +82,7 @@ namespace BuyerMicroservice.Entities.Context
 
 >>>>>>> Stashed changes
             //Contact person 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
             builder.Entity<ContactPerson>().HasData(
               new
               {
@@ -112,8 +121,12 @@ namespace BuyerMicroservice.Entities.Context
                   phone2="-0654442223",
                   email="dinoR@gmail.com",
                   accountNumber="4224234876",
+<<<<<<< HEAD
+                 
+=======
                   
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
               });
 
            
@@ -137,9 +150,14 @@ namespace BuyerMicroservice.Entities.Context
                  phone2 = "067662529",
                  fax= "212693-2377",
                  email = "rosa@gmail.com",
+<<<<<<< HEAD
+                 accountNumber = "0074234876"
+                
+=======
                  accountNumber = "0074234876",
                  
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
              });
 
 
@@ -150,27 +168,39 @@ namespace BuyerMicroservice.Entities.Context
             {
                 priorityID = Guid.Parse("784c7edd-c937-45e6-a493-f0b8dedab85f"),
                 priorityType = "1",
+<<<<<<< HEAD
+=======
                 
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
             });
 
             builder.Entity<Priority>().HasData(
             new
             {
                 priorityID = Guid.Parse("21200907-0d08-44f3-8506-dc807ca2215b"),
+<<<<<<< HEAD
+                priorityType = "2"
+            });
+
+=======
                 priorityType = "2",
 
 
             });
 
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
             builder.Entity<BoardNumber>().HasData(
             new
             {
                 boardNumberID = Guid.Parse("8d951bd9-497a-47ec-b1a7-c944492f4c8c"),
                 number = 5
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
             });
 
             builder.Entity<BoardNumber>().HasData(
@@ -178,8 +208,11 @@ namespace BuyerMicroservice.Entities.Context
             {
                 boardNumberID = Guid.Parse("2018f35a-f49b-462f-a1c9-a105f297864b"),
                 number = 10
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
             });
         }
     }

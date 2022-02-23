@@ -21,7 +21,10 @@ namespace DocumentMicroservice.Data.Repositories
             Mapper = mapper;
         }
 
+<<<<<<< HEAD
+=======
         
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<GuaranteeTypeConfirmation> CreateGuaranteeTypeAsync(GuaranteeType guaranteeType)
         {
             var createdEntity = await Context.AddAsync(guaranteeType);
@@ -49,15 +52,22 @@ namespace DocumentMicroservice.Data.Repositories
             return await Context.SaveChangesAsync() > 0;
         }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task UpdateGuaranteeTypeAsync(GuaranteeType guaranteeType)
         {
             /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 
               kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane */
         }
+<<<<<<< HEAD
+  
+=======
 
        
 
         
+>>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     }
 }
