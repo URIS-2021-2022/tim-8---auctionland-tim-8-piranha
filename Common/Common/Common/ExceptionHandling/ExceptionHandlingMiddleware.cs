@@ -39,7 +39,6 @@ namespace Commons.ExceptionHandling
                 messsage = ex.Message,
                 status = ex.code,
                 requested_uri = context.Request.Path,
-                origin = ex.origin,
                 timestamp = DateTime.Now
             });
 

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using AuthMicroservice.Utils;
 
 namespace AuthMicroservice.Initializers
 {
@@ -10,9 +10,7 @@ namespace AuthMicroservice.Initializers
     {
         public void InitializeServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContextPool<DbContext>(options => options.UseMySql(
-                configuration.GetConnectionString("MySql"), 
-                new MySqlServerVersion(new Version(8, 0, 16))));
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer"), x => x.MigrationsAssembly("AuthMicroservice")));
         }
     }
 }

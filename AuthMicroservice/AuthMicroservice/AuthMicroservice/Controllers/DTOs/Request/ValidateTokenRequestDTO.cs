@@ -6,6 +6,6 @@
     public class ValidateTokenRequestDTO
     {
         [Required]
-        private string token { get; set; }
+        public string token { get; set; }
     }
 }
