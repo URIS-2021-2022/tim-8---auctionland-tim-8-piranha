@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\x\source\repos\tim-8---auctionland-tim-8-piranha\AuthMicroservice\AuthMicroservice\AuthMicroservice\AuthMicroservice.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\andrija\source\repos\tim-8---auctionland-tim-8-piranha\AuthMicroservice\AuthMicroservice\AuthMicroservice\AuthMicroservice.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />

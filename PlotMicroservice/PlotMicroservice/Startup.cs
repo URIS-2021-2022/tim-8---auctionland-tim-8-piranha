@@ -73,12 +73,12 @@ namespace PlotMicroservice
                     {
                         Name = "Andrija Pavlov",
                         Email = "pavlovandrija9@gmail.com",
-                        Url = new Uri("https://github.com/pavlovandrija99")
+                        Url = new Uri(Configuration["Urls:Contact"])
                     },
                     License = new OpenApiLicense
                     {
                         Name = "FTN license",
-                        Url = new Uri("http://www.ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka")
+                        Url = new Uri(Configuration["Urls:License"])
                     }
                 });
 

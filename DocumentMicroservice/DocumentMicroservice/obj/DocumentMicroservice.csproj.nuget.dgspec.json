@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj": {}
+    "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj": {
+    "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj",
         "projectName": "DocumentMicroservice",
-        "projectPath": "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj",
-        "packagesPath": "C:\\Users\\x\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\x\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\obj\\",
+        "projectPath": "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\DocumentMicroservice.csproj",
+        "packagesPath": "C:\\Users\\andrija\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\DocumentMicroservice\\DocumentMicroservice\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\x\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\andrija\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
