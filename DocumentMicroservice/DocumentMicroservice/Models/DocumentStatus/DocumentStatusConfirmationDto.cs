@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models
 {
+    /// <summary>
+    /// Document status confirmation DTO model for commnication with user
+    /// </summary>
     public class DocumentStatusConfirmationDto
     {
 

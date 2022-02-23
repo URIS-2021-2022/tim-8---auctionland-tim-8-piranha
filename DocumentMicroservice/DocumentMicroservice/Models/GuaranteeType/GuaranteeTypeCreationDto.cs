@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models.GuaranteeType
 {
+    /// <summary>
+    /// Guarantee type creation DTO model for commnication with user
+    /// </summary>
     public class GuaranteeTypeCreationDto
     {
         /// <summary>

@@ -20,8 +20,8 @@ namespace DocumentMicroservice.Controllers
         [ApiController]
         [Route("api/guaranteeType")]
         [Produces("application/json", "application/xml")]
-        //[Authorize] - kontroleru mogu pristupati samo autorizovani korisnici
-        public class GuaranteeTypeController : ControllerBase
+        [Authorize]
+    public class GuaranteeTypeController : ControllerBase
         {
             private readonly IGuaranteeTypeRepository GuaranteeTypeRepository;
             private readonly LinkGenerator LinkGeneration;
@@ -49,7 +49,8 @@ namespace DocumentMicroservice.Controllers
             [HttpHead]
             [ProducesResponseType(StatusCodes.Status200OK)]
             [ProducesResponseType(StatusCodes.Status204NoContent)]
-            public async Task< ActionResult<List<GuaranteeTypeDto>>> GetGuaranteeTypeAsync (string guaranteeType)
+            [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+        public async Task< ActionResult<List<GuaranteeTypeDto>>> GetGuaranteeTypeAsync (string guaranteeType)
             {
                 List<GuaranteeType> guaranteeTypeList =await  GuaranteeTypeRepository.GetGuaranteeTypeAsync(guaranteeType);
 
@@ -75,6 +76,7 @@ namespace DocumentMicroservice.Controllers
             [HttpGet("{guaranteeTypeId}")]
             [ProducesResponseType(StatusCodes.Status200OK)]
             [ProducesResponseType(StatusCodes.Status404NotFound)]
+            [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
             public async Task<ActionResult<GuaranteeTypeDto>> GetGuaranteeTypeByIdAsync(Guid GuaranteeTypeId)
             {
                 GuaranteeType guaranteeType = await GuaranteeTypeRepository.GetGuaranteeTypeByIdAsync(GuaranteeTypeId);
@@ -110,7 +112,8 @@ namespace DocumentMicroservice.Controllers
             [Consumes("application/json")]
             [ProducesResponseType(StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-            public async Task< ActionResult<GuaranteeTypeConfirmationDto>> CreateGuaranteeTypeAsync([FromBody] GuaranteeTypeCreationDto guaranteeType)
+            [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+        public async Task< ActionResult<GuaranteeTypeConfirmationDto>> CreateGuaranteeTypeAsync([FromBody] GuaranteeTypeCreationDto guaranteeType)
             {
                 try
                 {
@@ -153,6 +156,7 @@ namespace DocumentMicroservice.Controllers
             [ProducesResponseType(StatusCodes.Status200OK)]
             [ProducesResponseType(StatusCodes.Status404NotFound)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+            [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
             public async Task<ActionResult<GuaranteeTypeDto>> UpdateGuaranteeTypeAsync(GuaranteeTypeUpdateDto guaranteeType)
             {
                 try
@@ -202,7 +206,8 @@ namespace DocumentMicroservice.Controllers
             [ProducesResponseType(StatusCodes.Status204NoContent)]
             [ProducesResponseType(StatusCodes.Status404NotFound)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-            public async Task<IActionResult> DeleteGuaranteeTypeAsync(Guid guaranteeTypeId)
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
+        public async Task<IActionResult> DeleteGuaranteeTypeAsync(Guid guaranteeTypeId)
             {
                 try
                 {
@@ -235,7 +240,8 @@ namespace DocumentMicroservice.Controllers
             [HttpOptions]
             [ProducesResponseType(StatusCodes.Status200OK)]
             [AllowAnonymous]
-            public async Task<IActionResult>  GetGuaranteeTypeOptions()
+            [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
+         public async Task<IActionResult>  GetGuaranteeTypeOptions()
             {
                 Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             await logger.LogMessage(LogLevel.Information, "Options request returned successfully!", "Document microservice", "GetGuaranteeTypeOptions");

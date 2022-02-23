@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Entities
 {
-    //tip garancije
+    /// <summary>
+    /// Guarantee type model
+    /// </summary>
     public class GuaranteeType
     {
         /// <summary>

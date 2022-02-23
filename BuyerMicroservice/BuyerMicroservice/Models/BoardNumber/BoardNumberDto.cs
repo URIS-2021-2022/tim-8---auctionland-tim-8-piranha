@@ -5,8 +5,15 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.BoardNumber
 {
+    /// <summary>
+    /// Board number DTO for communication with user
+    /// </summary>
     public class BoardNumberDto
     {
+        /// <summary>
+        /// Number - Broj table
+        /// Example : 2
+        /// </summary>
         public int number { get; set; }
     }
 }

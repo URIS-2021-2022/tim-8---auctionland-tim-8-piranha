@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Entities
 {
+    /// <summary>
+    /// Document status model
+    /// </summary>
     public class DocumentStatus
     {
         /// <summary>

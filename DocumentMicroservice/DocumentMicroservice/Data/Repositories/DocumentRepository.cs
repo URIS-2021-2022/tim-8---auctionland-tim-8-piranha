@@ -27,35 +27,26 @@ namespace DocumentMicroservice.Data.Repositories
             return Mapper.Map<DocumentConfirmation>(createdEntity.Entity);
         }
 
-        
-
         public async Task DeleteDocumentAsync(Guid documentId)
         {
             var document =await  GetDocumentByIdAsync(documentId);
             Context.Remove(document);
         }
 
-        
-
         public async  Task<List<Document>> GetDocumentAsync(string rNumber = null, string documentTemplate = null)
         {
             return await Context.Document.Where(o => (o.registrationNumber == null || rNumber == null) && (o.documentTemplate == null || documentTemplate == null)).ToListAsync();
         }
-
-       
 
         public async Task<Document> GetDocumentByIdAsync(Guid documentId)
         {
             return await Context.Document.FirstOrDefaultAsync(o => o.documentId == documentId);
         }
 
-
         public async Task<bool> SaveChangesAsync()
         {
             return await Context.SaveChangesAsync() > 0;
         }
-
-       
 
         public async Task UpdateDocumentAsync(Document document)
         {

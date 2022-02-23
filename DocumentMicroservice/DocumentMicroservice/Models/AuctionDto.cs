@@ -8,10 +8,6 @@ namespace DocumentMicroservice.Models
     public class AuctionDto
     {
         /// <summary>
-        /// Auction ID
-        /// </summary>
-        //public Guid AuctionId { get; set; }
-        /// <summary>
         /// Auction number
         /// </summary>
         public int AuctionNum { get; set; }
@@ -31,16 +27,12 @@ namespace DocumentMicroservice.Models
         /// Auction price step
         /// </summary>
         public int PriceStep { get; set; }
-
-        /// <summary>
-        /// List of public biddings
-        /// </summary>
-        //public List<PublicBiddingDto> publicBiddings { get; set; }
+   
 
         /// <summary>
         /// Date of application deadline
         /// </summary>
-        /// 
+        
         public DateTime ApplicationDeadline { get; set; }
     }
 }

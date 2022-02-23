@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Entities
 {
+    /// <summary>
+    /// Guarantee type confirmation model
+    /// </summary>
     public class GuaranteeTypeConfirmation
     {
         /// <summary>

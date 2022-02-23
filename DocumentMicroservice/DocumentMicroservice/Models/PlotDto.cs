@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models
 {
+    /// <summary>
+    /// Plot DTO - Model za parcelu sistema
+    /// </summary>
     public class PlotDto
     {
         /// <summary>

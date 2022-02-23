@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models
 {
+    /// <summary>
+    /// Buyer DTO - Model za kupca sistema
+    /// </summary>
     public class BuyerDto
     {
         /// <summary>

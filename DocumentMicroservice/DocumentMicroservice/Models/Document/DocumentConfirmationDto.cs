@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models.Document
 {
+    /// <summary>
+    /// Document confirmation DTO model for commnication with user
+    /// </summary>
     public class DocumentConfirmationDto
     {
         /// <summary>
@@ -15,6 +18,7 @@ namespace DocumentMicroservice.Models.Document
 
         /// <summary>
         /// Document creation date - Datum krairanja dokumenta
+        /// Example : "2021-02-01 00:00:00"
         /// </summary>
         public DateTime? DocumentCreationDate { get; set; }
 

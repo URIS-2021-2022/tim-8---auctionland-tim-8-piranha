@@ -52,10 +52,18 @@ namespace BuyerMicroservice.Controllers
 
 
         }
+
+        /// <summary>
+        /// Vraća sve kupce
+        /// </summary>
+        /// <returns>Lista kupaca</returns>
+        /// <response code = "200">Vraća listu kupaca</response>
+        /// <response code = "204">Ne postoji nijedan kupac</response>
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task<ActionResult<List<BuyerDto>>> GetBuyerAsync(int realizedArea = 0)
         {
             List<Buyer> buyers = await buyerRepository.GetBuyerAsync(realizedArea);
@@ -89,9 +97,17 @@ namespace BuyerMicroservice.Controllers
             return Ok(buyersDto);
         }
 
+        /// <summary>
+        /// Vraća trazenog kupca po ID-ju
+        /// </summary>
+        /// <param name="buyerID">ID kupca</param>
+        /// <returns>Traženi kupac</returns>
+        /// <response code = "200">Vraća traženog kupca</response>
+        /// <response code = "404">Nije pronađen traženi kupac</response>
         [HttpGet("{buyerID}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task<ActionResult<BuyerDto>> GetBuyerByIdAsync(Guid buyerID)
         {
             Buyer buyer = await buyerRepository.GetBuyerByIdAsync(buyerID);
@@ -123,10 +139,19 @@ namespace BuyerMicroservice.Controllers
             );
         }
 
+        /// <summary>
+        /// Briše kupca na osnovu ID-ja
+        /// </summary>
+        /// <param name="buyerId">ID kupca</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Kupac uspešno obrisan</response>
+        /// <response code="404">Nije pronađen kupac za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja kupca</response>
         [HttpDelete("{buyerId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task<IActionResult> DeleteBuyerAsync(Guid buyerId)
         {
             try
@@ -151,7 +176,19 @@ namespace BuyerMicroservice.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        /// <summary>
+        /// Povezivanje ovlascenog lica sa kupcem
+        /// </summary>
+        /// <param name="apbDto"> model kupca kome se dodaje ovlasceno lice</param>
+        /// <returns>Potvrda o uspesnom povezivanju</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje nove banke \
+        /// post /api/buyers/AddAuthorizedPerson \
+        /// </remarks>
+        /// <response code = "201"> potvrda o uspesnom povezivanju </response>
+        /// <response code = "500">Došlo je do greške na serveru prilikom povezivanja kupca i ovlascenog lica</response>
         [HttpPost("AddAuthorizedPerson")]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task<IActionResult> AddBuyerAuthorizedPerson(AuthorizedPersonBuyerDto apbDto)
         {
             AuthorizedPerson ap = await authorizedPersonRepository.GetAuthorizedPersonByIdAsync(apbDto.authorizedPersonId);
@@ -161,8 +198,19 @@ namespace BuyerMicroservice.Controllers
 
             return NoContent();
         }
-
+        /// <summary>
+        /// Brisanje veze kupcem sa ovlascenog lica
+        /// </summary>
+        /// <param name="apbDto"> model kupca kome se brise ovlasceno lice</param>
+        /// <returns>Potvrda o uspesnom brisanju</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje nove banke \
+        /// DELETE /api/buyers/DeleteAuthorizedPerson \
+        /// </remarks>
+        /// <response code = "201"> potvrda o uspesnom brisanju </response>
+        /// <response code = "500">Došlo je do greške na serveru prilikom brisanja veze kupca i ovlascenog lica</response>
         [HttpDelete("DeleteAuthorizedPerson")]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task<IActionResult> DeleteBuyerAuthorizedPerson(AuthorizedPersonBuyerDto apbDto)
         {
             AuthorizedPerson ap = await authorizedPersonRepository.GetAuthorizedPersonByIdAsync(apbDto.authorizedPersonId);
@@ -173,8 +221,13 @@ namespace BuyerMicroservice.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Vraća informacije o opcijama koje je moguće izvršiti za sve kupce
+        /// </summary>
+        /// <response code="200">Vraća informacije o opcijama koje je moguće izvršiti</response>
         [HttpOptions]
         [AllowAnonymous]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task<IActionResult> GetBuyerOptions()
         {
             Response.Headers.Add("Allow", "GET,DELETE");

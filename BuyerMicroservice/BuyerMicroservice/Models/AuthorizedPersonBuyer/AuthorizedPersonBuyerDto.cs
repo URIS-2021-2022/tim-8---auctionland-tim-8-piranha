@@ -5,10 +5,21 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.AuthorizedPersonBuyer
 {
+    /// <summary>
+    /// AuthorizedPersonBuyerDto-Auxiliary table for connecting more authorized persons with the buyer
+    /// </summary>
     public class AuthorizedPersonBuyerDto
     {
+        /// <summary>
+        /// Authorized person ID - ID broja table
+        /// Example : 861f142c-4707-416d-ad14-7debbd2031ed
+        /// </summary>
         public Guid authorizedPersonId { get; set; }
 
+        /// <summary>
+        /// Buyer ID - ID broja table
+        /// Example : 861f142c-4707-416d-ad14-7debbd2031ed
+        /// </summary>
         public Guid buyerId { get; set; }
     }
 }
