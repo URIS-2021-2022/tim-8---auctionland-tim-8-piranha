@@ -1,0 +1,899 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ComplaintMicroservice</name>
+    </assembly>
+    <members>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintController.GetComplaints(System.String)">
+            <summary>
+            Vraća sve zalbe
+            </summary>
+            <param name="solutionNumber">Broj zalbe</param>
+            <returns>Lista zalbi</returns>
+            <response code="200">Vraća listu zalb</response>
+            <response code="404">Nije pronađena nijedna zalba</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintController.GetComplaintById(System.Guid)">
+            <summary>
+            Vraća jednu zalbu na osnovu ID-a
+            </summary>
+            <returns>Zalba</returns>
+            <response code="200">Vraća jednu zalbu</response>
+            <response code="404">Nije pronađena zalba sa tim ID-em</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintController.CreateComplaintEvent(ComplaintMicroservice.Models.Complaint.ComplaintCreationDto)">
+            <summary>
+            Kreira zalbu
+            </summary>
+            <returns>Potvrda o kreiranju zalbe</returns>
+            <response code="200">Vraća listu zalbi</response>
+            <response code="500">Došlo je do greške na serveru prilikom unosa nove zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintController.UpdateComplaint(ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto)">
+            <summary>
+            Ažurira jednu zalbu
+            </summary>
+            <returns>Potvrdu o modifikovanoj zalbi</returns>
+            <response code="200">Vraća ažuriranu zalbu</response>
+            <response code="400">Zalba kojia se ažurira nije pronađena</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintController.DeleteComplaint(System.Guid)">
+            <summary>
+            Vrši brisanje jedne zalbe na osnovu ID-a 
+            </summary>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Zalba uspešno obrisana</response>
+            <response code="404">Nije pronađena zalba za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintController.GetComplaintOptions">
+            <summary>
+            Vraća opcije za rad sa zalbom
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintEventController.GetComplaintEvents(System.String)">
+            <summary>
+            Vraća sve dogadjaje na osnovu zalbe
+            </summary>
+            <param name="complaintEvent">dogadjaj na osnovu zalbe</param>
+            <returns>Lista dogadjaja na osnovu zalbe</returns>
+            <response code="200">Vraća listu dogadjaja na osnovu zalbe</response>
+            <response code="404">Nije pronađen nijedan dogadjaj na osnovu zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintEventController.GetComplaintEventById(System.Guid)">
+            <summary>
+            Vraća jedan dogadjaj na osnovu zalbe na osnovu ID-a
+            </summary>
+            <returns>dogadjaj na osnovu zalbe</returns>
+            <response code="200">Vraća jedan dogadjaj na osnovu zalbe </response>
+            <response code="404">Nije pronađen dogadjaj na osnovu zalbe sa tim ID-em</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintEventController.CreateComplaintEvent(ComplaintMicroservice.Models.Event.ComplaintEventCreationDto)">
+            <summary>
+            Kreira dogadjaj na osnovu zalbe
+            </summary>
+            <returns>Potvrda o kreiranju dogadjaja na osnovu zalbe</returns>
+            <response code="200">kreiran dogadjaj na osnovu zalbe</response>
+            <response code="500">Došlo je do greške na serveru prilikom unosa novog dogadjaja na osnovu zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintEventController.UpdateComplaintEvent(ComplaintMicroservice.Models.Event.ComplaintEventUpdateDto)">
+            <summary>
+            Ažurira jedan dogadjaj na osnovu zalbe
+            </summary>
+            <returns>Potvrdu o modifikovanom dogadjaju na osnovu zalbe</returns>
+            <response code="200">Vraća ažuriran dogadjaj na osnovu zalbe</response>
+            <response code="400">Dogadjaj na osnovu zalbe koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja dogadjaja na osnovu zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintEventController.DeleteComplaintEvent(System.Guid)">
+            <summary>
+            Vrši brisanje jednog dogadjaja na osnovu zalbe na osnovu ID-a 
+            </summary>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Dogadjaj na osnovu zalbe uspešno obrisan</response>
+            <response code="404">Nije pronađen dogadjaj na osnovu zalbe za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja dogadjaja na osnovu zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintEventController.GetComplaintEventOptions">
+            <summary>
+            Vraća opcije za rad sa dogadjajem na osnovu zalbe
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintStatusController.GetComplaintStatuses(System.String)">
+            <summary>
+            Vraća sve statuse zalbe
+            </summary>
+            <param name="Status">Status zalbe</param>
+            <returns>Lista statusa zalbe</returns>
+            <response code="200">Vraća listu statusa zalbe</response>
+            <response code="404">Nije pronađen nijedan status zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintStatusController.GetComplaintStatusById(System.Guid)">
+            <summary>
+            Vraća jedan status zalbe na osnovu ID-a
+            </summary>
+            <returns>Status zalbe</returns>
+            <response code="200">Vraća jedan status zalbe</response>
+            <response code="404">Nije pronađen status zalbe sa tim ID-em</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintStatusController.CreateComplaintStatus(ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusCreationDto)">
+            <summary>
+            Kreira status zalbe
+            </summary>
+            <returns>Kreiran status zalbe</returns>
+            <response code="200">Vraća listu statusa zalbe</response>
+            <response code="500">Došlo je do greške na serveru prilikom unosa novog statusa zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintStatusController.UpdateComplaintStatus(ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusUpdateDto)">
+            <summary>
+            Ažurira jedan status zalbe
+            </summary>
+            <returns>Potvrdu o modifikovanom statusu zalbe</returns>
+            <response code="200">Vraća ažuriran status zalbe</response>
+            <response code="400">Status zalbe koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja statusa zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintStatusController.DeleteComplaintStatus(System.Guid)">
+            <summary>
+            Vrši brisanje jednog statusa zalbe na osnovu ID-a 
+            </summary>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Status zalbe uspešno obrisan</response>
+            <response code="404">Nije pronađen status zalbe za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja statusa zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintStatusController.GetComplaintStatusOptions">
+            <summary>
+            Vraća opcije za rad sa statusom zalbe
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintTypeController.GetComplaintTypes(System.String)">
+            <summary>
+            Vraća sve tipove zalbe
+            </summary>
+            <param name="complaintType">Tip zalbe</param>
+            <returns>Lista tipova zalbe</returns>
+            <response code="200">Vraća listu tipova zalbe</response>
+            <response code="404">Nije pronađen nijedan tip zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintTypeController.GetComplaintTypeById(System.Guid)">
+            <summary>
+            Vraća jedan tip zalbe na osnovu ID-a
+            </summary>
+            <returns>Tip zalbe</returns>
+            <response code="200">Vraća jedan tip zalbe</response>
+            <response code="404">Nije pronađen tip zalbe sa tim ID-em</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintTypeController.CreateComplaintType(ComplaintMicroservice.Models.ComplaintTypeCreationDto)">
+            <summary>
+            Kreira tip zalbe
+            </summary>
+            <returns>Kreiran tip zalbe</returns>
+            <response code="200">Vraća listu tipova zalbe</response>
+            <response code="500">Došlo je do greške na serveru prilikom unosa novog tipa zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintTypeController.UpdateComplaintType(ComplaintMicroservice.Models.ComplaintTypeUpdateDto)">
+            <summary>
+            Ažurira jedan Tip zalbe
+            </summary>
+            <returns>Potvrdu o modifikovanom tipu zalbe</returns>
+            <response code="200">Vraća ažuriran tip zalbe</response>
+            <response code="400">Tip zalbe koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja tipa zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintTypeController.DeleteComplaintType(System.Guid)">
+            <summary>
+            Vrši brisanje jednog tipa zalbe na osnovu ID-a 
+            </summary>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Tip zalbe uspešno obrisan</response>
+            <response code="404">Nije pronađen tip zalbe za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja tipa zalbe</response>
+        </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintTypeController.GetComplaintTypeOptions">
+            <summary>
+            Vraća opcije za rad sa tipom zalbe
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ComplaintMicroservice.Entities.Complaint.Complaint">
+            <summary>
+            Predstavlja zalbu
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.ComplaintId">
+            <summary>
+            ID zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.SubmissionDate">
+            <summary>
+            Datum podnosenja zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.Reason">
+            <summary>
+            Razlog zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.Explanation">
+            <summary>
+            Obrazlozenje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.SolutionNumber">
+            <summary>
+            Broj odluke
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.DecisionNumber">
+            <summary>
+            Broj resenja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.ComplaintTypeId">
+            <summary>
+            ID tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.ComplaintType">
+            <summary>
+            Tip zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.ComplaintStatusId">
+            <summary>
+            ID statusa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.ComplaintStatus">
+            <summary>
+            Status zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.ComplaintEventId">
+            <summary>
+            ID dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.ComplaintEvent">
+            <summary>
+            Dogadjaj na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.Complaint.BuyerId">
+            <summary>
+            Id kupca
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation">
+            <summary>
+            Potvrda zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.ComplaintId">
+            <summary>
+            ID zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.SubmissionDate">
+            <summary>
+            Datum podnosenja zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.Reason">
+            <summary>
+            Razlog zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.Explanation">
+            <summary>
+            Obrazlozenje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.SolutionNumber">
+            <summary>
+            Broj odluke
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.DecisionNumber">
+            <summary>
+            Broj resenja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.ComplaintTypeId">
+            <summary>
+            ID tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.ComplaintStatusId">
+            <summary>
+            ID statusa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.ComplaintEventId">
+            <summary>
+            ID dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Complaint.ComplaintConfirmation.BuyerId">
+            <summary>
+            Id kupca
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Entities.Event.ComplaintEvent">
+            <summary>
+            Predstavlja dogadjaj na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Event.ComplaintEvent.ComplaintEventId">
+            <summary>
+            ID dogadjaja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Event.ComplaintEvent.Event">
+            <summary>
+            Doagadjaj na osnovu zalbe
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Entities.Event.ComplaintEventConfirmation">
+            <summary>
+            Predstavlja potvrdu dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Event.ComplaintEventConfirmation.ComplaintEventId">
+            <summary>
+            ID dogadjaja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.Event.ComplaintEventConfirmation.Event">
+            <summary>
+            Dogadjaj na osnovu zalbe
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Entities.ComplaintStatusEntities.ComplaintStatus">
+            <summary>
+            Predstavlja status zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.ComplaintStatusEntities.ComplaintStatus.ComplaintStatusId">
+            <summary>
+            ID statusa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.ComplaintStatusEntities.ComplaintStatus.Status">
+            <summary>
+            Status zalbe
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Entities.ComplaintStatusEntities.ComplaintStatusConfirmation">
+            <summary>
+            Predstavlja potvrdu statusa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.ComplaintStatusEntities.ComplaintStatusConfirmation.ComplaintStatusId">
+            <summary>
+            ID statusa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.ComplaintStatusEntities.ComplaintStatusConfirmation.Status">
+            <summary>
+            Status zalbe
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Entities.ComplaintTypeConfirmation">
+            <summary>
+            Predstavlja potvrdu tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.ComplaintTypeConfirmation.ComplaintTypeId">
+            /// <summary>
+            Predstavlja ID tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.ComplaintTypeConfirmation.ComplaintType">
+            <summary>
+            Tip zalbe
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Entities.ComplaintTypeModel">
+            <summary>
+            Predstavlja tip zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.ComplaintTypeModel.ComplaintTypeId">
+            <summary>
+            Predstavlja ID tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Entities.ComplaintTypeModel.ComplaintType">
+            <summary>
+            Tip zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.name">
+            <summary>
+            Ime kupca
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.addresse">
+            <summary>
+            Adresa kupca
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.phone1">
+            <summary>
+            Telefon kupca
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.email">
+            <summary>
+            Mail kupca
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.BuyerDto.accountNumber">
+            <summary>
+            Broj naloga
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto">
+            <summary>
+            Potvrda zalbe DTO
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.ComplaintId">
+            <summary>
+            ID zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.SubmissionDate">
+            <summary>
+            Datum podnosenja zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.Reason">
+            <summary>
+            Razlog zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.Explanation">
+            <summary>
+            Obrazlozenje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.SolutionNumber">
+            <summary>
+            Broj resenja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.DecisionNumber">
+            <summary>
+            Broj odluke
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.ComplaintTypeId">
+            <summary>
+            ID tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.ComplaintStatusId">
+            <summary>
+            ID statusa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.ComplaintEventId">
+            <summary>
+            ID dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintConfirmationDto.BuyerId">
+            <summary>
+            Id kupca
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto">
+            <summary>
+            Zalba DTO za kreiranje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.SubmissionDate">
+            <summary>
+            Datum podnosenja zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.Reason">
+            <summary>
+            Razlog zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.Explanation">
+            <summary>
+            Obrazlozenje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.SolutionNumber">
+            <summary>
+            Broj resenja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.DecisionNumber">
+            <summary>
+            Broj odluke
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.ComplaintTypeId">
+            <summary>
+            ID tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.ComplaintStatusId">
+            <summary>
+            ID statusa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.ComplaintEventId">
+            <summary>
+            ID dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintCreationDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintDto">
+            <summary>
+            Zalba DTO
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.SubmissionDate">
+            <summary>
+            Datum podnosenja zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.Reason">
+            <summary>
+            Razlog zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.Explanation">
+            <summary>
+            Obrazlozenje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.SolutionNumber">
+            <summary>
+            Broj resenja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.DecisionNumber">
+            <summary>
+            Broj odluke
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.ComplaintType">
+            <summary>
+            DTO tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.ComplaintStatus">
+            <summary>
+            DTO statusa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.ComplaintEvent">
+            <summary>
+            DTO dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.PublicBidding">
+            <summary>
+            Javno nadmetanje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintDto.Buyer">
+            <summary>
+            Kupca
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto">
+            <summary>
+            Zalba DTO za update
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.ComplaintId">
+            <summary>
+            ID zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.SubmissionDate">
+            <summary>
+            Datum podnosenja zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.Reason">
+            <summary>
+            Razlog zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.Explanation">
+            <summary>
+            Obrazlozenje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.SolutionNumber">
+            <summary>
+            Broj resenja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.DecisionNumber">
+            <summary>
+            Broj odluke
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.ComplaintTypeId">
+            <summary>
+            ID tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.ComplaintStatusId">
+            <summary>
+            ID statusa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.ComplaintEventId">
+            <summary>
+            ID dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Complaint.ComplaintUpdateDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.Event.ComplaintEventConfirmationDto">
+            <summary>
+            Potvrda dogadjaja na osnovu zalbe DTO
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Event.ComplaintEventConfirmationDto.ComplaintEventId">
+            <summary>
+            ID dogadjaja na osnovu zalbe 
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Event.ComplaintEventConfirmationDto.Event">
+            <summary>
+            Dogadjaj na osnovu zalbe 
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.Event.ComplaintEventCreationDto">
+            <summary>
+            Dogadjaj na osnovu zalbe DTO za kreiranje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Event.ComplaintEventCreationDto.Event">
+            <summary>
+            Dogadjaj na osnovu zalbe 
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.Event.ComplaintEventDto">
+            <summary>
+            Dogadjaj na osnovu zalbe DTO
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Event.ComplaintEventDto.Event">
+            <summary>
+            Dogadjaj na osnovu zalbe 
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.Event.ComplaintEventUpdateDto">
+            <summary>
+            Dogadjaj na osnovu zalbe DTO za update
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Event.ComplaintEventUpdateDto.ComplaintEventId">
+            <summary>
+            ID dogadjaja na osnovu zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.Event.ComplaintEventUpdateDto.Event">
+            <summary>
+            Dogadjaj na osnovu zalbe 
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.LogModel">
+            <summary>
+            Representation of Log.
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.LogModel.LogLevel">
+            <summary>
+            Log level (ex. Warn, Debug, Error, Info)
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.LogModel.LogMessage">
+            <summary>
+            Message to log.
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.LogModel.MicroserviceName">
+            <summary>
+            Name of microservice (ex. Plot microservice)
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.LogModel.MicroserviceMethod">
+            <summary>
+            Microservice method (ex. GetPlotsAsync())
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices">
+            <summary>
+            Model javnog nadmetanja za druge servise
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.Type">
+            <summary>
+            Tip javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.Status">
+            <summary>
+            Status pocetka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.StartTime">
+            <summary>
+            Vreme pocetka javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.Date">
+            <summary>
+            Datum odrzavanja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.StartPricePerHa">
+            <summary>
+            Pocetna cena parcele
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.Address">
+            <summary>
+            Adresa odrzavanja javnog nadmetanja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.RentPeriod">
+            <summary>
+            Period zakupa
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.PublicBiddingDto.PublicBiddingForOtherServices.DepositSupplement">
+            <summary>
+            Doplata depozita
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusConfirmationDto">
+            <summary>
+            Potvrda statusa zalbe DTO
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusConfirmationDto.ComplaintStatusId">
+            <summary>
+            Status zalbe ID
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusConfirmationDto.Status">
+            <summary>
+            Status zalbe 
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusCreationDto">
+            <summary>
+            Status zalbe DTO za kreiranje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusCreationDto.Status">
+            <summary>
+            Status zalbe 
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusDto">
+            <summary>
+            Status zalbe DTO
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusDto.Status">
+            <summary>
+            Status zalbe 
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusUpdateDto">
+            <summary>
+            Status zalbe DTO za update
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusUpdateDto.ComplaintStatusId">
+            <summary>
+            Status zalbe ID
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintStatusDto.ComplaintStatusUpdateDto.Status">
+            <summary>
+            Status zalbe 
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.ComplaintTypeConfirmationDto">
+            <summary>
+            Potvrda tipa zalbe DTO
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintTypeConfirmationDto.ComplaintTypeId">
+            <summary>
+            Tip zalbe ID
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintTypeConfirmationDto.ComplaintType">
+            <summary>
+            Tip zalbe
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.ComplaintTypeCreationDto">
+            <summary>
+            Tip zalbe DTO za kreiranje
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintTypeCreationDto.ComplaintType">
+            <summary>
+            Tip zalbe
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.ComplaintTypeDto">
+            <summary>
+            Tip zalbe DTO
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintTypeDto.ComplaintType">
+            <summary>
+            Tip zalbe
+            </summary>
+        </member>
+        <member name="T:ComplaintMicroservice.Models.ComplaintTypeUpdateDto">
+            <summary>
+            Tip zalbe DTO za update
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintTypeUpdateDto.ComplaintTypeId">
+            <summary>
+            ID tipa zalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintTypeUpdateDto.ComplaintType">
+            <summary>
+            Tip zalbe
+            </summary>
+        </member>
+    </members>
+</doc>
