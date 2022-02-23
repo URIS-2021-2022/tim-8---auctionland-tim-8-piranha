@@ -37,7 +37,7 @@ namespace DocumentMicroservice.ServiceCalls
                         return default;
                     }
 
-                    await Logger.LogMessage(LogLevel.Information, "Communication with Buyer microservice succeeded!", "Plot microservice", "SendGetRequestAsync");
+                    await Logger.LogMessage(LogLevel.Information, "Communication with Public Bidding microservice succeeded!", "Payment microservice", "SendGetRequestAsync");
                     return JsonConvert.DeserializeObject<T>(content);
                 }
                 return default;
@@ -45,7 +45,7 @@ namespace DocumentMicroservice.ServiceCalls
             }
             catch (Exception)
             {
-                await Logger.LogMessage(LogLevel.Error, "Error while trying to communicate with Buyer microservice!", "Plot microservice", "SendGetRequestAsync");
+                await Logger.LogMessage(LogLevel.Error, "Error while trying to communicate with Public Bidding  microservice!", "Payment microservice", "SendGetRequestAsync");
                 return default;
             }
         }

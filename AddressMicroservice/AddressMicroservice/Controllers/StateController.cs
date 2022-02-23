@@ -14,6 +14,7 @@ using AddressMicroservice.Models.State;
 using FluentValidation;
 using CustomValidationException = AddressMicroservice.Models.Exceptions.ValidationException;
 using DocumentMicroservice.ServiceCalls;
+using Microsoft.Extensions.Logging;
 
 namespace AddressMicroservice.Controllers
 {
@@ -48,15 +49,17 @@ namespace AddressMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<StateDto>> GetState(string state)
+        public async Task<ActionResult<List<StateDto>>> GetState(string state)
         {
             List<State> StateList = stateRepository.GetState(state);
 
             if (StateList == null || StateList.Count == 0)
             {
+                await logger.LogMessage(LogLevel.Warning, "State list is empty!", "Address microservice", "GetState");
                 return NoContent();
             }
 
+            await logger.LogMessage(LogLevel.Information, "State list successfuly returned!", "Address microservice", "GetState");
             return Ok(mapper.Map<List<StateDto>>(StateList));
         }
         /// <summary>
@@ -70,9 +73,10 @@ namespace AddressMicroservice.Controllers
         [HttpGet("{stateId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<StateDto> GetStateById(Guid stateId)
+        public async Task<ActionResult<StateDto>> GetStateById(Guid stateId)
         {
             State State = stateRepository.GetStateById(stateId);
+            await logger.LogMessage(LogLevel.Information, "State successfuly returned!", "Address microservice", "GetStateById");
 
             return Ok(mapper.Map<StateDto>(State));
         }
@@ -102,6 +106,8 @@ namespace AddressMicroservice.Controllers
             var result = await Validator.ValidateAsync(state);
             if (!result.IsValid)
             {
+                await logger.LogMessage(LogLevel.Warning, "State validation failed!", "Address microservice", "CreateStateAsync");
+
                 throw new CustomValidationException(result.Errors);
             }
 
@@ -111,6 +117,8 @@ namespace AddressMicroservice.Controllers
 
             string uri = linkGeneration.GetPathByAction("GetStateById", "State", new { stateId = confirmation.StateID });
             //LinkGenerator --> nalazi putanju resu (naziv akcije koja se radi, naziv kontrollera bez sufiksa kontroller, new-> nesto sto jedinstveno identifikuje nas resur koji trenutno trazimo)
+            await logger.LogMessage(LogLevel.Information, "State created successfully!", "Address microservice", "CreateStateAsync");
+
             return Created(uri, mapper.Map<StateConfirmationDto>(confirmation));
         }
         /// <summary>
@@ -135,6 +143,8 @@ namespace AddressMicroservice.Controllers
             var result = await Validator.ValidateAsync(State);
             if (!result.IsValid)
             {
+                await logger.LogMessage(LogLevel.Warning, "State validation failed!", "Address microservice", "UpdateStateAsync");
+
                 throw new CustomValidationException(result.Errors);
             }
 
@@ -142,6 +152,7 @@ namespace AddressMicroservice.Controllers
             stateRepository.SaveChanges();
 
             StateConfirmation confirmation = mapper.Map<StateConfirmation>(existingState);
+            await logger.LogMessage(LogLevel.Information, "State updated successfully!", "Address microservice", "UpdateStateAsync");
 
             return Ok(mapper.Map<StateConfirmationDto>(confirmation));
         }
@@ -157,12 +168,13 @@ namespace AddressMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeleteState(Guid stateId)
+        public async Task<IActionResult> DeleteState(Guid stateId)
         {
             State State = stateRepository.GetStateById(stateId);
 
             stateRepository.DeleteState(State);
             stateRepository.SaveChanges();
+            await logger.LogMessage(LogLevel.Warning, "State deleted successfully!", "Address microservice", "DeleteState");
 
             return NoContent(); // Successful deletion -- sve je okej proslo ali ne vraca nikakav sadrzaj--> iz familije je 200
         }

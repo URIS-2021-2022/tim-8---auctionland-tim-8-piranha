@@ -24,7 +24,7 @@ namespace DocumentMicroservice.ServiceCalls
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                Uri url = new Uri($"{ Configuration["Services:LoggerService"] }api/logger-service");
+                Uri url = new Uri($"{ Configuration["Services:LoggerService"] }");
 
                 LogModel log = new LogModel
                 {

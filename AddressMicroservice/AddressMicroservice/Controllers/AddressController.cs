@@ -48,16 +48,17 @@ namespace AddressMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<AddressDto>> GetAddress(string place, string street)
+        public async Task<ActionResult<List<AddressDto>>> GetAddress(string place, string street)
         {
             List<Address> AddressList = addressRepository.GetAddress(place, street);
 
             if (AddressList == null || AddressList.Count == 0)
             {
-                logger.LogMessage(LogLevel.Warning, "Address list is empty!", "Address microservice", "GetAddress");
+                await logger.LogMessage(LogLevel.Warning, "Address list is empty!", "Address microservice", "GetAddress");
                 return NoContent();
             }
 
+            await logger.LogMessage(LogLevel.Information, "Address list successfuly returned!", "Address microservice", "GetAddress");
             return Ok(mapper.Map<List<AddressDto>>(AddressList));
         }
 
@@ -71,9 +72,10 @@ namespace AddressMicroservice.Controllers
         [HttpGet("{addressId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<AddressDto> GetAddressById(Guid addressId)
+        public async Task<ActionResult<AddressDto>> GetAddressById(Guid addressId)
         {
             Address Address = addressRepository.GetAddressById(addressId);
+            await logger.LogMessage(LogLevel.Information, "Address successfuly returned!", "Address microservice", "GetAddressById");
 
             return Ok(mapper.Map<AddressDto>(Address));
         }
@@ -106,6 +108,7 @@ namespace AddressMicroservice.Controllers
             var result = await Validator.ValidateAsync(address);
             if (!result.IsValid)
             {
+                await logger.LogMessage(LogLevel.Warning, "Address validation failed!", "Address microservice", "CreateAddressAsync");
                 throw new CustomValidationException(result.Errors);
             }
 
@@ -114,6 +117,7 @@ namespace AddressMicroservice.Controllers
 
             string uri = linkGeneration.GetPathByAction("GetAddressById", "Address", new { addressId = confirmation.AddressId });
             //LinkGenerator --> nalazi putanju resu (naziv akcije koja se radi, naziv kontrollera bez sufiksa kontroller, new-> nesto sto jedinstveno identifikuje nas resur koji trenutno trazimo)
+            await logger.LogMessage(LogLevel.Information, "Address created successfully!", "Address microservice", "CreateAddressAsync");
             return Created(uri, mapper.Map<AddressConfirmationDto>(confirmation));
         }
         /// <summary>
@@ -138,6 +142,7 @@ namespace AddressMicroservice.Controllers
             var result = await Validator.ValidateAsync(address);
             if (!result.IsValid)
             {
+                await logger.LogMessage(LogLevel.Warning, "Address validation failed!", "Address microservice", "UpdateAddressAsync");
                 throw new CustomValidationException(result.Errors);
             }
 
@@ -145,6 +150,7 @@ namespace AddressMicroservice.Controllers
             addressRepository.SaveChanges();
 
             AddressConfirmation confirmation = mapper.Map<AddressConfirmation>(existingAddress);
+            await logger.LogMessage(LogLevel.Warning, "Address update successfully!", "Address microservice", "UpdateAddressAsync");
 
             return Ok(mapper.Map<AddressConfirmationDto>(confirmation));
         }
@@ -160,13 +166,14 @@ namespace AddressMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeleteAddress(Guid addressId)
+        public async Task<IActionResult> DeleteAddress(Guid addressId)
         {
             Address address = addressRepository.GetAddressById(addressId);
 
             addressRepository.DeleteAddress(address);
             addressRepository.SaveChanges();
 
+            await logger.LogMessage(LogLevel.Warning, "Address deleted successfully!", "Address microservice", "DeleteAddress");
             return NoContent(); // Successful deletion -- sve je okej proslo ali ne vraca nikakav sadrzaj--> iz familije je 200
         }
 

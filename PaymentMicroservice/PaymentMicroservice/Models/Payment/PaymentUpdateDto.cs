@@ -22,6 +22,5 @@ namespace PaymentMicroservice.Models.Payment
         public Guid CourseID { get; set; }
 
         public Guid PublicBiddingId { get; set; }
-        //----------------------javno nadmetanje
     }
 }

@@ -51,9 +51,6 @@ namespace AddressMicroservice
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-            services.AddScoped<IAddressRepository, AddressRepository>();
-            services.AddScoped<IStateRepository, StateRepository>();
-
             services.AddScoped<ILoggerService, LoggerService>();
 
             services.AddSwaggerGen(c =>
