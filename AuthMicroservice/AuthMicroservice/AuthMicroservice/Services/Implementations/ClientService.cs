@@ -125,19 +125,20 @@
         /// <returns>List&lt;ClientResponseDTO&gt;</returns>
         public async Task<List<ClientResponseDTO>> GetAllClients()
         {
-            await loggerService.LogMessage(
-                    LogLevel.Information,
-                    "GetAllClients successful",
-                    GeneralConsts.MICROSERVICE_NAME,
-                    "GetAllClients");
-            List<Client> clients = clientRepository.List(c => true);
+            List<Client> clients = clientRepository.List(c => true, c => c.UserType);
 
             if (clients.Count == 0)
             {
                 return new List<ClientResponseDTO>();
             }
 
-            return autoMapper.Map<List<Client>, List<ClientResponseDTO>>(clients);
+            /*await loggerService.LogMessage(
+                   LogLevel.Information,
+                   "GetAllClients successful",
+                   GeneralConsts.MICROSERVICE_NAME,
+                   "GetAllClients");*/
+
+            return autoMapper.Map<List<ClientResponseDTO>>(clients);
         }
 
         /// <summary>
@@ -153,7 +154,7 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "GetOneByUid");
 
-            return autoMapper.Map<Client, ClientResponseDTO>(clientRepository.FindOneByUid(uid));
+            return autoMapper.Map<ClientResponseDTO>(clientRepository.FindOneByUid(uid));
         }
 
         /// <summary>

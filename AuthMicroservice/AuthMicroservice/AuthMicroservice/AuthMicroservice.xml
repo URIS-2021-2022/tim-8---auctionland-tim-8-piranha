@@ -549,6 +549,36 @@
             <param name="services">Services to be initialized.</param>
             <param name="configuration">Configuration to be applied.</param>
         </member>
+        <member name="T:AuthMicroservice.Profiles.AuthProfile">
+            <summary>
+            Profile for auth.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Profiles.AuthProfile.#ctor">
+            <summary>
+            Auth profile constructor.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Profiles.ClientProfile">
+            <summary>
+            Client profile.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Profiles.ClientProfile.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Profiles.UserTypeProfile">
+            <summary>
+            User type profile.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Profiles.UserTypeProfile.#ctor">
+            <summary>
+            User type profile.
+            </summary>
+        </member>
         <member name="T:AuthMicroservice.Program">
             <summary>
             Program class.
