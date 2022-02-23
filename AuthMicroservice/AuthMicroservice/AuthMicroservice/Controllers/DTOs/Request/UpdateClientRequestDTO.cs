@@ -23,8 +23,8 @@
         public string Username { get; set; }
 
         /// <summary>
-        /// Type of the user.
+        /// Client password.
         /// </summary>
-        public string UserType { get; set; }
+        public string Password { get; set; }
     }
 }

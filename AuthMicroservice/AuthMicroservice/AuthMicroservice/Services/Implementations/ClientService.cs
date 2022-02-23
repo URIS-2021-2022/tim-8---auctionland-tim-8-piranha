@@ -6,8 +6,13 @@
     using AuthMicroservice.Domain;
     using AuthMicroservice.Repositories.Abstractions;
     using AuthMicroservice.Services.Abstractions;
+    using AuthMicroservice.Utils.LoggerService;
     using AutoMapper;
+    using Common.ExceptionHandling.Exceptions;
+    using Microsoft.Extensions.Logging;
+    using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Client service interface implementation.
@@ -17,6 +22,7 @@
         private readonly IClientRepository clientRepository;
         private readonly IMapper autoMapper;
         private IUserTypeRepository userTypeRepository;
+        private readonly ILoggerService loggerService;
 
         /// <summary>
         /// Client service constructor.
@@ -24,13 +30,16 @@
         /// <param name="clientRepository">Client repository.</param>
         /// <param name="autoMapper">Auto model mapper.</param>
         /// <param name="userTypeRepository">User type repository.</param>
+        /// <param name="loggerService">Logger service.</param>
         public ClientService(IClientRepository clientRepository, 
             IMapper autoMapper, 
-            IUserTypeRepository userTypeRepository)
+            IUserTypeRepository userTypeRepository,
+            ILoggerService loggerService)
         {
             this.clientRepository = clientRepository;
             this.autoMapper = autoMapper;
             this.userTypeRepository = userTypeRepository;
+            this.loggerService = loggerService;
         }
 
         /// <summary>
@@ -38,12 +47,13 @@
         /// </summary>
         /// <param name="requestDTO">Info about user that is to be created.</param>
         /// <returns>ClientResponseDTO</returns>
-        public ClientResponseDTO Create(CreateClientRequestDTO requestDTO)
+        public async Task<ClientResponseDTO> Create(CreateClientRequestDTO requestDTO)
         {
             ThrowExceptionIfEmailExists(requestDTO.Username);
 
             Client client = new Client()
             {
+                Uid = Guid.NewGuid().ToString(),
                 FirstName = requestDTO.FirstName,
                 LastName = requestDTO.LastName,
                 Username = requestDTO.Username,
@@ -54,6 +64,12 @@
 
             clientRepository.Save(client);
 
+            await loggerService.LogMessage(
+                    LogLevel.Information,
+                    "Create successful",
+                    GeneralConsts.MICROSERVICE_NAME,
+                    "Create");
+
             return autoMapper.Map<ClientResponseDTO>(client);
         }
 
@@ -61,7 +77,7 @@
         {
             if (FindOneByEmailAddress(email) != null)
             {
-                //throw new EntityAlreadyExistsException($"User with email {email} already exists!", GeneralConsts.MICROSERVICE_NAME);
+                throw new EntityAlreadyExistsException($"User with email {email} already exists!");
             }
         }
 
@@ -79,18 +95,49 @@
         /// Deletes a client.
         /// </summary>
         /// <param name="uid">Uid of the client that is to be deleted.</param>
-        public void Delete(string uid)
+        public async Task DeleteAsync(string uid)
         {
-            throw new System.NotImplementedException();
+            Client client = clientRepository.FindOneByUid(uid);
+
+            if (client == null)
+            {
+                await loggerService.LogMessage(
+                   LogLevel.Warning,
+                   "No client to delete",
+                   GeneralConsts.MICROSERVICE_NAME,
+                   "Delete");
+
+                return;
+            }
+
+            await loggerService.LogMessage(
+                   LogLevel.Information,
+                   "Client deleted",
+                   GeneralConsts.MICROSERVICE_NAME,
+                   "DeleteAsync");
+
+            clientRepository.Delete(client);
         }
 
         /// <summary>
         /// Gets all clients.
         /// </summary>
         /// <returns>List&lt;ClientResponseDTO&gt;</returns>
-        public List<ClientResponseDTO> GetAllClients()
+        public async Task<List<ClientResponseDTO>> GetAllClients()
         {
-            return autoMapper.Map<List<ClientResponseDTO>>(clientRepository.List(c => true));
+            await loggerService.LogMessage(
+                    LogLevel.Information,
+                    "GetAllClients successful",
+                    GeneralConsts.MICROSERVICE_NAME,
+                    "GetAllClients");
+            List<Client> clients = clientRepository.List(c => true);
+
+            if (clients.Count == 0)
+            {
+                return new List<ClientResponseDTO>();
+            }
+
+            return autoMapper.Map<List<Client>, List<ClientResponseDTO>>(clients);
         }
 
         /// <summary>
@@ -98,9 +145,15 @@
         /// </summary>
         /// <param name="uid">Uid of the client.</param>
         /// <returns>ClientResponseDTO</returns>
-        public ClientResponseDTO GetOneByUid(string uid)
+        public async Task<ClientResponseDTO> GetOneByUid(string uid)
         {
-            return autoMapper.Map<ClientResponseDTO>(clientRepository.FindOneByUid(uid));
+            await loggerService.LogMessage(
+                    LogLevel.Information,
+                    "GetOneByUid successful",
+                    GeneralConsts.MICROSERVICE_NAME,
+                    "GetOneByUid");
+
+            return autoMapper.Map<Client, ClientResponseDTO>(clientRepository.FindOneByUid(uid));
         }
 
         /// <summary>
@@ -109,9 +162,35 @@
         /// <param name="uid">Uid of the client that is to be updated.</param>
         /// <param name="requestDTO">Info to update.</param>
         /// <returns>ClientResponseDTO</returns>
-        public ClientResponseDTO Update(string uid, UpdateClientRequestDTO requestDTO)
+        public async Task<ClientResponseDTO> Update(string uid, UpdateClientRequestDTO requestDTO)
         {
-            throw new System.NotImplementedException();
+            Client client = clientRepository.FindOneByUid(uid);
+
+            if (client == null)
+            {
+                await loggerService.LogMessage(
+                   LogLevel.Error,
+                   "Update failed",
+                   GeneralConsts.MICROSERVICE_NAME,
+                   "Update");
+
+                throw new EntityNotFoundException($"Client with uid {uid} not found!");
+            }
+
+            client.FirstName = requestDTO.FirstName;
+            client.LastName = requestDTO.LastName;
+            client.Username = requestDTO.Username;
+            client.Password = requestDTO.Password;
+
+            clientRepository.Save(client);
+
+            await loggerService.LogMessage(
+                    LogLevel.Information,
+                    "Update successful",
+                    GeneralConsts.MICROSERVICE_NAME,
+                    "Update");
+
+            return autoMapper.Map<ClientResponseDTO>(client);
         }
     }
 }

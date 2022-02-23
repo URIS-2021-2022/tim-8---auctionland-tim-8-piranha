@@ -46,7 +46,17 @@
         </member>
         <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_CLIENT_GET_ONE_BY_UID">
             <summary>
-            Route for getting a single client by uuid.
+            Route for a single user type.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_USER_TYPE_BASE">
+            <summary>
+            Base route for user type resource.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_USER_TYPE_GET_ONE_BY_UID">
+            <summary>
+            Route for a single user type.
             </summary>
         </member>
         <member name="T:AuthMicroservice.Controllers.AuthController">
@@ -156,6 +166,16 @@
             Type of the user.
             </summary>
         </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO">
+            <summary>
+            Create user type request DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO.Name">
+            <summary>
+            Name of the user type.
+            </summary>
+        </member>
         <member name="T:AuthMicroservice.Controllers.DTOs.Request.SignInRequestDTO">
             <summary>
             Sign in request DTO.
@@ -191,9 +211,19 @@
             Client username.
             </summary>
         </member>
-        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.UserType">
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.Password">
             <summary>
-            Type of the user.
+            Client password.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO">
+            <summary>
+            Update user type request DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO.Name">
+            <summary>
+            New name for the user type.
             </summary>
         </member>
         <member name="T:AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO">
@@ -271,6 +301,58 @@
             Token validation response DTO constructor.
             </summary>
             <param name="userUid"></param>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.UserTypeController">
+            <summary>
+            User type resource controller.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.#ctor(AuthMicroservice.Services.Abstractions.IUserTypeService)">
+            <summary>
+            Constructor for the user type controller.
+            </summary>
+            <param name="userTypeService">User type service.</param>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleGetAllUserTypes">
+            <summary>
+            Endpoint for getting all user types.
+            </summary>
+            <returns>ActionResult&lt;List&lt;UserTypeResponseDTO&gt;&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleGetUserTypeByUid(System.String)">
+            <summary>
+            Endpoint for getting a single user type by user uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <returns>ActionResult&lt;UserTypeResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleGetUserTypeOptions">
+            <summary>
+            Endpoint for getting options.
+            </summary>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleCreateClient(AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO)">
+            <summary>
+            Endpoint for creating a new user type.
+            </summary>
+            <param name="requestDTO">Attributes of the user type.</param>
+            <returns>ActionResult&lt;UserTypeResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleUpdateClient(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO)">
+            <summary>
+            Endpoint for updating user type with the passed uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <param name="requestDTO">Attributes of the user type.</param>
+            <returns>ActionResult&lt;UserTypeResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleDeleteUserType(System.String)">
+            <summary>
+            Endpoint for deleting user type with the passed uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <returns>Void</returns>
         </member>
         <member name="T:AuthMicroservice.Domain.AuthenticatedUser">
             <summary>
@@ -585,11 +667,50 @@
             <param name="requestDTO">Info to update.</param>
             <returns>ClientResponseDTO</returns>
         </member>
-        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.Delete(System.String)">
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.DeleteAsync(System.String)">
             <summary>
             Deletes a client.
             </summary>
             <param name="uid">Uid of the client that is to be deleted.</param>
+        </member>
+        <member name="T:AuthMicroservice.Services.Abstractions.IUserTypeService">
+            <summary>
+            Interface for user type service.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.GetAll">
+            <summary>
+            Gets all user types.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.GetByUid(System.String)">
+            <summary>
+            Gets a single user type by uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.UpdateAsync(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO)">
+            <summary>
+            Updates a user type entity.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <param name="requestDTO">Info about user type to be changed.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO)">
+            <summary>
+            Creates a new user type entity.
+            </summary>
+            <param name="requestDTO">Info about user type.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.DeleteAsync(System.String)">
+            <summary>
+            Deletes a user type.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
         </member>
         <member name="T:AuthMicroservice.Services.Implementations.AuthService">
             <summary>
@@ -624,13 +745,14 @@
             Client service interface implementation.
             </summary>
         </member>
-        <member name="M:AuthMicroservice.Services.Implementations.ClientService.#ctor(AuthMicroservice.Repositories.Abstractions.IClientRepository,AutoMapper.IMapper,AuthMicroservice.Repositories.Abstractions.IUserTypeRepository)">
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.#ctor(AuthMicroservice.Repositories.Abstractions.IClientRepository,AutoMapper.IMapper,AuthMicroservice.Repositories.Abstractions.IUserTypeRepository,AuthMicroservice.Utils.LoggerService.ILoggerService)">
             <summary>
             Client service constructor.
             </summary>
             <param name="clientRepository">Client repository.</param>
             <param name="autoMapper">Auto model mapper.</param>
             <param name="userTypeRepository">User type repository.</param>
+            <param name="loggerService">Logger service.</param>
         </member>
         <member name="M:AuthMicroservice.Services.Implementations.ClientService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO)">
             <summary>
@@ -646,7 +768,7 @@
             <param name="email">Email of the user.</param>
             <returns>Client</returns>
         </member>
-        <member name="M:AuthMicroservice.Services.Implementations.ClientService.Delete(System.String)">
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.DeleteAsync(System.String)">
             <summary>
             Deletes a client.
             </summary>
@@ -672,6 +794,60 @@
             <param name="uid">Uid of the client that is to be updated.</param>
             <param name="requestDTO">Info to update.</param>
             <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="T:AuthMicroservice.Services.Implementations.UserTypeService">
+            <summary>
+            User type interface implementation.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.#ctor(AuthMicroservice.Repositories.Abstractions.IUserTypeRepository,AutoMapper.IMapper,AuthMicroservice.Utils.LoggerService.ILoggerService)">
+            <summary>
+            User type service constructor.
+            </summary>
+            <param name="userTypeRepository">User type repository.</param>
+            <param name="autoMapper">Auto model mapper.</param>
+            <param name="loggerService">Logger service.</param>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO)">
+            <summary>
+            Creates a user type.
+            </summary>
+            <param name="requestDTO">User type info.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.FindOneByNameAsync(System.String)">
+            <summary>
+            Finds user type by name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.DeleteAsync(System.String)">
+            <summary>
+            Deletes a user type.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.GetAll">
+            <summary>
+            Gets all user types.
+            </summary>
+            <returns>List&lt;UserTypeResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.GetByUid(System.String)">
+            <summary>
+            Gets a single user type by uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.UpdateAsync(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO)">
+            <summary>
+            Updates a user type with the provided info.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <param name="requestDTO">Info to be applied as a change.</param>
+            <returns>UserTypeResponseDTO</returns>
         </member>
         <member name="T:AuthMicroservice.Startup">
             <summary>
