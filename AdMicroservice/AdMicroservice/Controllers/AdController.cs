@@ -65,7 +65,7 @@ namespace AdMicroservice.Controllers
             foreach (var ad in ads)
             {
                 AdDto adDto = mapper.Map<AdDto>(ad);
-
+#pragma warning disable S1075
                 if (ad.PublicBiddingId is not null)
                 {
                     var publicBiddingDto = await publicBiddingService.SendGetRequestAsync("http://localhost:40010");
@@ -112,7 +112,7 @@ namespace AdMicroservice.Controllers
                     adDto.PublicBidding = publicBiddingDto;
                 }
             }
-
+#pragma warning restore S1075
             await Logger.LogMessage(LogLevel.Information, "Ad found and successfully returned!", "Ad microservice", "GetAdById");
             return Ok(adDto);
         }
