@@ -7,16 +7,7 @@ namespace DocumentMicroservice.Models.ContractLease
 {
     public class ContractLeaseDto
     {
-<<<<<<< Updated upstream
-        
-=======
 
-
-        /// <summary>
-        /// Maturities - Rokovi dospeća
-        /// </summary>
-        //public int[] Maturities { get; set; }
->>>>>>> Stashed changes
 
 
         /// <summary>
@@ -30,11 +21,6 @@ namespace DocumentMicroservice.Models.ContractLease
         /// </summary>
         public DateTime? submissionDate { get; set; }
 
-<<<<<<< Updated upstream
-
-=======
-       
->>>>>>> Stashed changes
 
         /// <summary>
         /// DeadlineLandRestitution - Rok za vracanje zemljista

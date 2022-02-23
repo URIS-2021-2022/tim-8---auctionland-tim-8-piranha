@@ -19,7 +19,7 @@ namespace AuctionMicroservice.Services
             Configuration = configuration;
         }
 
-        public async Task<bool> LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod, Exception exception = null)
+        public async Task<bool> LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod)
         {
             using (HttpClient httpClient = new HttpClient())
             {
@@ -30,8 +30,7 @@ namespace AuctionMicroservice.Services
                     LogLevel = logLevel,
                     LogMessage = logMessage,
                     MicroserviceName = microserviceName,
-                    MicroserviceMethod = microserviceMethod,
-                    Exception = exception
+                    MicroserviceMethod = microserviceMethod
                 };
 
                 HttpContent content = new StringContent(JsonConvert.SerializeObject(log));

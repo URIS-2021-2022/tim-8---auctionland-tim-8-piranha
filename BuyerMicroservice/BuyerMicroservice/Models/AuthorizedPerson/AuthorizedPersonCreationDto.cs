@@ -22,11 +22,7 @@ namespace BuyerMicroservice.Models.AuthorizedPerson
 
         public Guid boardNumbID { get; set; }
 
-<<<<<<< Updated upstream
+      
 
-       
-=======
-        public IList<BoardNumber> boardNums { get; set; }
->>>>>>> Stashed changes
     }
 }

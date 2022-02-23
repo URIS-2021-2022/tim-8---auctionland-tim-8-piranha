@@ -13,14 +13,7 @@ namespace DocumentMicroservice.Models.ContractLease
         public Guid contractLeaseID { get; set; }
 
 
-<<<<<<< Updated upstream
-        
-=======
-        /// <summary>
-        /// Maturities - Rokovi dospeća
-        /// </summary>
-        //public int[] Maturities { get; set; }
->>>>>>> Stashed changes
+
 
 
         /// <summary>

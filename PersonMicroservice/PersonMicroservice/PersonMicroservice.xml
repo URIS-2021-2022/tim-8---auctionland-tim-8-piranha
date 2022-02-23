@@ -34,6 +34,14 @@
             <returns>Potvrda o kreiranju komisije</returns>
             <response code="201">Vraća kreiranu komisiju</response>
             <response code="500">Desila se greška prilikom kreiranja nove komisije</response>
+            /// <remarks>
+            Primer POST zahteva \
+            POST /api/person/board \
+            { \
+                "president": "2d8607c5-f3cf-4ef5-9323-a9318eee6232", \
+                "members": [] \
+            }
+            </remarks>
         </member>
         <member name="M:PersonMicroservice.Controllers.BoardController.UpdateBoard(System.Guid,PersonMicroservice.Models.BoardUpdateDto)">
             <summary>
@@ -45,6 +53,14 @@
             <response code="200">Komisija je uspešno izmenjena</response>
             <response code="404">Nije pronađena komisija sa unetim ID-em</response>
             <response code="500">Serverska greška tokom izmene komisije</response>
+            /// /// <remarks>
+            Primer PUT zahteva \
+            PUT /api/person \
+            {   \
+                "president": "5283dcc9-7010-459b-87d7-346820a32f31", \
+                "members": [] \
+            }
+            </remarks>
         </member>
         <member name="M:PersonMicroservice.Controllers.BoardController.DeleteBoard(System.Guid)">
             <summary>
@@ -54,6 +70,12 @@
             <response code="204">Komisija je uspešno obrisana</response>
             <response code="404">Nije pronađena komisija sa unetim ID-em</response>
             <response code="500">Serverska greška tokom brisanja komisije</response>
+        </member>
+        <member name="M:PersonMicroservice.Controllers.BoardController.GetBoardOptions">
+            <summary>
+            Zaglavlje odgovora
+            </summary>
+            <returns>Zaglavlje odgovora</returns>
         </member>
         <member name="T:PersonMicroservice.Controllers.PersonController">
             <summary>
@@ -77,14 +99,23 @@
             <response code="200">Vraća traženu ličnost</response>
             <response code="404">Nije pronađena ličnost sa unetim ID-em</response>
         </member>
-        <member name="M:PersonMicroservice.Controllers.PersonController.CreateBoard(PersonMicroservice.Models.PersonCreationDto)">
+        <member name="M:PersonMicroservice.Controllers.PersonController.CreatePerson(PersonMicroservice.Models.PersonCreationDto)">
             <summary>
             Kreira novu ličnost
             </summary>
-            <param name="board">Model ličnosti</param>
+            <param name="person">Model ličnosti</param>
             <returns>Potvrda o kreiranju ličnosti</returns>
             <response code="201">Vraća kreiranu ličnost</response>
             <response code="500">Desila se greška prilikom kreiranja nove ličnosti</response>
+            <remarks>
+            Primer POST zahteva \
+            POST /api/person \
+            { \
+                "name": "Dragan", \
+                "surname": "Majkic", \
+                "function": "Member" \
+            }
+            </remarks>
         </member>
         <member name="M:PersonMicroservice.Controllers.PersonController.UpdatePerson(System.Guid,PersonMicroservice.Models.PersonUpdateDto)">
             <summary>
@@ -96,6 +127,16 @@
              <response code="200">Izmenjena ličnost</response>
              <response code="404">Nije pronađena ličnost sa unetim ID-em</response>
              <response code="500">Serverska greška tokom izmene ličnosti</response>
+             /// <remarks>
+             Primer PUT zahteva \
+             PUT /api/person \
+             {   \
+                "personId": "81f63012-16d7-4f1a-a330-55dc295a6dcd",\
+                "name": "Miha",\
+                "surname": "Strajin",\
+                "function": "Member"\
+             }
+             </remarks>
         </member>
         <member name="M:PersonMicroservice.Controllers.PersonController.DeletePerson(System.Guid)">
             <summary>
@@ -106,6 +147,67 @@
             <response code="204">Ličnost je uspešno obrisana</response>
             <response code="404">Nije pronađena ličnost za uneti ID</response>
             <response code="500">Serverska greška tokom brisanja ličnosti</response>
+        </member>
+        <member name="M:PersonMicroservice.Controllers.PersonController.GetPersonOptions">
+            <summary>
+            Zaglavlje odgovora
+            </summary>
+            <returns>Zaglavlje odgovora</returns>
+        </member>
+        <member name="T:PersonMicroservice.Entities.Board">
+            <summary>
+            Entitet za komisiju
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Entities.Board.BoardId">
+            <summary>
+            Id komisije
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Entities.Board.PresidentId">
+            <summary>
+            Id predsednika komisije
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Entities.Board.President">
+            <summary>
+            Predsednik komisije
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Entities.Board.Members">
+            <summary>
+            List članova komisije
+            </summary>
+        </member>
+        <member name="T:PersonMicroservice.Entities.Person">
+            <summary>
+            Entitet za ličnost
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Entities.Person.PersonId">
+            <summary>
+            Id ličnosti
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Entities.Person.Name">
+            <summary>
+            Ime ličnosti
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Entities.Person.Surname">
+            <summary>
+            Prezime ličnosti
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Entities.Person.Function">
+            <summary>
+            funkcija ličnosti
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Entities.Person.Boards">
+            <summary>
+            Lista komisija u kojima se nalazi ličnost
+            </summary>
         </member>
         <member name="T:PersonMicroservice.Models.BoardConfirmationDto">
             <summary>
@@ -155,6 +257,31 @@
         <member name="P:PersonMicroservice.Models.BoardDto.Members">
             <summary>
             Članovi komisije
+            </summary>
+        </member>
+        <member name="T:PersonMicroservice.Models.LogModel">
+            <summary>
+            Reprezentacija loga
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Models.LogModel.LogLevel">
+            <summary>
+            Log level (ex. Warn, Debug, Error, Info)
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Models.LogModel.LogMessage">
+            <summary>
+            Poruka ya log
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Models.LogModel.MicroserviceName">
+            <summary>
+            Ime mikroservisa
+            </summary>
+        </member>
+        <member name="P:PersonMicroservice.Models.LogModel.MicroserviceMethod">
+            <summary>
+            Metoda mikroservisa
             </summary>
         </member>
         <member name="T:PersonMicroservice.Models.PersonConfirmationDto">

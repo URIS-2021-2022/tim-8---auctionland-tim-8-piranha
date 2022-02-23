@@ -42,12 +42,7 @@ namespace BuyerMicroservice.Entities.Context
                    surname = "Corlija",
                    personalDocNum = "8767834637274",
                    address = "Mira popare 11",
-<<<<<<< Updated upstream
                    country = "Srbija"
-=======
-                   country = "Srbija",
-
->>>>>>> Stashed changes
                });
 
             builder.Entity<AuthorizedPerson>().HasData(
@@ -62,17 +57,8 @@ namespace BuyerMicroservice.Entities.Context
                    address = "Bulevar Oslobodjenja 55",
                    country = "Zrenjanin"
                });
-<<<<<<< Updated upstream
-            
-=======
-            builder.Entity<AuthorizedPerson>().OwnsMany(ap => ap.boardNums);
                 
 
-
-
-
-
->>>>>>> Stashed changes
             //Contact person 
             builder.Entity<ContactPerson>().HasData(
               new
