@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Entities
 {
-<<<<<<< HEAD
+
     /// <summary>
     /// Board Number confirmation model
     /// </summary>
@@ -20,11 +20,6 @@ namespace BuyerMicroservice.Entities
         /// Number - Broj table
         /// Example : 2
         /// </summary>
-=======
-    public class BoardNumberConfirmation
-    {
-        public Guid boardNumberID { get; set; }
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
-        public int number { get; set; }
+
     }
 }

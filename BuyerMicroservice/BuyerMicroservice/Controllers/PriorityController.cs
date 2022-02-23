@@ -41,6 +41,7 @@ namespace BuyerMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task<ActionResult<List<PriorityDto>>> GetPriorityAsync(string priorityType = null)
         {
             List<Priority> priority = await priorityRepository.GetPriorityAsync(priorityType);
@@ -59,6 +60,7 @@ namespace BuyerMicroservice.Controllers
         [HttpGet("{priorityId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task < ActionResult<PriorityDto>> GetPriorityByIdAsync(Guid priorityID)
         {
             Priority priority = await priorityRepository.GetPriorityByIdAsync(priorityID);
@@ -80,6 +82,7 @@ namespace BuyerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task< ActionResult<PriorityConfirmationDto>> CreatePriorityAsync([FromBody] PriorityCreationDto priorityCreation)
         {
             try
@@ -117,6 +120,7 @@ namespace BuyerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task<ActionResult<PriorityDto>> UpdatePriorityAsync(PriorityUpdateDto priorityUpdate)
         {
             try
@@ -159,6 +163,7 @@ namespace BuyerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
         public async Task< IActionResult> DeletePriorityAsync(Guid priorityId)
         {
             try
@@ -189,6 +194,7 @@ namespace BuyerMicroservice.Controllers
 
         [HttpOptions]
         [AllowAnonymous]
+        [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
         public async Task<IActionResult> GetPriorityOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");

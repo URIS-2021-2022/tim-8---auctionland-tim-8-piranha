@@ -7,25 +7,16 @@ namespace DocumentMicroservice.Models.ContractLease
 {
     public class ContractLeaseUpdateDto
     {
+
         /// <summary>
         /// ContractLeaseID - ID ugovora o zakupu
+        /// Example: 86c9ac76-a632-4ffc-b2a2-26ea8600dc86
         /// </summary>
         public Guid contractLeaseID { get; set; }
 
-<<<<<<< HEAD
-=======
-
-<<<<<<< Updated upstream
-        
-=======
-        /// <summary>
-        /// Maturities - Rokovi dospeća
-        /// </summary>
-        //public int[] Maturities { get; set; }
->>>>>>> Stashed changes
 
 
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
+
         /// <summary>
         /// SerialNumber - Zavodni broj
         /// </summary>
@@ -34,8 +25,13 @@ namespace DocumentMicroservice.Models.ContractLease
 
         /// <summary>
         /// SubmissionDate - Datum zavodjenja
+        /// Example:"2021-02-01 00:00:00"
         /// </summary>
         public DateTime? submissionDate { get; set; }
+
+
+
+
 
 
 
@@ -48,33 +44,50 @@ namespace DocumentMicroservice.Models.ContractLease
 
         /// <summary>
         /// Place Of Signing - Mesto potpisivanja 
+        /// Example:Zrenjanin
         /// </summary>
         public string placeOfSigning { get; set; }
 
 
         /// <summary>
         /// Date Of Signing - Datum potpisivanja
+        /// Example : "2021-02-01 00:00:00"
         /// </summary>
         public DateTime dateOfSigning { get; set; }
 
 
         /// <summary>
         /// GuaranteeTypeID - ID tipa garancije
+        /// Example: 68bf5d70-f26b-4c53-b014-bab74b7b86a0
         /// </summary>
         public Guid guaranteeTypeID { get; set; }
 
         /// <summary>
+        /// DocumentId - ID dokumenta
+        /// Example: 3a3e6366-3a20-4d3b-ae15-be85ba277683
         /// DocumentID - ID dokumenta
         /// </summary>
-        public Guid documentId { get; set; }
+        public Guid documentID { get; set; }
 
         /// <summary>
-        /// Buyer ID.
+        /// Buyer ID from Buyer microservice.
+        /// Example: 3a3e6366-3a20-4d3b-ae15-be85ba277683
+        /// This is optional attributte
         /// </summary>
         public Guid? buyerId { get; set; }
 
+        /// <summary>
+        /// Person ID from Person microservice.
+        /// Example: 3a3e6366-3a20-4d3b-ae15-be85ba277683
+        /// This is optional attributte
+        /// </summary>
         public Guid? personId { get; set; }
 
+        /// <summary>
+        /// Plot ID  from Plot microservice.
+        /// Example: 3a3e6366-3a20-4d3b-ae15-be85ba277683
+        /// This is optional attributte
+        /// </summary>
         public Guid? plotId { get; set; }
 
     }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.Individual
 {
-<<<<<<< HEAD
     /// <summary>
     /// Individual creation DTO model for communication with user 
     /// </summary>
@@ -21,12 +20,6 @@ namespace BuyerMicroservice.Models.Individual
         /// JMBG -jedinstvena identifikacija fizickog lica
         /// Example : 1187999876656
         /// </summary>
-=======
-    public class IndividualCreationDto : BuyerCreationDto
-    {
-        public string surname { get; set; }
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public string JMBG { get; set; }
     }
 }

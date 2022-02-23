@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models.ContractLease
 {
-<<<<<<< HEAD
     /// <summary>
     /// Contract Lease confirmation DTO model
     /// </summary>

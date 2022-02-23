@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.AuthorizedPerson
 {
-<<<<<<< HEAD
+
     /// <summary>
     /// Authorized person  creation DTO model for communication with user
     /// </summary>
@@ -45,29 +45,6 @@ namespace BuyerMicroservice.Models.AuthorizedPerson
         /// </summary>
         public Guid boardNumbID { get; set; }
 
-=======
-    public class AuthorizedPersonCreationDto
-    {
 
-        public string name { get; set; }
-
-        public string surname { get; set; }
-
-        public string personalDocNum { get; set; }
-
-        public string address { get; set; }
-
-
-        public string country { get; set; }
-
-        public Guid boardNumbID { get; set; }
-
-<<<<<<< Updated upstream
-
-       
-=======
-        public IList<BoardNumber> boardNums { get; set; }
->>>>>>> Stashed changes
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     }
 }

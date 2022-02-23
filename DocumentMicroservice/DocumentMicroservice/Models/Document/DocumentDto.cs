@@ -5,12 +5,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models.Document
 {
-<<<<<<< HEAD
     /// <summary>
     /// Document DTO model for commnication with user
     /// </summary>
-=======
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     public class DocumentDto
     {
 
@@ -18,17 +15,13 @@ namespace DocumentMicroservice.Models.Document
         /// ID dokumenta
         /// Example:07af89f2-feee-4680-b489-9d0e31699588
         /// </summary>
-<<<<<<< HEAD
         public Guid documentId { get; set; }
-=======
         public Guid DocumentId { get; set; }
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
 
         /// <summary>
         /// Registration number - broj registracije 
         /// Exaple: 1123232323
         /// </summary>
-<<<<<<< HEAD
         public string registrationNumber { get; set; }
 
         /// <summary>
@@ -59,7 +52,6 @@ namespace DocumentMicroservice.Models.Document
 
         /// <summary>
         /// Auction DTO - Auction model from Auction microservice
-=======
         public string RegistrationNumber { get; set; }
 
         /// <summary>
@@ -83,17 +75,12 @@ namespace DocumentMicroservice.Models.Document
         public Guid DocStatusID { get; set; }
 
         /// <summary>
-        /// Buyer DTO.
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
+        /// Auction
         /// </summary>
         public AuctionDto auction { get; set; }
 
         /// <summary>
-<<<<<<< HEAD
         /// User DTO - User model from User microservice
-=======
-        /// User DTO
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         /// </summary>
         public UserDto user { get; set; }
 

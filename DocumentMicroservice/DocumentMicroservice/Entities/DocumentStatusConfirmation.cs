@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Entities
 {
-<<<<<<< HEAD
     /// <summary>
     /// Document status confirmation model
     /// </summary>
-=======
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     public class DocumentStatusConfirmation
     {
         /// <summary>

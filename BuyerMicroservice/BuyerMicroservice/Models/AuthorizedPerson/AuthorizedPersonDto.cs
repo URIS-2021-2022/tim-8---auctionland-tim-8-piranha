@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.AuthorizedPerson
 {
-<<<<<<< HEAD
+
     /// <summary>
     /// Authorized person  DTO model for communication with user
     /// </summary>
@@ -42,24 +42,6 @@ namespace BuyerMicroservice.Models.AuthorizedPerson
         /// board Number ID(Foreign key) from boardNumber entity - ID broja table
         /// Example : 861f142c-4707-416d-ad14-7debbd2031ed
         /// </summary>
-=======
-    public class AuthorizedPersonDto
-    {
-        
-
-        public string name { get; set; }
-
-        public string surname { get; set; }
-
-        public string personalDocNum { get; set; }
-
-        public string address { get; set; }
-
-        
-        public string country { get; set; }
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
-
-
         public Guid boardNumbID { get; set; }
     }
 }
