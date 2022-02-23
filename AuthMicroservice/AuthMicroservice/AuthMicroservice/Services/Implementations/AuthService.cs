@@ -29,6 +29,8 @@
         private IOptions<AudienceModel> _appSettings;
         private readonly ILoggerService loggerService;
 
+        public static object Domain { get; internal set; }
+
         /// <summary>
         /// Auth service constructor.
         /// </summary>

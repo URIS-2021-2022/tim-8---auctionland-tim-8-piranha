@@ -1,5 +1,6 @@
 ﻿namespace AuthMicroservice.Services.Implementations
 {
+    using AuthMicroservice.Consts;
     using AuthMicroservice.Controllers.DTOs.Request;
     using AuthMicroservice.Controllers.DTOs.Response;
     using AuthMicroservice.Domain;
@@ -15,15 +16,21 @@
     {
         private readonly IClientRepository clientRepository;
         private readonly IMapper autoMapper;
+        private IUserTypeRepository userTypeRepository;
 
         /// <summary>
         /// Client service constructor.
         /// </summary>
-        /// <param name="clientRepository">Auth repository.</param>
-        public ClientService(IClientRepository clientRepository, IMapper autoMapper)
+        /// <param name="clientRepository">Client repository.</param>
+        /// <param name="autoMapper">Auto model mapper.</param>
+        /// <param name="userTypeRepository">User type repository.</param>
+        public ClientService(IClientRepository clientRepository, 
+            IMapper autoMapper, 
+            IUserTypeRepository userTypeRepository)
         {
             this.clientRepository = clientRepository;
             this.autoMapper = autoMapper;
+            this.userTypeRepository = userTypeRepository;
         }
 
         /// <summary>
@@ -33,7 +40,39 @@
         /// <returns>ClientResponseDTO</returns>
         public ClientResponseDTO Create(CreateClientRequestDTO requestDTO)
         {
-            throw new System.NotImplementedException();
+            ThrowExceptionIfEmailExists(requestDTO.Username);
+
+            Client client = new Client()
+            {
+                FirstName = requestDTO.FirstName,
+                LastName = requestDTO.LastName,
+                Username = requestDTO.Username,
+                Password = BCrypt.Net.BCrypt.HashPassword(requestDTO.Password)
+            };
+
+            client.UserType = userTypeRepository.FindOne(ut => ut.Name.Equals(requestDTO.UserType));
+
+            clientRepository.Save(client);
+
+            return autoMapper.Map<ClientResponseDTO>(client);
+        }
+
+        private void ThrowExceptionIfEmailExists(string email)
+        {
+            if (FindOneByEmailAddress(email) != null)
+            {
+                //throw new EntityAlreadyExistsException($"User with email {email} already exists!", GeneralConsts.MICROSERVICE_NAME);
+            }
+        }
+
+        /// <summary>
+        /// Method for finding a client with the specified email.
+        /// </summary>
+        /// <param name="email">Email of the user.</param>
+        /// <returns>Client</returns>
+        public Client FindOneByEmailAddress(string email)
+        {
+            return clientRepository.FindOne(c => c.Username.Equals(email));
         }
 
         /// <summary>
@@ -51,7 +90,7 @@
         /// <returns>List&lt;ClientResponseDTO&gt;</returns>
         public List<ClientResponseDTO> GetAllClients()
         {
-            throw new System.NotImplementedException();
+            return autoMapper.Map<List<ClientResponseDTO>>(clientRepository.List(c => true));
         }
 
         /// <summary>
@@ -61,7 +100,7 @@
         /// <returns>ClientResponseDTO</returns>
         public ClientResponseDTO GetOneByUid(string uid)
         {
-            throw new System.NotImplementedException();
+            return autoMapper.Map<ClientResponseDTO>(clientRepository.FindOneByUid(uid));
         }
 
         /// <summary>

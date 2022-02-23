@@ -19,6 +19,7 @@
         {
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUserTypeRepository, UserTypeRepository>();
         }
     }
 }
