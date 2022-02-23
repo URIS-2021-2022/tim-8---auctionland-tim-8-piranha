@@ -27,51 +27,29 @@ namespace DocumentMicroservice.Data.Repositories
             return Mapper.Map<DocumentConfirmation>(createdEntity.Entity);
         }
 
-<<<<<<< HEAD
-=======
-        
 
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task DeleteDocumentAsync(Guid documentId)
         {
             var document =await  GetDocumentByIdAsync(documentId);
             Context.Remove(document);
         }
 
-<<<<<<< HEAD
-=======
-        
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async  Task<List<Document>> GetDocumentAsync(string rNumber = null, string documentTemplate = null)
         {
             return await Context.Document.Where(o => (o.registrationNumber == null || rNumber == null) && (o.documentTemplate == null || documentTemplate == null)).ToListAsync();
         }
 
-<<<<<<< HEAD
-=======
-       
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<Document> GetDocumentByIdAsync(Guid documentId)
         {
             return await Context.Document.FirstOrDefaultAsync(o => o.documentId == documentId);
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task<bool> SaveChangesAsync()
         {
             return await Context.SaveChangesAsync() > 0;
         }
 
-<<<<<<< HEAD
-=======
-       
 
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task UpdateDocumentAsync(Document document)
         {
             /* Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze 

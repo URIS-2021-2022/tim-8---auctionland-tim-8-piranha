@@ -20,11 +20,8 @@ namespace DocumentMicroservice.Controllers
     [ApiController]
     [Route("api/DocumentStatus")]
     [Produces("application/json", "application/xml")]
-<<<<<<< HEAD
     [Authorize] 
-=======
-    //[Authorize] - kontroleru mogu pristupati samo autorizovani korisnici
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
+
     public class DocumentStatusController : ControllerBase
     {
         private readonly IDocumentStatusRepository DocumentStatusRepository;
@@ -44,11 +41,7 @@ namespace DocumentMicroservice.Controllers
         }
 
         /// <summary>
-<<<<<<< HEAD
-        /// Vraca sve statuse dokumenta 
-=======
         /// Vraca sve statuse dokumenta na osnovu prosledjenih filtera
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         /// </summary>
         /// <param name="documentStatus">Status dokumenta</param>
         /// <returns>Lista svih statusa dokumenata</returns>
@@ -71,11 +64,7 @@ namespace DocumentMicroservice.Controllers
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// Vraća traženi status dokument po ID-ju
-=======
-        /// Vraća traženi dokument po ID-ju
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         /// </summary>
         /// <param name="DocumentStatusId">ID statusa dokumenta</param>
         /// <returns>Tražena banka</returns>

@@ -12,11 +12,7 @@ namespace DocumentMicroservice.Profiles
     {
         public GuaranteeTypeProfile()
         {
-<<<<<<< HEAD
-            
-=======
-            //nema Confirmation!!!
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
+
             CreateMap<GuaranteeTypeConfirmation, GuaranteeTypeConfirmationDto>();
             CreateMap<GuaranteeType,GuaranteeTypeDto>();
             CreateMap<GuaranteeTypeCreationDto,GuaranteeType>();

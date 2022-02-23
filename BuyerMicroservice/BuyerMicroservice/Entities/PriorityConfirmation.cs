@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Entities
 {
-<<<<<<< HEAD
     /// <summary>
     /// Priority confirmation model
     /// </summary>
@@ -21,13 +20,6 @@ namespace BuyerMicroservice.Entities
         ///  Priority Type - tip prioriteta 
         ///  Example : 1
         /// </summary>
-=======
-    public class PriorityConfirmation
-    {
-        [Key]
-        public Guid priorityID { get; set; }
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public string priorityType { get; set; }
     }
 }

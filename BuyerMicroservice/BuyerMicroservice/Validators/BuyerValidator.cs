@@ -27,17 +27,11 @@ namespace BuyerMicroservice.Validators
             .NotEmpty()
             .NotNull();
 
-<<<<<<< HEAD
             RuleFor(buyer => buyer.name)
                 .NotEmpty()
                 .NotNull();
                 
-=======
-            RuleFor(individual => individual.name)
-                .NotEmpty()
-                .NotNull()
-                .Matches("^[a - zA - Z] *$");
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
+
 
             RuleFor(individual => individual.addresse)
                .NotEmpty()

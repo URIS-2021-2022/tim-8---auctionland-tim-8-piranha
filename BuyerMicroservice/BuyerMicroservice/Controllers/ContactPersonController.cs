@@ -38,7 +38,7 @@ namespace BuyerMicroservice.Controllers
             this.validator = validator;
             this.logger=logger;
          }
-<<<<<<< HEAD
+
 
         /// <summary>
         /// Vraća sve kontakt osobe
@@ -46,18 +46,16 @@ namespace BuyerMicroservice.Controllers
         /// <returns>Lista kontakt osoba</returns>
         /// <response code = "200">Vraća listu kontakt osoba</response>
         /// <response code = "204">Ne postoji nijedna kontakt osoba</response>
-=======
+
     
 
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
+
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
-=======
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
+
         public async Task< ActionResult<List<ContactPersonDto>>> GetContactPersonAsync(string name = null)
         {
             List<ContactPerson> contactPerson =await contactPersonRepository.GetContactPersonAsync(name);
@@ -73,7 +71,6 @@ namespace BuyerMicroservice.Controllers
             return Ok(mapper.Map<List<ContactPersonDto>>(contactPerson));
         }
 
-<<<<<<< HEAD
         /// <summary>
         /// Vraća traženu kontakt osobu po ID-ju
         /// </summary>
@@ -85,11 +82,6 @@ namespace BuyerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
-=======
-        [HttpGet("{contactPersonId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task< ActionResult<ContactPersonDto>> GetContactPersonByIdAsync(Guid contactPersonID)
         {
             ContactPerson contactPerson = await contactPersonRepository.GetContactPersonByIdAsync(contactPersonID);
@@ -104,7 +96,7 @@ namespace BuyerMicroservice.Controllers
 
             return Ok(mapper.Map<ContactPersonDto>(contactPerson));
         }
-<<<<<<< HEAD
+
         /// <summary>
         /// Kreira novu kontakt osobu
         /// </summary>
@@ -122,18 +114,12 @@ namespace BuyerMicroservice.Controllers
         /// <response code = "201">Vraća kreiranu banku</response>
         /// <response code="401">Lice koje želi da izvrši kreiranje banke nije autorizovani korisnik</response>
         /// <response code = "500">Došlo je do greške na serveru prilikom kreiranja banke</response>
-=======
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
-=======
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task< ActionResult<ContactPersonConfirmationDto>> CreateContactPersonAsync([FromBody] ContactPersonCreationDto contactPersonCreation)
         {
             try
@@ -165,7 +151,7 @@ namespace BuyerMicroservice.Controllers
             }
         }
 
-<<<<<<< HEAD
+
         /// <summary>
         /// Ažurira jednu kontak osobu
         /// </summary>
@@ -174,18 +160,13 @@ namespace BuyerMicroservice.Controllers
         /// <response code="200">Vraća ažuriranu kontakt osobu</response>
         /// <response code="404">Nije pronađena kontakt osoba za ažuriranje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja kontakt osobe</response>
-=======
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
-=======
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task< ActionResult<ContactPersonDto>> UpdateContactPersonAsync(ContactPersonUpdateDto contactPersonUpdate)
         {
             try
@@ -223,8 +204,6 @@ namespace BuyerMicroservice.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-
-<<<<<<< HEAD
         /// <summary>
         /// Briše kontakt osobu na osnovu ID-ja
         /// </summary>
@@ -233,16 +212,11 @@ namespace BuyerMicroservice.Controllers
         /// <response code="204">Kontak osoba uspešno obrisana</response>
         /// <response code="404">Nije pronađena kontakt osoba za brisanje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom brisanja kontakt osobe</response>
-=======
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         [HttpDelete("{contactPersonId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-<<<<<<< HEAD
         [Authorize(Roles = "Administrator, Superuser, TehnickiSekretar")]
-=======
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async  Task<IActionResult> DeleteContactPersonAsync(Guid contactPersonId)
         {
             try
@@ -271,7 +245,6 @@ namespace BuyerMicroservice.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-<<<<<<< HEAD
         /// <summary>
         /// Vraća informacije o opcijama koje je moguće izvršiti za sve kontakt osobe
         /// </summary>
@@ -279,11 +252,6 @@ namespace BuyerMicroservice.Controllers
         [HttpOptions]
         [AllowAnonymous]
         [Authorize(Roles = "Administrator, Superuser, Menadzer, TehnickiSekretar")]
-=======
-
-        [HttpOptions]
-        [AllowAnonymous]
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public async Task< IActionResult> GetContactPersonOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");

@@ -20,6 +20,8 @@ using BuyerMicroservice.ServiceCalls;
 using BuyerMicroservice.Models.Buyer;
 using BuyerMicroservice.Models;
 using BuyerMicroservice.ServiceCalls.Mocks;
+using System.Reflection;
+using System.IO;
 
 namespace BuyerMicroservice
 {
@@ -57,7 +59,31 @@ namespace BuyerMicroservice
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BuyerMicroservice", Version = "v1" });
+
+                c.SwaggerDoc("PlotMicroserviceOpenApiSpecification", new OpenApiInfo()
+                {
+                    Title = "Plot microservice API",
+                    Version = "1",
+                    Description = "Throughout this API, you can view or modify existing plots, also you can create new plots.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Dimitrije Corlija",
+                        Email = "corlija.dimitrije822@gmail.com",
+                        Url = new Uri("https://github.com/Dimitrije-Corlija")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "FTN license",
+                        Url = new Uri("http://www.ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka")
+                    }
+                });
+                var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+
+                // Making path to XML file with comments
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+
+                // Telling Swagger where file with XML comments is located
+                c.IncludeXmlComments(xmlCommentsPath);
             });
             services.AddDbContext<BuyerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BuyerDB")));
         }
@@ -71,6 +97,10 @@ namespace BuyerMicroservice
                 /*app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BuyerMicroservice v1"));*/
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(setupAction => {
+                setupAction.SwaggerEndpoint("/swagger/BuyerMicroserviceOpenApiSpecification/swagger.json", "Buyer microservice API");
+            });
 
             app.UseHttpsRedirection();
 

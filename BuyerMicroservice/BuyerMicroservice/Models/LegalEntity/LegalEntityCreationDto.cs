@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.LegalEntity
 {
-<<<<<<< HEAD
     /// <summary>
     /// Legal Entity creation DTO  model for communication with user 
     /// </summary>
@@ -23,12 +22,5 @@ namespace BuyerMicroservice.Models.LegalEntity
         /// </summary>
         public string fax { get; set; }
         
-=======
-    public class LegalEntityCreationDto : BuyerCreationDto
-    {
-        public string identificationNumber { get; set; }
-
-        public string fax { get; set; }
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     }
 }

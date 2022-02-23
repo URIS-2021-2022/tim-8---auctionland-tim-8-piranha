@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Entities
 {
-<<<<<<< HEAD
     /// <summary>
     /// Authorized person confirmation model
     /// </summary>
@@ -50,27 +49,6 @@ namespace BuyerMicroservice.Entities
         public string country { get; set; }
 
      
-=======
-    public class AuthorizedPersonConfirmation
-    {
-       
-        public Guid authorizedPersonID { get; set; }
-        public Guid boardNumbID { get; set; }
 
-        public string name { get; set; }
-
-        public string surname { get; set; }
-
-        public string personalDocNum { get; set; }
-
-        public string address { get; set; }
-        //lice za koje se vrsi aukcija 
-        // ne treba foreign key zato sto strelica pokazuje u kontra smeru 
-     
-        public string country { get; set; }
-
-        //public BoardNumber[] boardNums { get; set; }
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     }
 }

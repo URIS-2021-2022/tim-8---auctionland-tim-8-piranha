@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.Buyer
 {
-<<<<<<< HEAD
     /// <summary>
     /// Buyer update Dto model for communication with user 
     /// </summary>
@@ -91,49 +90,5 @@ namespace BuyerMicroservice.Models.Buyer
         /// Example : 861f142c-4707-416d-ad14-7debbd2031ed
         /// </summary>
         public Guid? paymentId { get; set; }
-
-=======
-    public class BuyerUpdateDto
-    {
-       
-        public Guid buyerID { get; set; }
-
-        public Guid priorityID { get; set; }
-
-        public int realizedArea { get; set; }
-
-        // public string paymentID { get; set; }
-
-        public Guid authorizedPersonID { get; set; }
-
-        public bool hasBan { get; set; }
-
-        public DateTime? startDateOfBan { get; set; }
-
-        public int durationOfBanInYear { get; set; }
-
-        public DateTime? endDateOfBan { get; set; }
-
-        public string name { get; set; }
-
-        public string addresse { get; set; }
-
-        public string phone1 { get; set; }
-
-        public string phone2 { get; set; }
-
-        public string email { get; set; }
-
-        public string accountNumber { get; set; }
-<<<<<<< Updated upstream
-
-        // public Guid publicTender { get; set; }
-
-        public Guid? addressId { get; set; }
-
-        public Guid? paymentId { get; set; }
-=======
->>>>>>> Stashed changes
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
     }
 }

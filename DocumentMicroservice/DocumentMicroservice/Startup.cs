@@ -51,11 +51,6 @@ namespace DocumentMicroservice
             services.AddScoped<IDocumentStatusRepository, DocumentStatusRepository>();
             services.AddScoped<IGuaranteeTypeRepository, GuaranteeTypeRepository>();
             services.AddScoped<IContractLeaseRepository, ContractLeaseRepository>();
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
             services.AddScoped<ILoggerService, LoggerService>();
 
             services.AddScoped<IServiceCall<BuyerDto>, BuyerServiceCallMock<BuyerDto>>();
@@ -63,14 +58,9 @@ namespace DocumentMicroservice
             services.AddScoped<IServiceCall<AuctionDto>, AuctionServiceCallMock<AuctionDto>>();
             services.AddScoped<IServiceCall<UserDto>, UserServiceCallMock<UserDto>>();
             services.AddScoped<IServiceCall<PlotDto>, PlotServiceCallMock<PlotDto>>();
-<<<<<<< HEAD
 
-=======
-=======
->>>>>>> Stashed changes
 
             //services.AddScoped<IDocumentStatusRepository, PlotCadastralMunicipalityRepository>();
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
             //-- svaki put kada stigne novi rikvest od klijenta uvek se pravi nova instanca(to je vezano za parametar konstruktora u kontroleru)
 
 
@@ -100,11 +90,8 @@ namespace DocumentMicroservice
 
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
-<<<<<<< HEAD
                c.IncludeXmlComments(xmlCommentsPath);
-=======
-               // c.IncludeXmlComments(xmlCommentsPath);
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
+
                 
 
             });

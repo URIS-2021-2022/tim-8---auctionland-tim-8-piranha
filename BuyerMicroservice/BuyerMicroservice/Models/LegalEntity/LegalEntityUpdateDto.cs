@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.LegalEntity
 {
-<<<<<<< HEAD
     /// <summary>
     /// Legal Entity update DTO  model for communication with user 
     /// </summary>
@@ -22,12 +21,6 @@ namespace BuyerMicroservice.Models.LegalEntity
         /// Fax - fax broj pravnog lica 
         /// Example : 212693-2377
         /// </summary>
-=======
-    public class LegalEntityUpdateDto : BuyerUpdateDto
-    {
-        public string identificationNumber { get; set; }
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public string fax { get; set; }
     }
 }

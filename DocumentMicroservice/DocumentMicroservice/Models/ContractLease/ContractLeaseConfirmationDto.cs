@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models.ContractLease
 {
-<<<<<<< HEAD
+
     /// <summary>
     /// Contract Lease confirmation DTO model
     /// </summary>
@@ -41,7 +41,6 @@ namespace DocumentMicroservice.Models.ContractLease
         /// <summary>
         /// Date Of Signing - Datum potpisivanja
         /// Example : "2021-02-01 00:00:00"
-
         /// </summary>
         public DateTime dateOfSigning { get; set; }
 

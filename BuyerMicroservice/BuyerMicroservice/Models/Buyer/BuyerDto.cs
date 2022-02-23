@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BuyerMicroservice.Models.Buyer
 {
-<<<<<<< HEAD
+
     /// <summary>
     /// Buyer Dto model for communication with user 
     /// </summary>
@@ -43,22 +43,6 @@ namespace BuyerMicroservice.Models.Buyer
         /// <summary>
         /// Payment(PaymentDto) from payment microservice 
         /// </summary>
-=======
-    public class BuyerDto
-    {
-        public string name { get; set; }
-
-        public string addresse { get; set; }
-
-        public string phone1 { get; set; }
-
-        public string email { get; set; }
-
-        public string accountNumber { get; set; }
-
-        public AddressDto address { get; set; }
-
->>>>>>> fc78dec60f56cc4dd7d5724adaa6d44b10ccb90a
         public PaymentDto payment { get; set; }
     }
 }
