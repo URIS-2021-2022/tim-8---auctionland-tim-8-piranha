@@ -34,6 +34,7 @@ namespace ComplaintMicroservice.Controllers
         private readonly IServiceCall<PublicBiddingDto> publicBiddingService;
         private readonly IServiceCall<BuyerDto> BuyerService;
 
+#pragma warning disable S107
         public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, 
             IMapper mapper, IComplaintTypeRepository complaintTypeRepository, 
             IComplaintStatusRepository complaintStatusRepository, 
@@ -50,6 +51,7 @@ namespace ComplaintMicroservice.Controllers
             this.publicBiddingService = publicBiddingService;
             this.BuyerService = BuyerService;
         }
+#pragma warning restore S107
 
         /// <summary>
         /// Vraća sve zalbe
@@ -204,7 +206,6 @@ namespace ComplaintMicroservice.Controllers
                 com.ComplaintStatus = await complaintStatusRepository.GetComplaintStatusById(oldComplaint.ComplaintStatusId);
                 com.ComplaintEvent = await complaintEventRepository.GetComplaintEventById(oldComplaint.ComplaintEventId);
                 await complaintRepository.UpdateComplaint(com);
-                string location = linkGenerator.GetPathByAction("GetComplaintById", "Complaint", new { complaintId = com.ComplaintId });
                 await Logger.LogMessage(LogLevel.Information, "Complaint successfully updated!", "Complaint microservice", "UpdateComplaint");
                 return Ok(com);
             }
