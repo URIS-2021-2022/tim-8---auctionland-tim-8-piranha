@@ -1,0 +1,160 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/auth{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/auth{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/address{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40001
+        }
+      ],
+      "UpstreamPathTemplate": "/address{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/ad{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40002
+        }
+      ],
+      "UpstreamPathTemplate": "/ad{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/auction{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40003
+        }
+      ],
+      "UpstreamPathTemplate": "/auction{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/buyer{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40004
+        }
+      ],
+      "UpstreamPathTemplate": "/buyer{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/complaint{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40005
+        }
+      ],
+      "UpstreamPathTemplate": "/complaint{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/document{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40006
+        }
+      ],
+      "UpstreamPathTemplate": "/document{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/payment{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40007
+        }
+      ],
+      "UpstreamPathTemplate": "/payment{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/person{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40008
+        }
+      ],
+      "UpstreamPathTemplate": "/person{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/plot{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40009
+        }
+      ],
+      "UpstreamPathTemplate": "/plot{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/public-bidding{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40010
+        }
+      ],
+      "UpstreamPathTemplate": "/public-bidding{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/registration{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40011
+        }
+      ],
+      "UpstreamPathTemplate": "/registration{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/user{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 40012
+        }
+      ],
+      "UpstreamPathTemplate": "/user{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Patch", "Options", "Head", "Delete" ]
+    }
+  ]
+}
