@@ -74,8 +74,8 @@ namespace BuyerMicroservice.Controllers
 
                 if (buyer.addressId is not null && buyer.paymentId is not null)
                 {
-                    var addressDto = await addressService.SendGetRequestAsync("");
-                    var paymentDto = await paymentService.SendGetRequestAsync("");
+                    var addressDto = await addressService.SendGetRequestAsync("http://localhost:40001/address");
+                    var paymentDto = await paymentService.SendGetRequestAsync("http://localhost:40008/payment");
                     if (addressDto is not null && paymentDto is not null )
                     {
                         buyerDto.address = addressDto;
@@ -106,8 +106,8 @@ namespace BuyerMicroservice.Controllers
 
             if(buyer.addressId is not null && buyer.paymentId is not null)
             {
-                var addressDto = await addressService.SendGetRequestAsync("");
-                var paymentDto = await paymentService.SendGetRequestAsync("");
+                var addressDto = await addressService.SendGetRequestAsync("http://localhost:40001/address");
+                var paymentDto = await paymentService.SendGetRequestAsync("http://localhost:40008/payment");
 
                 if ( addressDto is not null && paymentDto is not null)
                 {

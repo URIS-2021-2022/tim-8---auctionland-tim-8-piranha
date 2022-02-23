@@ -72,9 +72,9 @@ namespace DocumentMicroservice.Controllers
 
                 if (cl.buyerId is not null && cl.personId is not null && cl.plotId is not null)
                 {
-                    var buyerDto = await buyerService.SendGetRequestAsync("");
-                    var personDto = await personService.SendGetRequestAsync("");
-                    var plotDto = await plotService.SendGetRequestAsync("");
+                    var buyerDto = await buyerService.SendGetRequestAsync("http://localhost:40004/buyer");
+                    var personDto = await personService.SendGetRequestAsync("http://localhost:40008/person");
+                    var plotDto = await plotService.SendGetRequestAsync("http://localhost:40009/plot");
 
                     if (buyerDto is not null && personDto is not null && plotDto is not null)
                     {
@@ -113,9 +113,9 @@ namespace DocumentMicroservice.Controllers
 
             if (contractLease.buyerId is not null && contractLease.personId is not null && contractLease.plotId is not null)
             {
-                var buyerDto = await buyerService.SendGetRequestAsync("");
-                var personDto = await personService.SendGetRequestAsync("");
-                var plotDto = await plotService.SendGetRequestAsync("");
+                var buyerDto = await buyerService.SendGetRequestAsync("http://localhost:40004/buyer");
+                var personDto = await personService.SendGetRequestAsync("http://localhost:40008/person");
+                var plotDto = await plotService.SendGetRequestAsync("http://localhost:40009/plot");
 
                 if (buyerDto is not null && personDto is not null && plotDto is not null)
                 {

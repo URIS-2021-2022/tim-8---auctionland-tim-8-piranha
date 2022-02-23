@@ -74,8 +74,8 @@ namespace DocumentMicroservice.Controllers
 
                 if (doc.auctionId is not null && doc.userId is not null)
                 {
-                    var auctionDto = await auctionService.SendGetRequestAsync("");
-                    var userDto = await userService.SendGetRequestAsync("");
+                    var auctionDto = await auctionService.SendGetRequestAsync("http://localhost:40003/auction");
+                    var userDto = await userService.SendGetRequestAsync("http://localhost:40012/user");
 
                     if (auctionDto is not null && userDto is not null)
                     {
@@ -116,8 +116,8 @@ namespace DocumentMicroservice.Controllers
 
             if (doc.auctionId is not null && doc.userId is not null )
             {
-                var auctionDto = await auctionService.SendGetRequestAsync("");
-                var userDto = await userService.SendGetRequestAsync("");
+                var auctionDto = await auctionService.SendGetRequestAsync("http://localhost:40003/auction");
+                var userDto = await userService.SendGetRequestAsync("http://localhost:40012/user");
 
                 if (auctionDto is not null && userDto is not null)
                 {
