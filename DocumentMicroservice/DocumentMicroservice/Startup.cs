@@ -51,6 +51,7 @@ namespace DocumentMicroservice
             services.AddScoped<IDocumentStatusRepository, DocumentStatusRepository>();
             services.AddScoped<IGuaranteeTypeRepository, GuaranteeTypeRepository>();
             services.AddScoped<IContractLeaseRepository, ContractLeaseRepository>();
+<<<<<<< Updated upstream
 
             services.AddScoped<ILoggerService, LoggerService>();
 
@@ -59,6 +60,8 @@ namespace DocumentMicroservice
             services.AddScoped<IServiceCall<AuctionDto>, AuctionServiceCallMock<AuctionDto>>();
             services.AddScoped<IServiceCall<UserDto>, UserServiceCallMock<UserDto>>();
             services.AddScoped<IServiceCall<PlotDto>, PlotServiceCallMock<PlotDto>>();
+=======
+>>>>>>> Stashed changes
 
             //services.AddScoped<IDocumentStatusRepository, PlotCadastralMunicipalityRepository>();
             //-- svaki put kada stigne novi rikvest od klijenta uvek se pravi nova instanca(to je vezano za parametar konstruktora u kontroleru)

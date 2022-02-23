@@ -8,7 +8,14 @@ namespace DocumentMicroservice.Models.ContractLease
     public class ContractLeaseConfirmationDto
     {
 
+<<<<<<< Updated upstream
         
+=======
+        /// <summary>
+        /// Maturities - Rokovi dospeća
+        /// </summary>
+       // public int[] Maturities { get; set; }
+>>>>>>> Stashed changes
 
 
         /// <summary>
@@ -49,9 +56,14 @@ namespace DocumentMicroservice.Models.ContractLease
         /// <summary>
         /// DocumentID - ID dokumenta
         /// </summary>
+<<<<<<< Updated upstream
         public Guid documentId { get; set; }
 
         
+=======
+        
+        public Guid documentId { get; set; }
+>>>>>>> Stashed changes
 
 
     }

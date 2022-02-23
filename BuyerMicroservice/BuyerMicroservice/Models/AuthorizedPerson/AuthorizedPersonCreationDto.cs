@@ -8,8 +8,6 @@ namespace BuyerMicroservice.Models.AuthorizedPerson
 {
     public class AuthorizedPersonCreationDto
     {
-        
-        public Guid authorizedPersonID { get; set; }
 
         public string name { get; set; }
 
@@ -18,13 +16,17 @@ namespace BuyerMicroservice.Models.AuthorizedPerson
         public string personalDocNum { get; set; }
 
         public string address { get; set; }
-        
-    
+
+
         public string country { get; set; }
 
         public Guid boardNumbID { get; set; }
 
+<<<<<<< Updated upstream
 
        
+=======
+        public IList<BoardNumber> boardNums { get; set; }
+>>>>>>> Stashed changes
     }
 }

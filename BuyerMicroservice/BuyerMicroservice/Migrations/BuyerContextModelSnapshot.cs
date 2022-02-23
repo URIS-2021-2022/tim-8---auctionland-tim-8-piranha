@@ -305,7 +305,37 @@ namespace BuyerMicroservice.Migrations
                         });
                 });
 
+<<<<<<< Updated upstream
             modelBuilder.Entity("AuthorizedPersonBuyer", b =>
+=======
+            modelBuilder.Entity("BuyerMicroservice.Entities.AuthorizedPerson", b =>
+                {
+                    b.OwnsMany("BuyerMicroservice.Entities.BoardNumber", "boardNums", b1 =>
+                        {
+                            b1.Property<Guid>("authorizedPersonID")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<int>("number")
+                                .HasColumnType("int");
+
+                            b1.HasKey("authorizedPersonID", "Id");
+
+                            b1.ToTable("BoardNumber");
+
+                            b1.WithOwner()
+                                .HasForeignKey("authorizedPersonID");
+                        });
+
+                    b.Navigation("boardNums");
+                });
+
+            modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>
+>>>>>>> Stashed changes
                 {
                     b.HasOne("BuyerMicroservice.Entities.AuthorizedPerson", null)
                         .WithMany()

@@ -37,11 +37,14 @@ namespace BuyerMicroservice.Models.Buyer
         public string email { get; set; }
 
         public string accountNumber { get; set; }
+<<<<<<< Updated upstream
 
         // public Guid publicTender { get; set; }
 
         public Guid? addressId { get; set; }
 
         public Guid? paymentId { get; set; }
+=======
+>>>>>>> Stashed changes
     }
 }
