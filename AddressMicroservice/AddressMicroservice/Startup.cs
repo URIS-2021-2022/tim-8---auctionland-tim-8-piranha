@@ -1,6 +1,9 @@
+using AddressMicroservice.Data.Interfaces;
+using AddressMicroservice.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +13,12 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AddressMicroservice.Filters;
+using AddressMicroservice.Entities.Contexts;
+using Microsoft.EntityFrameworkCore;
+using DocumentMicroservice.ServiceCalls;
 
 namespace AddressMicroservice
 {
@@ -26,8 +34,28 @@ namespace AddressMicroservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AddressContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AddressDB")));
 
-            services.AddControllers();
+            services.AddControllers(setup =>
+            {
+                setup.Filters.Add<ApiExceptionFilterAttribute>();
+                setup.ReturnHttpNotAcceptable = true;//SVAKI PUT KADA STIGNE NESTO STO NISAM PODRZAO VRATI ODGOVARAJUCI NOT EXECTABLE STATUS I KAZI KLIJENTU DA TO NIJE PODRZANO
+            })
+                .AddXmlDataContractSerializerFormatters();
+
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // pogledaj ceo domen za servis i trazi konfiguracije za automapper(trazi profile da bi znao na koji nacin da mapira)
+
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IStateRepository, StateRepository>();
+
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IStateRepository, StateRepository>();
+
+            services.AddScoped<ILoggerService, LoggerService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AddressMicroservice", Version = "v1" });
