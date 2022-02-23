@@ -7,9 +7,5 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = APIGateway
-<<<<<<< HEAD
-build_property.ProjectDir = C:\Users\PC\Source\Repos\tim-8---auctionland-tim-8-piranha\APIGateway\APIGateway\
-=======
-build_property.ProjectDir = C:\Davor\VII semestar\Uris projekat\tim-8---auctionland-tim-8-piranha\APIGateway\APIGateway\
+build_property.ProjectDir = C:\Davor\VII semestar\Uris projekat\tim-8---auctionland-tim-8-piranha(2)\APIGateway\APIGateway\
 
->>>>>>> ef50130ca9ae3c914cf523d4ba77ca585bb8ea85
