@@ -39,6 +39,16 @@
             Token validation endpoint route.
             </summary>
         </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_CLIENT_BASE">
+            <summary>
+            Base route for client resource.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_CLIENT_GET_ONE_BY_UID">
+            <summary>
+            Route for getting a single client by uuid.
+            </summary>
+        </member>
         <member name="T:AuthMicroservice.Controllers.AuthController">
             <summary>
             Controller for the auth resource.
@@ -48,7 +58,7 @@
             <summary>
             Constructor for the auth controller.
             </summary>
-            <param name="authService"></param>
+            <param name="authService">Auth service.</param>
         </member>
         <member name="M:AuthMicroservice.Controllers.AuthController.HandleSignIn(AuthMicroservice.Controllers.DTOs.Request.SignInRequestDTO)">
             <summary>
@@ -63,6 +73,83 @@
             </summary>
             <param name="requestDTO"></param>
             <returns></returns>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.ClientController">
+            <summary>
+            Controller for client resource.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.#ctor(AuthMicroservice.Services.Abstractions.IClientService)">
+            <summary>
+            Constructor for the client controller.
+            </summary>
+            <param name="clientService">Client service.</param>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleGetAllClients">
+            <summary>
+            Endpoint for getting all users.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleGetClientByUid(System.String)">
+            <summary>
+            Endpoint for getting a single user by user uid.
+            </summary>
+            <param name="uid">Uid of the user.</param>
+            <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleGetClientOptions">
+            <summary>
+            Endpoint for getting options.
+            </summary>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleCreateClient(AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO)">
+            <summary>
+            Endpoint for creating a new client.
+            </summary>
+            <param name="requestDTO">Attributes of the client.</param>
+            <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleUpdateClient(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO)">
+            <summary>
+            Endpoint for updating user with the passed uid.
+            </summary>
+            <param name="uid">Uid of the user.</param>
+            <param name="requestDTO">Attributes of the user.</param>
+            <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleDeleteClient(System.String)">
+            <summary>
+            Endpoint for deleting user with the passed uid.
+            </summary>
+            <param name="uid">Uid of the user.</param>
+            <returns>Void</returns>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO">
+            <summary>
+            Request DTO containing info for creating a client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.FirstName">
+            <summary>
+            First name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.LastName">
+            <summary>
+            Last name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.Username">
+            <summary>
+            Client username.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.UserType">
+            <summary>
+            Type of the user.
+            </summary>
         </member>
         <member name="T:AuthMicroservice.Controllers.DTOs.Request.SignInRequestDTO">
             <summary>
@@ -79,6 +166,31 @@
             Password.
             </summary>
         </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO">
+            <summary>
+            Request DTO containing info for updating user.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.FirstName">
+            <summary>
+            First name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.LastName">
+            <summary>
+            Last name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.Username">
+            <summary>
+            Client username.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.UserType">
+            <summary>
+            Type of the user.
+            </summary>
+        </member>
         <member name="T:AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO">
             <summary>
             Token validation request DTO.
@@ -87,6 +199,31 @@
         <member name="P:AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO.token">
             <summary>
             JWT token.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO">
+            <summary>
+            Client entity response DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO.FirstName">
+            <summary>
+            First name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO.LastName">
+            <summary>
+            Last name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO.Username">
+            <summary>
+            Client username.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO.UserType">
+            <summary>
+            Type of the user.
             </summary>
         </member>
         <member name="T:AuthMicroservice.Controllers.DTOs.Response.SignInResponseDTO">
@@ -102,6 +239,16 @@
         <member name="P:AuthMicroservice.Controllers.DTOs.Response.SignInResponseDTO.token">
             <summary>
             JWT token.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Response.UserTypeResponseDTO">
+            <summary>
+            User type response DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.UserTypeResponseDTO.Name">
+            <summary>
+            Name of the user type.
             </summary>
         </member>
         <member name="T:AuthMicroservice.Controllers.DTOs.Response.ValidateTokenResponseDTO">
@@ -384,6 +531,45 @@
             <param name="requestDTO">Request DTO.</param>
             <returns>Task&lt;ValidateTokenResponseDTO&gt;</returns>
         </member>
+        <member name="T:AuthMicroservice.Services.Abstractions.IClientService">
+            <summary>
+            Client service interface.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.GetAllClients">
+            <summary>
+            Gets all clients.
+            </summary>
+            <returns>List&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.GetOneByUid(System.String)">
+            <summary>
+            Gets a single client by uid.
+            </summary>
+            <param name="uid">Uid of the client.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO)">
+            <summary>
+            Creates a user.
+            </summary>
+            <param name="requestDTO">Info about user that is to be created.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.Update(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO)">
+            <summary>
+            Updates a user.
+            </summary>
+            <param name="uid">Uid of the client that is to be updated.</param>
+            <param name="requestDTO">Info to update.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.Delete(System.String)">
+            <summary>
+            Deletes a client.
+            </summary>
+            <param name="uid">Uid of the client that is to be deleted.</param>
+        </member>
         <member name="T:AuthMicroservice.Services.Implementations.AuthService">
             <summary>
             Service class for authentication.
@@ -411,6 +597,51 @@
             </summary>
             <param name="requestDTO">Token to be checked.</param>
             <returns>Task&lt;ValidateTokenResponseDTO&gt;</returns>
+        </member>
+        <member name="T:AuthMicroservice.Services.Implementations.ClientService">
+            <summary>
+            Client service interface implementation.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.#ctor(AuthMicroservice.Repositories.Abstractions.IClientRepository,AutoMapper.IMapper)">
+            <summary>
+            Client service constructor.
+            </summary>
+            <param name="clientRepository">Auth repository.</param>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO)">
+            <summary>
+            Creates a user.
+            </summary>
+            <param name="requestDTO">Info about user that is to be created.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.Delete(System.String)">
+            <summary>
+            Deletes a client.
+            </summary>
+            <param name="uid">Uid of the client that is to be deleted.</param>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.GetAllClients">
+            <summary>
+            Gets all clients.
+            </summary>
+            <returns>List&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.GetOneByUid(System.String)">
+            <summary>
+            Gets a single client by uid.
+            </summary>
+            <param name="uid">Uid of the client.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.Update(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO)">
+            <summary>
+            Updates a user.
+            </summary>
+            <param name="uid">Uid of the client that is to be updated.</param>
+            <param name="requestDTO">Info to update.</param>
+            <returns>ClientResponseDTO</returns>
         </member>
         <member name="T:AuthMicroservice.Startup">
             <summary>
