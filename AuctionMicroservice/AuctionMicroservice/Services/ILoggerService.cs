@@ -9,7 +9,7 @@ namespace AuctionMicroservice.Services
      public  interface ILoggerService
     {
         
-           Task <bool> LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod, Exception exception = null);
+           Task <bool> LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod);
         
     }
 }

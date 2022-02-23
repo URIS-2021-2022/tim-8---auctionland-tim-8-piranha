@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha(2)\\PublicBidding\\PublicBidding\\PublicBidding.csproj": {}
+    "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\PublicBidding\\PublicBidding\\PublicBidding.csproj": {}
   },
   "projects": {
-    "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha(2)\\PublicBidding\\PublicBidding\\PublicBidding.csproj": {
+    "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\PublicBidding\\PublicBidding\\PublicBidding.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha(2)\\PublicBidding\\PublicBidding\\PublicBidding.csproj",
+        "projectUniqueName": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\PublicBidding\\PublicBidding\\PublicBidding.csproj",
         "projectName": "PublicBidding",
-        "projectPath": "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha(2)\\PublicBidding\\PublicBidding\\PublicBidding.csproj",
-        "packagesPath": "C:\\Users\\Davor\\.nuget\\packages\\",
-        "outputPath": "C:\\Davor\\VII semestar\\Uris projekat\\tim-8---auctionland-tim-8-piranha(2)\\PublicBidding\\PublicBidding\\obj\\",
+        "projectPath": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\PublicBidding\\PublicBidding\\PublicBidding.csproj",
+        "packagesPath": "C:\\Users\\andrija\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\PublicBidding\\PublicBidding\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Davor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\andrija\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -95,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
         }
       }
     }

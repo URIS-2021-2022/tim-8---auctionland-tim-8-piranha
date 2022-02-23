@@ -305,9 +305,6 @@ namespace BuyerMicroservice.Migrations
                         });
                 });
 
-<<<<<<< Updated upstream
-            modelBuilder.Entity("AuthorizedPersonBuyer", b =>
-=======
             modelBuilder.Entity("BuyerMicroservice.Entities.AuthorizedPerson", b =>
                 {
                     b.OwnsMany("BuyerMicroservice.Entities.BoardNumber", "boardNums", b1 =>
@@ -332,22 +329,6 @@ namespace BuyerMicroservice.Migrations
                         });
 
                     b.Navigation("boardNums");
-                });
-
-            modelBuilder.Entity("BuyerMicroservice.Entities.Buyer", b =>
->>>>>>> Stashed changes
-                {
-                    b.HasOne("BuyerMicroservice.Entities.AuthorizedPerson", null)
-                        .WithMany()
-                        .HasForeignKey("authorizedPersonID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BuyerMicroservice.Entities.Buyer", null)
-                        .WithMany()
-                        .HasForeignKey("buyersbuyerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("BuyerMicroservice.Entities.AuthorizedPerson", b =>
