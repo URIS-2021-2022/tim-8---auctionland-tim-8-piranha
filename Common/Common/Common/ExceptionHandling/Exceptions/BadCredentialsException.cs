@@ -13,7 +13,7 @@ namespace Common.ExceptionHandling.Exceptions
         public BadCredentialsException(string message) : base(message, HttpStatusCode.Unauthorized)
         {
             this.message = message;
-            this.code = HttpStatusCode.Unauthorized;
+            code = HttpStatusCode.Unauthorized;
         }
     }
 }
