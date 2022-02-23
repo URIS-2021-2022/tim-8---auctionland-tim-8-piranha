@@ -71,7 +71,7 @@ namespace PublicBidding.Entities
         /// Kupci
         /// </summary>
         [NotMapped]
-        public List<Guid> Bidders { get; set; }
+        public List<Guid>? Bidders { get; set; }
         /// <summary>
         /// Delovi parcela koji ucestvuju na javnom nadmetanju
         /// </summary>

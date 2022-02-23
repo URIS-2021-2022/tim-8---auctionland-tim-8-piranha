@@ -13,6 +13,6 @@ namespace PublicBidding.Models
         /// <summary>
         /// Tip javnog nadmetanja
         /// </summary>
-        public string TypeName { get; set; }
+        public string? TypeName { get; set; }
     }
 }
