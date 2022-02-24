@@ -53,7 +53,7 @@ namespace PersonMicroservice
                         {
                             Name = "Davor Jelic",
                             Email = "davorjelic@uns.ac.rs",
-                            Url = new Uri("https://github.com/davorjelic")
+                            Url = new Uri(Configuration["Swagger:Github"])
                         }
                     });
 

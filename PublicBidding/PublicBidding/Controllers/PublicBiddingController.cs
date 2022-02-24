@@ -27,10 +27,6 @@ namespace PublicBidding.Controllers
         private readonly IPublicBiddingRepository publicBiddingRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
-        //private readonly IService<AddressDto> addressMock;
-        //private readonly IService<AuthorizedPersonDto> authorizedPersonMock;
-        //private readonly IService<BuyerDto> buyerMock;
-        //private readonly IService<PlotPartDto> plotPartMock;
         private readonly ILoggerService logger;
 
         public PublicBiddingController(IPublicBiddingService publicBiddingService, IPublicBiddingRepository publicBiddingRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService logger)
@@ -59,7 +55,7 @@ namespace PublicBidding.Controllers
 
             if (publicBiddings == null || publicBiddings.Count == 0)
             {
-                //await logger.LogMessage(LogLevel.Warning, "Public bidding list is empty!", "PublicBidding microservice", "GetPublicBiddings");
+                await logger.LogMessage(LogLevel.Warning, "Public bidding list is empty!", "PublicBidding microservice", "GetPublicBiddings");
                 return NoContent();
             }
 
@@ -69,7 +65,7 @@ namespace PublicBidding.Controllers
             {
                 publicBiddingsDto.Add(await publicBiddingService.GetInfoForListsInPublicBidding(publicBidding));
             }
-            //await logger.LogMessage(LogLevel.Information, "Public bidding list successfully returned!", "PublicBidding microservice", "GetPublicBiddings");
+            await logger.LogMessage(LogLevel.Information, "Public bidding list successfully returned!", "PublicBidding microservice", "GetPublicBiddings");
             return Ok(publicBiddingsDto);
 
         }

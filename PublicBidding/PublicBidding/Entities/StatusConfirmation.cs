@@ -7,6 +7,6 @@ namespace PublicBidding.Entities
 {
     public class StatusConfirmation
     {
-        public string StatusName { get; set; }
+        public string? StatusName { get; set; }
     }
 }

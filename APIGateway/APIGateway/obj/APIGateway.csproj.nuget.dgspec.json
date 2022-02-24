@@ -1,41 +1,20 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\APIGateway.csproj": {}
+    "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\APIGateway.csproj": {
+    "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\APIGateway.csproj",
+        "projectUniqueName": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj",
         "projectName": "APIGateway",
-        "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\APIGateway.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\obj\\",
-=======
-    "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\APIGateway.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\APIGateway.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\APIGateway.csproj",
-        "projectName": "APIGateway",
-        "projectPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\APIGateway.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\obj\\",
->>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
+        "projectPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj",
+        "packagesPath": "C:\\Users\\Davor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-<<<<<<< HEAD
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
+          "C:\\Users\\Davor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -51,13 +30,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-<<<<<<< HEAD
-              "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj": {
-                "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj"
-=======
-              "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj": {
-                "projectPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj"
->>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
+              "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj"
               }
             }
           }
@@ -121,39 +95,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
-<<<<<<< HEAD
-    "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj": {
+    "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\obj\\",
-=======
-    "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj",
-        "projectName": "Common",
-        "projectPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\obj\\",
->>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
+        "projectPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\Davor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-<<<<<<< HEAD
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
+          "C:\\Users\\Davor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -225,7 +181,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

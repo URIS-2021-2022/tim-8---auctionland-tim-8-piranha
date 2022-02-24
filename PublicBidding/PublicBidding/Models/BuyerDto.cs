@@ -17,11 +17,11 @@ namespace PublicBidding.Models
         /// <summary>
         /// Broj telefona kupca
         /// </summary>
-        public string phone1 { get; set; }
+        public string? phone1 { get; set; }
         /// <summary>
         /// Emali kupca
         /// </summary>
-        public string email { get; set; }
+        public string? email { get; set; }
         /// <summary>
         /// Broj računa kupca
         /// </summary>
@@ -29,6 +29,6 @@ namespace PublicBidding.Models
         /// <summary>
         /// Adresa kupca
         /// </summary>
-        public AddressDto address { get; set; }
+        public AddressDto? address { get; set; }
     }
 }

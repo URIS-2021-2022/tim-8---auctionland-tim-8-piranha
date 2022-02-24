@@ -42,7 +42,7 @@ namespace PublicBidding.Models
         /// <summary>
         /// Adresa odrzavanja javnog nadmetanja
         /// </summary>
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         /// <summary>
         /// Period zakupa

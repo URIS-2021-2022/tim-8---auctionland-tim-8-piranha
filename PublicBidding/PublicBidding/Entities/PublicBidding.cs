@@ -25,7 +25,7 @@ namespace PublicBidding.Entities
         /// <summary>
         /// Tip javnog nadmetanja
         /// </summary>
-        public Type Type { get; set; }
+        public Type? Type { get; set; }
         /// <summary>
         /// Id statusa javnog nadmetanja
         /// </summary>
@@ -33,7 +33,7 @@ namespace PublicBidding.Entities
         /// <summary>
         /// Status javnog nadmetanja
         /// </summary>
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
         /// <summary>
         /// Vreme početka javnog nadmetanja
         /// </summary>
@@ -66,7 +66,7 @@ namespace PublicBidding.Entities
         /// Ovlascena lica
         /// </summary>
         [NotMapped]
-        public List<Guid> AuthorizedPersons { get; set; }
+        public List<Guid>? AuthorizedPersons { get; set; }
         /// <summary>
         /// Kupci
         /// </summary>
@@ -76,7 +76,7 @@ namespace PublicBidding.Entities
         /// Delovi parcela koji ucestvuju na javnom nadmetanju
         /// </summary>
         [NotMapped]
-        public List<Guid> Plots { get; set; }
+        public List<Guid>? Plots { get; set; }
         /// <summary>
         /// Konačna cena
         /// </summary>

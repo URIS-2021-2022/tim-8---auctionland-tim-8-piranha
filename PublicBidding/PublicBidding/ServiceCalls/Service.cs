@@ -34,7 +34,9 @@ namespace PublicBidding.ServiceCalls
 
                     if (string.IsNullOrEmpty(content))
                     {
+#pragma warning disable CS8603 // Possible null reference return.
                         return default;
+#pragma warning restore CS8603 // Possible null reference return.
                     }
 
                     await logger.LogMessage(LogLevel.Information, "Communication with other microservice from PublicBidding microservice succeeded!", "PublicBidding microservice", "SendGetRequestAsync");
@@ -50,7 +52,9 @@ namespace PublicBidding.ServiceCalls
             catch (Exception)
             {
                 await logger.LogMessage(LogLevel.Error, "Error while trying to communicate with other microservice!", "PublicBidding microservice", "SendGetRequestAsync");
+#pragma warning disable CS8603 // Possible null reference return.
                 return default;
+#pragma warning restore CS8603 // Possible null reference return.
             }
         }
     }

@@ -280,24 +280,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Davor\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
+      "projectUniqueName": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
       "projectName": "PaymentMicroservice",
-      "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
-      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\obj\\",
+      "projectPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
+      "packagesPath": "C:\\Users\\Davor\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Davor\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -357,7 +352,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

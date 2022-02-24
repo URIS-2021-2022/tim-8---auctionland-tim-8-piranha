@@ -7,6 +7,6 @@ namespace PublicBidding.Entities
 {
     public class TypeConfirmation
     {
-        public string TypeName { get; set; }
+        public string? TypeName { get; set; }
     }
 }

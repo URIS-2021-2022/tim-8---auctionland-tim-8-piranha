@@ -44,11 +44,6 @@ namespace PublicBidding
             services.AddScoped<IPublicBiddingService, PublicBiddingService>();
             services.AddScoped<ILoggerService, LoggerService>();
 
-            /*services.AddScoped<IService<AddressDto>, AddressMock<AddressDto>>();
-            services.AddScoped<IService<BuyerDto>, BuyerMock<BuyerDto>>();
-            services.AddScoped<IService<AuthorizedPersonDto>, AuthorizedPersonMock<AuthorizedPersonDto>>();
-            services.AddScoped<IService<PlotPartDto>, PlotPartMock<PlotPartDto>>();*/
-
             services.AddScoped<IService<AddressDto>, Service<AddressDto>>();
             services.AddScoped<IService<BuyerDto>, Service<BuyerDto>>();
             services.AddScoped<IService<AuthorizedPersonDto>, Service<AuthorizedPersonDto>>();

@@ -73,15 +73,15 @@ namespace PublicBidding.Models
         /// <summary>
         /// Lista ID-eva ovlašćenih lica
         /// </summary>
-        public List<Guid> AuthorizedPersons { get; set; }
+        public List<Guid>? AuthorizedPersons { get; set; }
         /// <summary>
         /// Lista ID-eva kupaca
         /// </summary>
-        public List<Guid> Bidders { get; set; }
+        public List<Guid>? Bidders { get; set; }
         /// <summary>
         /// Lista ID-eva delova parcele
         /// </summary>
-        public List<Guid> PlotParts { get; set; }
+        public List<Guid>? PlotParts { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

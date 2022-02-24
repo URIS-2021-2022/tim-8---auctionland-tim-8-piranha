@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj": {}
+    "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj": {
+    "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
         "projectName": "ComplaintMicroservice",
-        "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\obj\\",
+        "projectPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
+        "packagesPath": "C:\\Users\\Davor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Davor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -102,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }
