@@ -1,0 +1,1655 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PlotMicroservice</name>
+    </assembly>
+    <members>
+        <member name="T:PlotMicroservice.Controllers.PlotCadastralMunicipalityController">
+            <summary>
+            Plot cadastral municipality controller. Gives access to fields and methods of cadastral municipality.
+            Produces JSON and XML objects as response to a request.
+            </summary>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.#ctor(PlotMicroservice.Data.Interfaces.IPlotCadastralMunicipalityRepository,Microsoft.AspNetCore.Routing.LinkGenerator,AutoMapper.IMapper,PlotMicroservice.Validators.PlotCadastralMunicipalityValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
+            <summary>
+            Plot cadastral municipality constructor.
+            Initializes properties.
+            </summary>
+            <param name="plotCadastralMunicipalityRepository"></param>
+            <param name="linkGenerator"></param>
+            <param name="mapper"></param>
+            <param name="validator"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.GetPlotCadastralMunicipalitiesAsync(System.String)">
+            <summary>
+            Getting all instances of cadastral municipality for given filter.
+            </summary>
+            <param name="cadastrialMunicipality">Plot cadastral municipality (ex. Stari Grad).</param>
+            <returns>List of cadastral municipalities.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.GetPlotCadastralMunicipalityByIdAsync(System.Guid)">
+            <summary>
+            Getting plot cadastral municipality by given GUID of cadastral municipality as parameter.
+            </summary>
+            <param name="plotCadastralMunicipalityId"></param>
+            <returns>Single plot cadastral municipality.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.CreatePlotCadastralMunicipalityAsync(PlotMicroservice.Models.PlotCadastralMunicipalityCreationDto)">
+            <summary>
+            Creating new plot cadastral municipality.
+            </summary>
+            <param name="municipality"></param>
+            <returns>Confirmation about created cadastral municipality.</returns>
+            <remarks>
+            Example of POST request \
+            POST /api/plot-cadastral-municipalities \
+            {   \
+                "cadastralMunicipality": "New cadastral municipality" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.UpdatePlotCadastralMunicipalityAsync(PlotMicroservice.Models.PlotCadastralMunicipalityUpdateDto)">
+            <summary>
+            Updating existing plot cadastral municipality by given GUID. 
+            </summary>
+            <param name="plotCadastralMunicipality"></param>
+            <returns>Updated plot cadastral municipality.</returns>
+            <remarks>
+            Example of PUT request \
+            PUT api/plot-cadastral-municipalities \
+            {   \
+                "plotCadastralMunicipalityId": "93a08cc2-1d17-46e6-bd95-4fa70bb11226", \
+                 "cadastralMunicipality": "Subotica" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.DeletePlotCadastralMunicipalityAsync(System.Guid)">
+            <summary>
+            Deleting plot cadastral municipality by given GUID.
+            </summary>
+            <param name="plotCadastrialMunicipalityId"></param>
+            <returns>Appropriate status code.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCadastralMunicipalityController.GetPlotCadastralMunicipalityOptions">
+            <summary>
+            Gives an overview of response header.
+            </summary>
+            <returns>Response header.</returns>
+        </member>
+        <member name="T:PlotMicroservice.Controllers.PlotController">
+            <summary>
+            Plot controller. Gives access to fields and methods of plot.
+            Produces JSON and XML objects as response to a request.
+            </summary>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotController.#ctor(PlotMicroservice.Data.Interfaces.IPlotRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotValidator,PlotMicroservice.ServiceCalls.ILoggerService,PlotMicroservice.ServiceCalls.IServiceCall{PlotMicroservice.Models.BuyerDto})">
+            <summary>
+            Plot constructor.
+            Initializes properties.
+            </summary>
+            <param name="plotRepository"></param>
+            <param name="mapper"></param>
+            <param name="linkGenerator"></param>
+            <param name="validator"></param>
+            <param name="logger"></param>
+            <param name="buyerService"></param>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotController.GetPlotsAsync(System.String,System.String)">
+            <summary>
+            Getting all instances of plot for given filter/s.
+            </summary>
+            <param name="culture">Culture (ex. Njive)</param>
+            <param name="workability">Workability (ex. Obradivo)</param>
+            <returns>List of plots.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotController.GetPlotByIdAsync(System.Guid)">
+            <summary>
+            Getting plot by given GUID of plot as parameter.
+            </summary>
+            <param name="plotId"></param>
+            <returns>Single plot.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotController.CreatePlotAsync(PlotMicroservice.Models.PlotModel.PlotCreationDto)">
+            <summary>
+            Creating new plot.
+            </summary>
+            <param name="plotCreation"></param>
+            <returns>Confirmation about created plot.</returns>
+            <remarks>
+            Example of POST request \
+            POST /api/plots \
+            {   \
+                "plotCultureId": "cc506ecd-fb9e-48d8-af90-26ecc5d9feba", \
+                "plotCadastralMunicipalityId": "f305096b-52fd-4c43-8699-05bc3ee664b7", \
+                "plotWorkabilityId": "c0615a4d-faa4-4e17-8f2f-93ec25383f9b", \
+                "plotSurfaceArea": 3200, \
+                "plotNumber": "55", \
+                "plotRealEstateListNumber": "LN505", \
+                "plotCurrentCulture": "", \
+                "plotCurrentWorkability": "" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotController.UpdatePlotAsync(PlotMicroservice.Models.PlotModel.PlotUpdateDto)">
+            <summary>
+            Updating existing plot by given GUID.
+            </summary>
+            <param name="plotUpdate"></param>
+            <returns>Updated plot.</returns>
+            <remarks>
+            Example of PUT request \
+            PUT /api/plots \
+            {   \
+                "plotId": "49178d69-2ada-4d14-d731-08d9eaeac343", \
+                "plotCultureId": "cc506ecd-fb9e-48d8-af90-26ecc5d9feba", \
+                "plotCadastralMunicipalityId": "f305096b-52fd-4c43-8699-05bc3ee664b7", \
+                "plotWorkabilityId": "c0615a4d-faa4-4e17-8f2f-93ec25383f9b", \
+                "plotSurfaceArea": 2900, \
+                "plotNumber": "482", \
+                "plotRealEstateListNumber": "LN482", \
+                "plotCurrentCulture": "updatedCulture", \
+                "plotCurrentWorkability": "updatedWorkability" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotController.DeletePlotAsync(System.Guid)">
+            <summary>
+            Deleting plot by given GUID.
+            </summary>
+            <param name="plotId"></param>
+            <returns>Appropriate status code.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotController.GetPlotOptions">
+            <summary>
+            Gives an overview of response header.
+            </summary>
+            <returns>Response header.</returns>
+        </member>
+        <member name="T:PlotMicroservice.Controllers.PlotCultureController">
+            <summary>
+            Plot culutre controller. Gives access to fields and methods of plot culuture.
+            Produces JSON and XML objects as response to a request.
+            </summary>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.#ctor(PlotMicroservice.Data.Interfaces.IPlotCultureRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotCultureValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
+            <summary>
+            Plot culture constructor.
+            Initializes properties.
+            </summary>
+            <param name="plotCultureRepository"></param>
+            <param name="mapper"></param>
+            <param name="linkGenerator"></param>
+            <param name="validator"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.GetPlotCulturesAsync(System.String)">
+            <summary>
+            Getting all instances of plot cultures for given filter.
+            </summary>
+            <param name="plotCulture">Plot culture (ex. Voćnjaci)</param>
+            <returns>List of plot cultures.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.GetPlotCultureByIdAsync(System.Guid)">
+            <summary>
+            Getting plot culture by given GUID of plot culture as parameter.
+            </summary>
+            <param name="plotCultureId"></param>
+            <returns>Single plot culture.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.CreatePlotCultureAsync(PlotMicroservice.Models.PlotCultureModel.PlotCultureCreationDto)">
+            <summary>
+            Creating new plot culture.
+            </summary>
+            <param name="plotCultureCreation"></param>
+            <returns>Confirmation about created plot culture.</returns>
+            <remarks>
+            Example of POST request \
+            POST /api/plot-cultures \
+            {   \
+                "culture": "New plot culture" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.UpdatePlotCultureAsync(PlotMicroservice.Models.PlotCultureModel.PlotCultureUpdateDto)">
+            <summary>
+            Updating existing plot culuture by given GUID.
+            </summary>
+            <param name="plotCultureUpdate"></param>
+            <returns>Updated plot culture.</returns>
+            <remarks>
+            Example of PUT request \
+            PUT /api/plot-cultures \
+            {   \
+                "plotCultureId": "260c190d-07b9-426b-e58b-08d9e36dc042",
+                "culture": "Updated culture"
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.DeletePlotCultureAsync(System.Guid)">
+            <summary>
+            Deleting plot culture by given GUID.
+            </summary>
+            <param name="plotCultureId"></param>
+            <returns>Appropriate status code.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotCultureController.GetPlotCultureOptions">
+            <summary>
+            Gives an overview of response header.
+            </summary>
+            <returns>Response header.</returns>
+        </member>
+        <member name="T:PlotMicroservice.Controllers.PlotPartClassController">
+            <summary>
+            Plot part class controller. Gives access to fields and methods of plot part class.
+            Produces JSON and XML objects as response to a request.
+            </summary>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartClassRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartClassValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
+            <summary>
+            Plot part class constructor.
+            Initializes properties.s
+            </summary>
+            <param name="plotPartClassRepository"></param>
+            <param name="mapper"></param>
+            <param name="linkGenerator"></param>
+            <param name="validator"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.GetPlotPartClassesAsync(System.String)">
+            <summary>
+            Getting all instances of plot part classes for given filter.
+            </summary>
+            <param name="plotPartClass">Plot part class (ex. II)</param>
+            <returns>List of plot part classes.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.GetPlotPartClassByIdAsync(System.Guid)">
+            <summary>
+            Getting plot part class by given GUID of plot part class as parameter.
+            </summary>
+            <param name="plotPartClassId"></param>
+            <returns>Single plot part class.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.CreatePlotPartClassAsync(PlotMicroservice.Models.PlotPartClassModel.PlotPartClassCreationDto)">
+            <summary>
+            Creating new plot part class.
+            </summary>
+            <param name="plotPartClassCreation"></param>
+            <returns>Confirmation about created plot part class.</returns>
+            <remarks>
+            Example of POST request \
+            POST /api/plot-part-classes \
+            {   \
+                "class": "New plot part class" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.UpdatePlotPartClassAsync(PlotMicroservice.Models.PlotPartClassModel.PlotPartClassUpdateDto)">
+            <summary>
+            Updating existing plot part class by given GUID.
+            </summary>
+            <param name="plotPartClassUpdate"></param>
+            <returns>Updated plot part class.</returns>
+            <remarks>
+            Example of PUT request \
+            PUT /api/plot-part-classes \
+            {   \
+                "plotPartClassId": "f319d30e-85b7-40d3-e79b-08d9e4b5d468", \
+                "class": "UpdatedPlotPartClass" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.DeletePlotPartClassAsync(System.Guid)">
+            <summary>
+            Deleting plot part class by given GUID.
+            </summary>
+            <param name="plotPartClassId"></param>
+            <returns>Appropriate status code.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartClassController.GetPlotPartClassOptions">
+            <summary>
+            Gives an overview of response header.
+            </summary>
+            <returns>Response header.</returns>
+        </member>
+        <member name="T:PlotMicroservice.Controllers.PlotPartController">
+            <summary>
+            Plot part controller. Gives access to fields and methods of plot part.
+            Produces JSON and XML objects as response to a request.
+            </summary>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
+            <summary>
+            Plot part constructor.
+            Initializes properties.
+            </summary>
+            <param name="plotPartRepository"></param>
+            <param name="mapper"></param>
+            <param name="linkGenerator"></param>
+            <param name="validator"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartsAsync(System.String,System.String)">
+            <summary>
+            Getting all instances of plot parts for given filter/s.
+            </summary>
+            <param name="plotPartClass">Plot part class (ex. III)</param>
+            <param name="plotProtectedZone">Plot part protected zone (ex. 4)</param>
+            <returns>List of plot parts.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartByIdAsync(System.Guid)">
+            <summary>
+            Getting plot part by given GUID of plot part as parameter.
+            </summary>
+            <param name="plotPartId"></param>
+            <returns>Single plot part.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartsByPlotIdAsync(System.Guid)">
+            <summary>
+            Getting plot parts by given GUID of plot as parameter.
+            </summary>
+            <param name="plotId"></param>
+            <returns>List of plot parts.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.CreatePlotPartAsync(PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto)">
+            <summary>
+            Creating new plot part.
+            </summary>
+            <param name="plotPartCreation"></param>
+            <returns>Confirmation of created plot part.</returns>
+            <remarks>
+            Example of POST request \
+            POST /api/plot-parts \
+            {   \
+                "plotPartNumber": "97/1", \
+                "plotId": "5f37ba98-ca19-4c9e-8914-708e38bba8bf", \
+                "plotPartClassId": "3a3e6366-3a20-4d3b-ae15-be85ba277683", \
+                "plotPartProtectedZoneId": "4debaa6a-1a2f-43e0-bb82-1b7ca1824318", \
+                "plotPartFormOfOwnershipId": "07af89f2-feee-4680-b489-9d0e31699588", \
+                "plotPartSurfaceArea": 100, \
+                "plotPartCurrentClass": "", \
+                "plotPartCurrentProtectedZone": "" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.UpdatePlotPartAsync(PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto)">
+            <summary>
+            Updating existing plot part by given GUID.
+            </summary>
+            <param name="plotPartUpdate"></param>
+            <returns>Updated plot part.</returns>
+            <remarks> 
+            Example of PUT request \
+            PUT /api/plot-parts \
+            {   \
+                "plotPartId": "a11d93e1-5a89-4821-5426-08d9eaeb3bdb", \
+                "plotPartNumber": "97/1", \
+                "plotId": "5f37ba98-ca19-4c9e-8914-708e38bba8bf", \
+                "plotPartClassId": "3a3e6366-3a20-4d3b-ae15-be85ba277683", \
+                "plotPartProtectedZoneId": "4debaa6a-1a2f-43e0-bb82-1b7ca1824318", \
+                "plotPartFormOfOwnershipId": "07af89f2-feee-4680-b489-9d0e31699588", \
+                "plotPartSurfaceArea": 900 , \
+                "plotPartCurrentClass": "Updated class", \
+                "plotPartCurrentProtectedZone": "Updated protected zone" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.DeletePlotPartAsync(System.Guid)">
+            <summary>
+             Deleting plot part by given GUID.
+            </summary>
+            <param name="plotPartId"></param>
+            <returns>Appropriate status code.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartController.GetPlotPartOptions">
+            <summary>
+            Gives an overview of response header.
+            </summary>
+            <returns>Response header.</returns>
+        </member>
+        <member name="T:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController">
+            <summary>
+            Plot part form of ownership controller. Gives access to fields and methods of plot part form of ownership.
+            Produces JSON and XML objects as response to a request.
+            </summary>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartFormOfOwnershipRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartFormOfOwnershipValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
+            <summary>
+            Plot part form of ownership constructor.
+            Initializes properties.
+            </summary>
+            <param name="plotPartFormOfOwnershipRepository"></param>
+            <param name="mapper"></param>
+            <param name="linkGenerator"></param>
+            <param name="validator"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.GetPlotPartFormOfOwnershipsAsync(System.String)">
+            <summary>
+            Getting all instances of plot part form of ownerships for given filter.
+            </summary>
+            <param name="formOfOwnership">Plot part form of ownership (ex. Privatna svojina)</param>
+            <returns>List of plot part form of onwerships.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.GetPlotPartFormOfOwnershipByIdAsync(System.Guid)">
+            <summary>
+            Getting plot part form of ownership by given GUID of plot part form of ownership as parameter.
+            </summary>
+            <param name="plotPartFormOfOwnershipId"></param>
+            <returns>Single plot part form of ownership.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.CreatPlotPartFormOfOwnershipAsync(PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipCreationDto)">
+             <summary>
+             Creating new plot part form of ownership.
+             </summary>
+             <param name="plotPartFormOfOwnershipCreation"></param>
+             <returns>Confirmation about created plot part form of ownership.</returns>
+             <remarks>
+             Example of POST request \
+             POST /api/plot-part-form-of-ownerships \
+             {   \
+                 "formOfOwnership": "TestFormOfOwnership" \
+             }
+            
+             </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.UpdatePlotPartFormOfOwnershipAsync(PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipUpdateDto)">
+            <summary>
+            Updating existing plot part form of ownership by given GUID.
+            </summary>
+            <param name="plotPartFormOfOwnershipUpdate"></param>
+            <returns>Updated plot part form of ownership.</returns>
+            <remarks>
+            Example of PUT request \
+            PUT api/plot-part-form-of-ownerships \
+            {   \
+                "plotPartFormOfOwnershipId": "98684996-3154-4ec1-b7e0-08d9e44f163b", \
+                "formOfOwnership": "UpdatedFormOfOwnership" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.DeletePlotPartFormOfOwnershipAsync(System.Guid)">
+            <summary>
+            Deleting plot part form of ownership by given GUID.
+            </summary>
+            <param name="plotPartFormOfOwnershipId"></param>
+            <returns>Appropriate status code.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartFormOfOwnershipController.GetPlotPartFormOfOwnershipOptions">
+            <summary>
+            Gives an overview of response header.
+            </summary>
+            <returns>Response header.</returns>
+        </member>
+        <member name="T:PlotMicroservice.Controllers.PlotPartProtecedZoneController">
+            <summary>
+            Plot part protected zone controller. Gives access to fields and methods of plot part protected zone.
+            Produces JSON and XML objects as response to a request.    
+            </summary>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.#ctor(PlotMicroservice.Data.Interfaces.IPlotPartProtectedZoneRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotPartProtectedZoneValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
+            <summary>
+            Plot part protected zone constructor.
+            Initializes properties.
+            </summary>
+            <param name="plotPartProtectedZoneRepository"></param>
+            <param name="mapper"></param>
+            <param name="linkGenerator"></param>
+            <param name="validator"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.GetPlotPartProtectedZonesAsync(System.String)">
+            <summary>
+            Getting all instances of plot part protected zones for given filter.
+            </summary>
+            <param name="protectedZone">Protected zone (ex. 3)</param>
+            <returns>List of plot part protected zones.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.GetPlotPartProtectedZoneByIdAsync(System.Guid)">
+            <summary>
+            Getting plot part protected zone by given GUID of plot part protected zone as parameter.
+            </summary>
+            <param name="plotPartProtectedZoneId"></param>
+            <returns>Single plot part protected zone.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.CreatePlotPartProtectedZoneAsync(PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneCreationDto)">
+            <summary>
+            Creating new plot part protected zone.
+            </summary>
+            <param name="plotPartProtectedZoneCreation"></param>
+            <returns>Confirmation about created plot part protected zone.</returns>
+            <remarks>
+            Example of POST request \
+            POST /api/plot-part-protected-zones \
+            {   \
+                "protectedZone": "TestProtectedZone" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.UpdatePlotPartProtectedZoneAsync(PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneUpdateDto)">
+            <summary>
+            Updating existing plot part protected zone by given GUID.
+            </summary>
+            <param name="plotPartProtectedZoneUpdate"></param>
+            <returns>Updated plot part protected zone.</returns>
+            <remarks>
+            Example of PUT request \
+            PUT /api/plot-part-protected-zones \
+            {   \
+                "plotPartProtectedZoneId": "5d41023b-d930-4f2c-f578-08d9e4d11ca1", \
+                "protectedZone": "UpdatedProtectedZone" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.DeletePlotPartProtectedZoneAsync(System.Guid)">
+            <summary>
+            Deleting plot part protected zone by given GUID.
+            </summary>
+            <param name="plotPartProtectedZoneId"></param>
+            <returns>Appropriate status code.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotPartProtecedZoneController.GetPlotPartProtectedZoneOptions">
+            <summary>
+            Gives an overview of response header.
+            </summary>
+            <returns>Response header.</returns>
+        </member>
+        <member name="T:PlotMicroservice.Controllers.PlotWorkabilityController">
+            <summary>
+            Plot workability controller. Gives access to fields and methods of plot workability.
+            Produces JSON and XML objects as response to a request.
+            </summary>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.#ctor(PlotMicroservice.Data.Interfaces.IPlotWorkabilityRepository,AutoMapper.IMapper,Microsoft.AspNetCore.Routing.LinkGenerator,PlotMicroservice.Validators.PlotWorkabilityValidator,PlotMicroservice.ServiceCalls.ILoggerService)">
+            <summary>
+            Plot workability constructor.
+            Initializes properties.
+            </summary>
+            <param name="plotWorkabilityRepository"></param>
+            <param name="mapper"></param>
+            <param name="linkGenerator"></param>
+            <param name="validator"></param>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.GetPlotWorkabilitiesAsync(System.String)">
+            <summary>
+            Getting all instances of plot workabilities for given filter.
+            </summary>
+            <param name="workability">Workability (ex. Obradivo)</param>
+            <returns>List of plot workabilities.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.GetPlotWorkabilityIdAsync(System.Guid)">
+            <summary>
+            Getting plot workability by given GUID of plot workability as parameter.
+            </summary>
+            <param name="plotWorkabilityId"></param>
+            <returns>Single plot workability.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.CreatePlotWorkabilityAsync(PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityCreationDto)">
+            <summary>
+            Creating new plot workability.
+            </summary>
+            <param name="plotWorkabilityCreation"></param>
+            <returns>Confirmation about created plot workability.</returns>
+            <remarks>
+            Example of POST request \
+            POST /api/plot-workabilities \
+            {   \
+                "workability": "TestWorkability" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.UpdatePlotWorkabilityAsync(PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityUpdateDto)">
+            <summary>
+            Updating existing plot workability by given GUID.
+            </summary>
+            <param name="plotWorkabilityUpdate"></param>
+            <returns>Updated plot workability.</returns>
+            <remarks>
+            Example of PUT request \
+            PUT /api/plot-workablities \
+            {   \
+                 "plotWorkabilityId": "97a257a0-127e-4167-9faf-08d9e421e1e4", \
+                 "workability": "UpdatedWorkability" \
+            }
+            </remarks>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.DeletePlotWorkabilityAsync(System.Guid)">
+            <summary>
+            Deleting plot workability by given GUID.
+            </summary>
+            <param name="plotWorkabilityId"></param>
+            <returns>Appropriate status code.</returns>
+        </member>
+        <member name="M:PlotMicroservice.Controllers.PlotWorkabilityController.GetPlotWorkabilityOptions">
+            <summary>
+            Gives an overview of response header.
+            </summary>
+            <returns>Response header.</returns>
+        </member>
+        <member name="T:PlotMicroservice.Entities.Plot">
+            <summary>
+            Represents Plot. 
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotId">
+            <summary>
+            ID Plot-a.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotParts">
+            <summary>
+            Collection of plot parts within current plot.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotCultureId">
+            <summary>
+            Plot culture ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotCulture">
+            <summary>
+            Plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotCadastralMunicipalityId">
+            <summary>
+            Plot cadastral municipality ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotCadastralMunicipality">
+            <summary>
+            Plot cadastral municipality.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotWorkabilityId">
+            <summary>
+            Plot workability ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotWorkability">
+            <summary>
+            Plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotSurfaceArea">
+            <summary>
+            Plot surface area. Example: 3200
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotNumber">
+            <summary>
+            Plot number. Example: 55
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotRealEstateListNumber">
+            <summary>
+            Plot real estate number. Example: LN505
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotCurrentCulture">
+            <summary>
+            Current plot culture
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.PlotCurrentWorkability">
+            <summary>
+            Current plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.Plot.BuyerId">
+            <summary>
+            Buyer ID. Buyer ID from Buyer microservice.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotCadastralMunicipality">
+            <summary>
+            Represents cadastral municipality of plot.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotCadastralMunicipality.PlotCadastralMunicipalityId">
+            <summary>
+            Plot cadastral municipality ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotCadastralMunicipality.CadastralMunicipality">
+            <summary>
+            Plot cadastral municipality.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotCadastralMunicipalityConfirmation">
+            <summary>
+            Represents confirmation of plot cadastral municipality.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotCadastralMunicipalityConfirmation.PlotCadastralMunicipalityId">
+            <summary>
+            Plot cadastral municipality ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotCadastralMunicipalityConfirmation.CadastralMunicipality">
+            <summary>
+            Plot cadastral municipality.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotConfirmation">
+            <summary>
+            Represents confirmation of plot.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotConfirmation.PlotId">
+            <summary>
+            Plot ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotConfirmation.PlotCultureId">
+            <summary>
+            Plot culture ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotConfirmation.PlotCadastralMunicipalityId">
+            <summary>
+            Plot cadastral municipality ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotConfirmation.PlotWorkabilityId">
+            <summary>
+            Plot workability ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotConfirmation.PlotSurfaceArea">
+            <summary>
+            Plot surface area. Example: 5000
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotConfirmation.PlotNumber">
+            <summary>
+            Plot number. Example: 112
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotConfirmation.PlotRealEstateListNumber">
+            <summary>
+            Plot real estate number. Example: LN30
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotConfirmation.PlotCurrentCulture">
+            <summary>
+            Current plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotConfirmation.PlotCurrentWorkability">
+            <summary>
+            Current plot workability
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotCulture">
+            <summary>
+            Represents plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotCulture.PlotCultureId">
+            <summary>
+            Plot culture ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotCulture.Culture">
+            <summary>
+            Plot culture. Example: Vinogradi
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotCultureConfirmation">
+            <summary>
+            Represents confirmation for plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotCultureConfirmation.PlotCultureId">
+            <summary>
+            Plot culture ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotCultureConfirmation.Culture">
+            <summary>
+            Plot culture. Example: Pašnjaci
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotPart">
+            <summary>
+            Represents Plot part.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartId">
+            <summary>
+            Plot part ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartNumber">
+            <summary>
+            Plot part number. Example: 97/1
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotId">
+            <summary>
+            Plot ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.Plot">
+            <summary>
+            Plot
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartClassId">
+            <summary>
+            Plot part class ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartClass">
+            <summary>
+            Plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartProtectedZoneId">
+            <summary>
+            Plot part protected zone ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartProtectedZone">
+            <summary>
+            Plot part protected zone.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartFormOfOwnershipId">
+            <summary>
+            Plot part form of ownership ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartFormOfOwnership">
+            <summary>
+            Plot part form of ownership.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartSurfaceArea">
+            <summary>
+            Plot part surface area. Example: 2000
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartCurrentClass">
+            <summary>
+            Current plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPart.PlotPartCurrentProtectedZone">
+            <summary>
+            Current plot part protected zone.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotPartClass">
+            <summary>
+            Represents plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartClass.PlotPartClassId">
+            <summary>
+            Plot part class ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartClass.Class">
+            <summary>
+            Plot part class. Example: III
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotPartClassConfirmation">
+            <summary>
+            Represents confirmation of plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartClassConfirmation.PlotPartClassId">
+            <summary>
+            Plot part class ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartClassConfirmation.Class">
+            <summary>
+            Plot part class. Example: IV
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotPartConfirmation">
+            <summary>
+            Represents confirmation of plot part.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartConfirmation.PlotPartId">
+            <summary>
+            Plot part ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartConfirmation.PlotPartNumber">
+            <summary>
+            Plot part number. Example: 112/3
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartConfirmation.PlotId">
+            <summary>
+            Plot ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartConfirmation.PlotPartClassId">
+            <summary>
+            Plot part class ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartConfirmation.PlotPartProtectedZoneId">
+            <summary>
+            Plot part protected zone ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartConfirmation.PlotPartFormOfOwnershipId">
+            <summary>
+            Plot part form of ownership ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartConfirmation.PlotPartSurfaceArea">
+            <summary>
+            Plot part surface area. Example: 3500
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartConfirmation.PlotPartCurrentClass">
+            <summary>
+            Current plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartConfirmation.PlotPartCurrentProtectedZone">
+            <summary>
+            Current plot part protected zone.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotPartFormOfOwnership">
+            <summary>
+            Represents plot part form of ownership.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartFormOfOwnership.PlotPartFormOfOwnershipId">
+            <summary>
+            Plot part form of ownership ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartFormOfOwnership.FormOfOwnership">
+            <summary>
+            Plot part form of ownership. Example: Privatna svojina
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotPartFormOfOwnershipConfirmation">
+            <summary>
+            Represents confirmation of plot part form of ownership.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartFormOfOwnershipConfirmation.PlotPartFormOfOwnershipId">
+            <summary>
+            Plot part form of ownership ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartFormOfOwnershipConfirmation.FormOfOwnership">
+            <summary>
+            Plot part form of ownership. Example: Državna svojina|
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotPartProtectedZone">
+            <summary>
+            Represents plot part protected zone.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartProtectedZone.PlotPartProtectedZoneId">
+            <summary>
+            Plot part protected zone ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartProtectedZone.ProtectedZone">
+            <summary>
+            Plot part protected zone. Example: 4
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotPartProtectedZoneConfirmation">
+            <summary>
+            Represents confirmation of plot part protected zone.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartProtectedZoneConfirmation.PlotPartProtectedZoneId">
+            <summary>
+            Plot part protected zone ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotPartProtectedZoneConfirmation.ProtectedZone">
+            <summary>
+            Plot part protected zone. Example: 1
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotWorkability">
+            <summary>
+            Represents plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotWorkability.PlotWorkabilityId">
+            <summary>
+            Plot workability ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotWorkability.Workability">
+            <summary>
+            Plot workability. Example: Obradivo
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Entities.PlotWorkabilityConfirmation">
+            <summary>
+            Represents confirmation of plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotWorkabilityConfirmation.PlotWorkabilityId">
+            <summary>
+            Plot workability ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Entities.PlotWorkabilityConfirmation.Workability">
+            <summary>
+            Plot workability.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.BuyerDto">
+            <summary>
+            DTO for Buyer.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerName">
+            <summary>
+            Buyer name.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerAddress">
+            <summary>
+            Buyer address (ex. Pap pavla 15)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerPhoneNumber">
+            <summary>
+            Buyer phone number (ex. 0603802918)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerAccountNumber">
+            <summary>
+            Buyer account number (ex. 1234567890)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.BuyerDto.BuyerEmail">
+            <summary>
+            Buyer email (ex. test@gmail.com)
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.LogModel">
+            <summary>
+            Representation of Log.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.LogModel.LogLevel">
+            <summary>
+            Log level (ex. Warn, Debug, Error, Info)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.LogModel.LogMessage">
+            <summary>
+            Message to log.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.LogModel.MicroserviceName">
+            <summary>
+            Name of microservice (ex. Plot microservice)
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.LogModel.MicroserviceMethod">
+            <summary>
+            Microservice method (ex. GetPlotsAsync())
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotCadastralMunicipalityConfirmationDto">
+            <summary>
+            Confirmation DTO for plot cadastral municipality.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCadastralMunicipalityConfirmationDto.CadastralMunicipality">
+            <summary>
+            Plot cadastral municipality.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotCadastralMunicipalityCreationDto">
+            <summary>
+            Creation DTO for plot cadastral municipality
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCadastralMunicipalityCreationDto.CadastralMunicipality">
+            <summary>
+            Plot cadastral municipality.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotCadastralMunicipalityDto">
+            <summary>
+            DTO for cadastral municipality
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCadastralMunicipalityDto.CadastralMunicipality">
+            <summary>
+            Plot cadastral municipality. Example: Bikovo
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotCadastralMunicipalityUpdateDto">
+            <summary>
+            Update model for plot cadastral municipality.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCadastralMunicipalityUpdateDto.PlotCadastralMunicipalityId">
+            <summary>
+            Plot cadastral municipality ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCadastralMunicipalityUpdateDto.CadastralMunicipality">
+            <summary>
+            Plot cadastral municipality.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotCultureModel.PlotCultureConfirmationDto">
+            <summary>
+            Confirmation DTO for plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCultureModel.PlotCultureConfirmationDto.Culture">
+            <summary>
+            Plot culture.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotCultureModel.PlotCultureCreationDto">
+            <summary>
+            Creation DTO for plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCultureModel.PlotCultureCreationDto.Culture">
+            <summary>
+            Plot culture.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotCultureModel.PlotCultureDto">
+            <summary>
+            DTO for plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCultureModel.PlotCultureDto.Culture">
+            <summary>
+            Plot culture. Example: Njive
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotCultureModel.PlotCultureUpdateDto">
+            <summary>
+            Update model for plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCultureModel.PlotCultureUpdateDto.PlotCultureId">
+            <summary>
+            Plot culture ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotCultureModel.PlotCultureUpdateDto.Culture">
+            <summary>
+            Plot culture.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotModel.PlotConfirmationDto">
+            <summary>
+            Confirmation DTO for plot.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotConfirmationDto.PlotNumber">
+            <summary>
+            Plot number.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotConfirmationDto.PlotSurfaceArea">
+            <summary>
+            Plot surface area.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotModel.PlotCreationDto">
+            <summary>
+            Creation DTO for plot.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.PlotCultureId">
+            <summary>
+            Plot culture ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.PlotCadastralMunicipalityId">
+            <summary>
+            Plot cadastral municipality ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.PlotWorkabilityId">
+            <summary>
+            Plot workability ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.PlotSurfaceArea">
+            <summary>
+            Plot surface area.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.PlotNumber">
+            <summary>
+            Plot number.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.PlotRealEstateListNumber">
+            <summary>
+            Plot real estate number.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.PlotCurrentCulture">
+            <summary>
+            Current plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.PlotCurrentWorkability">
+            <summary>
+            Current plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotCreationDto.BuyerId">
+            <summary>
+            Buyer ID.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotModel.PlotDto">
+            <summary>
+            DTO for plot.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotDto.PlotNumber">
+            <summary>
+            Plot number. Example: 112
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotDto.PlotSurfaceArea">
+            <summary>
+            Plot surface area. Example: 2050
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotDto.PlotRealEstateListNumber">
+            <summary>
+            Plot real estate number. Example: LN505
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotDto.Buyer">
+            <summary>
+            Buyer DTO.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotModel.PlotUpdateDto">
+            <summary>
+            Update model for plot.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotId">
+            <summary>
+            Plot ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotCultureId">
+            <summary>
+            Plot culture ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotCadastralMunicipalityId">
+            <summary>
+            Plot cadastral municiplaity ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotWorkabilityId">
+            <summary>
+            Plot workability ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotSurfaceArea">
+            <summary>
+            Plot surface area.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotNumber">
+            <summary>
+            Plot number.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotRealEstateListNumber">
+            <summary>
+            Plot real estate list number.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotCurrentCulture">
+            <summary>
+            Current plot culture.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.PlotCurrentWorkability">
+            <summary>
+            Current plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotModel.PlotUpdateDto.BuyerId">
+            <summary>
+            Buyer ID.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassConfirmationDto">
+            <summary>
+            Confirmation DTO for plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassConfirmationDto.Class">
+            <summary>
+            Plot part class.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassCreationDto">
+            <summary>
+            Creation DTO for plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassCreationDto.Class">
+            <summary>
+            Plot part class.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassDto">
+            <summary>
+            DTO for plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassDto.Class">
+            <summary>
+            Plot part class. Example: V
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassUpdateDto">
+            <summary>
+            Update model for plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassUpdateDto.PlotPartClassId">
+            <summary>
+            Plot part class ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartClassModel.PlotPartClassUpdateDto.Class">
+            <summary>
+            Plot part class.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipConfirmationDto">
+            <summary>
+            Confirmation DTO for plot part form of ownership
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipConfirmationDto.FormOfOwnership">
+            <summary>
+            Plot part form of ownership.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipCreationDto">
+            <summary>
+            Creation DTO for plot part form of ownership.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipCreationDto.FormOfOwnership">
+            <summary>
+            Plot part form of ownership.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipDto">
+            <summary>
+            DTO for plot part form of ownership.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipDto.FormOfOwnership">
+            <summary>
+            Plot part form of ownership. Example: Privatna svojina
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipUpdateDto">
+            <summary>
+            Update model for plot part form of ownership.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipUpdateDto.PlotPartFormOfOwnershipId">
+            <summary>
+            Plot part form of ownership ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartFormOfOwnershipModel.PlotPartFormOfOwnershipUpdateDto.FormOfOwnership">
+            <summary>
+            Plot part form of ownership.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartModel.PlotPartConfirmationDto">
+            <summary>
+            Confirmation DTO for plot part.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartConfirmationDto.PlotPartNumber">
+            <summary>
+            Plot part number.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartConfirmationDto.PlotPartSurfaceArea">
+            <summary>
+            Plot part surface area.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto">
+            <summary>
+            Creation DTO for plot part.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto.PlotPartNumber">
+            <summary>
+            Plot part number.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto.PlotId">
+            <summary>
+            Plot ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto.PlotPartClassId">
+            <summary>
+            Plot part class ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto.PlotPartProtectedZoneId">
+            <summary>
+            Plot part protected zone ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto.PlotPartFormOfOwnershipId">
+            <summary>
+            Plot part form of ownership ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto.PlotPartSurfaceArea">
+            <summary>
+            Plot part surface area.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto.PlotPartCurrentClass">
+            <summary>
+            Current plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartCreationDto.PlotPartCurrentProtectedZone">
+            <summary>
+            Current plot part protected zone.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartModel.PlotPartDto">
+            <summary>
+            DTO for plot part.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartDto.PlotPartNumber">
+            <summary>
+            Plot part number. Example: 112/2
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartDto.PlotPartSurfaceArea">
+            <summary>
+            Plot part surface area. Example: 2500
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartDto.PlotId">
+            <summary>
+            Plot ID.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto">
+            <summary>
+            Update model for plot part.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto.PlotPartId">
+            <summary>
+            Plot part ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto.PlotPartNumber">
+            <summary>
+            Plot part number.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto.PlotId">
+            <summary>
+            Plot ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto.PlotPartClassId">
+            <summary>
+            Plot part class ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto.PlotPartProtectedZoneId">
+            <summary>
+            Plot part protected zone ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto.PlotPartFormOfOwnershipId">
+            <summary>
+            Plot part form of ownership ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto.PlotPartSurfaceArea">
+            <summary>
+            Plot part surface area.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto.PlotPartCurrentClass">
+            <summary>
+            Current plot part class.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartModel.PlotPartUpdateDto.PlotPartCurrentProtectedZone">
+            <summary>
+            Current plot part protected zone.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneConfirmationDto">
+            <summary>
+            Confirmation DTO for plot part protected zone.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneConfirmationDto.ProtectedZone">
+            <summary>
+            Plot part protected zone.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneCreationDto">
+            <summary>
+            Creation DTO for plot part protected zone.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneCreationDto.ProtectedZone">
+            <summary>
+            Plot part protected zone.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneDto">
+            <summary>
+            DTO for plot part protected zone.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneDto.ProtectedZone">
+            <summary>
+            Plot part protected zone. Example: 3
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneUpdateDto">
+            <summary>
+            Update model for plot part protected zone.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneUpdateDto.PlotPartProtectedZoneId">
+            <summary>
+            Plot part protected zone ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotPartProtectedZoneModel.PlotPartProtectedZoneUpdateDto.ProtectedZone">
+            <summary>
+            Plot part protected zone.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityConfirmationDto">
+            <summary>
+            Confirmation DTO for plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityConfirmationDto.Workability">
+            <summary>
+            Plot workability.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityCreationDto">
+            <summary>
+            Creation DTO for plot workabilty.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityCreationDto.Workability">
+            <summary>
+            Plot workability.
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityDto">
+            <summary>
+            DTO for plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityDto.Workability">
+            <summary>
+            Plot workability. Example: Obradivo
+            </summary>
+        </member>
+        <member name="T:PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityUpdateDto">
+            <summary>
+            Update model for plot workability.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityUpdateDto.PlotWorkabilityId">
+            <summary>
+            Plot workability ID.
+            </summary>
+        </member>
+        <member name="P:PlotMicroservice.Models.PlotWorkabilityModel.PlotWorkabilityUpdateDto.Workability">
+            <summary>
+            Plot workability.
+            </summary>
+        </member>
+    </members>
+</doc>

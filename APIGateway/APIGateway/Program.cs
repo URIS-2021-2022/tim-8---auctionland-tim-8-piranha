@@ -1,26 +1,66 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace APIGateway
 {
-    public class Program
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
+    using Ocelot.Middleware;
+    using Ocelot.DependencyInjection;
+    using System;
+    using System.IO;
+    using Commons.ExceptionHandling;
+    using APIGateway.Middlewares;
+    using Microsoft.Net.Http.Headers;
+
+    public static class Program
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder().Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+        public static WebHostBuilder CreateHostBuilder() =>
+            (WebHostBuilder) new WebHostBuilder()
+            .UseKestrel()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config
+                .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("ocelot.json")
+                .AddEnvironmentVariables();
+            })
+            .ConfigureServices(s =>
+            {
+                s.AddOcelot();
+            })
+            .UseIISIntegration()
+            .Configure(app =>
+            {
+                var config = new OcelotPipelineConfiguration
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    PreErrorResponderMiddleware = async (context, next) =>
+                    {
+                        try
+                        {
+                            await next.Invoke();
+                        } catch (BaseException ex)
+                        {
+                            await ApiGatewayExceptionHandler.HandleExceptionAsync(context, ex);
+                        }
+
+                        await next.Invoke();
+                    },
+                    PreAuthenticationMiddleware = async (context, next) =>
+                    {
+                        (new TokenValidationMiddleware()).ValidateToken(context?.Request?.Headers[HeaderNames.Authorization]);
+
+                        await next.Invoke();
+                    }
+                };
+
+                app.UseOcelot(config).Wait();
+            });
     }
 }
