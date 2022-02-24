@@ -55,7 +55,7 @@ namespace PublicBidding.Controllers
 
             if (publicBiddings == null || publicBiddings.Count == 0)
             {
-                //await logger.LogMessage(LogLevel.Warning, "Public bidding list is empty!", "PublicBidding microservice", "GetPublicBiddings");
+                await logger.LogMessage(LogLevel.Warning, "Public bidding list is empty!", "PublicBidding microservice", "GetPublicBiddings");
                 return NoContent();
             }
 
@@ -65,7 +65,7 @@ namespace PublicBidding.Controllers
             {
                 publicBiddingsDto.Add(await publicBiddingService.GetInfoForListsInPublicBidding(publicBidding));
             }
-            //await logger.LogMessage(LogLevel.Information, "Public bidding list successfully returned!", "PublicBidding microservice", "GetPublicBiddings");
+            await logger.LogMessage(LogLevel.Information, "Public bidding list successfully returned!", "PublicBidding microservice", "GetPublicBiddings");
             return Ok(publicBiddingsDto);
 
         }

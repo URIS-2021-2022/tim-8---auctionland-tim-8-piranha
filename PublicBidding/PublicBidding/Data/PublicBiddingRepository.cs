@@ -102,7 +102,9 @@ namespace PublicBidding.Data
                 publicBidding.Plots = await context.PublicBiddingPlotPart.Where(pp => pp.PublicBiddingId == publicBidding.PublicBiddingId).Select(p => p.PlotPartId).ToListAsync();
             }
 
+#pragma warning disable CS8603 // Possible null reference return.
             return publicBidding;
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
         public async Task<PublicBiddingForOtherServices> GetPublicBiddingsById(Guid publicBiddingId)
