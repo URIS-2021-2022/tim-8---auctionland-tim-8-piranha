@@ -55,7 +55,7 @@ namespace AuctionMicroservice.Data
 
         public async Task UpdateDocumentationAsync(DocumentationLegalEntity documentation)
         {
-           
+           //updates documentation
         }
     }
 }

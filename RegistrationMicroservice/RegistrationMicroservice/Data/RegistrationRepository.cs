@@ -48,7 +48,7 @@ namespace RegistrationMicroservice.Data
 
         public async Task UpdateRegistrationAsync(Registration registration)
         {
-
+            //updates registration
         }
     }
 }

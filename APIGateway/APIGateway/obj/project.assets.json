@@ -1423,19 +1423,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\x\\.nuget\\packages\\": {}
+    "C:\\Users\\lukap\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\x\\source\\repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj",
+      "projectUniqueName": "C:\\Users\\lukap\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj",
       "projectName": "APIGateway",
-      "projectPath": "C:\\Users\\x\\source\\repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj",
-      "packagesPath": "C:\\Users\\x\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\x\\source\\repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\obj\\",
+      "projectPath": "C:\\Users\\lukap\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj",
+      "packagesPath": "C:\\Users\\lukap\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lukap\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\x\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lukap\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1449,8 +1449,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\x\\source\\repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj": {
-              "projectPath": "C:\\Users\\x\\source\\repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj"
+            "C:\\Users\\lukap\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj": {
+              "projectPath": "C:\\Users\\lukap\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj"
             }
           }
         }
@@ -1496,6 +1496,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.11, 5.0.11]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
