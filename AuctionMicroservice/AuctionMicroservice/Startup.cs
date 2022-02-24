@@ -48,45 +48,7 @@ namespace AuctionMicroservice
                 s.RegisterValidatorsFromAssemblyContaining<Startup>();
                 s.DisableDataAnnotationsValidation = true;
 
-            });//.ConfigureApiBehaviorOptions(setupAction =>
-            
-            //    setupAction.InvalidModelStateResponseFactory = context =>
-            //    {
-            //        ProblemDetailsFactory problemDetailsFactory = context.HttpContext.RequestServices
-            //        .GetRequiredService<ProblemDetailsFactory>();
-
-            //        ValidationProblemDetails problemDetails = problemDetailsFactory.CreateValidationProblemDetails(
-            //            context.HttpContext,
-            //            context.ModelState
-            //            );
-
-            //        problemDetails.Instance = context.HttpContext.Request.Path;
-
-            //        var actionExecutingContext = context as ActionExecutingContext;
-
-            //        if ((context.ModelState.ErrorCount > 0) &&
-            //           (actionExecutingContext?.ActionArguments.Count == context.ActionDescriptor.Parameters.Count))
-            //        {
-            //            problemDetails.Type = "https://google.com"; //ina?e treba da stoji link ka stranici sa detaljima greške
-            //            problemDetails.Status = StatusCodes.Status422UnprocessableEntity;
-            //            problemDetails.Title = "There has been an error during validation.";
-
-            //            //sve vra?amo kao UnprocessibleEntity objekat
-            //            return new UnprocessableEntityObjectResult(problemDetails)
-            //            {
-            //                ContentTypes = { "application/problem+json" }
-            //            };
-            //        };
-
-            //        problemDetails.Status = StatusCodes.Status400BadRequest;
-            //        problemDetails.Title = "There has been an error during parsing of the content.";
-            //        return new BadRequestObjectResult(problemDetails)
-            //        {
-            //            ContentTypes = { "application/problem+json" }
-            //        };
-
-            //    };
-            //});
+            });
 
             
 
