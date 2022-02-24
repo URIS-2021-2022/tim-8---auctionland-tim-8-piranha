@@ -98,7 +98,7 @@ namespace PublicBidding.Controllers
             PublicBiddingDto publicBiddingDto = await publicBiddingService.GetInfoForListsInPublicBidding(publicBidding);
 
             await logger.LogMessage(LogLevel.Information, "Public bidding found and successfully returned!", "PublicBidding microservice", "GetPublicBiddingById");
-            return Ok(mapper.Map<PublicBiddingDto>(publicBidding));
+            return Ok(publicBiddingDto);
 
         }
 
@@ -225,8 +225,6 @@ namespace PublicBidding.Controllers
             try
             {
                 var oldPublicBidding = await publicBiddingRepository.GetPublicBiddingById(publicBidding.PublicBiddingId);
-
-                //var oldPublicBidding = mapper.Map<Entities.PublicBidding>(publicBiddingRepository.GetPublicBiddingById(publicBidding.PublicBiddingId));
 
                 if (oldPublicBidding == null)
                 {

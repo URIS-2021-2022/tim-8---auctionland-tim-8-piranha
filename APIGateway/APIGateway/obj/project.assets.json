@@ -456,6 +456,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.EntityFrameworkCore": "5.0.14",
+          "Microsoft.EntityFrameworkCore.Analyzers": "5.0.14",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {
@@ -1415,6 +1416,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "Common >= 1.0.0",
+      "Microsoft.EntityFrameworkCore.Analyzers >= 5.0.14",
       "Microsoft.IdentityModel.Tokens >= 6.16.0",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.11.1",
       "Ocelot >= 17.0.0",
@@ -1471,6 +1473,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Analyzers": {
+            "target": "Package",
+            "version": "[5.0.14, )"
+          },
           "Microsoft.IdentityModel.Tokens": {
             "target": "Package",
             "version": "[6.16.0, )"

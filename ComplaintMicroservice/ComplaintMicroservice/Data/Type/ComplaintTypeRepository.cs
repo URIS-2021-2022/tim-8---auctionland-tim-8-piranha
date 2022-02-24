@@ -53,88 +53,10 @@ namespace ComplaintMicroservice.Data
 #pragma warning disable CS1998
         public async Task UpdateComplaintType(ComplaintTypeModel complaintType)
         {
-            //NE GLEDAJ OVAJ KOD   
-            /*ComplaintTypeModel ct = GetComplaintTypeById(complaintType.ComplaintTypeId);
-
-            ct.ComplaintTypeId = complaintType.ComplaintTypeId;
-            ct.ComplaintType = complaintType.ComplaintType;
-
-            return new ComplaintTypeConfirmation
-            {
-                ComplaintTypeId = ct.ComplaintTypeId,
-                ComplaintType = ct.ComplaintType
-            };*/
+            //EF sam odradi
         }
 #pragma warning restore CS1998
 
-        /*
-         * public static List<ComplaintTypeModel> ComplaintTypes { get; set; } = new List<ComplaintTypeModel>();
-
-        public ComplaintTypeRepository()
-        {
-            FillData();
-        }
-
-        private void FillData()
-        {
-            ComplaintTypes.AddRange(new List<ComplaintTypeModel>
-            {
-                new ComplaintTypeModel
-                {
-                    ComplaintTypeId=Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
-                    ComplaintType="Zalba na tok javnog nadmetanja"
-                },
-                new ComplaintTypeModel
-                {
-                    ComplaintTypeId=Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
-                    ComplaintType="Zalba na Odluku o davanju u zakup"
-                }
-            });
-        }
-
-        public ComplaintTypeConfirmation CreateComplaintType(ComplaintTypeModel complaintType)
-        {
-            complaintType.ComplaintTypeId = Guid.NewGuid();
-            ComplaintTypes.Add(complaintType);
-            ComplaintTypeModel ct = GetComplaintTypeById(complaintType.ComplaintTypeId);
-
-            return new ComplaintTypeConfirmation
-            {
-                ComplaintTypeId = ct.ComplaintTypeId,
-                ComplaintType = ct.ComplaintType
-            };
-        }
-
-        public void DeleteComplaintType(Guid complaintTypeId)
-        {
-            ComplaintTypes.Remove(ComplaintTypes.FirstOrDefault(e => e.ComplaintTypeId == complaintTypeId));
-        }
-
-        public List<ComplaintTypeModel> GetComplaintTypes(string complaintType = null)
-        {
-            return (from e in ComplaintTypes
-                    where string.IsNullOrEmpty(complaintType) || e.ComplaintType == complaintType
-                    select e).ToList();
-        }
-
-        public ComplaintTypeModel GetComplaintTypeById(Guid complaintTypeId)
-        {
-            return ComplaintTypes.FirstOrDefault(e => e.ComplaintTypeId == complaintTypeId);
-        }
-
-        public ComplaintTypeConfirmation UpdateComplaintType(ComplaintTypeModel complaintType)
-        {
-            ComplaintTypeModel ct = GetComplaintTypeById(complaintType.ComplaintTypeId);
-
-            ct.ComplaintTypeId = complaintType.ComplaintTypeId;
-            ct.ComplaintType = complaintType.ComplaintType;
-
-            return new ComplaintTypeConfirmation
-            {
-                ComplaintTypeId = ct.ComplaintTypeId,
-                ComplaintType = ct.ComplaintType
-            };
-        }
-        */
+        
     }
 }

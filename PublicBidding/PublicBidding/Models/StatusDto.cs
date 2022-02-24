@@ -13,6 +13,6 @@ namespace PublicBidding.Models
         /// <summary>
         /// Status javnog nadmetanja
         /// </summary>
-        public string StatusName { get; set; }
+        public string? StatusName { get; set; }
     }
 }
