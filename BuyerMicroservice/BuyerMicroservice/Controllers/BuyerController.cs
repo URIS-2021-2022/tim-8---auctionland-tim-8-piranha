@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -27,24 +28,21 @@ namespace BuyerMicroservice.Controllers
     [Produces("application/json", "application/xml")]
     public class BuyerController : ControllerBase
     {
-        private readonly IBuyerRepository buyerRepository;
-        private readonly LinkGenerator linkGenerator;
+        private readonly IBuyerRepository buyerRepository;   
         private readonly IMapper mapper;
-        private readonly BuyerValidator validator;
         private readonly ILoggerService logger;
         private readonly IServiceCall<AddressDto> addressService;
         private readonly IServiceCall<PaymentDto> paymentService;
+        private readonly IConfiguration configuration;
 
         public readonly IAuthorizedPersonRepository authorizedPersonRepository;
 
 
 
-        public BuyerController(IBuyerRepository buyerRepository, IMapper mapper, LinkGenerator linkGenerator, BuyerValidator validator, ILoggerService logger, IServiceCall<AddressDto> addressService, IServiceCall<PaymentDto> paymentService, IAuthorizedPersonRepository authorizedPersonRepository)
+        public BuyerController(IBuyerRepository buyerRepository, IMapper mapper, ILoggerService logger, IServiceCall<AddressDto> addressService, IServiceCall<PaymentDto> paymentService, IAuthorizedPersonRepository authorizedPersonRepository)
         {
             this.buyerRepository = buyerRepository;
-            this.linkGenerator = linkGenerator;
             this.mapper = mapper;
-            this.validator = validator;
             this.addressService = addressService;
             this.logger = logger;
             this.paymentService = paymentService;
@@ -74,8 +72,8 @@ namespace BuyerMicroservice.Controllers
 
                 if (buyer.addressId is not null && buyer.paymentId is not null)
                 {
-                    var addressDto = await addressService.SendGetRequestAsync("http://localhost:40001/address");
-                    var paymentDto = await paymentService.SendGetRequestAsync("http://localhost:40008/payment");
+                    var addressDto = await addressService.SendGetRequestAsync(configuration["Services:AddressServiceCallMock"]);
+                    var paymentDto = await paymentService.SendGetRequestAsync(configuration["Services:PaymentServiceCallMock"]) ;
                     if (addressDto is not null && paymentDto is not null )
                     {
                         buyerDto.address = addressDto;
@@ -106,8 +104,8 @@ namespace BuyerMicroservice.Controllers
 
             if(buyer.addressId is not null && buyer.paymentId is not null)
             {
-                var addressDto = await addressService.SendGetRequestAsync("http://localhost:40001/address");
-                var paymentDto = await paymentService.SendGetRequestAsync("http://localhost:40008/payment");
+                var addressDto = await addressService.SendGetRequestAsync(configuration["Services:AddressServiceCallMock"]);
+                var paymentDto = await paymentService.SendGetRequestAsync(configuration["Services:PaymentServiceCallMock"]);
 
                 if ( addressDto is not null && paymentDto is not null)
                 {

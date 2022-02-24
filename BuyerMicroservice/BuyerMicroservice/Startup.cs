@@ -68,8 +68,7 @@ namespace BuyerMicroservice
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                /*app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BuyerMicroservice v1"));*/
+               
             }
 
             app.UseHttpsRedirection();
