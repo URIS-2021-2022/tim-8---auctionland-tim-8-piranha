@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj": {}
+    "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj": {
+    "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
         "projectName": "ComplaintMicroservice",
-        "projectPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
-        "packagesPath": "C:\\Users\\Davor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\ComplaintMicroservice\\ComplaintMicroservice\\obj\\",
+        "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\ComplaintMicroservice.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\ComplaintMicroservice\\ComplaintMicroservice\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Davor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +26,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://tfs.mca.mk/DefaultCollection/_packaging/MCA/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
@@ -83,6 +88,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.12, 5.0.12]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -91,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

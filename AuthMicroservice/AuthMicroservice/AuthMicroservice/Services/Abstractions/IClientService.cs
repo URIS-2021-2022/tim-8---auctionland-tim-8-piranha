@@ -36,7 +36,7 @@
         /// <param name="uid">Uid of the client that is to be updated.</param>
         /// <param name="requestDTO">Info to update.</param>
         /// <returns>ClientResponseDTO</returns>
-        public Task<ClientResponseDTO> Update(string uid, UpdateClientRequestDTO requestDTO);
+        public Task<ClientResponseDTO> Update(string uid, UpdateClientRequestDto requestDTO);
 
         /// <summary>
         /// Deletes a client.

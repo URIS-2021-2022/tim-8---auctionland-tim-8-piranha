@@ -88,7 +88,7 @@
         /// </summary>
         /// <param name="requestDTO">Token to be checked.</param>
         /// <returns>Task&lt;ValidateTokenResponseDTO&gt;</returns>
-        public async Task<ValidateTokenResponseDTO> ValidateTokenAsync(ValidateTokenRequestDTO requestDTO)
+        public async Task<ValidateTokenResponseDTO> ValidateTokenAsync(ValidateTokenRequestDto requestDTO)
         {
             if (requestDTO.token == null || requestDTO.token == "")
             {
