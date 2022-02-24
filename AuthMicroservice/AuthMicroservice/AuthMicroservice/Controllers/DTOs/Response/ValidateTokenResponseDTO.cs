@@ -18,7 +18,7 @@
         public string UserUid
         {
             get { return userUid; }
-            set { this.userUid = value }
+            set { this.userUid = value; }
         }
 
         /// <summary>

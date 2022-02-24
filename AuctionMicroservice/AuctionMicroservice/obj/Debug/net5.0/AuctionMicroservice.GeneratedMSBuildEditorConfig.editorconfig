@@ -7,8 +7,4 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AuctionMicroservice
-<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\Lenovo\source\repos\URIS\AuctionMicroservice\AuctionMicroservice\
-=======
-build_property.ProjectDir = C:\Users\PC\Source\Repos\tim-8---auctionland-tim-8-piranhaCopy\AuctionMicroservice\AuctionMicroservice\
->>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
