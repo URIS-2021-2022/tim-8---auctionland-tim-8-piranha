@@ -8,7 +8,7 @@ namespace PublicBidding.Entities
     public class PublicBiddingAuthorizedPerson
     {
         public Guid PublicBiddingId { get; set; }
-        public PublicBidding PublicBidding { get; set; }
+        public PublicBidding? PublicBidding { get; set; }
         public Guid AuthorizedPersonId { get; set; }
     }
 }
