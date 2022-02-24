@@ -20,16 +20,16 @@ namespace PublicBidding.Models
         /// <summary>
         /// Poruka za log
         /// </summary>
-        public string LogMessage { get; set; }
+        public string? LogMessage { get; set; }
 
         /// <summary>
         /// Ime mikroservisa
         /// </summary>
-        public string MicroserviceName { get; set; }
+        public string? MicroserviceName { get; set; }
 
         /// <summary>
         /// Metoda mikroservisa
         /// </summary>
-        public string MicroserviceMethod { get; set; }
+        public string? MicroserviceMethod { get; set; }
     }
 }

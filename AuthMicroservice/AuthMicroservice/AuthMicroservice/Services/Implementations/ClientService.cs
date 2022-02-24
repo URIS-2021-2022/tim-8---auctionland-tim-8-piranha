@@ -21,7 +21,7 @@
     {
         private readonly IClientRepository clientRepository;
         private readonly IMapper autoMapper;
-        private IUserTypeRepository userTypeRepository;
+        private readonly IUserTypeRepository userTypeRepository;
         private readonly ILoggerService loggerService;
 
         /// <summary>
@@ -132,11 +132,11 @@
                 return new List<ClientResponseDTO>();
             }
 
-            /*await loggerService.LogMessage(
+            await loggerService.LogMessage(
                    LogLevel.Information,
                    "GetAllClients successful",
                    GeneralConsts.MICROSERVICE_NAME,
-                   "GetAllClients");*/
+                   "GetAllClients");
 
             return autoMapper.Map<List<ClientResponseDTO>>(clients);
         }
@@ -163,7 +163,7 @@
         /// <param name="uid">Uid of the client that is to be updated.</param>
         /// <param name="requestDTO">Info to update.</param>
         /// <returns>ClientResponseDTO</returns>
-        public async Task<ClientResponseDTO> Update(string uid, UpdateClientRequestDTO requestDTO)
+        public async Task<ClientResponseDTO> Update(string uid, UpdateClientRequestDto requestDTO)
         {
             Client client = clientRepository.FindOneByUid(uid);
 

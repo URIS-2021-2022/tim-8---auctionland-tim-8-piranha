@@ -5,7 +5,7 @@
     /// <summary>
     /// Request DTO containing info for updating user.
     /// </summary>
-    public class UpdateClientRequestDTO
+    public class UpdateClientRequestDto
     {
         /// <summary>
         /// First name of the client.

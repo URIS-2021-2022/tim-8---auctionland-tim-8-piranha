@@ -77,7 +77,7 @@
             <param name="requestDTO"></param>
             <returns></returns>
         </member>
-        <member name="M:AuthMicroservice.Controllers.AuthController.HandleValidateToken(AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO)">
+        <member name="M:AuthMicroservice.Controllers.AuthController.HandleValidateToken(AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDto)">
             <summary>
             Endpoint for validating a JWT token.
             </summary>
@@ -121,7 +121,7 @@
             <param name="requestDTO">Attributes of the client.</param>
             <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
         </member>
-        <member name="M:AuthMicroservice.Controllers.ClientController.HandleUpdateClient(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO)">
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleUpdateClient(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDto)">
             <summary>
             Endpoint for updating user with the passed uid.
             </summary>
@@ -191,27 +191,27 @@
             Password.
             </summary>
         </member>
-        <member name="T:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO">
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDto">
             <summary>
             Request DTO containing info for updating user.
             </summary>
         </member>
-        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.FirstName">
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDto.FirstName">
             <summary>
             First name of the client.
             </summary>
         </member>
-        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.LastName">
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDto.LastName">
             <summary>
             Last name of the client.
             </summary>
         </member>
-        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.Username">
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDto.Username">
             <summary>
             Client username.
             </summary>
         </member>
-        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.Password">
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDto.Password">
             <summary>
             Client password.
             </summary>
@@ -226,12 +226,12 @@
             New name for the user type.
             </summary>
         </member>
-        <member name="T:AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO">
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDto">
             <summary>
             Token validation request DTO.
             </summary>
         </member>
-        <member name="P:AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO.token">
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDto.token">
             <summary>
             JWT token.
             </summary>
@@ -657,7 +657,7 @@
             <param name="requestDTO">Request DTO.</param>
             <returns>Task&lt;SignInResponseDTO&gt;</returns>
         </member>
-        <member name="M:AuthMicroservice.Services.Abstractions.IAuthService.ValidateTokenAsync(AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO)">
+        <member name="M:AuthMicroservice.Services.Abstractions.IAuthService.ValidateTokenAsync(AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDto)">
             <summary>
             Asynchronous validate token method.
             </summary>
@@ -689,7 +689,7 @@
             <param name="requestDTO">Info about user that is to be created.</param>
             <returns>ClientResponseDTO</returns>
         </member>
-        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.Update(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO)">
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.Update(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDto)">
             <summary>
             Updates a user.
             </summary>
@@ -763,7 +763,7 @@
             <param name="requestDTO">Sign in request DTO.</param>
             <returns>Task&lt;SignInResponseDTO&gt;</returns>
         </member>
-        <member name="M:AuthMicroservice.Services.Implementations.AuthService.ValidateTokenAsync(AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO)">
+        <member name="M:AuthMicroservice.Services.Implementations.AuthService.ValidateTokenAsync(AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDto)">
             <summary>
             Method that performs asynchronous token validation.
             </summary>
@@ -817,7 +817,7 @@
             <param name="uid">Uid of the client.</param>
             <returns>ClientResponseDTO</returns>
         </member>
-        <member name="M:AuthMicroservice.Services.Implementations.ClientService.Update(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO)">
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.Update(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDto)">
             <summary>
             Updates a user.
             </summary>
@@ -928,7 +928,7 @@
             <summary>
             What to do on configuring.
             </summary>
-            <param name="options">Options to apply.</param>
+            <param name="optionsBuilder">Options to apply.</param>
         </member>
         <member name="M:AuthMicroservice.Utils.DatabaseContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>

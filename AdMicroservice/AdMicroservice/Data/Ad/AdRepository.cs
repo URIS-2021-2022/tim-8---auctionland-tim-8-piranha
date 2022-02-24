@@ -45,9 +45,9 @@ namespace AdMicroservice.Data.Ad
 
         }
 
-        public async Task<AdModel> GetAdById(Guid adId)
+        public async Task<AdModel> GetAdById(Guid AdId)
         {
-            return await context.Ads.Include(a => a.Journal).FirstOrDefaultAsync(e => e.AdId == adId);
+            return await context.Ads.Include(a => a.Journal).FirstOrDefaultAsync(e => e.AdId == AdId);
         }
 
 #pragma warning disable CS1998

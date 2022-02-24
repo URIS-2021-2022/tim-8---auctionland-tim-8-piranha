@@ -3,7 +3,7 @@
     /// <summary>
     /// Route constants used in controllers.
     /// </summary>
-    public class RouteConsts
+    public static class RouteConsts
     {
         /// <summary>
         /// Base route.

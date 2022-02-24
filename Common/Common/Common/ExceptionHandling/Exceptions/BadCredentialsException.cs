@@ -1,15 +1,18 @@
-﻿using Commons.ExceptionHandling;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Common.ExceptionHandling.Exceptions
+﻿namespace Common.ExceptionHandling.Exceptions
 {
+    using Commons.ExceptionHandling;
+    using System;
+    using System.Net;
+    using System.Runtime.Serialization;
+
+    [Serializable]
     public class BadCredentialsException : BaseException
     {
+        protected BadCredentialsException(SerializationInfo info, StreamingContext context) 
+            : base(info, context)
+        {
+        }
+
         public BadCredentialsException(string message) : base(message, HttpStatusCode.Unauthorized)
         {
             this.message = message;

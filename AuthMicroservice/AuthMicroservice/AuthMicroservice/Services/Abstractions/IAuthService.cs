@@ -21,6 +21,6 @@
         /// </summary>
         /// <param name="requestDTO">Request DTO.</param>
         /// <returns>Task&lt;ValidateTokenResponseDTO&gt;</returns>
-        Task<ValidateTokenResponseDTO> ValidateTokenAsync(ValidateTokenRequestDTO requestDTO);
+        Task<ValidateTokenResponseDTO> ValidateTokenAsync(ValidateTokenRequestDto requestDTO);
     }
 }

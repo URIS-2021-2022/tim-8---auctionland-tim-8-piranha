@@ -45,7 +45,7 @@
         /// <returns></returns>
         [HttpPost(RouteConsts.ROUTE_AUTH_VALIDATE_TOKEN)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<ValidateTokenResponseDTO> HandleValidateToken([FromBody] ValidateTokenRequestDTO requestDTO)
+        public ActionResult<ValidateTokenResponseDTO> HandleValidateToken([FromBody] ValidateTokenRequestDto requestDTO)
         {
             return Ok(authService.ValidateTokenAsync(requestDTO));
         }

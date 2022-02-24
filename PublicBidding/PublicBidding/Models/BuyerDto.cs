@@ -13,7 +13,7 @@ namespace PublicBidding.Models
         /// <summary>
         /// Naziv kupca
         /// </summary>
-        public string name { get; set; }
+        public string? name { get; set; }
         /// <summary>
         /// Broj telefona kupca
         /// </summary>
@@ -25,7 +25,7 @@ namespace PublicBidding.Models
         /// <summary>
         /// Broj računa kupca
         /// </summary>
-        public string accountNumber { get; set; }
+        public string? accountNumber { get; set; }
         /// <summary>
         /// Adresa kupca
         /// </summary>
