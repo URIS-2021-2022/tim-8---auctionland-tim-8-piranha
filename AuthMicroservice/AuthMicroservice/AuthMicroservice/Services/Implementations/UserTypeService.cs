@@ -40,8 +40,8 @@
         /// Creates a user type.
         /// </summary>
         /// <param name="requestDTO">User type info.</param>
-        /// <returns>UserTypeResponseDTO</returns>
-        public async Task<UserTypeResponseDTO> Create(CreateUserTypeRequestDTO requestDTO)
+        /// <returns>UserTypeResponseDto</returns>
+        public async Task<UserTypeResponseDto> Create(CreateUserTypeRequestDto requestDTO)
         {
             ThrowExceptionIfUserTypeExists(requestDTO.Name);
 
@@ -59,7 +59,7 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "CreateAsync");
 
-            return autoMapper.Map<UserTypeResponseDTO>(userType);
+            return autoMapper.Map<UserTypeResponseDto>(userType);
         }
 
         private void ThrowExceptionIfUserTypeExists(string name)
@@ -116,8 +116,8 @@
         /// <summary>
         /// Gets all user types.
         /// </summary>
-        /// <returns>List&lt;UserTypeResponseDTO&gt;</returns>
-        public async Task<List<UserTypeResponseDTO>> GetAll()
+        /// <returns>List&lt;UserTypeResponseDto&gt;</returns>
+        public async Task<List<UserTypeResponseDto>> GetAll()
         {
             await loggerService.LogMessage(
                     LogLevel.Information,
@@ -125,15 +125,15 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "GetAll");
 
-            return autoMapper.Map<List<UserTypeResponseDTO>>(userTypeRepository.List(ut => true));
+            return autoMapper.Map<List<UserTypeResponseDto>>(userTypeRepository.List(ut => true));
         }
 
         /// <summary>
         /// Gets a single user type by uid.
         /// </summary>
         /// <param name="uid">Uid of the user type.</param>
-        /// <returns>UserTypeResponseDTO</returns>
-        public async Task<UserTypeResponseDTO> GetByUid(string uid)
+        /// <returns>UserTypeResponseDto</returns>
+        public async Task<UserTypeResponseDto> GetByUid(string uid)
         {
             await loggerService.LogMessage(
                     LogLevel.Information,
@@ -141,7 +141,7 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "GetByUid");
 
-            return autoMapper.Map<UserTypeResponseDTO>(userTypeRepository.FindOneByUid(uid));
+            return autoMapper.Map<UserTypeResponseDto>(userTypeRepository.FindOneByUid(uid));
         }
 
         /// <summary>
@@ -149,8 +149,8 @@
         /// </summary>
         /// <param name="uid">Uid of the user type.</param>
         /// <param name="requestDTO">Info to be applied as a change.</param>
-        /// <returns>UserTypeResponseDTO</returns>
-        public async Task<UserTypeResponseDTO> UpdateAsync(string uid, UpdateUserTypeRequestDTO requestDTO)
+        /// <returns>UserTypeResponseDto</returns>
+        public async Task<UserTypeResponseDto> UpdateAsync(string uid, UpdateUserTypeRequestDto requestDTO)
         {
             UserType userType = userTypeRepository.FindOneByUid(uid);
 
@@ -174,7 +174,7 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "UpdateAsync");
 
-            return autoMapper.Map<UserTypeResponseDTO>(userType);
+            return autoMapper.Map<UserTypeResponseDto>(userType);
         }
     }
 }

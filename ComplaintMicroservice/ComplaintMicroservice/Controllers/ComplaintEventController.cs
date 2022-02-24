@@ -193,7 +193,7 @@ namespace ComplaintMicroservice.Controllers
             return Ok();
         }
 
-        private bool ValidateComplaintType(ComplaintEventCreationDto complaintEvent)
+        private static bool ValidateComplaintType(ComplaintEventCreationDto complaintEvent)
         {
             if (complaintEvent.Event == "")
             {

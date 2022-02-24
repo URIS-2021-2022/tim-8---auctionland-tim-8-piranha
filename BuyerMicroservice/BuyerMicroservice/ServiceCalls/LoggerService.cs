@@ -21,7 +21,7 @@ namespace BuyerMicroservice.ServiceCalls
 
         public async Task<bool> LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod)
         {
-            return await Task.FromResult(true);
+            
 
             using (HttpClient httpClient = new HttpClient())
             {

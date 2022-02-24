@@ -29,10 +29,10 @@
         /// <summary>
         /// Endpoint for getting all user types.
         /// </summary>
-        /// <returns>ActionResult&lt;List&lt;UserTypeResponseDTO&gt;&gt;</returns>
+        /// <returns>ActionResult&lt;List&lt;UserTypeResponseDto&gt;&gt;</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<List<UserTypeResponseDTO>> HandleGetAllUserTypes()
+        public ActionResult<List<UserTypeResponseDto>> HandleGetAllUserTypes()
         {
             return Ok(userTypeService.GetAll());
         }
@@ -41,10 +41,10 @@
         /// Endpoint for getting a single user type by user uid.
         /// </summary>
         /// <param name="uid">Uid of the user type.</param>
-        /// <returns>ActionResult&lt;UserTypeResponseDTO&gt;</returns>
+        /// <returns>ActionResult&lt;UserTypeResponseDto&gt;</returns>
         [HttpGet(RouteConsts.ROUTE_USER_TYPE_GET_ONE_BY_UID)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<UserTypeResponseDTO> HandleGetUserTypeByUid(string uid)
+        public ActionResult<UserTypeResponseDto> HandleGetUserTypeByUid(string uid)
         {
             return Ok(userTypeService.GetByUid(uid));
         }
@@ -65,11 +65,11 @@
         /// Endpoint for creating a new user type.
         /// </summary>
         /// <param name="requestDTO">Attributes of the user type.</param>
-        /// <returns>ActionResult&lt;UserTypeResponseDTO&gt;</returns>
+        /// <returns>ActionResult&lt;UserTypeResponseDto&gt;</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public ActionResult<UserTypeResponseDTO> HandleCreateClient([FromBody] CreateUserTypeRequestDTO requestDTO)
+        public ActionResult<UserTypeResponseDto> HandleCreateClient([FromBody] CreateUserTypeRequestDto requestDTO)
         {
             return Ok(userTypeService.Create(requestDTO));
         }
@@ -79,11 +79,11 @@
         /// </summary>
         /// <param name="uid">Uid of the user type.</param>
         /// <param name="requestDTO">Attributes of the user type.</param>
-        /// <returns>ActionResult&lt;UserTypeResponseDTO&gt;</returns>
+        /// <returns>ActionResult&lt;UserTypeResponseDto&gt;</returns>
         [HttpPut(RouteConsts.ROUTE_USER_TYPE_GET_ONE_BY_UID)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<UserTypeResponseDTO> HandleUpdateClient(string uid, [FromBody] UpdateUserTypeRequestDTO requestDTO)
+        public ActionResult<UserTypeResponseDto> HandleUpdateClient(string uid, [FromBody] UpdateUserTypeRequestDto requestDTO)
         {
             return Ok(userTypeService.UpdateAsync(uid, requestDTO));
         }

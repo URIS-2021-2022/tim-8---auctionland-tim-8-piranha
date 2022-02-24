@@ -27,12 +27,12 @@
         /// <summary>
         /// What to do on configuring.
         /// </summary>
-        /// <param name="options">Options to apply.</param>
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        /// <param name="optionsBuilder">Options to apply.</param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!options.IsConfigured)
+            if (!optionsBuilder.IsConfigured)
             {
-                options.UseSqlServer(""); // Fallback connection string
+                optionsBuilder.UseSqlServer(""); // Fallback connection string
             }
         }
 

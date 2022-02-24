@@ -26,7 +26,7 @@
     {
         private readonly IAuthRepository authRepository;
         private readonly JwtGenerator jwtGenerator;
-        private IOptions<AudienceModel> _appSettings;
+        private readonly IOptions<AudienceModel> _appSettings;
         private readonly ILoggerService loggerService;
 
         public static object Domain { get; internal set; }
@@ -53,8 +53,8 @@
         /// Method that performs asynchronous user sign in.
         /// </summary>
         /// <param name="requestDTO">Sign in request DTO.</param>
-        /// <returns>Task&lt;SignInResponseDTO&gt;</returns>
-        public async Task<SignInResponseDTO> SignInAsync(SignInRequestDTO requestDTO)
+        /// <returns>Task&lt;SignInResponseDto&gt;</returns>
+        public async Task<SignInResponseDto> SignInAsync(SignInRequestDto requestDTO)
         {
             Client client = authRepository.FindOne(client => client.Username == requestDTO.email);
 
@@ -76,7 +76,7 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "SignInAsync");
 
-            return new SignInResponseDTO()
+            return new SignInResponseDto()
             {
                 email = requestDTO.email,
                 token = jwtGenerator.Generate(user.Uid, user.role)
@@ -87,8 +87,8 @@
         /// Method that performs asynchronous token validation.
         /// </summary>
         /// <param name="requestDTO">Token to be checked.</param>
-        /// <returns>Task&lt;ValidateTokenResponseDTO&gt;</returns>
-        public async Task<ValidateTokenResponseDTO> ValidateTokenAsync(ValidateTokenRequestDTO requestDTO)
+        /// <returns>Task&lt;ValidateTokenResponseDto&gt;</returns>
+        public async Task<ValidateTokenResponseDto> ValidateTokenAsync(ValidateTokenRequestDto requestDTO)
         {
             if (requestDTO.token == null || requestDTO.token == "")
             {
@@ -124,7 +124,7 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "ValidateTokenAsync");
 
-                return new ValidateTokenResponseDTO(userUid);
+                return new ValidateTokenResponseDto(userUid);
             }
             catch
             {

@@ -38,9 +38,13 @@ namespace PublicBidding.ServiceCalls
                     }
 
                     await logger.LogMessage(LogLevel.Information, "Communication with other microservice from PublicBidding microservice succeeded!", "PublicBidding microservice", "SendGetRequestAsync");
+#pragma warning disable CS8603 // Possible null reference return.
                     return JsonConvert.DeserializeObject<T>(content);
+#pragma warning restore CS8603 // Possible null reference return.
                 }
+#pragma warning disable CS8603 // Possible null reference return.
                 return default;
+#pragma warning restore CS8603 // Possible null reference return.
 
             }
             catch (Exception)

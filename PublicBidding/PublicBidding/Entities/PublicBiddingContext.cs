@@ -14,7 +14,7 @@ namespace PublicBidding.Entities
       
         }
 
-        public DbSet<Status> Statuses { get; set; }
+        public DbSet<Status>? Statuses { get; set; }
         public DbSet<Type> Types { get; set; }
         public DbSet<PublicBidding> PublicBiddings { get; set; }
         public DbSet<PublicBiddingAuthorizedPerson> PublicBiddingAuthorizedPerson { get; set; }
@@ -26,32 +26,32 @@ namespace PublicBidding.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Veze izmedju entiteta van mikroservisa
-            /*modelBuilder.Entity<PublicBiddingAuthorizedPerson>()
+            modelBuilder.Entity<PublicBiddingAuthorizedPerson>()
                 .HasOne(p => p.PublicBidding)
                 .WithMany()
                 .HasForeignKey("PublicBiddingId")
                 .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();*/
+                .IsRequired();
 
             modelBuilder.Entity<PublicBiddingAuthorizedPerson>()
                 .HasKey(pa => new { pa.PublicBiddingId, pa.AuthorizedPersonId });
 
-            /*modelBuilder.Entity<PublicBiddingBuyer>()
+            modelBuilder.Entity<PublicBiddingBuyer>()
                 .HasOne(p => p.PublicBidding)
                 .WithMany()
                 .HasForeignKey("PublicBiddingId")
                 .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();*/
+                .IsRequired();
 
             modelBuilder.Entity<PublicBiddingBuyer>()
                 .HasKey(pb => new { pb.PublicBiddingId, pb.BuyerId });
 
-            /*modelBuilder.Entity<PublicBiddingPlotPart>()
+            modelBuilder.Entity<PublicBiddingPlotPart>()
                 .HasOne(p => p.PublicBidding)
                 .WithMany()
                 .HasForeignKey("PublicBiddingId")
                 .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();*/
+                .IsRequired();
 
             modelBuilder.Entity<PublicBiddingPlotPart>()
                 .HasKey(pp => new { pp.PublicBiddingId, pp.PlotPartId });

@@ -12,15 +12,15 @@ namespace APIGateway
     using APIGateway.Middlewares;
     using Microsoft.Net.Http.Headers;
 
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
             CreateHostBuilder().Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder() =>
-            (IHostBuilder) new WebHostBuilder()
+        public static WebHostBuilder CreateHostBuilder() =>
+            (WebHostBuilder) new WebHostBuilder()
             .UseKestrel()
             .UseContentRoot(Directory.GetCurrentDirectory())
             .ConfigureAppConfiguration((hostingContext, config) =>
@@ -35,10 +35,6 @@ namespace APIGateway
             {
                 s.AddOcelot();
             })
-            .ConfigureLogging((hostingContext, logging) =>
-            {
-                // TODO: should add logging
-            })
             .UseIISIntegration()
             .Configure(app =>
             {
@@ -51,14 +47,14 @@ namespace APIGateway
                             await next.Invoke();
                         } catch (BaseException ex)
                         {
-                            await APIGatewayExceptionHandler.HandleExceptionAsync(context, ex);
+                            await ApiGatewayExceptionHandler.HandleExceptionAsync(context, ex);
                         }
 
                         await next.Invoke();
                     },
                     PreAuthenticationMiddleware = async (context, next) =>
                     {
-                        TokenValidationMiddleware.ValidateToken(context?.Request?.Headers[HeaderNames.Authorization]);
+                        (new TokenValidationMiddleware()).ValidateToken(context?.Request?.Headers[HeaderNames.Authorization]);
 
                         await next.Invoke();
                     }

@@ -13,14 +13,14 @@
         /// Asynchronous sign in method.
         /// </summary>
         /// <param name="requestDTO">Request DTO.</param>
-        /// <returns>Task&lt;SignInResponseDTO&gt;</returns>
-        Task<SignInResponseDTO> SignInAsync(SignInRequestDTO requestDTO);
+        /// <returns>Task&lt;SignInResponseDto&gt;</returns>
+        Task<SignInResponseDto> SignInAsync(SignInRequestDto requestDTO);
 
         /// <summary>
         /// Asynchronous validate token method.
         /// </summary>
         /// <param name="requestDTO">Request DTO.</param>
-        /// <returns>Task&lt;ValidateTokenResponseDTO&gt;</returns>
-        Task<ValidateTokenResponseDTO> ValidateTokenAsync(ValidateTokenRequestDTO requestDTO);
+        /// <returns>Task&lt;ValidateTokenResponseDto&gt;</returns>
+        Task<ValidateTokenResponseDto> ValidateTokenAsync(ValidateTokenRequestDto requestDTO);
     }
 }

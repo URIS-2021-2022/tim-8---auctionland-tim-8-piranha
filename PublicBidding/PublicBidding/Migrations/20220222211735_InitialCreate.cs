@@ -144,12 +144,12 @@ namespace PublicBidding.Migrations
             migrationBuilder.InsertData(
                 table: "PublicBiddings",
                 columns: new[] { "PublicBiddingId", "AddressId", "BestBidder", "Date", "DepositSupplement", "EndTime", "IsExcepted", "NumberOfApplicants", "Price", "RentPeriod", "Round", "StartPricePerHa", "StartTime", "StatusId", "TypeId" },
-                values: new object[] { new Guid("d7d314b0-2f22-4af5-8909-238b23383249"), new Guid("01f759bd-fb38-49f5-a4a7-f8a938fbd541"), null, new DateTime(2018, 12, 10, 1, 0, 0, 0, DateTimeKind.Local), 120.5, new DateTime(2018, 12, 10, 16, 45, 0, 0, DateTimeKind.Local), false, 1, 600.5, 2, 4, 500.35000000000002, new DateTime(2018, 12, 10, 14, 45, 0, 0, DateTimeKind.Local), new Guid("2233cbba-607a-4182-9f83-7ff8ffe6e5ac"), new Guid("8010f254-e872-49d9-9c2c-1d5783719019") });
+                values: new object[] { new Guid("d7d314b0-2f22-4af5-8909-238b23383249"), new Guid("01f759bd-fb38-49f5-a4a7-f8a938fbd541"), new Guid("09c3e6b4 - 1602 - 457a - b0d3 - 1737e6434f04"), new DateTime(2018, 12, 10, 1, 0, 0, 0, DateTimeKind.Local), 120.5, new DateTime(2018, 12, 10, 16, 45, 0, 0, DateTimeKind.Local), false, 1, 600.5, 2, 4, 500.35000000000002, new DateTime(2018, 12, 10, 14, 45, 0, 0, DateTimeKind.Local), new Guid("2233cbba-607a-4182-9f83-7ff8ffe6e5ac"), new Guid("8010f254-e872-49d9-9c2c-1d5783719019") });
 
             migrationBuilder.InsertData(
                 table: "PublicBiddings",
                 columns: new[] { "PublicBiddingId", "AddressId", "BestBidder", "Date", "DepositSupplement", "EndTime", "IsExcepted", "NumberOfApplicants", "Price", "RentPeriod", "Round", "StartPricePerHa", "StartTime", "StatusId", "TypeId" },
-                values: new object[] { new Guid("62c28c9a-7306-45c7-a5b3-1603eed4fd5a"), new Guid("50394b74-3ed0-4364-a8f2-aeb0bcb783ef"), null, new DateTime(2018, 8, 9, 2, 0, 0, 0, DateTimeKind.Local), 200.19999999999999, new DateTime(2018, 8, 9, 19, 45, 0, 0, DateTimeKind.Local), false, 4, 1800.4000000000001, 4, 2, 1200.5999999999999, new DateTime(2018, 8, 9, 17, 45, 0, 0, DateTimeKind.Local), new Guid("770a32d4-1db9-4844-868e-6bf8171ffc20"), new Guid("9b926999-151c-458c-8ae8-3d4a7e9f6459") });
+                values: new object[] { new Guid("62c28c9a-7306-45c7-a5b3-1603eed4fd5a"), new Guid("50394b74-3ed0-4364-a8f2-aeb0bcb783ef"), new Guid("09c3e6b4 - 1602 - 457a - b0d3 - 1737e6434f04"), new DateTime(2018, 8, 9, 2, 0, 0, 0, DateTimeKind.Local), 200.19999999999999, new DateTime(2018, 8, 9, 19, 45, 0, 0, DateTimeKind.Local), false, 4, 1800.4000000000001, 4, 2, 1200.5999999999999, new DateTime(2018, 8, 9, 17, 45, 0, 0, DateTimeKind.Local), new Guid("770a32d4-1db9-4844-868e-6bf8171ffc20"), new Guid("9b926999-151c-458c-8ae8-3d4a7e9f6459") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PublicBiddings_StatusId",

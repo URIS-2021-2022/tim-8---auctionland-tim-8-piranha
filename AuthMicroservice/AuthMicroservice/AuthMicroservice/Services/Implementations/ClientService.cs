@@ -21,7 +21,7 @@
     {
         private readonly IClientRepository clientRepository;
         private readonly IMapper autoMapper;
-        private IUserTypeRepository userTypeRepository;
+        private readonly IUserTypeRepository userTypeRepository;
         private readonly ILoggerService loggerService;
 
         /// <summary>
@@ -46,8 +46,8 @@
         /// Creates a user.
         /// </summary>
         /// <param name="requestDTO">Info about user that is to be created.</param>
-        /// <returns>ClientResponseDTO</returns>
-        public async Task<ClientResponseDTO> Create(CreateClientRequestDTO requestDTO)
+        /// <returns>ClientResponseDto</returns>
+        public async Task<ClientResponseDto> Create(CreateClientRequestDto requestDTO)
         {
             ThrowExceptionIfEmailExists(requestDTO.Username);
 
@@ -70,7 +70,7 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "Create");
 
-            return autoMapper.Map<ClientResponseDTO>(client);
+            return autoMapper.Map<ClientResponseDto>(client);
         }
 
         private void ThrowExceptionIfEmailExists(string email)
@@ -122,31 +122,31 @@
         /// <summary>
         /// Gets all clients.
         /// </summary>
-        /// <returns>List&lt;ClientResponseDTO&gt;</returns>
-        public async Task<List<ClientResponseDTO>> GetAllClients()
+        /// <returns>List&lt;ClientResponseDto&gt;</returns>
+        public async Task<List<ClientResponseDto>> GetAllClients()
         {
             List<Client> clients = clientRepository.List(c => true, c => c.UserType);
 
             if (clients.Count == 0)
             {
-                return new List<ClientResponseDTO>();
+                return new List<ClientResponseDto>();
             }
 
-            /*await loggerService.LogMessage(
+            await loggerService.LogMessage(
                    LogLevel.Information,
                    "GetAllClients successful",
                    GeneralConsts.MICROSERVICE_NAME,
-                   "GetAllClients");*/
+                   "GetAllClients");
 
-            return autoMapper.Map<List<ClientResponseDTO>>(clients);
+            return autoMapper.Map<List<ClientResponseDto>>(clients);
         }
 
         /// <summary>
         /// Gets a single client by uid.
         /// </summary>
         /// <param name="uid">Uid of the client.</param>
-        /// <returns>ClientResponseDTO</returns>
-        public async Task<ClientResponseDTO> GetOneByUid(string uid)
+        /// <returns>ClientResponseDto</returns>
+        public async Task<ClientResponseDto> GetOneByUid(string uid)
         {
             await loggerService.LogMessage(
                     LogLevel.Information,
@@ -154,7 +154,7 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "GetOneByUid");
 
-            return autoMapper.Map<ClientResponseDTO>(clientRepository.FindOneByUid(uid));
+            return autoMapper.Map<ClientResponseDto>(clientRepository.FindOneByUid(uid));
         }
 
         /// <summary>
@@ -162,8 +162,8 @@
         /// </summary>
         /// <param name="uid">Uid of the client that is to be updated.</param>
         /// <param name="requestDTO">Info to update.</param>
-        /// <returns>ClientResponseDTO</returns>
-        public async Task<ClientResponseDTO> Update(string uid, UpdateClientRequestDTO requestDTO)
+        /// <returns>ClientResponseDto</returns>
+        public async Task<ClientResponseDto> Update(string uid, UpdateClientRequestDto requestDTO)
         {
             Client client = clientRepository.FindOneByUid(uid);
 
@@ -191,7 +191,7 @@
                     GeneralConsts.MICROSERVICE_NAME,
                     "Update");
 
-            return autoMapper.Map<ClientResponseDTO>(client);
+            return autoMapper.Map<ClientResponseDto>(client);
         }
     }
 }

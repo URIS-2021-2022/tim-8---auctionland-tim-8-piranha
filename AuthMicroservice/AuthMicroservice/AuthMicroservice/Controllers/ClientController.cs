@@ -32,7 +32,7 @@
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<List<ClientResponseDTO>> HandleGetAllClients()
+        public ActionResult<List<ClientResponseDto>> HandleGetAllClients()
         {
             return Ok(clientService.GetAllClients());
         }
@@ -42,10 +42,10 @@
         /// Endpoint for getting a single user by user uid.
         /// </summary>
         /// <param name="uid">Uid of the user.</param>
-        /// <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
+        /// <returns>ActionResult&lt;ClientResponseDto&gt;</returns>
         [HttpGet(RouteConsts.ROUTE_CLIENT_GET_ONE_BY_UID)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<ClientResponseDTO> HandleGetClientByUid(string uid)
+        public ActionResult<ClientResponseDto> HandleGetClientByUid(string uid)
         {
             return Ok(clientService.GetOneByUid(uid));
         }
@@ -66,11 +66,11 @@
         /// Endpoint for creating a new client.
         /// </summary>
         /// <param name="requestDTO">Attributes of the client.</param>
-        /// <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
+        /// <returns>ActionResult&lt;ClientResponseDto&gt;</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public ActionResult<ClientResponseDTO> HandleCreateClient([FromBody] CreateClientRequestDTO requestDTO)
+        public ActionResult<ClientResponseDto> HandleCreateClient([FromBody] CreateClientRequestDto requestDTO)
         {
             return Ok(clientService.Create(requestDTO));
         }
@@ -80,11 +80,11 @@
         /// </summary>
         /// <param name="uid">Uid of the user.</param>
         /// <param name="requestDTO">Attributes of the user.</param>
-        /// <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
+        /// <returns>ActionResult&lt;ClientResponseDto&gt;</returns>
         [HttpPut(RouteConsts.ROUTE_CLIENT_GET_ONE_BY_UID)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<ClientResponseDTO> HandleUpdateClient(string uid, [FromBody] UpdateClientRequestDTO requestDTO)
+        public ActionResult<ClientResponseDto> HandleUpdateClient(string uid, [FromBody] UpdateClientRequestDto requestDTO)
         {
             return Ok(clientService.Update(uid, requestDTO));
         }

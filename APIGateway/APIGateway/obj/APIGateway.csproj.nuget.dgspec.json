@@ -1,23 +1,42 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj": {}
+<<<<<<< HEAD
+    "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\APIGateway.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj": {
+    "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\APIGateway.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj",
+        "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\APIGateway.csproj",
         "projectName": "APIGateway",
-        "projectPath": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\APIGateway.csproj",
-        "packagesPath": "C:\\Users\\andrija\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\APIGateway\\APIGateway\\obj\\",
+        "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\APIGateway.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\APIGateway\\APIGateway\\obj\\",
+=======
+    "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\APIGateway.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\APIGateway.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\APIGateway.csproj",
+        "projectName": "APIGateway",
+        "projectPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\APIGateway.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\APIGateway\\APIGateway\\obj\\",
+>>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\andrija\\AppData\\Roaming\\NuGet\\NuGet.Config",
+<<<<<<< HEAD
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,14 +44,20 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://tfs.mca.mk/DefaultCollection/_packaging/MCA/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj": {
-                "projectPath": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj"
+<<<<<<< HEAD
+              "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj"
+=======
+              "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj"
+>>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
               }
             }
           }
@@ -47,6 +72,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Analyzers": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.16.0, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.11.1, )"
@@ -58,6 +91,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.16.0, )"
             }
           },
           "imports": [
@@ -70,6 +107,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.12, 5.0.12]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -78,24 +121,40 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj": {
+<<<<<<< HEAD
+    "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\Common.csproj",
-        "packagesPath": "C:\\Users\\andrija\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andrija\\source\\repos\\tim-8---auctionland-tim-8-piranha\\Common\\Common\\Common\\obj\\",
+        "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\Common\\Common\\Common\\obj\\",
+=======
+    "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj",
+        "projectName": "Common",
+        "projectPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Source\\Repos\\tim-8---auctionland-tim-8-piranhaCopy\\Common\\Common\\Common\\obj\\",
+>>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\andrija\\AppData\\Roaming\\NuGet\\NuGet.Config",
+<<<<<<< HEAD
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> f28cdfe1866fb67df8c7a678d8ee187947cc5a39
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -103,7 +162,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://tfs.mca.mk/DefaultCollection/_packaging/MCA/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
@@ -126,6 +186,10 @@
               "version": "[2.2.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Analyzers": {
               "target": "Package",
               "version": "[5.0.14, )"
             },
@@ -161,7 +225,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

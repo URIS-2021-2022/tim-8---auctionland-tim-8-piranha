@@ -6,12 +6,12 @@ namespace BuyerMicroservice.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
+            //ova migracija je napravljena zbog tesiranja nekih komponenti u toku projekta
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            //ova migracija je napravljena zbog tesiranja nekih komponenti u toku projekta
         }
     }
 }

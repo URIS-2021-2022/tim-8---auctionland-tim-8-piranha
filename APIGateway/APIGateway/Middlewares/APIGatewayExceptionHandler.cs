@@ -7,7 +7,7 @@
     using System.Net;
     using System.Threading.Tasks;
 
-    public class APIGatewayExceptionHandler
+    public static class ApiGatewayExceptionHandler
     {
         public static Task HandleExceptionAsync(HttpContext context, BaseException ex)
         {
@@ -21,7 +21,6 @@
                 messsage = ex.Message,
                 status = ex.code,
                 requested_uri = context.Request.Path,
-                origin = ex.origin,
                 timestamp = DateTime.Now
             });
 

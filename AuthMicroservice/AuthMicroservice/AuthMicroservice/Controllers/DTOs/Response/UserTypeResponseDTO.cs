@@ -3,7 +3,7 @@
     /// <summary>
     /// User type response DTO.
     /// </summary>
-    public class UserTypeResponseDTO
+    public class UserTypeResponseDto
     {
         /// <summary>
         /// Name of the user type.
