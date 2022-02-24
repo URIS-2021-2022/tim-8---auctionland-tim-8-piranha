@@ -8,7 +8,11 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AuctionMicroservice
 <<<<<<< HEAD
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\User\Source\Repos\tim-8---auctionland-tim-8-piranha\AuctionMicroservice\AuctionMicroservice\
 =======
 build_property.ProjectDir = C:\Users\Lenovo\source\repos\URIS\AuctionMicroservice\AuctionMicroservice\
 >>>>>>> 580aa253bf1cc3f284f177323c8e801b6615b585
+=======
+build_property.ProjectDir = C:\Users\User\Source\Repos\tim-8---auctionland-tim-8-piranha\AuctionMicroservice\AuctionMicroservice\
+>>>>>>> 15b5567732b6b1c16f2f004f0a4fc41036a74f3f
