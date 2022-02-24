@@ -13,7 +13,7 @@
     /// </summary>
     public class JwtGenerator
     {
-        private IOptions<AudienceModel> _options;
+        private readonly IOptions<AudienceModel> _options;
 
         /// <summary>
         /// Constructor for the JWT token generator class.

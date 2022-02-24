@@ -5,7 +5,7 @@
     /// <summary>
     /// Token validation request DTO.
     /// </summary>
-    public class ValidateTokenRequestDTO
+    public class ValidateTokenRequestDto
     {
         /// <summary>
         /// JWT token.

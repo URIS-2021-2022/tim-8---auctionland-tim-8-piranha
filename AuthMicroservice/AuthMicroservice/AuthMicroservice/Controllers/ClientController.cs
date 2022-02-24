@@ -84,7 +84,7 @@
         [HttpPut(RouteConsts.ROUTE_CLIENT_GET_ONE_BY_UID)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<ClientResponseDTO> HandleUpdateClient(string uid, [FromBody] UpdateClientRequestDTO requestDTO)
+        public ActionResult<ClientResponseDTO> HandleUpdateClient(string uid, [FromBody] UpdateClientRequestDto requestDTO)
         {
             return Ok(clientService.Update(uid, requestDTO));
         }
