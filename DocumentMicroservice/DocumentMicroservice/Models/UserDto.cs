@@ -12,10 +12,6 @@ namespace DocumentMicroservice.Models
     {
        
         
-            /// <summary>
-            /// Id korisnika sistema
-            /// </summary>
-           // public Guid userId { get; set; }
 
             /// <summary>
             /// Ime korisnika sistema

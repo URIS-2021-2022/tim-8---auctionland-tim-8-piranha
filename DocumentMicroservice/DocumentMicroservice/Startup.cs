@@ -75,21 +75,21 @@ namespace DocumentMicroservice
                     {
                         Name = "Dimitrije Corlija",
                         Email = "corlija.dimitrije822@gmail.com",
-                        Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        Url = new Uri(Configuration["Links:FTN"])
                     },
                     License = new Microsoft.OpenApi.Models.OpenApiLicense
                     {
                         Name = "FTN licence",
-                        Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        Url = new Uri(Configuration["Links:FTN"])
                     },
-                    TermsOfService = new Uri("http://www.ftn.uns.ac.rs/uplataTermsOfService")
-                });
+                    TermsOfService = new Uri(Configuration["Links:TermsOfService"])
+                }); ;
 
                 var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
 
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
-               // c.IncludeXmlComments(xmlCommentsPath);
+                c.IncludeXmlComments(xmlCommentsPath);
                 
 
             });

@@ -134,7 +134,7 @@ namespace BuyerMicroservice.Controllers
 
                 BoardNumber boardNumber = mapper.Map<BoardNumber>(boardNumberUpdate);
 
-                //validator.ValidateAndThrow(priority);
+                validator.ValidateAndThrow(boardNumber);
 
                 mapper.Map(boardNumber, existingBoardNumber);
 

@@ -24,16 +24,16 @@ namespace BuyerMicroservice.Entities.Context
 
         public DbSet<BoardNumber> boardNumber { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Buyer>(
+            modelBuilder.Entity<Buyer>(
             e => e.HasDiscriminator<string>("BuyerType")
         );
             //Authorized person 
-           
 
-            
-            builder.Entity<AuthorizedPerson>().HasData(
+
+
+            modelBuilder.Entity<AuthorizedPerson>().HasData(
                new
                {
                    authorizedPersonID = Guid.Parse("93a08cc2-1d17-46e6-bd95-4fa70bb11226"),
@@ -45,7 +45,7 @@ namespace BuyerMicroservice.Entities.Context
                    country = "Srbija"
                });
 
-            builder.Entity<AuthorizedPerson>().HasData(
+            modelBuilder.Entity<AuthorizedPerson>().HasData(
                new
                {
 
@@ -57,10 +57,10 @@ namespace BuyerMicroservice.Entities.Context
                    address = "Bulevar Oslobodjenja 55",
                    country = "Zrenjanin"
                });
-                
+
 
             //Contact person 
-            builder.Entity<ContactPerson>().HasData(
+            modelBuilder.Entity<ContactPerson>().HasData(
               new
               {
                   contactPersonID = Guid.Parse("e54364be-1fe6-43b5-9401-8b8bd2165aba"),
@@ -69,7 +69,7 @@ namespace BuyerMicroservice.Entities.Context
                   phone="0629349583"
 
               });
-            builder.Entity<ContactPerson>().HasData(
+            modelBuilder.Entity<ContactPerson>().HasData(
               new
               {
                   contactPersonID = Guid.Parse("68bf5d70-f26b-4c53-b014-bab74b7b86a0"),
@@ -79,7 +79,7 @@ namespace BuyerMicroservice.Entities.Context
 
               });
             //Individual
-            builder.Entity<Individual>().HasData(
+            modelBuilder.Entity<Individual>().HasData(
               new
               {
                   buyerID = Guid.Parse("0ec20a3b-fd39-4c2e-8062-7d1664eb5381"),
@@ -102,10 +102,10 @@ namespace BuyerMicroservice.Entities.Context
 
               });
 
-           
+
 
             //Legal entity
-            builder.Entity<LegalEntity>().HasData(
+            modelBuilder.Entity<LegalEntity>().HasData(
              new
              {
                   buyerID = Guid.Parse("861f142c-4707-416d-ad14-7debbd2031ed"),
@@ -131,7 +131,7 @@ namespace BuyerMicroservice.Entities.Context
 
             //Priority
 
-            builder.Entity<Priority>().HasData(
+            modelBuilder.Entity<Priority>().HasData(
             new
             {
                 priorityID = Guid.Parse("784c7edd-c937-45e6-a493-f0b8dedab85f"),
@@ -140,7 +140,7 @@ namespace BuyerMicroservice.Entities.Context
 
             });
 
-            builder.Entity<Priority>().HasData(
+            modelBuilder.Entity<Priority>().HasData(
             new
             {
                 priorityID = Guid.Parse("21200907-0d08-44f3-8506-dc807ca2215b"),
@@ -150,7 +150,7 @@ namespace BuyerMicroservice.Entities.Context
             });
 
 
-            builder.Entity<BoardNumber>().HasData(
+            modelBuilder.Entity<BoardNumber>().HasData(
             new
             {
                 boardNumberID = Guid.Parse("8d951bd9-497a-47ec-b1a7-c944492f4c8c"),
@@ -159,7 +159,7 @@ namespace BuyerMicroservice.Entities.Context
 
             });
 
-            builder.Entity<BoardNumber>().HasData(
+            modelBuilder.Entity<BoardNumber>().HasData(
             new
             {
                 boardNumberID = Guid.Parse("2018f35a-f49b-462f-a1c9-a105f297864b"),

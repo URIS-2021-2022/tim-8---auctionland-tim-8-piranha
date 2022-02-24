@@ -49,7 +49,7 @@ namespace AuctionMicroservice
                 s.DisableDataAnnotationsValidation = true;
 
             });//.ConfigureApiBehaviorOptions(setupAction =>
-            //{
+            
             //    setupAction.InvalidModelStateResponseFactory = context =>
             //    {
             //        ProblemDetailsFactory problemDetailsFactory = context.HttpContext.RequestServices
@@ -103,15 +103,14 @@ namespace AuctionMicroservice
                     {
                         Name = "Luka Panic",
                         Email = "Panic.Luka@uns.ac.rs",
-                        Url = new Uri("https://sova.uns.ac.rs/")
+                        
                     },
                     License = new OpenApiLicense()
                     {
-                        Name = "Licence",
-                        Url = new Uri("https://sova.uns.ac.rs/"),
+                        Name = "Licence"
+                        
 
                     },
-                    TermsOfService = new Uri("https://sova.uns.ac.rs/")
                 });
 
                 var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

@@ -305,7 +305,7 @@
             <summary>
             Inserts seed data into database
             </summary>
-            <param name="builder"></param>
+            <param name="modelBuilder"></param>
         </member>
         <member name="T:AuctionMicroservice.Entities.AuctionPublicBidding">
             <summary>
