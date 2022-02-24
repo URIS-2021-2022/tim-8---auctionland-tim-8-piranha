@@ -3,7 +3,7 @@
     /// <summary>
     /// Sign in response DTO.
     /// </summary>
-    public class SignInResponseDTO
+    public class SignInResponseDto
     {
         /// <summary>
         /// Email address.

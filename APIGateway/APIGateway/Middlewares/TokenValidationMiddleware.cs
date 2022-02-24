@@ -11,7 +11,7 @@
     public class TokenValidationMiddleware
     {
 
-        private IOptions<AudienceModel> _appSettings;
+        private readonly IOptions<AudienceModel> _appSettings;
 
         public TokenValidationMiddleware()
         {
@@ -40,9 +40,8 @@
 
                 try
                 {
-                    var claimsPrincipal = new JwtSecurityTokenHandler()
+                    new JwtSecurityTokenHandler()
                         .ValidateToken(token, validationParameters, out var rawValidatedToken);
-                    return;
                 }
                 catch (SecurityTokenValidationException stvex)
                 {

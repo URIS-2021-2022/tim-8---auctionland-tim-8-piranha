@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace DocumentMicroservice.Controllers
         private readonly IServiceCall<BuyerDto> buyerService;
         private readonly IServiceCall<PersonDto> personService;
         private readonly IServiceCall<PlotDto> plotService;
+        private readonly IConfiguration configuration;
 
         public ContractLeaseController(IContractLeaseRepository contractLeaseRepository, LinkGenerator linkGenerator, IMapper mapper, ContractLeaseValidators validator, ILoggerService logger, IServiceCall<BuyerDto> buyerService, IServiceCall<PersonDto> personService, IServiceCall<PlotDto> plotService)
         {
@@ -67,9 +69,9 @@ namespace DocumentMicroservice.Controllers
 
                 if (cl.buyerId is not null && cl.personId is not null && cl.plotId is not null)
                 {
-                    var buyerDto = await buyerService.SendGetRequestAsync("http://localhost:40004/buyer");
-                    var personDto = await personService.SendGetRequestAsync("http://localhost:40008/person");
-                    var plotDto = await plotService.SendGetRequestAsync("http://localhost:40009/plot");
+                    var buyerDto = await buyerService.SendGetRequestAsync(configuration["Services:BuyerServiceCallMock"]);
+                    var personDto = await personService.SendGetRequestAsync(configuration["Services:PersonServiceCallMock"]);
+                    var plotDto = await plotService.SendGetRequestAsync(configuration["Services:PlotServiceCallMock"]);
 
                     if (buyerDto is not null && personDto is not null && plotDto is not null)
                     {
@@ -102,9 +104,9 @@ namespace DocumentMicroservice.Controllers
 
             if (contractLease.buyerId is not null && contractLease.personId is not null && contractLease.plotId is not null)
             {
-                var buyerDto = await buyerService.SendGetRequestAsync("http://localhost:40004/buyer");
-                var personDto = await personService.SendGetRequestAsync("http://localhost:40008/person");
-                var plotDto = await plotService.SendGetRequestAsync("http://localhost:40009/plot");
+                var buyerDto = await buyerService.SendGetRequestAsync(configuration["Services:BuyerServiceCallMock"]);
+                var personDto = await personService.SendGetRequestAsync(configuration["Services:PersonServiceCallMock"]);
+                var plotDto = await plotService.SendGetRequestAsync(configuration["Services:PlotServiceCallMock"]);
 
                 if (buyerDto is not null && personDto is not null && plotDto is not null)
                 {
@@ -129,9 +131,7 @@ namespace DocumentMicroservice.Controllers
             try
             {
                 ContractLease contractLease = mapper.Map<ContractLease>(ContractLeaseCreation);
-
                 validator.ValidateAndThrow(contractLease);
-
                 ContractLeaseConfirmation confirmation = await contractLeaseRepository.CreateContractLeaseAsync(contractLease);
                 await contractLeaseRepository.SaveChangesAsync();
 

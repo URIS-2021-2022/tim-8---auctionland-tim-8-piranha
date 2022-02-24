@@ -15,8 +15,8 @@
         /// </summary>
         public ClientProfile()
         {
-            CreateMap<Client, ClientResponseDTO>();
-            CreateMap<ClientResponseDTO, Client>();
+            CreateMap<Client, ClientResponseDto>();
+            CreateMap<ClientResponseDto, Client>();
             CreateMap<Client, Client>();
         }
     }

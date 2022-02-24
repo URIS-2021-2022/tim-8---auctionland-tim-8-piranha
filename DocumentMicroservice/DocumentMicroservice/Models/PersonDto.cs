@@ -10,10 +10,7 @@ namespace DocumentMicroservice.Models
     /// </summary>
     public class PersonDto
     {
-        /// <summary>
-        /// Id ličnosti
-        /// </summary>
-       // public Guid PersonId { get; set; }
+       
 
         /// <summary>
         /// Ime ličnosti

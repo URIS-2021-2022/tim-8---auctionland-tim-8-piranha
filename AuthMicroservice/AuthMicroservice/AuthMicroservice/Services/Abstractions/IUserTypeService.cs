@@ -14,29 +14,29 @@ namespace AuthMicroservice.Services.Abstractions
         /// Gets all user types.
         /// </summary>
         /// <returns></returns>
-        public Task<List<UserTypeResponseDTO>> GetAll();
+        public Task<List<UserTypeResponseDto>> GetAll();
 
         /// <summary>
         /// Gets a single user type by uid.
         /// </summary>
         /// <param name="uid">Uid of the user type.</param>
-        /// <returns>UserTypeResponseDTO</returns>
-        public Task<UserTypeResponseDTO> GetByUid(string uid);
+        /// <returns>UserTypeResponseDto</returns>
+        public Task<UserTypeResponseDto> GetByUid(string uid);
 
         /// <summary>
         /// Updates a user type entity.
         /// </summary>
         /// <param name="uid">Uid of the user type.</param>
         /// <param name="requestDTO">Info about user type to be changed.</param>
-        /// <returns>UserTypeResponseDTO</returns>
-        public Task<UserTypeResponseDTO> UpdateAsync(string uid, UpdateUserTypeRequestDTO requestDTO);
+        /// <returns>UserTypeResponseDto</returns>
+        public Task<UserTypeResponseDto> UpdateAsync(string uid, UpdateUserTypeRequestDto requestDTO);
 
         /// <summary>
         /// Creates a new user type entity.
         /// </summary>
         /// <param name="requestDTO">Info about user type.</param>
-        /// <returns>UserTypeResponseDTO</returns>
-        public Task<UserTypeResponseDTO> Create(CreateUserTypeRequestDTO requestDTO);
+        /// <returns>UserTypeResponseDto</returns>
+        public Task<UserTypeResponseDto> Create(CreateUserTypeRequestDto requestDTO);
 
         /// <summary>
         /// Deletes a user type.

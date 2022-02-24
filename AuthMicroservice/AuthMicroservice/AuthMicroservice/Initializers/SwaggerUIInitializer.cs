@@ -30,13 +30,11 @@
                     Contact = new OpenApiContact()
                     {
                         Name = "Stefan Radojevic",
-                        Email = "radojevic.stefan.sr@gmail.com",
-                        Url = new System.Uri("https://github.com/Stefi99R")
+                        Email = "radojevic.stefan.sr@gmail.com"
                     },
                     License = new OpenApiLicense
                     {
                         Name = "MIT",
-                        Url = new System.Uri("https://opensource.org/licenses/MIT")
                     },
                 });
 

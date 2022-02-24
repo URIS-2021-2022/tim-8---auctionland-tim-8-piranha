@@ -3,7 +3,7 @@
     /// <summary>
     /// General constants used in application.
     /// </summary>
-    public class GeneralConsts
+    public static class GeneralConsts
     {
         /// <summary>
         /// Name of the current microservice.

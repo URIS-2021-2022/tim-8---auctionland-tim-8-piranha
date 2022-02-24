@@ -12,7 +12,7 @@ namespace APIGateway
     using APIGateway.Middlewares;
     using Microsoft.Net.Http.Headers;
 
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -47,7 +47,7 @@ namespace APIGateway
                             await next.Invoke();
                         } catch (BaseException ex)
                         {
-                            await APIGatewayExceptionHandler.HandleExceptionAsync(context, ex);
+                            await ApiGatewayExceptionHandler.HandleExceptionAsync(context, ex);
                         }
 
                         await next.Invoke();

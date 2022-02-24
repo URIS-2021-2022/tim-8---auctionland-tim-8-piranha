@@ -3,7 +3,7 @@
     /// <summary>
     /// Client entity response DTO.
     /// </summary>
-    public class ClientResponseDTO
+    public class ClientResponseDto
     {
         /// <summary>
         /// First name of the client.
@@ -23,6 +23,6 @@
         /// <summary>
         /// Type of the user.
         /// </summary>
-        public UserTypeResponseDTO UserType { get; set; }
+        public UserTypeResponseDto UserType { get; set; }
     }
 }
