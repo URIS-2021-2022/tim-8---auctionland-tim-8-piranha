@@ -1,0 +1,1067 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AuthMicroservice</name>
+    </assembly>
+    <members>
+        <member name="T:AuthMicroservice.Consts.GeneralConsts">
+            <summary>
+            General constants used in application.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.GeneralConsts.MICROSERVICE_NAME">
+            <summary>
+            Name of the current microservice.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Consts.RouteConsts">
+            <summary>
+            Route constants used in controllers.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_API_BASE">
+            <summary>
+            Base route.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_AUTH_BASE">
+            <summary>
+            Auth resource route.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_AUTH_SIGN_IN">
+            <summary>
+            Sign in endpoint route.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_AUTH_VALIDATE_TOKEN">
+            <summary>
+            Token validation endpoint route.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_CLIENT_BASE">
+            <summary>
+            Base route for client resource.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_CLIENT_GET_ONE_BY_UID">
+            <summary>
+            Route for a single user type.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_USER_TYPE_BASE">
+            <summary>
+            Base route for user type resource.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Consts.RouteConsts.ROUTE_USER_TYPE_GET_ONE_BY_UID">
+            <summary>
+            Route for a single user type.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.AuthController">
+            <summary>
+            Controller for the auth resource.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.AuthController.#ctor(AuthMicroservice.Services.Abstractions.IAuthService)">
+            <summary>
+            Constructor for the auth controller.
+            </summary>
+            <param name="authService">Auth service.</param>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.AuthController.HandleSignIn(AuthMicroservice.Controllers.DTOs.Request.SignInRequestDTO)">
+            <summary>
+            Endpoint for user sign in.
+            </summary>
+            <param name="requestDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.AuthController.HandleValidateToken(AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO)">
+            <summary>
+            Endpoint for validating a JWT token.
+            </summary>
+            <param name="requestDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.ClientController">
+            <summary>
+            Controller for client resource.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.#ctor(AuthMicroservice.Services.Abstractions.IClientService)">
+            <summary>
+            Constructor for the client controller.
+            </summary>
+            <param name="clientService">Client service.</param>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleGetAllClients">
+            <summary>
+            Endpoint for getting all users.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleGetClientByUid(System.String)">
+            <summary>
+            Endpoint for getting a single user by user uid.
+            </summary>
+            <param name="uid">Uid of the user.</param>
+            <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleGetClientOptions">
+            <summary>
+            Endpoint for getting options.
+            </summary>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleCreateClient(AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO)">
+            <summary>
+            Endpoint for creating a new client.
+            </summary>
+            <param name="requestDTO">Attributes of the client.</param>
+            <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleUpdateClient(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO)">
+            <summary>
+            Endpoint for updating user with the passed uid.
+            </summary>
+            <param name="uid">Uid of the user.</param>
+            <param name="requestDTO">Attributes of the user.</param>
+            <returns>ActionResult&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.ClientController.HandleDeleteClient(System.String)">
+            <summary>
+            Endpoint for deleting user with the passed uid.
+            </summary>
+            <param name="uid">Uid of the user.</param>
+            <returns>Void</returns>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO">
+            <summary>
+            Request DTO containing info for creating a client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.FirstName">
+            <summary>
+            First name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.LastName">
+            <summary>
+            Last name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.Username">
+            <summary>
+            Client username.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.Password">
+            <summary>
+            Client password.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO.UserType">
+            <summary>
+            Type of the user.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO">
+            <summary>
+            Create user type request DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO.Name">
+            <summary>
+            Name of the user type.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.SignInRequestDTO">
+            <summary>
+            Sign in request DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.SignInRequestDTO.email">
+            <summary>
+            Email address.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.SignInRequestDTO.password">
+            <summary>
+            Password.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO">
+            <summary>
+            Request DTO containing info for updating user.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.FirstName">
+            <summary>
+            First name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.LastName">
+            <summary>
+            Last name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.Username">
+            <summary>
+            Client username.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO.Password">
+            <summary>
+            Client password.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO">
+            <summary>
+            Update user type request DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO.Name">
+            <summary>
+            New name for the user type.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO">
+            <summary>
+            Token validation request DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO.token">
+            <summary>
+            JWT token.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO">
+            <summary>
+            Client entity response DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO.FirstName">
+            <summary>
+            First name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO.LastName">
+            <summary>
+            Last name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO.Username">
+            <summary>
+            Client username.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.ClientResponseDTO.UserType">
+            <summary>
+            Type of the user.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Response.SignInResponseDTO">
+            <summary>
+            Sign in response DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.SignInResponseDTO.email">
+            <summary>
+            Email address.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.SignInResponseDTO.token">
+            <summary>
+            JWT token.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Response.UserTypeResponseDTO">
+            <summary>
+            User type response DTO.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Controllers.DTOs.Response.UserTypeResponseDTO.Name">
+            <summary>
+            Name of the user type.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.DTOs.Response.ValidateTokenResponseDTO">
+            <summary>
+            Token validation response DTO.
+            </summary>
+        </member>
+        <member name="F:AuthMicroservice.Controllers.DTOs.Response.ValidateTokenResponseDTO.userUid">
+            <summary>
+            Nullable uid of the user.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.DTOs.Response.ValidateTokenResponseDTO.#ctor(System.String)">
+            <summary>
+            Token validation response DTO constructor.
+            </summary>
+            <param name="userUid"></param>
+        </member>
+        <member name="T:AuthMicroservice.Controllers.UserTypeController">
+            <summary>
+            User type resource controller.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.#ctor(AuthMicroservice.Services.Abstractions.IUserTypeService)">
+            <summary>
+            Constructor for the user type controller.
+            </summary>
+            <param name="userTypeService">User type service.</param>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleGetAllUserTypes">
+            <summary>
+            Endpoint for getting all user types.
+            </summary>
+            <returns>ActionResult&lt;List&lt;UserTypeResponseDTO&gt;&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleGetUserTypeByUid(System.String)">
+            <summary>
+            Endpoint for getting a single user type by user uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <returns>ActionResult&lt;UserTypeResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleGetUserTypeOptions">
+            <summary>
+            Endpoint for getting options.
+            </summary>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleCreateClient(AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO)">
+            <summary>
+            Endpoint for creating a new user type.
+            </summary>
+            <param name="requestDTO">Attributes of the user type.</param>
+            <returns>ActionResult&lt;UserTypeResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleUpdateClient(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO)">
+            <summary>
+            Endpoint for updating user type with the passed uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <param name="requestDTO">Attributes of the user type.</param>
+            <returns>ActionResult&lt;UserTypeResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Controllers.UserTypeController.HandleDeleteUserType(System.String)">
+            <summary>
+            Endpoint for deleting user type with the passed uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <returns>Void</returns>
+        </member>
+        <member name="T:AuthMicroservice.Domain.AuthenticatedUser">
+            <summary>
+            Authenticated user entity class.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Domain.AuthenticatedUser.username">
+            <summary>
+            Username (email) of the user.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Domain.AuthenticatedUser.role">
+            <summary>
+            Name of the user role.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Domain.AuthenticatedUser.#ctor(System.String,System.String)">
+            <summary>
+            Constructor for the authenticated user entity.
+            </summary>
+            <param name="username">Username of the user.</param>
+            <param name="role">Role of the user.</param>
+        </member>
+        <member name="T:AuthMicroservice.Domain.Client">
+            <summary>
+            Class that represents client entity.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Domain.Client.FirstName">
+            <summary>
+            First name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Domain.Client.LastName">
+            <summary>
+            Last name of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Domain.Client.Username">
+            <summary>
+            Username of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Domain.Client.Password">
+            <summary>
+            Password of the client.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Domain.Client.UserTypeUid">
+            <summary>
+            Uid of the user type entity.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Domain.Client.UserType">
+            <summary>
+            Type of the user.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Domain.UserType">
+            <summary>
+            Class that represents user type entity.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Domain.UserType.Name">
+            <summary>
+            Name of the user type.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.DbContextInitializer">
+            <summary>
+            Class that initializes database context.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Initializers.DbContextInitializer.InitializeServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Method used for database initialization.
+            </summary>
+            <param name="services">Services to initialize.</param>
+            <param name="configuration">Configuration to be applied.</param>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.DependencyInjectionInitializer">
+            <summary>
+            Method that initializes singletons accross used in the api.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Initializers.DependencyInjectionInitializer.InitializeServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Method used for dependency injection initialization.
+            </summary>
+            <param name="services">Services to initialize.</param>
+            <param name="configuration">Configuration to be applied.</param>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.GeneralInitializer">
+            <summary>
+            General initializator.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Initializers.GeneralInitializer.InitializeServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Method that initializes services for controllers.
+            </summary>
+            <param name="services">Services to be initialized.</param>
+            <param name="configuration">Configuration to be applied.</param>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.IInitializer">
+            <summary>
+            Initializator interface.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Initializers.IInitializer.InitializeServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Method to be used for initialization of services.
+            </summary>
+            <param name="services">Services to be initialized.</param>
+            <param name="configuration">Configuration to be applied.</param>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.Initializer">
+            <summary>
+            Initializer implementation.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Initializers.Initializer.InitializeAll(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Method used to initialize all that is needed on startup.
+            </summary>
+            <param name="services">Services to be initialized.</param>
+            <param name="configuration">Configuration to be applied.</param>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.RepositoryInitializer">
+            <summary>
+            Repositories initializer.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Initializers.RepositoryInitializer.InitializeServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Method that initializes scoped repositories.
+            </summary>
+            <param name="services">Services to be initialized.</param>
+            <param name="configuration">Configuration to be applied.</param>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.Security.AudienceModel">
+            <summary>
+            Audience model.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Initializers.Security.AudienceModel.Secret">
+            <summary>
+            Secret.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Initializers.Security.AudienceModel.Iss">
+            <summary>
+            Issuer.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Initializers.Security.AudienceModel.Aud">
+            <summary>
+            Audience.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.Security.SecurityInitializer">
+            <summary>
+            Security initializer class.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Initializers.Security.SecurityInitializer.InitializeServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Method that initializes security on api startup.
+            </summary>
+            <param name="services">Services to configure.</param>
+            <param name="configuration">Configuration to be applied.</param>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.Security.SwaggerUIInitializer">
+            <summary>
+            Swagger UI initializer.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Initializers.Security.SwaggerUIInitializer.InitializeServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Method used for swagger initialization.
+            </summary>
+            <param name="services">Services to be initialized.</param>
+            <param name="configuration">Configuration to be applied.</param>
+        </member>
+        <member name="T:AuthMicroservice.Initializers.ServicesInitializer">
+            <summary>
+            Initializator for the services.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Initializers.ServicesInitializer.InitializeServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Method that is used to initialize services.
+            </summary>
+            <param name="services">Services to be initialized.</param>
+            <param name="configuration">Configuration to be applied.</param>
+        </member>
+        <member name="T:AuthMicroservice.Profiles.AuthProfile">
+            <summary>
+            Profile for auth.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Profiles.AuthProfile.#ctor">
+            <summary>
+            Auth profile constructor.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Profiles.ClientProfile">
+            <summary>
+            Client profile.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Profiles.ClientProfile.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Profiles.UserTypeProfile">
+            <summary>
+            User type profile.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Profiles.UserTypeProfile.#ctor">
+            <summary>
+            User type profile.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Program">
+            <summary>
+            Program class.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Program.Main(System.String[])">
+            <summary>
+            Main method.
+            </summary>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="M:AuthMicroservice.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Create host builder.
+            </summary>
+            <param name="args">Arguments.</param>
+            <returns>IHostBuilder</returns>
+        </member>
+        <member name="T:AuthMicroservice.Repositories.Abstractions.IAuthRepository">
+            <summary>
+            Auth repository interface.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Repositories.Abstractions.IClientRepository">
+            <summary>
+            Client repository interface. 
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Repositories.Abstractions.IUserTypeRepository">
+            <summary>
+            Repository interface for user type.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Repositories.Implementations.AuthRepository">
+            <summary>
+            Auth repository interface implementation.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Repositories.Implementations.AuthRepository.#ctor(AuthMicroservice.Utils.DatabaseContext)">
+            <summary>
+            Default, needed, constructor for the auth repository.
+            </summary>
+            <param name="context">Database context.</param>
+        </member>
+        <member name="T:AuthMicroservice.Repositories.Implementations.ClientRepository">
+            <summary>
+            Client repository interface implementation.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Repositories.Implementations.ClientRepository.#ctor(AuthMicroservice.Utils.DatabaseContext)">
+            <summary>
+            Default, needed, constructor for the client repository.
+            </summary>
+            <param name="context">Database context.</param>
+        </member>
+        <member name="T:AuthMicroservice.Repositories.Implementations.UserTypeRepository">
+            <summary>
+            Interface implementation of user type repository.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Repositories.Implementations.UserTypeRepository.#ctor(AuthMicroservice.Utils.DatabaseContext)">
+            <summary>
+            Default, needed, constructor for the client repository.
+            </summary>
+            <param name="context">Database context.</param>
+        </member>
+        <member name="T:AuthMicroservice.Services.Abstractions.IAuthService">
+            <summary>
+            Auth service interface.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IAuthService.SignInAsync(AuthMicroservice.Controllers.DTOs.Request.SignInRequestDTO)">
+            <summary>
+            Asynchronous sign in method.
+            </summary>
+            <param name="requestDTO">Request DTO.</param>
+            <returns>Task&lt;SignInResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IAuthService.ValidateTokenAsync(AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO)">
+            <summary>
+            Asynchronous validate token method.
+            </summary>
+            <param name="requestDTO">Request DTO.</param>
+            <returns>Task&lt;ValidateTokenResponseDTO&gt;</returns>
+        </member>
+        <member name="T:AuthMicroservice.Services.Abstractions.IClientService">
+            <summary>
+            Client service interface.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.GetAllClients">
+            <summary>
+            Gets all clients.
+            </summary>
+            <returns>List&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.GetOneByUid(System.String)">
+            <summary>
+            Gets a single client by uid.
+            </summary>
+            <param name="uid">Uid of the client.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO)">
+            <summary>
+            Creates a user.
+            </summary>
+            <param name="requestDTO">Info about user that is to be created.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.Update(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO)">
+            <summary>
+            Updates a user.
+            </summary>
+            <param name="uid">Uid of the client that is to be updated.</param>
+            <param name="requestDTO">Info to update.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IClientService.DeleteAsync(System.String)">
+            <summary>
+            Deletes a client.
+            </summary>
+            <param name="uid">Uid of the client that is to be deleted.</param>
+        </member>
+        <member name="T:AuthMicroservice.Services.Abstractions.IUserTypeService">
+            <summary>
+            Interface for user type service.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.GetAll">
+            <summary>
+            Gets all user types.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.GetByUid(System.String)">
+            <summary>
+            Gets a single user type by uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.UpdateAsync(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO)">
+            <summary>
+            Updates a user type entity.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <param name="requestDTO">Info about user type to be changed.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO)">
+            <summary>
+            Creates a new user type entity.
+            </summary>
+            <param name="requestDTO">Info about user type.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Abstractions.IUserTypeService.DeleteAsync(System.String)">
+            <summary>
+            Deletes a user type.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+        </member>
+        <member name="T:AuthMicroservice.Services.Implementations.AuthService">
+            <summary>
+            Service class for authentication.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.AuthService.#ctor(AuthMicroservice.Repositories.Abstractions.IAuthRepository,AuthMicroservice.Utils.JwtGenerator,Microsoft.Extensions.Options.IOptions{AuthMicroservice.Initializers.Security.AudienceModel},AuthMicroservice.Utils.LoggerService.ILoggerService)">
+            <summary>
+            Auth service constructor.
+            </summary>
+            <param name="authRepository">Auth repository.</param>
+            <param name="jwtGenerator">JWT generator.</param>
+            <param name="_appSettings">App settings.</param>
+            <param name="loggerService">Logger service.</param>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.AuthService.SignInAsync(AuthMicroservice.Controllers.DTOs.Request.SignInRequestDTO)">
+            <summary>
+            Method that performs asynchronous user sign in.
+            </summary>
+            <param name="requestDTO">Sign in request DTO.</param>
+            <returns>Task&lt;SignInResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.AuthService.ValidateTokenAsync(AuthMicroservice.Controllers.DTOs.Request.ValidateTokenRequestDTO)">
+            <summary>
+            Method that performs asynchronous token validation.
+            </summary>
+            <param name="requestDTO">Token to be checked.</param>
+            <returns>Task&lt;ValidateTokenResponseDTO&gt;</returns>
+        </member>
+        <member name="T:AuthMicroservice.Services.Implementations.ClientService">
+            <summary>
+            Client service interface implementation.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.#ctor(AuthMicroservice.Repositories.Abstractions.IClientRepository,AutoMapper.IMapper,AuthMicroservice.Repositories.Abstractions.IUserTypeRepository,AuthMicroservice.Utils.LoggerService.ILoggerService)">
+            <summary>
+            Client service constructor.
+            </summary>
+            <param name="clientRepository">Client repository.</param>
+            <param name="autoMapper">Auto model mapper.</param>
+            <param name="userTypeRepository">User type repository.</param>
+            <param name="loggerService">Logger service.</param>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateClientRequestDTO)">
+            <summary>
+            Creates a user.
+            </summary>
+            <param name="requestDTO">Info about user that is to be created.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.FindOneByEmailAddress(System.String)">
+            <summary>
+            Method for finding a client with the specified email.
+            </summary>
+            <param name="email">Email of the user.</param>
+            <returns>Client</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.DeleteAsync(System.String)">
+            <summary>
+            Deletes a client.
+            </summary>
+            <param name="uid">Uid of the client that is to be deleted.</param>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.GetAllClients">
+            <summary>
+            Gets all clients.
+            </summary>
+            <returns>List&lt;ClientResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.GetOneByUid(System.String)">
+            <summary>
+            Gets a single client by uid.
+            </summary>
+            <param name="uid">Uid of the client.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.ClientService.Update(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateClientRequestDTO)">
+            <summary>
+            Updates a user.
+            </summary>
+            <param name="uid">Uid of the client that is to be updated.</param>
+            <param name="requestDTO">Info to update.</param>
+            <returns>ClientResponseDTO</returns>
+        </member>
+        <member name="T:AuthMicroservice.Services.Implementations.UserTypeService">
+            <summary>
+            User type interface implementation.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.#ctor(AuthMicroservice.Repositories.Abstractions.IUserTypeRepository,AutoMapper.IMapper,AuthMicroservice.Utils.LoggerService.ILoggerService)">
+            <summary>
+            User type service constructor.
+            </summary>
+            <param name="userTypeRepository">User type repository.</param>
+            <param name="autoMapper">Auto model mapper.</param>
+            <param name="loggerService">Logger service.</param>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.Create(AuthMicroservice.Controllers.DTOs.Request.CreateUserTypeRequestDTO)">
+            <summary>
+            Creates a user type.
+            </summary>
+            <param name="requestDTO">User type info.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.FindOneByNameAsync(System.String)">
+            <summary>
+            Finds user type by name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.DeleteAsync(System.String)">
+            <summary>
+            Deletes a user type.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.GetAll">
+            <summary>
+            Gets all user types.
+            </summary>
+            <returns>List&lt;UserTypeResponseDTO&gt;</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.GetByUid(System.String)">
+            <summary>
+            Gets a single user type by uid.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="M:AuthMicroservice.Services.Implementations.UserTypeService.UpdateAsync(System.String,AuthMicroservice.Controllers.DTOs.Request.UpdateUserTypeRequestDTO)">
+            <summary>
+            Updates a user type with the provided info.
+            </summary>
+            <param name="uid">Uid of the user type.</param>
+            <param name="requestDTO">Info to be applied as a change.</param>
+            <returns>UserTypeResponseDTO</returns>
+        </member>
+        <member name="T:AuthMicroservice.Startup">
+            <summary>
+            Startup class.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Startup constructor.
+            </summary>
+            <param name="configuration">Startup configuration.</param>
+        </member>
+        <member name="P:AuthMicroservice.Startup.Configuration">
+            <summary>
+            Configuration property.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">Services to be added.</param>
+        </member>
+        <member name="M:AuthMicroservice.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">App to host.</param>
+            <param name="env">Hosting environment.</param>
+        </member>
+        <member name="T:AuthMicroservice.Utils.DatabaseContext">
+            <summary>
+            Database context.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Utils.DatabaseContext.#ctor">
+            <summary>
+            Default constructor for database context.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Utils.DatabaseContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{AuthMicroservice.Utils.DatabaseContext})">
+            <summary>
+            Constructor for the database context.
+            </summary>
+            <param name="options">Options to be applied to database context.</param>
+        </member>
+        <member name="M:AuthMicroservice.Utils.DatabaseContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
+            <summary>
+            What to do on configuring.
+            </summary>
+            <param name="options">Options to apply.</param>
+        </member>
+        <member name="M:AuthMicroservice.Utils.DatabaseContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            What to do on model creating.
+            </summary>
+            <param name="modelBuilder">Model builder.</param>
+        </member>
+        <member name="T:AuthMicroservice.Utils.JwtGenerator">
+            <summary>
+            JWT token generator class.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Utils.JwtGenerator.#ctor(Microsoft.Extensions.Options.IOptions{AuthMicroservice.Initializers.Security.AudienceModel})">
+            <summary>
+            Constructor for the JWT token generator class.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:AuthMicroservice.Utils.JwtGenerator.Generate(System.String,System.String)">
+            <summary>
+            Method used for generating JWT token.
+            </summary>
+            <param name="uid">User uid.</param>
+            <param name="role">User role.</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:AuthMicroservice.Utils.LoggerService.ILoggerService">
+            <summary>
+            Logger service interface.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Utils.LoggerService.ILoggerService.LogMessage(Microsoft.Extensions.Logging.LogLevel,System.String,System.String,System.String)">
+            <summary>
+            Abstract method for logging a message.
+            </summary>
+            <param name="logLevel">Log level.</param>
+            <param name="logMessage">Log message.</param>
+            <param name="microserviceName">Microservice name.</param>
+            <param name="microserviceMethod">Method from which is called.</param>
+            <returns></returns>
+        </member>
+        <member name="T:AuthMicroservice.Utils.LoggerService.LoggerService">
+            <summary>
+            Logger service interface implementation.
+            </summary>
+        </member>
+        <member name="M:AuthMicroservice.Utils.LoggerService.LoggerService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Logger service constructor.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:AuthMicroservice.Utils.LoggerService.LoggerService.LogMessage(Microsoft.Extensions.Logging.LogLevel,System.String,System.String,System.String)">
+            <summary>
+            Method for logging a message.
+            </summary>
+            <param name="logLevel">Log level.</param>
+            <param name="logMessage">Log message.</param>
+            <param name="microserviceName">Name of the microservice from which the logger is called.</param>
+            <param name="microserviceMethod">Method from which the logger is called.</param>
+            <returns></returns>
+        </member>
+        <member name="T:AuthMicroservice.Utils.LoggerService.LogModel">
+            <summary>
+            Log model representation.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Utils.LoggerService.LogModel.LogLevel">
+            <summary>
+            Log level (ex. Warn, Debug, Error, Info).
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Utils.LoggerService.LogModel.LogMessage">
+            <summary>
+            Log message.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Utils.LoggerService.LogModel.MicroserviceName">
+            <summary>
+            Name of the microservice from which the log is called.
+            </summary>
+        </member>
+        <member name="P:AuthMicroservice.Utils.LoggerService.LogModel.MicroserviceMethod">
+            <summary>
+            Method from which the logger was called.
+            </summary>
+        </member>
+        <member name="T:AuthMicroservice.Utils.ServiceCalls.IServiceCall`1">
+            <summary>
+            Service call interface.
+            </summary>
+            <typeparam name="T">Type of service.</typeparam>
+        </member>
+        <member name="M:AuthMicroservice.Utils.ServiceCalls.IServiceCall`1.SendGetRequestAsync(System.String)">
+            <summary>
+            Method used for sending an asynchronous request.
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AuthMicroservice.Utils.ServiceCalls.ServiceCall`1">
+            <summary>
+            Service call interface implementation.
+            </summary>
+            <typeparam name="T">Type of the service.</typeparam>
+        </member>
+        <member name="M:AuthMicroservice.Utils.ServiceCalls.ServiceCall`1.#ctor(AuthMicroservice.Utils.LoggerService.ILoggerService)">
+            <summary>
+            Constructor for declaring logger service as a service to which the requests are made.
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:AuthMicroservice.Utils.ServiceCalls.ServiceCall`1.SendGetRequestAsync(System.String)">
+            <summary>
+            Method used for sending a request to a service.
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AuthResource.Domain.EmailAndPassword">
+            <summary>
+            Email and password representation of the user.
+            </summary>
+        </member>
+        <member name="P:AuthResource.Domain.EmailAndPassword.email">
+            <summary>
+            Email address.
+            </summary>
+        </member>
+        <member name="P:AuthResource.Domain.EmailAndPassword.password">
+            <summary>
+            Password.
+            </summary>
+        </member>
+    </members>
+</doc>

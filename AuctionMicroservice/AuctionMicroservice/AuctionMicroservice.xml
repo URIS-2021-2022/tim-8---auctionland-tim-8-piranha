@@ -1,0 +1,948 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AuctionMicroservice</name>
+    </assembly>
+    <members>
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.GetAuctionsAsync">
+            <summary>
+            Returns list of all auctions.
+            </summary>
+            <returns>List of auctions</returns>
+            <response code="200">Returns list of auctions</response>
+            <response code="404">No auctions found</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.GetAuctionByIdAsync(System.Guid)">
+             <summary>
+             Returns Auction by ID of auction
+             </summary>
+             <param name="AuctionId"></param>
+             <returns>Auction by ID</returns>
+            <response code="200">returns found auction</response>
+            <response code="404">no auction found</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.CreateAuctionAsync(AuctionMicroservice.Models.AuctionCreationDto)">
+             <summary>
+             Creates new auction
+             </summary>
+             <param name="auctionCreationDto">Auction model</param>
+             <returns>Creation confirmation</returns>
+             <remarks>
+             Example of auction creation model \
+             POST /api/Auctions \
+             {       \
+                  "year": 2021, \
+               "AuctionNum" : 4,\
+                "date": "2021-01-01T00:00:00",\
+             "restriction": 33,\
+            "priceStep": 13,\
+             "applicationDeadline": "2023-01-01T00:00:00"\
+            }
+             }
+             </remarks>
+             <response code="200">returns created auction</response>
+             <response code="500">There's been server error</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.UpdateAuctionAsync(AuctionMicroservice.Models.AuctionUpdateDto)">
+            <summary>
+            Updates one auction 
+            </summary>
+            <param name="auctionUpdate">Auction model that is updated</param>
+            <returns>Update confirmation model</returns>
+            <response code="200">Returns updated auction</response>
+            <response code="400">Auction not found</response>
+            <response code="500">There has been internal server error</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.DeleteAuctionAsync(System.Guid)">
+            <summary>
+            Deletes one auction by ID
+            </summary>
+            <param name="AuctionId"></param>
+            <returns>Status 204</returns>
+            <response code="204">Auction successesfuly deleted</response>
+            <response code="404">Auction not found</response>
+            <response code="500">There has been internal server error</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.AuctionController.GetAuctionOptions">
+            <summary>
+            returns possible options to work with auctions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationIndividualsAsync">
+            <summary>
+            Returns list of all individual documentations
+            </summary>
+            <returns>List of individual documentations</returns>
+            <response code="200">Returns list of individual documentations</response>
+            <response code="404">No individual documentations found</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationIndividualsByAuctionAsync(System.Guid)">
+             <summary>
+             Returns individual documentations that belong to one auction by AuctionId
+             </summary>
+             <param name="AuctionId"></param>
+             <returns>individual documentations by AuctionId</returns>
+            <response code="200">returns found individual documentations</response>
+            <response code="404">no individual documentations found</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationByIdAsync(System.Guid)">
+             <summary>
+             Returns individual documentations by ID
+             </summary>
+             <param name="DocumentationIndividualId"></param>
+             <returns>individual documentations by ID</returns>
+            <response code="200">returns found individual documentation</response>
+            <response code="404">no individual documentation found</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.CreateDocumentationIndividualAsync(AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto)">
+            <summary>
+            Creates new individual documentation
+            </summary>
+            <param name="documentation">individual documentation model</param>
+            <returns>Creation confirmation</returns>
+            <remarks>
+            Example of individual documentation creation model \
+            POST /api/DocumentationIndividuals \
+            {   \
+            "firstName": "Luka", \
+            "surname": "Panic", \
+            "identificationNumber": "21412946612", \
+            "auctionId": "6a421c13-a195-48f7-8dbd-67596c3974c0" \
+            } \
+            </remarks>
+            <response code="200">returns created documentation</response>
+            <response code="500">There's been server error</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.UpdateDocumentationIndividualAsync(AuctionMicroservice.Models.DocumentationIndividualUpdateDto)">
+            <summary>
+            Updates one individual documentation 
+            </summary>
+            <param name="documentation">Individual documentation model that is updated</param>
+            <returns>Update confirmation model</returns>
+            <response code="200">Returns updated individual documentation</response>
+            <response code="400">Individual documentation not found</response>
+            <response code="500">There has been internal server error</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.DeleteDocumentationIndividualAsync(System.Guid)">
+            <summary>
+            Deletes one individual documentation by ID
+            </summary>
+            <param name="DocumentationIndividualId"></param>
+            <returns>Status 204</returns>
+            <response code="204">Individual documentation successesfuly deleted</response>
+            <response code="404">Individual documentation not found</response>
+            <response code="500">There has been internal server error</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationIndividualOptions">
+            <summary>
+            returns possible options to work with documentations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationLegalEntitesAsync">
+            <summary>
+            Returns list of all legal entity documentations
+            </summary>
+            <returns>List of legal entity documentations</returns>
+            <response code="200">Returns list of legal entity documentations</response>
+            <response code="404">No legal entity documentations found</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationByIdAsync(System.Guid)">
+             <summary>
+             Returns legal enitity documentation by ID
+             </summary>
+             <param name="DocumentationLegalEntityId"></param>
+             <returns>legal enitity documentation by ID</returns>
+            <response code="200">returns found legal enitity documentation</response>
+            <response code="404">no legal enitity documentation found</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationLegalEntitesByAuctionAsync(System.Guid)">
+             <summary>
+             Returns legal entity documentations that belong to one auction by AuctionId
+             </summary>
+             <param name="AuctionId"></param>
+             <returns>legal entity documentations by AuctionId</returns>
+            <response code="200">returns found legal entity documentations</response>
+            <response code="404">no legal entity documentations found</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.CreateDocumentationLegalEntityAsync(AuctionMicroservice.Models.DocumentationLegalEntityCreationDto)">
+            <summary>
+            Creates new legal entity documentation
+            </summary>
+            <param name="documentation">legal entity documentation model</param>
+            <returns>Creation confirmation</returns>
+            <remarks>
+            Example of legal entity documentation creation model \
+            POST /api/DocumentationLegalEntities \
+            {   \
+            "name": "Test", \
+            "identificationNumber": "21412946612", \
+            "address": "Bulevar 2", \
+            "auctionId": "6a421c13-a195-48f7-8dbd-67596c3974c0" \
+            } \
+            </remarks>
+            <response code="200">returns created documentation</response>
+            <response code="500">There's been server error</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.UpdateDocumentationLegalEntityAsync(AuctionMicroservice.Models.DocumentationLegalEntityUpdateDto)">
+            <summary>
+            Updates one legal entity documentation 
+            </summary>
+            <param name="documentation">legal entity documentation model that is updated</param>
+            <returns>Update confirmation model</returns>
+            <response code="200">Returns updated legal entity documentation</response>
+            <response code="400">legal entity documentation not found</response>
+            <response code="500">There has been internal server error</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.DeleteDocumentationLegalEntityAsync(System.Guid)">
+            <summary>
+            Deletes one legal entity documentation by ID
+            </summary>
+            <param name="DocumentationLegalEntityId"></param>
+            <returns>Status 204</returns>
+            <response code="204">legal entity documentation successesfuly deleted</response>
+            <response code="404">legal entity documentation not found</response>
+            <response code="500">There has been internal server error</response>
+        </member>
+        <member name="M:AuctionMicroservice.Controllers.DocumentationLegalEntityController.GetDocumentationLegalEntityOptions">
+            <summary>
+            returns possible options to work with documentations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AuctionMicroservice.Entities.Auction">
+            <summary>
+            Represents auction
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.Auction.AuctionId">
+            <summary>
+            Auction ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.Auction.AuctionNum">
+            <summary>
+            Auction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.Auction.Year">
+            <summary>
+            Year when auction is happening
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.Auction.Date">
+            <summary>
+            Date od auction
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.Auction.Restriction">
+            <summary>
+            Auction restriction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.Auction.PriceStep">
+            <summary>
+            Auction price step
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.Auction.DocumentationIndividual">
+            <summary>
+            List od individual documentations that belong to this auction
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.Auction.DocumentationLegalEntity">
+            <summary>
+            List od legal entity documentations that belong to this auction
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.Auction.ApplicationDeadline">
+            <summary>
+            Date of application deadline
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Entities.AuctionConfirmation">
+            <summary>
+            Represents auction confirmation
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionConfirmation.AuctionId">
+            <summary>
+            Auction ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionConfirmation.AuctionNum">
+            <summary>
+            Auction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionConfirmation.Year">
+            <summary>
+            Year when auction is happening
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionConfirmation.Date">
+            <summary>
+            Date od auction
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionConfirmation.Restriction">
+            <summary>
+            Auction restriction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionConfirmation.PriceStep">
+            <summary>
+            Auction price step
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionConfirmation.ApplicationDeadline">
+            <summary>
+            Date of application deadline
+            </summary>
+        </member>
+        <member name="M:AuctionMicroservice.Entities.AuctionContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Inserts seed data into database
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:AuctionMicroservice.Entities.AuctionPublicBidding">
+            <summary>
+            Represent AuctionPublicBidding entity
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionPublicBidding.PublicBiddingId">
+            <summary>
+            Public bidding ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.AuctionPublicBidding.AuctionId">
+            <summary>
+            ID of auction that public bidding belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Entities.DocumentationIndividual">
+            <summary>
+            Represents Individual documentation
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividual.DocumentationIndividualId">
+            <summary>
+            Individual documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividual.FirstName">
+            <summary>
+            Individual first name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividual.Surname">
+            <summary>
+            Individual surname
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividual.IdentificationNumber">
+            <summary>
+            Individual identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividual.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Entities.DocumentationIndividualConformation">
+            <summary>
+            Represents individual documentation confirmation
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividualConformation.DocumentationIndividualId">
+            <summary>
+            Individual documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividualConformation.FirstName">
+            <summary>
+            Individual first name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividualConformation.Surname">
+            <summary>
+            Individual surname
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividualConformation.IdentificationNumber">
+            <summary>
+            Individual identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationIndividualConformation.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Entities.DocumentationLegalEntity">
+            <summary>
+            Represents legal entity documentation
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntity.DocumentationLegalEntityId">
+            <summary>
+            legal entity documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntity.Name">
+            <summary>
+            legal entity name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntity.IdentificationNumber">
+            <summary>
+            legal entity identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntity.Address">
+            <summary>
+            legal entity address
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntity.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Entities.DocumentationLegalEntityConfirmation">
+            <summary>
+            Represents legal entity documentation confirmation
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntityConfirmation.DocumentationLegalEntityId">
+            <summary>
+            legal entity documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntityConfirmation.Name">
+            <summary>
+            legal entity name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntityConfirmation.IdentificationNumber">
+            <summary>
+            legal entity identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntityConfirmation.Address">
+            <summary>
+            legal entity address
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Entities.DocumentationLegalEntityConfirmation.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.AuctionConformationDto">
+            <summary>
+            Represents auction confirmation model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionConformationDto.AuctionId">
+            <summary>
+            Auction ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionConformationDto.AuctionNum">
+            <summary>
+            Auction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionConformationDto.Year">
+            <summary>
+            Year when auction is happening
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionConformationDto.Date">
+            <summary>
+            Date od auction
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionConformationDto.Restriction">
+            <summary>
+            Auction restriction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionConformationDto.PriceStep">
+            <summary>
+            Auction price step
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionConformationDto.ApplicationDeadline">
+            <summary>
+            Date of application deadline
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.AuctionCreationDto">
+            <summary>
+            Represents auction creation model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionCreationDto.AuctionNum">
+            <summary>
+            Auction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionCreationDto.Year">
+            <summary>
+            Year when auction is happening
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionCreationDto.Date">
+            <summary>
+            Date od auction
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionCreationDto.Restriction">
+            <summary>
+            Auction restriction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionCreationDto.PriceStep">
+            <summary>
+            Auction price step
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionCreationDto.PublicBiddings">
+            <summary>
+            List od public bidding IDs
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionCreationDto.ApplicationDeadline">
+            <summary>
+            Date of application deadline
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.AuctionDto">
+            <summary>
+            Represents auction model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionDto.AuctionId">
+            <summary>
+            Auction ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionDto.AuctionNum">
+            <summary>
+            Auction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionDto.Year">
+            <summary>
+            Year when auction is happening
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionDto.Date">
+            <summary>
+            Date od auction
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionDto.Restriction">
+            <summary>
+            Auction restriction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionDto.PriceStep">
+            <summary>
+            Auction price step
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionDto.publicBiddings">
+            <summary>
+            List of public biddings
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionDto.ApplicationDeadline">
+            <summary>
+            Date of application deadline
+            </summary>
+            
+        </member>
+        <member name="T:AuctionMicroservice.Models.AuctionUpdateDto">
+            <summary>
+            Represents auction update model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.AuctionId">
+            <summary>
+            Auction ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.AuctionNum">
+            <summary>
+            Auction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.Year">
+            <summary>
+            Year when auction is happening
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.Date">
+            <summary>
+            Date od auction
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.Restriction">
+            <summary>
+            Auction restriction number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.PriceStep">
+            <summary>
+            Auction price step
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.PublicBiddings">
+            <summary>
+            List of public bidding IDs
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.AuctionUpdateDto.ApplicationDeadline">
+            <summary>
+            Date of application deadline
+            </summary>
+        </member>
+        <member name="M:AuctionMicroservice.Models.AuctionUpdateDto.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates correct date and year of auction happening
+            </summary>
+            <param name="validationContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AuctionMicroservice.Models.DocumentationIndividualConfirmationDto">
+            <summary>
+            Represents individual documentation confirmation model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualConfirmationDto.DocumentationIndividualId">
+            <summary>
+            Individual documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualConfirmationDto.FirstName">
+            <summary>
+            Individual first name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualConfirmationDto.Surname">
+            <summary>
+            Individual surname
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualConfirmationDto.IdentificationNumber">
+            <summary>
+            Individual identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualConfirmationDto.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.DocumentationIndividualDto">
+            <summary>
+            Represents Individual documentation model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualDto.DocumentationIndividualId">
+            <summary>
+            Individual documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualDto.FirstName">
+            <summary>
+            Individual first name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualDto.Surname">
+            <summary>
+            Individual surname
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualDto.IdentificationNumber">
+            <summary>
+            Individual identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualDto.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.DocumentationIndividualUpdateDto">
+            <summary>
+            Represents  update individual documentation model 
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualUpdateDto.DocumentationIndividualId">
+            <summary>
+            Individual documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualUpdateDto.FirstName">
+            <summary>
+            Individual first name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualUpdateDto.Surname">
+            <summary>
+            Individual surname
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualUpdateDto.IdentificationNumber">
+            <summary>
+            Individual identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationIndividualUpdateDto.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="M:AuctionMicroservice.Models.DocumentationIndividualUpdateDto.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates inidividual surname and first name
+            </summary>
+            <param name="validationContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AuctionMicroservice.Models.DocumentationLegalEntityConfirmationDto">
+            <summary>
+            Represents legal entity documentation confirmation model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityConfirmationDto.DocumentationLegalEntityId">
+            <summary>
+            legal entity documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityConfirmationDto.Name">
+            <summary>
+            legal entity name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityConfirmationDto.IdentificationNumber">
+            <summary>
+            legal entity identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityConfirmationDto.Address">
+            <summary>
+            legal entity address
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityConfirmationDto.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.DocumentationLegalEntityCreationDto">
+            <summary>
+            Represents legal entity documentation creaton model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityCreationDto.Name">
+            <summary>
+            legal entity name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityCreationDto.IdentificationNumber">
+            <summary>
+            legal entity identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityCreationDto.Address">
+            <summary>
+            legal entity address
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityCreationDto.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.DocumentationLegalEntityDto">
+            <summary>
+            Represents legal entity documentation model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityDto.DocumentationLegalEntityId">
+            <summary>
+            legal entity documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityDto.Name">
+            <summary>
+            legal entity name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityDto.IdentificationNumber">
+            <summary>
+            legal entity identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityDto.Address">
+            <summary>
+            legal entity address
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityDto.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.DocumentationLegalEntityUpdateDto">
+            <summary>
+            Represents legal entity documentation update model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityUpdateDto.DocumentationLegalEntityId">
+            <summary>
+            legal entity documentation ID
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityUpdateDto.Name">
+            <summary>
+            legal entity name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityUpdateDto.IdentificationNumber">
+            <summary>
+            legal entity identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityUpdateDto.Address">
+            <summary>
+            legal entity address
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentationLegalEntityUpdateDto.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto">
+            <summary>
+            Represents individual documentation creation model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.FirstName">
+            <summary>
+            Individual first name
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.Surname">
+            <summary>
+            Individual surname
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.IdentificationNumber">
+            <summary>
+            Individual identification number
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.AuctionId">
+            <summary>
+            ID of auction that this documentation belongs to
+            </summary>
+        </member>
+        <member name="M:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates inidividual surname and first name
+            </summary>
+            <param name="validationContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AuctionMicroservice.Models.LogModel">
+            <summary>
+            Representation of Log.
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.LogModel.LogLevel">
+            <summary>
+            Log level (ex. Warn, Debug, Error, Info)
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.LogModel.LogMessage">
+            <summary>
+            Message to log.
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.LogModel.MicroserviceName">
+            <summary>
+            Name of microservice (ex. Plot microservice)
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.LogModel.MicroserviceMethod">
+            <summary>
+            Microservice method (ex. GetPlotsAsync())
+            </summary>
+        </member>
+        <member name="T:AuctionMicroservice.Models.PublicBiddingDto">
+            <summary>
+            Represents public bidding model
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.Date">
+            <summary>
+            Public bidding date
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.StartTime">
+            <summary>
+            Public bidding start time
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.EndTime">
+            <summary>
+            Public bidding end time
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.StartPricePerHa">
+            <summary>
+            Public bidding beggining price
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.IsExcepted">
+            <summary>
+            Skipped item
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.Price">
+            <summary>
+            Auctioned price
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.RentPeriod">
+            <summary>
+            Lease period for plot
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.NumberOfApplicants">
+            <summary>
+            Number of contestants
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.DepositSupplement">
+            <summary>
+            Price od addition to deposit
+            </summary>
+        </member>
+        <member name="P:AuctionMicroservice.Models.PublicBiddingDto.Round">
+            <summary>
+            Round number
+            </summary>
+        </member>
+    </members>
+</doc>
