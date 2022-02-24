@@ -20,9 +20,9 @@ namespace PublicBidding.Models
         }
         public Guid PublicBiddingId { get; set; }
 
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [Required]
         public DateTime StartTime { get; set; }
@@ -38,11 +38,11 @@ namespace PublicBidding.Models
 
         public bool IsExcepted { get; set; }
 
-        public AddressDto Address { get; set; }
+        public AddressDto? Address { get; set; }
 
         public double Price { get; set; }
 
-        public BuyerDto BestBidder { get; set; }
+        public BuyerDto? BestBidder { get; set; }
 
         public int RentPeriod { get; set; }
 
@@ -55,15 +55,15 @@ namespace PublicBidding.Models
         /// <summary>
         /// Lista delova parcela
         /// </summary>
-        public List<PlotPartDto> PlotParts { get; set; }
+        public List<PlotPartDto>? PlotParts { get; set; }
 
         /// <summary>
         /// Lista ovlascenih lica
         /// </summary>
-        public List<AuthorizedPersonDto> AuthorizedPersons { get; set; }
+        public List<AuthorizedPersonDto>? AuthorizedPersons { get; set; }
         /// <summary>
         /// Lista kupaca
         /// </summary>
-        public List<BuyerDto> Bidders { get; set; }
+        public List<BuyerDto>? Bidders { get; set; }
     }
 }

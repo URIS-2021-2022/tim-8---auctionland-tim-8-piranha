@@ -27,10 +27,6 @@ namespace PublicBidding.Controllers
         private readonly IPublicBiddingRepository publicBiddingRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
-        //private readonly IService<AddressDto> addressMock;
-        //private readonly IService<AuthorizedPersonDto> authorizedPersonMock;
-        //private readonly IService<BuyerDto> buyerMock;
-        //private readonly IService<PlotPartDto> plotPartMock;
         private readonly ILoggerService logger;
 
         public PublicBiddingController(IPublicBiddingService publicBiddingService, IPublicBiddingRepository publicBiddingRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService logger)

@@ -15,11 +15,11 @@ namespace PublicBidding.Entities
         }
 
         public DbSet<Status>? Statuses { get; set; }
-        public DbSet<Type> Types { get; set; }
-        public DbSet<PublicBidding> PublicBiddings { get; set; }
-        public DbSet<PublicBiddingAuthorizedPerson> PublicBiddingAuthorizedPerson { get; set; }
-        public DbSet<PublicBiddingBuyer> PublicBiddingBuyer { get; set; }
-        public DbSet<PublicBiddingPlotPart> PublicBiddingPlotPart { get; set; }
+        public DbSet<Type>? Types { get; set; }
+        public DbSet<PublicBidding>? PublicBiddings { get; set; }
+        public DbSet<PublicBiddingAuthorizedPerson>? PublicBiddingAuthorizedPerson { get; set; }
+        public DbSet<PublicBiddingBuyer>? PublicBiddingBuyer { get; set; }
+        public DbSet<PublicBiddingPlotPart>? PublicBiddingPlotPart { get; set; }
 
 
 

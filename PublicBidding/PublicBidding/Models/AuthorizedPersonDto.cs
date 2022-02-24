@@ -13,8 +13,8 @@ namespace PublicBidding.Models
 
         public string? personalDocNum { get; set; }
 
-        public string address { get; set; }
+        public string? address { get; set; }
 
-        public string country { get; set; }
+        public string? country { get; set; }
     }
 }
