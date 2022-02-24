@@ -5,7 +5,7 @@
     /// <summary>
     /// Sign in request DTO.
     /// </summary>
-    public class SignInRequestDTO
+    public class SignInRequestDto
     {
         /// <summary>
         /// Email address.

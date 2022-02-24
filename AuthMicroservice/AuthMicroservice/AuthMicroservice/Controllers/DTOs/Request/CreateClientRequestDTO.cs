@@ -5,7 +5,7 @@
     /// <summary>
     /// Request DTO containing info for creating a client.
     /// </summary>
-    public class CreateClientRequestDTO
+    public class CreateClientRequestDto
     {
         /// <summary>
         /// First name of the client.

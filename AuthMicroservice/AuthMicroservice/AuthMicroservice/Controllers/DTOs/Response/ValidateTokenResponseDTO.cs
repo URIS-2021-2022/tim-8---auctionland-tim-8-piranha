@@ -3,20 +3,29 @@
     /// <summary>
     /// Token validation response DTO.
     /// </summary>
-    public class ValidateTokenResponseDTO
+    public class ValidateTokenResponseDto
     {
         /// <summary>
         /// Nullable uid of the user.
         /// </summary>
         #nullable enable
-        public string? userUid;
+        private string? userUid;
         #nullable disable
+
+        /// <summary>
+        /// Getter and setter for userUid
+        /// </summary>
+        public string UserUid
+        {
+            get { return userUid; }
+            set { this.userUid = value }
+        }
 
         /// <summary>
         /// Token validation response DTO constructor.
         /// </summary>
         /// <param name="userUid"></param>
-        public ValidateTokenResponseDTO(string userUid)
+        public ValidateTokenResponseDto(string userUid)
         {
             this.userUid = userUid;
         }

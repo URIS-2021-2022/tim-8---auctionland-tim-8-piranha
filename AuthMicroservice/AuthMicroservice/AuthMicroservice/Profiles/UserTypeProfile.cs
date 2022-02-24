@@ -15,8 +15,8 @@
         /// </summary>
         public UserTypeProfile()
         {
-            CreateMap<UserType, UserTypeResponseDTO>();
-            CreateMap<UserTypeResponseDTO, UserType>();
+            CreateMap<UserType, UserTypeResponseDto>();
+            CreateMap<UserTypeResponseDto, UserType>();
             CreateMap<UserType, UserType>();
         }
     }

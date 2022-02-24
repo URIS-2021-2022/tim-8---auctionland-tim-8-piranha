@@ -42,8 +42,6 @@
                 {
                     new JwtSecurityTokenHandler()
                         .ValidateToken(token, validationParameters, out var rawValidatedToken);
-
-                    return;
                 }
                 catch (SecurityTokenValidationException stvex)
                 {
