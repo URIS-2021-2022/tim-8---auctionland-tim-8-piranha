@@ -19,12 +19,10 @@ namespace BuyerMicroservice.Entities
         public string personalDocNum { get; set; }
 
         public string address { get; set; }
-        //lice za koje se vrsi aukcija 
-        // ne treba foreign key zato sto strelica pokazuje u kontra smeru 
+        
      
         public string country { get; set; }
 
-        //public BoardNumber[] boardNums { get; set; }
 
     }
 }

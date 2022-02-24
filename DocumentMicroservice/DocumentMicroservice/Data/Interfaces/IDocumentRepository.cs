@@ -18,7 +18,7 @@ namespace DocumentMicroservice.Data.Interfaces
 
         Task UpdateDocumentAsync(Document document);
 
-        Task DeleteDocumentAsync(Guid DocumentId);
+        Task DeleteDocumentAsync(Guid documentId);
 
         Task<bool> SaveChangesAsync();
     }

@@ -12,7 +12,7 @@ namespace BuyerMicroservice.Models.Buyer
 
         public int realizedArea { get; set; }
 
-       // public string paymentID { get; set; }
+       
         
         public Guid authorizedPersonID { get; set; }
 
@@ -36,7 +36,7 @@ namespace BuyerMicroservice.Models.Buyer
 
         public string accountNumber { get; set; }
 
-        // public Guid publicTender { get; set; }
+    
 
         public Guid? addressId { get; set; }
 

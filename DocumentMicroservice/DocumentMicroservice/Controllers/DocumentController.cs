@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,8 @@ namespace DocumentMicroservice.Controllers
         private readonly ILoggerService logger;
         private readonly IServiceCall<AuctionDto> auctionService;
         private readonly IServiceCall<UserDto> userService;
-        
+        private readonly IConfiguration configuration;
+
 
 
         public DocumentController(IDocumentRepository documentRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentValidators validator, ILoggerService logger, IServiceCall<AuctionDto> auctionService, IServiceCall<UserDto> userService)
@@ -74,8 +76,8 @@ namespace DocumentMicroservice.Controllers
 
                 if (doc.auctionId is not null && doc.userId is not null)
                 {
-                    var auctionDto = await auctionService.SendGetRequestAsync("http://localhost:40003/auction");
-                    var userDto = await userService.SendGetRequestAsync("http://localhost:40012/user");
+                    var auctionDto = await auctionService.SendGetRequestAsync(configuration["Services:AuctionServiceCallMock"]);
+                    var userDto = await userService.SendGetRequestAsync(configuration["Services:UserServiceCallMock"]);
 
                     if (auctionDto is not null && userDto is not null)
                     {
@@ -89,7 +91,6 @@ namespace DocumentMicroservice.Controllers
             await logger.LogMessage(LogLevel.Information, "Document list successfully returned!", "Document microservice", "GetDocumentsAsync");
             return Ok(documentsDto);
 
-            /* return Ok(mapper.Map<List<DocumentDto>>(documentList));*/
         }
 
         /// <summary>
@@ -116,8 +117,8 @@ namespace DocumentMicroservice.Controllers
 
             if (doc.auctionId is not null && doc.userId is not null )
             {
-                var auctionDto = await auctionService.SendGetRequestAsync("http://localhost:40003/auction");
-                var userDto = await userService.SendGetRequestAsync("http://localhost:40012/user");
+                var auctionDto = await auctionService.SendGetRequestAsync(configuration["Services:AuctionServiceCallMock"]);
+                var userDto = await userService.SendGetRequestAsync(configuration["Services:UserServiceCallMock"]);
 
                 if (auctionDto is not null && userDto is not null)
                 {
@@ -129,7 +130,7 @@ namespace DocumentMicroservice.Controllers
             await logger.LogMessage(LogLevel.Information, "Document found and successfully returned!", "Document microservice", "GetDocumentByIdAsync");
             return Ok(documentDto);
 
-            //return Ok(mapper.Map<DocumentDto>(doc));
+         
         }
 
         /// <summary>
