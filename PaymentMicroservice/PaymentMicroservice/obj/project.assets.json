@@ -52,9 +52,7 @@
         "runtime": {
           "lib/netcoreapp3.0/Swashbuckle.AspNetCore.Swagger.dll": {}
         },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        "frameworkReferences": ["Microsoft.AspNetCore.App"]
       },
       "Swashbuckle.AspNetCore.SwaggerGen/5.6.3": {
         "type": "package",
@@ -67,9 +65,7 @@
         "runtime": {
           "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {}
         },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        "frameworkReferences": ["Microsoft.AspNetCore.App"]
       },
       "Swashbuckle.AspNetCore.SwaggerUI/5.6.3": {
         "type": "package",
@@ -79,9 +75,7 @@
         "runtime": {
           "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {}
         },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        "frameworkReferences": ["Microsoft.AspNetCore.App"]
       }
     }
   },
@@ -280,29 +274,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\lukap\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
+      "projectUniqueName": "C:\\Users\\lukap\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
       "projectName": "PaymentMicroservice",
-      "projectPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
-      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lenovo\\source\\repos\\URIS\\PaymentMicroservice\\PaymentMicroservice\\obj\\",
+      "projectPath": "C:\\Users\\lukap\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
+      "packagesPath": "C:\\Users\\lukap\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lukap\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\lukap\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
-      "originalTargetFrameworks": [
-        "net5.0"
-      ],
+      "originalTargetFrameworks": ["net5.0"],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {},
@@ -315,9 +305,7 @@
         }
       },
       "warningProperties": {
-        "warnAsError": [
-          "NU1605"
-        ]
+        "warnAsError": ["NU1605"]
       }
     },
     "frameworks": {
@@ -333,20 +321,13 @@
             "version": "[5.6.3, )"
           }
         },
-        "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48"
-        ],
+        "imports": ["net461", "net462", "net47", "net471", "net472", "net48"],
         "assetTargetFallback": true,
         "warn": true,
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[5.0.12, 5.0.12]"
+            "version": "[5.0.11, 5.0.11]"
           }
         ],
         "frameworkReferences": {

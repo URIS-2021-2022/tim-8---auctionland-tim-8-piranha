@@ -21,7 +21,7 @@ namespace AuctionMicroservice.Services
 
         public async Task<bool> LogMessage(LogLevel logLevel, string logMessage, string microserviceName, string microserviceMethod)
         {
-            using (HttpClient httpClient = new HttpClient())
+             using (HttpClient httpClient = new HttpClient())
             {
                 Uri url = new Uri($"{ Configuration["Services:LoggerService"] }api/logger-service");
 
@@ -43,7 +43,7 @@ namespace AuctionMicroservice.Services
                     return false;
                 }
 
-                return true;
+                 return true;
             }
         }
     }
