@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj": {}
+    "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj": {
+    "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
         "projectName": "PaymentMicroservice",
-        "projectPath": "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
-        "packagesPath": "C:\\Users\\andrija\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andrija\\Source\\Repos\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\obj\\",
+        "projectPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\PaymentMicroservice.csproj",
+        "packagesPath": "C:\\Users\\Davor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Davor\\Documents\\GitHub\\tim-8---auctionland-tim-8-piranha\\PaymentMicroservice\\PaymentMicroservice\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\andrija\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Davor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -70,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }
