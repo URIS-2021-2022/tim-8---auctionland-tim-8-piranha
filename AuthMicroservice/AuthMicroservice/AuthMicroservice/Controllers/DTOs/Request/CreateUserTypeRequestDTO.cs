@@ -3,7 +3,7 @@
     /// <summary>
     /// Create user type request DTO.
     /// </summary>
-    public class CreateUserTypeRequestDTO
+    public class CreateUserTypeRequestDto
     {
         /// <summary>
         /// Name of the user type.

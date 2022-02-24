@@ -33,7 +33,7 @@
         [HttpPost(RouteConsts.ROUTE_AUTH_SIGN_IN)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public ActionResult<SignInResponseDTO> HandleSignIn([FromBody] SignInRequestDTO requestDTO)
+        public ActionResult<SignInResponseDto> HandleSignIn([FromBody] SignInRequestDto requestDTO)
         {
             return Ok(authService.SignInAsync(requestDTO));
         }
@@ -45,7 +45,7 @@
         /// <returns></returns>
         [HttpPost(RouteConsts.ROUTE_AUTH_VALIDATE_TOKEN)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<ValidateTokenResponseDTO> HandleValidateToken([FromBody] ValidateTokenRequestDto requestDTO)
+        public ActionResult<ValidateTokenResponseDto> HandleValidateToken([FromBody] ValidateTokenRequestDto requestDTO)
         {
             return Ok(authService.ValidateTokenAsync(requestDTO));
         }

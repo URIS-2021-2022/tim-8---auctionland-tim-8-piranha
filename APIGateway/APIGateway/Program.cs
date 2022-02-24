@@ -47,7 +47,7 @@ namespace APIGateway
                             await next.Invoke();
                         } catch (BaseException ex)
                         {
-                            await APIGatewayExceptionHandler.HandleExceptionAsync(context, ex);
+                            await ApiGatewayExceptionHandler.HandleExceptionAsync(context, ex);
                         }
 
                         await next.Invoke();
