@@ -33,11 +33,6 @@ namespace LoggerService
             services.AddScoped<ILoggerManagerRepository, LoggerManagerRepository>();
           
             services.AddControllers();
-
-            /*services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LoggerService", Version = "v1" });
-            });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,9 +41,7 @@ namespace LoggerService
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                /*app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LoggerService v1"));
-            */}
+            }
 
             app.UseHttpsRedirection();
 

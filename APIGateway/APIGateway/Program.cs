@@ -12,7 +12,7 @@ namespace APIGateway
     using APIGateway.Middlewares;
     using Microsoft.Net.Http.Headers;
 
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

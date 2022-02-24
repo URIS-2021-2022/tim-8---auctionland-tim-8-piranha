@@ -2,10 +2,11 @@
 {
     using System;
     using System.Net;
+    using System.Runtime.Serialization;
 
+    [Serializable]
     public class BaseException : Exception
     {
-
         public string message { get; set; }
 
         public HttpStatusCode code { get; set; }
@@ -19,6 +20,11 @@
         {
             this.message = message;
             this.code = code;
+        }
+
+        protected BaseException(SerializationInfo info, StreamingContext context) 
+            : base(info, context)
+        {
         }
     }
 }

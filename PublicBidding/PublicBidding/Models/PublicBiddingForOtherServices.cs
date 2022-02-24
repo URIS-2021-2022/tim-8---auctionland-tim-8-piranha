@@ -13,11 +13,11 @@ namespace PublicBidding.Models
         /// <summary>
         /// Tip javnog nadmetanja
         /// </summary>
-        public string Type { get; set; }
+        public string? Type { get; set; }
         /// <summary>
         /// Status pocetka javnog nadmetanja
         /// </summary>
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// Vreme pocetka javnog nadmetanja

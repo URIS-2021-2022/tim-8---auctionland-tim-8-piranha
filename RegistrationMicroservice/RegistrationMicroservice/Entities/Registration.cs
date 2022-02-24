@@ -31,12 +31,10 @@ namespace RegistrationMicroservice.Entities
         
 
         public Guid? AuctionId { get; set; }
-        //public Auction auction { get; set; }
         /// <summary>
         /// Buyer ID that registration belongs to
         /// </summary>
         public Guid? BuyerId { get; set; }
-        //public Buyer buyer { get; set; }
         #endregion
 
 

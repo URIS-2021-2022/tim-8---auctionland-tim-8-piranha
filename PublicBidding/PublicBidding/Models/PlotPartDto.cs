@@ -13,7 +13,7 @@ namespace PublicBidding.Models
         /// <summary>
         /// Broj dela parcele
         /// </summary>
-        public string PlotPartNumber { get; set; }
+        public string? PlotPartNumber { get; set; }
 
         /// <summary>
         /// Povrsina dela parcele

@@ -33,13 +33,13 @@ namespace AuctionMicroservice.Entities
         /// <summary>
         /// Inserts seed data into database
         /// </summary>
-        /// <param name="builder"></param>
-        protected override void OnModelCreating(ModelBuilder builder)
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
 
 
-            builder.Entity<AuctionPublicBidding>()
+
+            modelBuilder.Entity<AuctionPublicBidding>()
                 .HasOne(p => p.auction)
                 .WithMany()
                 .HasForeignKey("AuctionId")
@@ -48,7 +48,7 @@ namespace AuctionMicroservice.Entities
 
 
 
-            builder.Entity<Auction>()
+            modelBuilder.Entity<Auction>()
 
                 .HasData(new
                 {
@@ -62,9 +62,9 @@ namespace AuctionMicroservice.Entities
 
                 });
 
-            
 
-        builder.Entity<DocumentationIndividual>()
+
+            modelBuilder.Entity<DocumentationIndividual>()
                 .HasData(new
         {
             DocumentationIndividualId = Guid.Parse("6a411a17-a195-48f7-8dbd-67596c3974c0"),
@@ -76,7 +76,7 @@ namespace AuctionMicroservice.Entities
 
         });
 
-         builder.Entity<DocumentationLegalEntity>()
+            modelBuilder.Entity<DocumentationLegalEntity>()
                 .HasData(new
                 {
                     DocumentationLegalEntityId = Guid.Parse("6a411c13-a295-48f7-8dbd-67596c3974c0"),

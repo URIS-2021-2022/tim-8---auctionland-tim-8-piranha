@@ -17,6 +17,6 @@ namespace PublicBidding.Entities
         /// <summary>
         /// Naziv statusa
         /// </summary>
-        public string StatusName { get; set; }
+        public string? StatusName { get; set; }
     }
 }
