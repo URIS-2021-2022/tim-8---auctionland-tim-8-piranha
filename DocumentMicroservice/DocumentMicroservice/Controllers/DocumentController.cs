@@ -36,7 +36,7 @@ namespace DocumentMicroservice.Controllers
 
 
 
-        public DocumentController(IDocumentRepository documentRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentValidators validator, ILoggerService logger, IServiceCall<AuctionDto> auctionService, IServiceCall<UserDto> userService)
+        public DocumentController(IDocumentRepository documentRepository, LinkGenerator linkGenerator, IMapper mapper, DocumentValidators validator, ILoggerService logger, IServiceCall<AuctionDto> auctionService, IServiceCall<UserDto> userService, IConfiguration configuration)
         {
             this.documentRepository = documentRepository;
             this.linkGenerator = linkGenerator;
@@ -45,6 +45,7 @@ namespace DocumentMicroservice.Controllers
             this.logger = logger;
             this.auctionService = auctionService;
             this.userService = userService;
+            this.configuration = configuration;
             
         }
 

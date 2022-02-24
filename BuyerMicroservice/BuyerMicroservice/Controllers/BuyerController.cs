@@ -39,7 +39,7 @@ namespace BuyerMicroservice.Controllers
 
 
 
-        public BuyerController(IBuyerRepository buyerRepository, IMapper mapper, ILoggerService logger, IServiceCall<AddressDto> addressService, IServiceCall<PaymentDto> paymentService, IAuthorizedPersonRepository authorizedPersonRepository)
+        public BuyerController(IBuyerRepository buyerRepository, IMapper mapper, ILoggerService logger, IServiceCall<AddressDto> addressService, IServiceCall<PaymentDto> paymentService, IAuthorizedPersonRepository authorizedPersonRepository, IConfiguration configuration)
         {
             this.buyerRepository = buyerRepository;
             this.mapper = mapper;
@@ -47,6 +47,7 @@ namespace BuyerMicroservice.Controllers
             this.logger = logger;
             this.paymentService = paymentService;
             this.authorizedPersonRepository = authorizedPersonRepository;
+            this.configuration = configuration;
 
 
         }

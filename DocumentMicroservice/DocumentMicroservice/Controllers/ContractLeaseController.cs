@@ -34,7 +34,7 @@ namespace DocumentMicroservice.Controllers
         private readonly IServiceCall<PlotDto> plotService;
         private readonly IConfiguration configuration;
 
-        public ContractLeaseController(IContractLeaseRepository contractLeaseRepository, LinkGenerator linkGenerator, IMapper mapper, ContractLeaseValidators validator, ILoggerService logger, IServiceCall<BuyerDto> buyerService, IServiceCall<PersonDto> personService, IServiceCall<PlotDto> plotService)
+        public ContractLeaseController(IContractLeaseRepository contractLeaseRepository, LinkGenerator linkGenerator, IMapper mapper, ContractLeaseValidators validator, ILoggerService logger, IServiceCall<BuyerDto> buyerService, IServiceCall<PersonDto> personService, IServiceCall<PlotDto> plotService, IConfiguration configuration)
         {
             this.contractLeaseRepository = contractLeaseRepository;
             this.linkGenerator = linkGenerator;
@@ -44,6 +44,7 @@ namespace DocumentMicroservice.Controllers
             this.buyerService = buyerService;
             this.personService = personService;
             this.plotService = plotService;
+            this.configuration = configuration;
         }
 
      
