@@ -80,15 +80,15 @@ namespace RegistrationMicroservice
 
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
-                c.IncludeXmlComments(xmlCommentsPath);
+                //c.IncludeXmlComments(xmlCommentsPath);
             });
 
 
             services.AddDbContext<RegistrationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RegistrationDB")));
             services.AddScoped<IRegistrationRepository, RegistrationRepository>();
-            services.AddScoped<IService<AuctionDto>, AuctionMock<AuctionDto>>();
+            services.AddScoped<IService<AuctionDto>, ServiceCall<AuctionDto>>();
             services.AddScoped<IService<BuyerDto>, BuyerMock<BuyerDto>>();
-
+            services.AddScoped<ILoggerService, LoggerService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }

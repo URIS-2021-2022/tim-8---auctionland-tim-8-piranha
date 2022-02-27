@@ -60,7 +60,7 @@ namespace AuctionMicroservice.Controllers
 
             if(auctions == null || auctions.Count == 0)
             {
-                await logger.LogMessage(LogLevel.Information, "No auctions found", "Auction microservice", "GetAuctionsAsync");
+               // await logger.LogMessage(LogLevel.Information, "No auctions found", "Auction microservice", "GetAuctionsAsync");
                 return NoContent();
             }
 
@@ -81,7 +81,7 @@ namespace AuctionMicroservice.Controllers
                 auctionDtos.Add(auctionDto);
             }
             
-            await logger.LogMessage(LogLevel.Information, "Auction list successfully returned!", "Auction microservice", "GetAuctionsAsync");
+            //await logger.LogMessage(LogLevel.Information, "Auction list successfully returned!", "Auction microservice", "GetAuctionsAsync");
 
             return Ok(auctionDtos);
 
@@ -105,7 +105,7 @@ namespace AuctionMicroservice.Controllers
 
             if(auction == null)
             {
-                await logger.LogMessage(LogLevel.Information, "Auction not found", "Auction microservice", "GetAuctionsAsyncById");
+                //await logger.LogMessage(LogLevel.Information, "Auction not found", "Auction microservice", "GetAuctionsAsyncById");
                 return NotFound();
             }
 
@@ -122,7 +122,7 @@ namespace AuctionMicroservice.Controllers
             }
             
 
-            await logger.LogMessage(LogLevel.Information, "Auction returned", "Auction microservice", "GetAuctionsAsyncById");
+            //await logger.LogMessage(LogLevel.Information, "Auction returned", "Auction microservice", "GetAuctionsAsyncById");
             return Ok(auctionDto);
             
         }

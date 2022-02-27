@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using RegistrationMicroservice.Data;
 using RegistrationMicroservice.Entities;
@@ -29,8 +30,9 @@ namespace RegistrationMicroservice.Controllers
         private readonly IService<AuctionDto> auctionService;
         private readonly IService<BuyerDto> buyerService;
         private readonly ILoggerService logger;
+        private readonly IConfiguration configuration;
 
-        public RegistrationController(IRegistrationRepository registrationRepository, IMapper mapper, LinkGenerator linkGenerator, RegistrationValidator validator, IService<AuctionDto> auctionService, IService<BuyerDto> buyerService, ILoggerService logger)
+        public RegistrationController(IRegistrationRepository registrationRepository, IMapper mapper, LinkGenerator linkGenerator, RegistrationValidator validator, IService<AuctionDto> auctionService, IService<BuyerDto> buyerService, ILoggerService logger, IConfiguration configuration)
         {
             this.registrationRepository = registrationRepository;
             this.mapper = mapper;
@@ -39,6 +41,7 @@ namespace RegistrationMicroservice.Controllers
             this.auctionService = auctionService;
             this.buyerService = buyerService;
             this.logger = logger;
+            this.configuration = configuration;
         }
 
         /// <summary>
@@ -58,7 +61,7 @@ namespace RegistrationMicroservice.Controllers
 
             if (registrations == null || registrations.Count == 0)
             {
-                await logger.LogMessage(LogLevel.Warning, "Registration list is empty!", "Registration microservice", "GetRegistrationsAsync");
+                //await logger.LogMessage(LogLevel.Warning, "Registration list is empty!", "Registration microservice", "GetRegistrationsAsync");
                 return NoContent();
             }
 
@@ -69,21 +72,33 @@ namespace RegistrationMicroservice.Controllers
             {
                 RegistrationDto registrationDto = mapper.Map<RegistrationDto>(registration);
 
-                if (registration.BuyerId is not null)
-                {
-                    var buyerDto = await buyerService.SendGetRequestAsync("");
+                
+                //if (registration.BuyerId is not null)
+                //{
+                    var buyerDto = new BuyerDto
+                    {
+                        BuyerName = "Panic Luka",
+                        BuyerAddress = "Pap Pavla 12",
+                        BuyerPhoneNumber = "0603704892",
+                        BuyerAccountNumber = "1234567890",
+                        BuyerEmail = "lukap181@gmail.com"
+                    };
 
 
                     if (buyerDto is not null)
                     {
                         registrationDto.BuyerDto = buyerDto;
                     }
-                }
+                //}
 
                 if (registration.AuctionId is not null)
                 {
-                    var auctionDto = await auctionService.SendGetRequestAsync("");
 
+                    string url = configuration["Services:AuctionService"];
+                   
+
+                    var auctionDto = await auctionService.SendGetRequestAsync(url + registration.AuctionId);
+                    
 
                     if (auctionDto is not null)
                     {
@@ -96,7 +111,7 @@ namespace RegistrationMicroservice.Controllers
 
 
 
-            await logger.LogMessage(LogLevel.Information, "Registration list successfully returned!", "Registration microservice", "GetRegistrationsAsync");
+           // await logger.LogMessage(LogLevel.Information, "Registration list successfully returned!", "Registration microservice", "GetRegistrationsAsync");
             return Ok(registrationDtos);
         }
 
@@ -186,17 +201,17 @@ namespace RegistrationMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetRegistrations", "Registration", new { RegistrationId = registrationConfirmation.RegistrationId });
 
-                await logger.LogMessage(LogLevel.Information, "Registration successfully created!", "Registration microservice", "CreateRegistrationAsync");
+                //await logger.LogMessage(LogLevel.Information, "Registration successfully created!", "Registration microservice", "CreateRegistrationAsync");
                 return Created(location, mapper.Map<RegistrationConfirmationDto>(registrationConfirmation));
             }
             catch (ValidationException v)
             {
-                await logger.LogMessage(LogLevel.Error, "Validation for registration object failed!", "Registration microservice", "CreateRegistrationAsync");
+                //await logger.LogMessage(LogLevel.Error, "Validation for registration object failed!", "Registration microservice", "CreateRegistrationAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
             }
             catch (Exception e)
             {
-                await logger.LogMessage(LogLevel.Error, "Registration object creation failed!", "Registration microservice", "CreateRegistrationAsync");
+                //await logger.LogMessage(LogLevel.Error, "Registration object creation failed!", "Registration microservice", "CreateRegistrationAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
