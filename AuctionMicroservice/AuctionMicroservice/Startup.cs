@@ -3,6 +3,7 @@ using AuctionMicroservice.Entities;
 using AuctionMicroservice.Models;
 using AuctionMicroservice.Services;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,12 +16,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
  
 
@@ -37,18 +40,54 @@ namespace AuctionMicroservice
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS",
+                builder => builder.WithOrigins("http://localhost:4200")
+
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                );
+                
+            });
 
             services.AddControllers(setup =>
             {
                 setup.ReturnHttpNotAcceptable = true;
 
             }
-            ).AddXmlDataContractSerializerFormatters().AddFluentValidation(s =>
+            ).AddFluentValidation(s =>
             {
                 s.RegisterValidatorsFromAssemblyContaining<Startup>();
                 s.DisableDataAnnotationsValidation = true;
 
-            });//.ConfigureApiBehaviorOptions(setupAction =>
+            }).AddNewtonsoftJson();
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = "http://localhost:40003",
+                    ValidAudience = "http://localhost:40003",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperSecretKey@123"))
+                    
+
+                };
+            });
+            
+            //.ConfigureApiBehaviorOptions(setupAction =>
             
             //    setupAction.InvalidModelStateResponseFactory = context =>
             //    {
@@ -152,11 +191,23 @@ namespace AuctionMicroservice
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/AuctionOpenApiSpecification/swagger.json", "AuctionMicroservice 1"));
             }
 
+            
+
             app.UseHttpsRedirection();
 
+
+            app.UseCors("EnableCORS");
             app.UseRouting();
 
 
+            //app.UseCors(x => x
+            //.AllowAnyOrigin()
+            //.AllowAnyMethod()
+            //.AllowAnyHeader());
+
+            
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

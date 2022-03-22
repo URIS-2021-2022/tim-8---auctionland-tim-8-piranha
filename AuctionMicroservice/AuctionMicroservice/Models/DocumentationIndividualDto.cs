@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -34,6 +35,7 @@ namespace AuctionMicroservice.Models
         /// ID of auction that this documentation belongs to
         /// </summary>
 
+        [BindProperty]
         public Guid AuctionId { get; set; }
         
 

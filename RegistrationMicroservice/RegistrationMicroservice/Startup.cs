@@ -80,7 +80,7 @@ namespace RegistrationMicroservice
 
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
-                //c.IncludeXmlComments(xmlCommentsPath);
+                c.IncludeXmlComments(xmlCommentsPath);
             });
 
 

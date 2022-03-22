@@ -95,7 +95,7 @@
             <response code="200">returns found individual documentation</response>
             <response code="404">no individual documentation found</response>
         </member>
-        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.CreateDocumentationIndividualAsync(AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto)">
+        <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.CreateDocumentationIndividualAsync(AuctionMicroservice.Models.DocumentatonIndividualCreationDto)">
             <summary>
             Creates new individual documentation
             </summary>
@@ -381,6 +381,7 @@
             <summary>
             ID of auction that this documentation belongs to
             </summary>
+            
         </member>
         <member name="T:AuctionMicroservice.Entities.DocumentationLegalEntity">
             <summary>
@@ -832,32 +833,32 @@
             ID of auction that this documentation belongs to
             </summary>
         </member>
-        <member name="T:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto">
+        <member name="T:AuctionMicroservice.Models.DocumentatonIndividualCreationDto">
             <summary>
             Represents individual documentation creation model
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.FirstName">
+        <member name="P:AuctionMicroservice.Models.DocumentatonIndividualCreationDto.FirstName">
             <summary>
             Individual first name
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.Surname">
+        <member name="P:AuctionMicroservice.Models.DocumentatonIndividualCreationDto.Surname">
             <summary>
             Individual surname
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.IdentificationNumber">
+        <member name="P:AuctionMicroservice.Models.DocumentatonIndividualCreationDto.IdentificationNumber">
             <summary>
             Individual identification number
             </summary>
         </member>
-        <member name="P:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.AuctionId">
+        <member name="P:AuctionMicroservice.Models.DocumentatonIndividualCreationDto.AuctionId">
             <summary>
             ID of auction that this documentation belongs to
             </summary>
         </member>
-        <member name="M:AuctionMicroservice.Models.DocumentatonLegalEntitylCreationDto.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+        <member name="M:AuctionMicroservice.Models.DocumentatonIndividualCreationDto.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
             <summary>
             Validates inidividual surname and first name
             </summary>

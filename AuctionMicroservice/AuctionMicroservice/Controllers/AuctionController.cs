@@ -21,7 +21,7 @@ namespace AuctionMicroservice.Controllers
     [Route("api/Auctions")]
     [Produces("application/json", "application/xml")]
     [Consumes("application/json")]
-   // [Authorize]
+    [Authorize]
     public class AuctionController : ControllerBase
     {
         private readonly IAuctionRepository auctionRepository;
@@ -167,17 +167,17 @@ namespace AuctionMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetAuctions", "Auction", new { AuctionId = confirmation.AuctionId });
 
-                await logger.LogMessage(LogLevel.Information, "Auction created", "Auction microservice", "PostAuctionAsync");
+                //await logger.LogMessage(LogLevel.Information, "Auction created", "Auction microservice", "PostAuctionAsync");
                 return Created(location, mapper.Map<AuctionConformationDto>(confirmation));
             }
             catch(ValidationException v)
             {
-                await logger.LogMessage(LogLevel.Information, "Bad request, check parameters", "Auction microservice", "PostAuctionAsync");
+                //await logger.LogMessage(LogLevel.Information, "Bad request, check parameters", "Auction microservice", "PostAuctionAsync");
                 return StatusCode(StatusCodes.Status400BadRequest, v.Errors);
             }
             catch(Exception e)
             {
-                await logger.LogMessage(LogLevel.Information, "Internal server error", "Auction microservice", "PostAuctionAsync");
+                //await logger.LogMessage(LogLevel.Information, "Internal server error", "Auction microservice", "PostAuctionAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
@@ -204,7 +204,7 @@ namespace AuctionMicroservice.Controllers
 
                 if (oldAuction == null)
                 {
-                    await logger.LogMessage(LogLevel.Warning, "Auction object not found!", "Auction microservice", "UpdateAuctionAsync");
+                    //await logger.LogMessage(LogLevel.Warning, "Auction object not found!", "Auction microservice", "UpdateAuctionAsync");
                     return NotFound();
                 }
 
@@ -214,13 +214,13 @@ namespace AuctionMicroservice.Controllers
 
                 await auctionRepository.SaveChangesAsync();
 
-                await logger.LogMessage(LogLevel.Information, "Auction updated", "Auction microservice", "UpdateAuctionAsync");
+                //await logger.LogMessage(LogLevel.Information, "Auction updated", "Auction microservice", "UpdateAuctionAsync");
                 return Ok(mapper.Map<AuctionDto>(oldAuction));
 
             }
             catch(Exception e)
             {
-                await logger.LogMessage(LogLevel.Information, "Internal server error", "Auction microservice", "UpdateAuctionAsync");
+                //await logger.LogMessage(LogLevel.Information, "Internal server error", "Auction microservice", "UpdateAuctionAsync");
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
