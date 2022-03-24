@@ -1,4 +1,5 @@
-﻿using AuctionMicroservice.Models;
+﻿using AuctionMicroservice.Data;
+using AuctionMicroservice.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -20,6 +21,12 @@ namespace AuctionMicroservice.Controllers
 
     public class AuthController : ControllerBase
     {
+        private readonly IUserRegistrationRepository repository;
+
+        public AuthController(IUserRegistrationRepository repository)
+        {
+            this.repository = repository;
+        }
 
          [HttpPost]
        
@@ -31,7 +38,9 @@ namespace AuctionMicroservice.Controllers
                 return BadRequest("Invalid client request");
             }
 
-            if(user.UserName == "Luka" && user.Password == "sanika")
+            var entity = repository.GetRegistrationByEmail(user.UserName);
+
+            if(user.UserName == entity.Email && user.Password == entity.Password)
             {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperSecretKey@123"));
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);

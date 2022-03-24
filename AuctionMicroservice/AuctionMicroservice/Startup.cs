@@ -166,9 +166,11 @@ namespace AuctionMicroservice
             
 
             services.AddDbContext<AuctionContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuctionDB")));
+            services.AddDbContext<RegistrationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("UserDB")));
             services.AddScoped<IAuctionRepository, AuctionRepository>();
             services.AddScoped<IDocumentationIndividualRepository, DocumentationIndividualRepository>();
             services.AddScoped<IDocumentationLegalEntityRepository, DocumentationLegalEntityRepository>();
+            services.AddScoped<IUserRegistrationRepository, UserRegistrationRepository>();
             services.AddScoped<ILoggerService, LoggerService>();
             services.AddScoped <IService<PublicBiddingDto>, PublicBiddingMock<PublicBiddingDto>>();
 

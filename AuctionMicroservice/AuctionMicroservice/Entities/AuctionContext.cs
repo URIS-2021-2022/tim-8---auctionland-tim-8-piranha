@@ -12,7 +12,7 @@ namespace AuctionMicroservice.Entities
     public class AuctionContext : DbContext
     {
         private readonly IConfiguration configuration;
-        public AuctionContext(DbContextOptions options, IConfiguration configuration) : base(options)
+        public AuctionContext(DbContextOptions<AuctionContext> options, IConfiguration configuration) : base(options)
         {
             this.configuration = configuration;
         }
