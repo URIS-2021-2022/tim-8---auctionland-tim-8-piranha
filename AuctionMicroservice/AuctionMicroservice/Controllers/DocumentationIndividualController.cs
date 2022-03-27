@@ -22,6 +22,7 @@ namespace AuctionMicroservice.Controllers
     [Route("api/DocumentationIndividuals")]
     [Produces("application/json")] 
     [Consumes("application/json")]
+    
     public class DocumentationIndividualController : ControllerBase
     {
         private readonly IDocumentationIndividualRepository documentationIndividualRepository;
@@ -46,6 +47,8 @@ namespace AuctionMicroservice.Controllers
         /// <returns>List of individual documentations</returns>
         /// <response code="200">Returns list of individual documentations</response>
         /// <response code="404">No individual documentations found</response>
+        /// 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)] 

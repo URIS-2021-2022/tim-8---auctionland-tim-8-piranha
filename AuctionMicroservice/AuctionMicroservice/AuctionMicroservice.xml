@@ -76,6 +76,7 @@
             <returns>List of individual documentations</returns>
             <response code="200">Returns list of individual documentations</response>
             <response code="404">No individual documentations found</response>
+            
         </member>
         <member name="M:AuctionMicroservice.Controllers.DocumentationIndividualController.GetDocumentationIndividualsByAuctionAsync(System.Guid)">
              <summary>

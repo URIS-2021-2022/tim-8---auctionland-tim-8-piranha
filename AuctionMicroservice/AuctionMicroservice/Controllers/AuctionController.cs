@@ -53,6 +53,7 @@ namespace AuctionMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        
         public async Task<ActionResult<List<AuctionDto>>> GetAuctionsAsync()
         {
 
